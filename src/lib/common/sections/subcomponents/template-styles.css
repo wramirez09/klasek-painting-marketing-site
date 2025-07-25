@@ -1,0 +1,94 @@
+/* Column container */
+.main-container > :global(div) {
+	@apply flex flex-col justify-center gap-4 relative z-10;
+}
+
+/* h2 */
+.main-container :global(h2) {
+	@apply lg:text-4xl sm:text-3xl xs:text-2xl text-xl font-semibold text-left text-secondary-dark;
+}
+
+/* h3 */
+.main-container :global(h3) {
+	@apply lg:text-2xl xs:text-xl text-lg font-semibold text-secondary-dark;
+}
+
+/* hr */
+.main-container :global(hr) {
+	@apply w-16 border-[1px] border-primary;
+}
+
+/* h2 > span */
+/* .main-container :global(h2 > span) {
+    @apply ;
+} */
+
+/* h3 > span */
+/* .main-container :global(h3 > span) {
+    @apply ;
+} */
+
+/* p */
+.main-container :global(p) {
+	@apply leading-loose;
+}
+
+/* a */
+.main-container :global(a) {
+	@apply underline underline-offset-2 text-secondary-dark hover:text-primary-dark duration-100 font-semibold;
+}
+
+/* strong */
+.main-container :global(strong) {
+	@apply text-secondary-dark;
+}
+
+/* strong > a */
+.main-container :global(strong > a) {
+	@apply font-bold;
+}
+
+/* > div > strong */
+.main-container :global(> div > strong) {
+	@apply text-xl;
+}
+
+/* small */
+.main-container :global(small) {
+	@apply text-gray-700;
+}
+
+/* ul */
+.main-container :global(ul) {
+	@apply flex flex-col gap-4 leading-loose sm:pl-6 pl-4;
+}
+
+/* ol */
+.main-container :global(ol) {
+	@apply flex flex-col gap-4 list-decimal leading-loose sm:pl-6 pl-4;
+}
+
+/* ol marker */
+.main-container :global(ol li::marker) {
+	@apply text-primary-dark font-semibold;
+}
+
+/* ol > li */
+.main-container :global(ul > li) {
+	@apply relative before:absolute before:content-[''] before:h-1 before:w-3 before:top-[14px] before:-left-5 before:bg-primary-dark;
+}
+
+/* li > strong */
+.main-container :global(li > strong) {
+	@apply text-secondary-dark;
+}
+
+/* ol > li > span */
+/* .main-container :global(ol > li > span) {
+    @apply ;
+} */
+
+/* ul > li */
+/* .main-container :global(ul > li) {
+    @apply ;
+} */

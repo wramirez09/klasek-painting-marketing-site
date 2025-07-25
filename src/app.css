@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	/* background === Background color */
+	/* foreground === Font color */
+	:root {
+		/* Default <body> colors */
+		--background: 0 0% 100%;
+		--foreground: 222.2 84% 4.9%;
+
+		--off-white: 0 0% 97%;
+		--off-black: 210 7% 27%;
+
+		--muted: 210 40% 96.1%;
+		--muted-foreground: 215.4 16.3% 46.9%;
+
+		/* Popover elements <DropdownMenu />, <HoverCard />, <Popover /> */
+		--popover: 0 0% 100%;
+		--popover-foreground: 222.2 84% 4.9%;
+
+		/* <Card /> */
+		--card: 0 0% 100%;
+		--card-foreground: 222.2 84% 4.9%;
+
+		/* Default border */
+		/* #e2e8f0 */
+		--border: 214.3 31.8% 91.4%;
+
+		/* Border color for inputs such as <Input />, <Select />, <Textarea /> */
+		--input: 214.3 31.8% 91.4%;
+
+		/* Primary colors for <Button /> */
+		/* 	#efa31f */
+		--primary: 38 87% 53%;
+
+		--primary-foreground: 0 0% 100%;
+
+		--primary-light: 42 88% 71%;
+		/* #ec8f0e */
+		--primary-dark: 35 89% 49%;
+
+		/* Secondary colors for <Button /> */
+		--secondary: 240 43% 31%;
+		--secondary-foreground: 0 0% 100%;
+
+		/* 	#28284d */
+		--secondary-dark: 240 31% 23%;
+
+		/* Used for accents such as hover effects on <DropdownMenuItem>, <SelectItem> ...etc */
+		--accent: 208 48% 55%;
+		--accent-light: 194 88% 55%;
+
+		--accent-foreground: 0 100% 100%;
+
+		/* Used for destructive actions such as <Button variant='destructive'> */
+		--destructive: 0 72.2% 50.6%;
+		--destructive-foreground: 210 40% 98%;
+
+		/* Used for focus ring */
+		--ring: 240 43% 31%;
+
+		/* Border radius for card, input and buttons */
+		--radius: 0.5rem;
+
+		--r: 2em; /* control the ribbon shape */
+		--r-color: white;
+	}
+}
+
+@layer base {
+	/* Disable motion if preferred */
+	@media (prefers-reduced-motion: reduce) {
+		* {
+			transition: none !important;
+			transition-duration: 0s !important;
+			animation: none !important;
+			animation-duration: 0s !important;
+		}
+	}
+
+	/* montserrat-latin-500-normal */
+	@font-face {
+		font-family: 'Montserrat';
+		font-style: normal;
+		font-display: swap;
+		font-weight: 500;
+		src:
+			url(@fontsource/montserrat/files/montserrat-latin-500-normal.woff2) format('woff2'),
+			url(@fontsource/montserrat/files/montserrat-latin-500-normal.woff) format('woff');
+		unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+			U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+			U+FFFD;
+	}
+
+	/* montserrat-latin-600-normal */
+	@font-face {
+		font-family: 'Montserrat';
+		font-style: normal;
+		font-display: swap;
+		font-weight: 600;
+		src:
+			url(@fontsource/montserrat/files/montserrat-latin-600-normal.woff2) format('woff2'),
+			url(@fontsource/montserrat/files/montserrat-latin-600-normal.woff) format('woff');
+		unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+			U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+			U+FFFD;
+	}
+
+	/* montserrat-latin-700-normal */
+	@font-face {
+		font-family: 'Montserrat';
+		font-style: normal;
+		font-display: swap;
+		font-weight: 700;
+		src:
+			url(@fontsource/montserrat/files/montserrat-latin-700-normal.woff2) format('woff2'),
+			url(@fontsource/montserrat/files/montserrat-latin-700-normal.woff) format('woff');
+		unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+			U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF,
+			U+FFFD;
+	}
+
+	* {
+		font-family: 'Montserrat', 'Arial', sans-serif;
+		@apply border-border;
+	}
+	body {
+		@apply bg-secondary-dark text-foreground overflow-x-hidden;
+	}
+
+	.p-x {
+		@apply lg:px-12 px-4;
+	}
+
+	.p-y {
+		@apply lg:py-12 py-8;
+	}
+
+	.p-t {
+		@apply lg:pt-12 pt-8;
+	}
+
+	.p-b {
+		@apply lg:pb-12 pb-8;
+	}
+
+	.disc {
+		--color: hsl(var(--primary));
+		--top: 14px;
+
+		@apply pl-5 relative;
+
+		&::before {
+			@apply top-[var(--top)] absolute content-[''] w-3 h-1 left-0 bg-[var(--color)];
+		}
+	}
+
+	.ribbon {
+		padding-inline: calc(var(--r) + 0.3em);
+		line-height: 1.8;
+		clip-path: polygon(0 0, 100% 0, calc(100% - var(--r)) 50%, 100% 100%, 0 100%, var(--r) 50%);
+		background: var(--r-color);
+		width: fit-content;
+	}
+
+	.ribbon-right {
+		padding-inline: calc(var(--r) + 0.3em);
+		line-height: 1.8;
+		clip-path: polygon(0 0, 100% 0, calc(100% - var(--r)) 50%, 100% 100%, 0 100%);
+		background: var(--r-color);
+		width: fit-content;
+	}
+
+	.ribbon-left {
+		padding-inline: calc(var(--r) + 0.3em);
+		line-height: 1.8;
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, var(--r) 50%);
+		background: var(--r-color);
+		width: fit-content;
+	}
+
+	.ribbon-bottom {
+		padding-inline: calc(var(--r) + 0.3em);
+		line-height: 1.8;
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - var(--r)), 0 100%);
+		background: var(--r-color);
+		width: fit-content;
+	}
+
+	.ribbon-top {
+		padding-inline: calc(var(--r) + 0.3em);
+		line-height: 1.8;
+		clip-path: polygon(0 0, 50% var(--r), 100% 0, 100% 100%, 0 100%);
+		background: var(--r-color);
+		width: fit-content;
+	}
+
+	.shadow-filter {
+		filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.16));
+	}
+
+	.shadow-subtle {
+		box-shadow: 0 3px 13px rgba(0, 0, 0, 0.12);
+	}
+
+	.hero-gradient {
+		@apply bg-gradient-to-b from-secondary-dark to-secondary;
+	}
+
+	.bord {
+		@apply lg:border-4 border-2 border-primary;
+	}
+}

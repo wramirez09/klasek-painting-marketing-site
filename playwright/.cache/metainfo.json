@@ -1,0 +1,84 @@
+{
+  "version": "1.46.1",
+  "viteVersion": "5.4.8",
+  "registerSourceHash": "4254adecf5079e12ff6690d1870cf312c42e1840",
+  "components": [],
+  "sources": {
+    "/Users/mtdewulf/repos/client-klasek-painting/playwright/index.html": {
+      "timestamp": 1751464502405.8943
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/playwright/index.ts": {
+      "timestamp": 1751464502405.945
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/index.js": {
+      "timestamp": 1751467192988.3657
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/await_block.js": {
+      "timestamp": 1751467192691.3447
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/environment.js": {
+      "timestamp": 1751467192846.4917
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/animations.js": {
+      "timestamp": 1751467192646.5435
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/dom.js": {
+      "timestamp": 1751467192823.1785
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/globals.js": {
+      "timestamp": 1751467192939.5066
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/loop.js": {
+      "timestamp": 1751467193010.8
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/lifecycle.js": {
+      "timestamp": 1751467193007.9011
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/each.js": {
+      "timestamp": 1751467192824.8252
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/spread.js": {
+      "timestamp": 1751467193079.1184
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/scheduler.js": {
+      "timestamp": 1751467193070.7385
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/ssr.js": {
+      "timestamp": 1751467193082.539
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/transitions.js": {
+      "timestamp": 1751467193106.7363
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/utils.js": {
+      "timestamp": 1751467193109.2632
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/Component.js": {
+      "timestamp": 1751467192782.6345
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/dev.js": {
+      "timestamp": 1751467192818.5989
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/ResizeObserverSingleton.js": {
+      "timestamp": 1751467193070.263
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/runtime/internal/style_manager.js": {
+      "timestamp": 1751467193087.3206
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/shared/boolean_attributes.js": {
+      "timestamp": 1751467192738.2126
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/shared/utils/escape.js": {
+      "timestamp": 1751467192850.2969
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/shared/utils/names.js": {
+      "timestamp": 1751467193021.3242
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/node_modules/svelte/src/shared/version.js": {
+      "timestamp": 1751467193110.456
+    },
+    "/Users/mtdewulf/repos/client-klasek-painting/src/app.css": {
+      "timestamp": 1751464502406.1707
+    }
+  },
+  "deps": {}
+}
