@@ -16,7 +16,7 @@
     <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
       <div class="w-2/4">
         <h2 class="text-4xl font-semibold mb-2 text-white mb-5">
-          Refresh and Protect Your Home with Expert Stucco Painting in Cook
+          Refresh and Protect Your Home with Expert Stucco Painting.
         </h2>
         <p class="text-lg text-gray-100 mb-5">
           Get a Free Estimate and Discover How Our Detailed Process Ensures a
