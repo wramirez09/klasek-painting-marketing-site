@@ -10,12 +10,14 @@
 	import ServiceGridSection from '$lib/services/ServiceGridSection.svelte';
 	import OtherServicesSection from '$lib/common/sections/OtherServicesSection.svelte';
 	import Footer from '$lib/common/footer/Footer.svelte';
+	import StuccoSection from '$lib/common/sections/StuccoSection.svelte';
 </script>
 
 <NavBar />
 <HomepageHero />
 <WhyChooseUsSection />
 <ServiceGridSection />
+<StuccoSection />
 <OtherServicesSection />
 <ServiceAreaSection />
 <CtaBannerSection />
