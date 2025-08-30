@@ -14,7 +14,7 @@
   </style>
   <div class="container z-10 py-10">
     <div class="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
-      <div class="w-2/4">
+      <div class="md:w-2/4">
         <h2 class="text-4xl font-semibold mb-2 text-white mb-5">
           Refresh and Protect Your Home with Expert Stucco Painting.
         </h2>
@@ -27,7 +27,7 @@
           >Get Free Estimate</Button
         >
       </div>
-      <div class="w-2/4">
+      <div class="md:w-2/4">
         <img src={stuccoImg} alt="stucco-repair" class="rounded-lg w-full" />
       </div>
     </div>
