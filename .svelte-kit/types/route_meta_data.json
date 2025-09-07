@@ -9,6 +9,9 @@
 		"src/routes/+layout.server.ts",
 		"src/routes/+layout.server.ts"
 	],
+	"/.well-known/appspecific/com.chrome.devtools.json": [
+		"src/routes/.well-known/appspecific/com.chrome.devtools.json/+server.js"
+	],
 	"/(dark-nav)/about-us": [
 		"src/routes/(dark-nav)/about-us/+page.ts",
 		"src/routes/+layout.server.ts"

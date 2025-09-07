@@ -1,566 +1,443 @@
-<script>
-	import { buttonVariants } from '$components/button';
-	import { cn } from '$lib/common/utils';
-	import { page } from '$app/stores';
+<script lang="ts">
+  import { onDestroy } from 'svelte';
+  import { fade } from 'svelte/transition';
+
+  // Form data type
+  type FormData = {
+    [key: string]: string;
+    'First Name': string;
+    'Last Name': string;
+    'Email': string;
+    'Phone': string;
+    'City': string;
+    'Zip Code': string;
+    'Description': string;
+  };
+
+  // Form state
+  let formData: FormData = {
+    'First Name': '',
+    'Last Name': '',
+    'Email': '',
+    'Phone': '',
+    'City': '',
+    'Zip Code': '',
+    'Description': ''
+  };
+
+  type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
+  let submitStatus: SubmitStatus = 'idle';
+  let submitMessage = '';
+  let isSubmitting = false;
+
+  // Zoho WebToLead Configuration
+  const ZOHO_FORM_ID = 'webform5683047000006693036';
+  const ZOHO_FORM_ACTION = 'https://crm.zoho.com/crm/WebToLeadForm';
+  
+  // Zoho form fields
+  const ZOHO_FIELDS = {
+    xnQsjsdp: 'cdaf4fd904d1a76d463cfa7498f7083593f85a7ebaf6309bc04de2170f5c5221',
+    xmIwtLD: 'b63d7c69781dd958162b76c2f3ecab4ffd5b8b5d2d23c3e5ae5621f9cb4f47fc4fac4b525fe84a2d485aaabf4ef4373c',
+    actionType: 'TGVhZHM=',
+    returnURL: 'null',
+    aG9uZXlwb3Q: '' // Honeypot field
+  };
+
+  function validateEmail(email: string): boolean {
+    if (!email) return true; // Email is optional
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+
+  function checkMandatory(): boolean {
+    const requiredFields: (keyof FormData)[] = ['First Name', 'Last Name', 'Phone', 'Zip Code'];
+    for (const field of requiredFields) {
+      if (!formData[field]?.trim()) {
+        submitStatus = 'error';
+        submitMessage = `${field} is required`;
+        return false;
+      }
+    }
+
+    if (!validateEmail(formData.Email)) {
+      submitStatus = 'error';
+      submitMessage = 'Please enter a valid email address';
+      return false;
+    }
+
+    return true;
+  }
+
+  async function handleSubmit(event: Event): Promise<void> {
+    event.preventDefault();
+    
+    if (!checkMandatory() || isSubmitting) return;
+    
+    isSubmitting = true;
+    submitStatus = 'submitting';
+    
+    try {
+      // Convert form data to URLSearchParams
+      const params = new URLSearchParams();
+      
+      // Add Zoho form fields
+      Object.entries(ZOHO_FIELDS).forEach(([key, value]) => {
+        params.append(key, value);
+      });
+      
+      // Add form data
+      Object.entries(formData).forEach(([key, value]) => {
+        if (value) params.append(key, value);
+      });
+      
+      const response = await fetch(ZOHO_FORM_ACTION, {
+        method: 'POST',
+        body: params,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+      
+      const responseText = await response.text();
+      
+      if (response.ok || response.redirected || responseText.includes('Thank you') || responseText.includes('success')) {
+        submitStatus = 'success';
+        submitMessage = 'Thank you for your inquiry! We will contact you shortly.';
+        
+        // Reset form
+        formData = {
+          'First Name': '',
+          'Last Name': '',
+          'Email': '',
+          'Phone': '',
+          'City': '',
+          'Zip Code': '',
+          'Description': ''
+        };
+        
+        // Hide success message after 5 seconds
+        const timer = setTimeout(() => {
+          submitStatus = 'idle';
+        }, 5000);
+        
+        onDestroy(() => clearTimeout(timer));
+      } else {
+        throw new Error('Failed to submit form');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      submitStatus = 'error';
+      submitMessage = 'An error occurred while submitting the form. Please try again.';
+    } finally {
+      isSubmitting = false;
+    }
+  }
 </script>
 
-<svelte:head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta HTTP-EQUIV="content-type" CONTENT="text/html;charset=UTF-8" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-</svelte:head>
+<!-- Zoho WebToLead Form -->
+<div id="crmWebToEntityForm" class="zcwf_lblLeft crmWebToEntityForm" style="background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <!-- Success/Error Messages -->
+  {#if submitStatus === 'success'}
+    <div class="message success" in:fade={{ duration: 200 }} role="alert" style="background-color: #F5FAF5; color: #132C14; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #A9D3AB; display: flex; align-items: center;">
+      <div style="background-color: #12AA67; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;">
+        <div style="width: 5px; height: 10px; border-right: 2px solid white; border-bottom: 2px solid white; transform: rotate(45deg) translate(-1px, -1px);"></div>
+      </div>
+      <span>{submitMessage}</span>
+    </div>
+  {/if}
 
-<!-- Note :
-   - You can modify the font style and form style to suit your website. 
-   - Code lines with comments Do not remove this code are required for the form to work properly, make sure that you do not remove these lines of code. 
-   - The Mandatory check script can modified as to suit your business needs. 
-   - It is important that you test the modified form before going live.-->
-<div
-	id="crmWebToEntityForm"
-	class="zcwf_lblTopBottom crmWebToEntityForm"
-	style="background-color: white;color: black;max-width: 900px;"
->
-	<style>
-		.wf_customMessageBox {
-			/* font-family: Arial, Helvetica, sans-serif; */
-			color: #132c14;
-			background: #f5faf5;
-			box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
-			max-width: 90%;
-			width: max-content;
-			word-break: break-word;
-			z-index: 11000;
-			border-radius: 6px;
-			border: 1px solid #a9d3ab;
-			min-width: 100px;
-			padding: 10px 15px;
-			display: flex;
-			align-items: center;
-			position: fixed;
-			top: 20px;
-			left: 50%;
-			transform: translate(-50%, 0);
-		}
-		.wf_customCircle {
-			position: relative;
-			background-color: #12aa67;
-			border-radius: 100%;
-			width: 20px;
-			height: 20px;
-			flex: none;
-			margin-right: 7px;
-		}
-		.wf_customCheckMark {
-			box-sizing: unset !important;
-			position: absolute;
-			transform: rotate(45deg) translate(-50%, -50%);
-			left: 6px;
-			top: 9px;
-			height: 8px;
-			width: 3px;
-			border-bottom: 2px solid #fff;
-			border-right: 2px solid #fff;
-		}
-		.wf_customClose {
-			box-sizing: border-box;
-			position: relative;
-			width: 18px;
-			height: 18px;
-		}
-		.wf_customClose::after,
-		.wf_customClose::before {
-			content: '';
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			width: 12px;
-			height: 1.5px;
-			background: #616e88;
-			transform: rotate(45deg);
-			border-radius: 5px;
-			top: 8px;
-			left: 8px;
-		}
-		.wf_customClose::after {
-			transform: rotate(-45deg);
-		}
-	</style>
-	<div class="wf_customMessageBox" id="wf_splash" style="display:none">
-		<div class="wf_customCircle">
-			<div class="wf_customCheckMark"></div>
-		</div>
-		<span id="wf_splash_info"> </span>
-	</div>
-	<form id="webform5683047000005601023" name="WebToLeads5683047000005601023">
-		<input
-			type="text"
-			style="display: none"
-			name="xnQsjsdp"
-			value="889b75d7fb885f08c308993dcf1295ff8e4db04bb16c4c721982deff699c6780"
-		/>
-		<input type="hidden" name="zc_gad" id="zc_gad" value="" />
-		<input
-			type="text"
-			style="display: none"
-			name="xmIwtLD"
-			value="e7deb13f7ec4ba28e7b3cf21f7c2440cee698f992bf912e0a8994385a6ffb9d34242644ef970eb49900485af88919c8f"
-		/>
-		<input type="text" style="display: none" name="actionType" value="TGVhZHM=" />
-		<input type="text" style="display: none" name="returnURL" value="null" />
-		<input type="hidden" style="display:none;" name="sessionId" value={$page.data.sessionId} />
-		<!-- Do not remove this code. -->
-		<style>
-			html,
-			body {
-				margin: 0px;
-			}
-			#crmWebToEntityForm.zcwf_lblTopBottom {
-				width: 100%;
-				margin: 0 auto;
-				box-sizing: border-box;
-			}
-			#crmWebToEntityForm.zcwf_lblTopBottom * {
-				box-sizing: border-box;
-			}
-			#crmWebToEntityForm {
-				text-align: left;
-			}
-			#crmWebToEntityForm * {
-				direction: ltr;
-			}
-			.zcwf_lblTopBottom.cpT_primaryBtn:hover {
-				background: linear-gradient(#02acff 0, #006be4 100%) no-repeat padding-box !important;
-				box-shadow: 0 -2px 0 0 #0159b9 inset !important;
-				border: 0 !important;
-				color: #fff !important;
-				outline: 0 !important;
-			}
+  {#if submitStatus === 'error'}
+    <div class="message error" in:fade={{ duration: 200 }} role="alert" style="background-color: #FDF4F5; color: #7F1D1D; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #F8B4B4; display: flex; align-items: center;">
+      <div style="background-color: #DC2626; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;">
+        <div style="color: white; font-weight: bold; font-size: 14px; margin-top: -2px;">!</div>
+      </div>
+      <span>{submitMessage}</span>
+    </div>
+  {/if}
 
-			/* Input styles */
-			.zcwf_lblTopBottom .zcwf_col_fld input[type='text'],
-			input[type='email'],
-			input[type='password'],
-			.zcwf_lblTopBottom .zcwf_col_fld textarea {
-				width: 100%;
-				border: 1px solid #c0c6cc !important;
-				resize: none;
-				border-radius: 4px;
-				float: left;
-				padding: 4px 6px;
-			}
-
-			/* Label styles */
-			.zcwf_lblTopBottom .zcwf_col_lab {
-				width: 30%;
-				word-break: break-word;
-				padding: 0px 6px 0px;
-				margin-right: 10px;
-				margin-top: 5px;
-				font-size: 14px;
-			}
-
-			.zcwf_lblTopBottom .zcwf_col_fld {
-				width: 60%;
-				padding: 0px 6px 0px;
-				position: relative;
-				margin-top: 5px;
-			}
-			.zcwf_lblTopBottom .zcwf_privacy {
-				padding: 6px;
-			}
-			.zcwf_lblTopBottom .wfrm_fld_dpNn {
-				display: none;
-			}
-			.dIB {
-				display: inline-block;
-			}
-			.zcwf_lblTopBottom .zcwf_col_fld_slt {
-				width: 60%;
-				border: 1px solid #ccc;
-				background: #fff;
-				border-radius: 4px;
-				font-size: 12px;
-				float: left;
-				resize: vertical;
-				padding: 2px 5px;
-			}
-			.zcwf_lblTopBottom .zcwf_row:after,
-			.zcwf_lblTopBottom .zcwf_col_fld:after {
-				content: '';
-				display: table;
-				clear: both;
-			}
-			.zcwf_lblTopBottom .zcwf_col_help {
-				float: left;
-				margin-left: 7px;
-				font-size: 12px;
-				max-width: 35%;
-				word-break: break-word;
-			}
-			.zcwf_lblTopBottom .zcwf_help_icon {
-				cursor: pointer;
-				width: 16px;
-				height: 16px;
-				display: inline-block;
-				background: #fff;
-				border: 1px solid #c0c6cc;
-				color: #c1c1c1;
-				text-align: center;
-				font-size: 11px;
-				line-height: 16px;
-				font-weight: bold;
-				border-radius: 50%;
-			}
-			.zcwf_lblTopBottom .zcwf_row {
-				margin: 16px 0px;
-			}
-			.zcwf_lblTopBottom .formsubmit {
-				margin-right: 5px;
-				cursor: pointer;
-			}
-			.zcwf_lblTopBottom .zcwf_privacy_txt {
-				width: 90%;
-				color: rgb(0, 0, 0);
-				font-size: 12px;
-				display: inline-block;
-				vertical-align: top;
-				color: #313949;
-				padding-top: 2px;
-				margin-left: 6px;
-			}
-			.zcwf_lblTopBottom .zcwf_button {
-				cursor: pointer;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-			}
-			.zcwf_lblTopBottom .zcwf_tooltip_over {
-				position: relative;
-			}
-			.zcwf_lblTopBottom .zcwf_tooltip_ctn {
-				position: absolute;
-				background: #dedede;
-				padding: 3px 6px;
-				top: 3px;
-				border-radius: 4px;
-				word-break: break-word;
-				min-width: 100px;
-				max-width: 150px;
-				color: #313949;
-				z-index: 100;
-			}
-			.zcwf_lblTopBottom .zcwf_ckbox {
-				float: left;
-			}
-			.zcwf_lblTopBottom .zcwf_file {
-				width: 35%;
-				box-sizing: border-box;
-				float: left;
-			}
-			.cBoth:after {
-				content: '';
-				display: block;
-				clear: both;
-			}
-			@media all {
-				.zcwf_lblTopBottom .zcwf_col_lab,
-				.zcwf_lblTopBottom .zcwf_col_fld {
-					width: auto;
-					float: none !important;
-				}
-				.zcwf_lblTopBottom .zcwf_col_help {
-					width: 40%;
-				}
-			}
-		</style>
-		<div class="zcwf_row">
-			<div class="zcwf_col_lab">
-				<label for="First_Name">
-					First Name
-					<span style="color:red;"> * </span>
-				</label>
-			</div>
-			<div class="zcwf_col_fld">
-				<input
-					type="text"
-					id="First_Name"
-					aria-required="true"
-					aria-label="First Name"
-					name="First Name"
-					maxlength="40"
-					autocomplete="given-name"
-				/>
-				<div class="zcwf_col_help"></div>
-			</div>
-		</div>
-		<div class="zcwf_row">
-			<div class="zcwf_col_lab">
-				<label for="Last_Name">
-					Last Name
-					<span style="color:red;"> * </span>
-				</label>
-			</div>
-			<div class="zcwf_col_fld">
-				<input
-					type="text"
-					id="Last_Name"
-					aria-required="true"
-					aria-label="Last Name"
-					name="Last Name"
-					maxlength="80"
-					autocomplete="family-name"
-				/>
-				<div class="zcwf_col_help"></div>
-			</div>
-		</div>
-		<div class="zcwf_row">
-			<div class="zcwf_col_lab">
-				<label for="Email"> Email <span style="color: red"> * </span> </label>
-			</div>
-			<div class="zcwf_col_fld">
-				<input
-					type="email"
-					id="Email"
-					aria-required="true"
-					aria-label="Email"
-					name="Email"
-					maxlength="100"
-				/>
-				<div class="zcwf_col_help"></div>
-			</div>
-		</div>
-		<div class="zcwf_row">
-			<div class="zcwf_col_lab">
-				<label for="Phone">
-					Phone
-					<span style="color:red;"> * </span>
-				</label>
-			</div>
-			<div class="zcwf_col_fld">
-				<input
-					type="text"
-					id="Phone"
-					aria-required="true"
-					aria-label="Phone"
-					name="Phone"
-					maxlength="30"
-					autocomplete="tel"
-				/>
-				<div class="zcwf_col_help"></div>
-			</div>
-		</div>
-		<div class="zcwf_row">
-			<div class="zcwf_col_lab">
-				<label for="Street">
-					Street Address <span style="color: red"> * </span>
-				</label>
-			</div>
-			<div class="zcwf_col_fld">
-				<input
-					type="text"
-					id="Street"
-					aria-required="true"
-					aria-label="Street"
-					name="Street"
-					maxlength="250"
-				/>
-				<div class="zcwf_col_help"></div>
-			</div>
-		</div>
-		<div class="zcwf_row">
-			<div class="zcwf_col_lab">
-				<label for="City"> City <span style="color: red"> * </span> </label>
-			</div>
-			<div class="zcwf_col_fld">
-				<input
-					type="text"
-					id="City"
-					aria-required="true"
-					aria-label="City"
-					name="City"
-					maxlength="100"
-				/>
-				<div class="zcwf_col_help"></div>
-			</div>
-		</div>
-		<div class="zcwf_row">
-			<div class="zcwf_col_lab">
-				<label for="Description"> Please Share Job Details </label>
-			</div>
-			<div class="zcwf_col_fld">
-				<textarea
-					aria-multiline="true"
-					id="Description"
-					aria-required="false"
-					aria-label="Description"
-					name="Description"
-				></textarea>
-				<div class="zcwf_col_help"></div>
-			</div>
-		</div>
-		<div class="zcwf_row">
-			<div class="zcwf_col_lab"></div>
-			<div class="zcwf_col_fld">
-				<input
-					class="{cn(
-						buttonVariants({
-							variant: 'default',
-							size: 'default',
-							className: 'formsubmit zcwf_button'
-						})
-					)}}"
-					type="submit"
-					id="formsubmit"
-					value="Submit"
-					aria-label="Submit"
-					title="Submit"
-				/>
-				<input
-					type="reset"
-					class="{cn(
-						buttonVariants({
-							variant: 'outline',
-							size: 'default',
-							className:
-								'zcwf_button text-secondary border-secondary hover:bg-white hover:border-secondary hover:text-secondary'
-						})
-					)}}"
-					name="reset"
-					value="Reset"
-					aria-label="Reset"
-					title="Reset"
-				/>
-			</div>
-		</div>
-		<script>
-			function validateEmail5683047000005601023() {
-				var form = document.forms['WebToLeads5683047000005601023'];
-				var emailFld = form.querySelectorAll('[type=email]');
-				var i;
-				for (i = 0; i < emailFld.length; i++) {
-					var emailVal = emailFld[i].value;
-					if (emailVal.replace(/^\s+|\s+$/g, '').length != 0) {
-						var atpos = emailVal.indexOf('@');
-						var dotpos = emailVal.lastIndexOf('.');
-						if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
-							alert('Please enter a valid email address. ');
-							emailFld[i].focus();
-							return false;
-						}
-					}
-				}
-				return true;
-			}
-			function checkMandatory5683047000005601023() {
-				var mndFileds = new Array('First Name', 'Last Name', 'Email', 'Phone', 'Street', 'City');
-				var fldLangVal = new Array(
-					'First\x20Name',
-					'Last\x20Name',
-					'Email',
-					'Phone',
-					'Street\x20Address',
-					'City'
-				);
-				for (i = 0; i < mndFileds.length; i++) {
-					var fieldObj = document.forms['WebToLeads5683047000005601023'][mndFileds[i]];
-					if (fieldObj) {
-						if (fieldObj.value.replace(/^\s+|\s+$/g, '').length == 0) {
-							if (fieldObj.type == 'file') {
-								alert('Please select a file to upload.');
-								fieldObj.focus();
-								return false;
-							}
-							alert(fldLangVal[i] + ' cannot be empty.');
-							fieldObj.focus();
-							return false;
-						} else if (fieldObj.nodeName == 'SELECT') {
-							if (fieldObj.options[fieldObj.selectedIndex].value == '-None-') {
-								alert(fldLangVal[i] + ' cannot be none.');
-								fieldObj.focus();
-								return false;
-							}
-						} else if (fieldObj.type == 'checkbox') {
-							if (fieldObj.checked == false) {
-								alert('Please accept ' + fldLangVal[i]);
-								fieldObj.focus();
-								return false;
-							}
-						}
-						try {
-							if (fieldObj.name == 'Last Name') {
-								name = fieldObj.value;
-							}
-						} catch (e) {}
-					}
-				}
-				if (!validateEmail5683047000005601023()) {
-					return false;
-				}
-				var urlparams = new URLSearchParams(window.location.search);
-				if (urlparams.has('service') && urlparams.get('service') === 'smarturl') {
-					var webform = document.getElementById('webform5683047000005601023');
-					var service = urlparams.get('service');
-					var smarturlfield = document.createElement('input');
-					smarturlfield.setAttribute('type', 'hidden');
-					smarturlfield.setAttribute('value', service);
-					smarturlfield.setAttribute('name', 'service');
-					webform.appendChild(smarturlfield);
-				}
-				document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', true);
-				return true;
-			}
-			$(document).ready(function () {
-				$('#webform5683047000005601023').submit(function (e) {
-					var ismandatory = checkMandatory5683047000005601023();
-					e.preventDefault();
-					if (ismandatory) {
-						if (typeof _wfa_track != 'undefined' && _wfa_track.wfa_submit) {
-							_wfa_track.wfa_submit(e);
-						}
-						var formData = new FormData(this);
-						$.ajax({
-							url: 'https://crm.zoho.com/crm/WebToLeadForm ',
-							type: 'POST',
-							data: formData,
-							cache: false,
-							contentType: false,
-							processData: false,
-							success: function (data) {
-								var splashinfodom = document.getElementById('wf_splash_info');
-								splashinfodom.innerText = data.actionvalue;
-								var splashdom = document.getElementById('wf_splash');
-								document.getElementById('webform5683047000005601023').reset.click();
-								splashdom.style.display = '';
-								setTimeout(function () {
-									splashdom.style.display = 'none';
-								}, 5000);
-								document
-									.querySelector('.crmWebToEntityForm .formsubmit')
-									.removeAttribute('disabled');
-							},
-							error: function (data) {
-								alert('an error occurred');
-							}
-						});
-						gtag('event', 'conversion', {
-							send_to: 'AW-998511498/BlxqCM2XkOMZEIqnkNwD'
-						});
-					}
-				});
-			});
-			function tooltipShow5683047000005601023(el) {
-				var tooltip = el.nextElementSibling;
-				var tooltipDisplay = tooltip.style.display;
-				if (tooltipDisplay == 'none') {
-					var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
-					for (i = 0; i < allTooltip.length; i++) {
-						allTooltip[i].style.display = 'none';
-					}
-					tooltip.style.display = 'block';
-				} else {
-					tooltip.style.display = 'none';
-				}
-			}
-		</script>
-	</form>
+  <div class="zcwf_title" style="font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;">Contact Us</div>
+  
+  <form id={ZOHO_FORM_ID} name="WebToLeads{ZOHO_FORM_ID}" on:submit|preventDefault={handleSubmit}>
+    <!-- Hidden Zoho Fields -->
+    <input type="hidden" name="xnQsjsdp" value={ZOHO_FIELDS.xnQsjsdp} />
+    <input type="hidden" name="xmIwtLD" value={ZOHO_FIELDS.xmIwtLD} />
+    <input type="hidden" name="actionType" value={ZOHO_FIELDS.actionType} />
+    <input type="hidden" name="returnURL" value={ZOHO_FIELDS.returnURL} />
+    <input type="hidden" name="aG9uZXlwb3Q" value="" />
+    
+    <div class="zcwf_row" style="margin: 15px 0;">
+      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+        <label for="First_Name" style="font-size: 14px;">First Name <span style="color: red;">*</span></label>
+      </div>
+      <div class="zcwf_col_fld" style="float: left; width: 60%;">
+        <input 
+          type="text" 
+          id="First_Name" 
+          name="First Name" 
+          bind:value={formData['First Name']}
+          maxlength="40"
+          aria-required="true"
+          style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
+        />
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    
+    <div class="zcwf_row" style="margin: 15px 0;">
+      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+        <label for="Last_Name" style="font-size: 14px;">Last Name <span style="color: red;">*</span></label>
+      </div>
+      <div class="zcwf_col_fld" style="float: left; width: 60%;">
+        <input 
+          type="text" 
+          id="Last_Name" 
+          name="Last Name" 
+          bind:value={formData['Last Name']}
+          maxlength="80"
+          aria-required="true"
+          style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
+        />
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    
+    <div class="zcwf_row" style="margin: 15px 0;">
+      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+        <label for="Email" style="font-size: 14px;">Email</label>
+      </div>
+      <div class="zcwf_col_fld" style="float: left; width: 60%;">
+        <input 
+          type="email" 
+          id="Email" 
+          name="Email" 
+          bind:value={formData.Email}
+          maxlength="100"
+          style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
+        />
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    
+    <div class="zcwf_row" style="margin: 15px 0;">
+      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+        <label for="Phone" style="font-size: 14px;">Phone <span style="color: red;">*</span></label>
+      </div>
+      <div class="zcwf_col_fld" style="float: left; width: 60%;">
+        <input 
+          type="tel" 
+          id="Phone" 
+          name="Phone" 
+          bind:value={formData.Phone}
+          maxlength="30"
+          aria-required="true"
+          style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
+        />
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    
+    <div class="zcwf_row" style="margin: 15px 0;">
+      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+        <label for="City" style="font-size: 14px;">Address</label>
+      </div>
+      <div class="zcwf_col_fld" style="float: left; width: 60%;">
+        <input 
+          type="text" 
+          id="City" 
+          name="City" 
+          bind:value={formData.City}
+          maxlength="100"
+          style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
+        />
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    
+    <div class="zcwf_row" style="margin: 15px 0;">
+      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+        <label for="Zip_Code" style="font-size: 14px;">Zip Code <span style="color: red;">*</span></label>
+      </div>
+      <div class="zcwf_col_fld" style="float: left; width: 60%;">
+        <input 
+          type="text" 
+          id="Zip_Code" 
+          name="Zip Code" 
+          bind:value={formData['Zip Code']}
+          maxlength="30"
+          aria-required="true"
+          style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
+        />
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    
+    <div class="zcwf_row" style="margin: 15px 0;">
+      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+        <label for="Description" style="font-size: 14px;">Job Details</label>
+      </div>
+      <div class="zcwf_col_fld" style="float: left; width: 60%;">
+        <textarea 
+          id="Description" 
+          name="Description" 
+          bind:value={formData.Description}
+          style="width: 100%; min-height: 100px; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
+        ></textarea>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    
+    <div class="zcwf_row" style="margin: 25px 0 15px 0; text-align: right;">
+      <button 
+        type="reset" 
+        class="zcwf_button" 
+        style="background: #F3F4F6; border: 1px solid #D1D5DB; color: #374151; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;"
+      >
+        Reset
+      </button>
+      <button 
+        type="submit" 
+        class="formsubmit zcwf_button" 
+        style="background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? 'Submitting...' : 'Submit'}
+      </button>
+    </div>
+  </form>
 </div>
+
+<!-- Zoho WebToLead Success Message Container -->
+<div id="wf_splash" class="wf_customMessageBox" style="display: none;">
+  <div class="wf_customCircle">
+    <div class="wf_customCheckMark"></div>
+  </div>
+  <span id="wf_splash_info"></span>
+</div>
+
+<style>
+  /* Zoho WebToLead Form Styles */
+  .zcwf_lblLeft {
+    font-family: Arial, sans-serif;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .zcwf_title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+  }
+
+  .zcwf_row {
+    margin: 15px 0;
+    clear: both;
+  }
+
+  .zcwf_col_lab {
+    width: 30%;
+    float: left;
+    padding-right: 10px;
+    box-sizing: border-box;
+  }
+
+  .zcwf_col_fld {
+    width: 70%;
+    float: left;
+  }
+
+  .zcwf_button {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .formsubmit {
+    background: #3b82f6 !important;
+    color: white !important;
+    border: none !important;
+  }
+
+  .formsubmit:hover {
+    background: #2563eb !important;
+  }
+
+  /* Success/Error Messages */
+  .message {
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+  }
+
+  .message.success {
+    background-color: #f0fdf4;
+    border: 1px solid #86efac;
+    color: #166534;
+  }
+
+  .message.error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 640px) {
+    .zcwf_col_lab,
+    .zcwf_col_fld {
+      width: 100%;
+      float: none;
+      padding-right: 0;
+    }
+    
+    .zcwf_col_fld {
+      margin-top: 8px;
+    }
+  }
+
+  /* Form Elements */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  /* Buttons */
+  button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  /* Responsive adjustments */
+  @media (min-width: 640px) {
+    .zcwf_row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+    }
+    
+    .zcwf_col_lab,
+    .zcwf_col_fld {
+      padding: 0 10px;
+      width: 50%;
+    }
+  }
+</style>
