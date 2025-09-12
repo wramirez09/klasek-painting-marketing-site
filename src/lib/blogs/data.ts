@@ -24,6 +24,7 @@ export const blogData: Record<string, BlogPost> = {
       image: imgPost0,
     },
   },
+
   "/blog/diy-vs-professional-painting-when-to-hire-a-painter": {
     version: 1724962381449,
     data: {
@@ -34,6 +35,7 @@ export const blogData: Record<string, BlogPost> = {
       image: imgPost1,
     },
   },
+
   "/blog/diy-vs-professional-painting-when-to-hire-a-painter:1724962381449": {
     version: 1724962381449,
     data: {
@@ -44,6 +46,7 @@ export const blogData: Record<string, BlogPost> = {
       image: imgPost2,
     },
   },
+
   "/blog/painting-maintenance-how-to-keep-your-home-looking-fresh": {
     version: 1724962382504,
     data: {
@@ -54,6 +57,7 @@ export const blogData: Record<string, BlogPost> = {
       image: imgPost3,
     },
   },
+
   "/blog/painting-maintenance-how-to-keep-your-home-looking-fresh:1724962382504":
     {
       version: 1724962382504,
@@ -65,6 +69,7 @@ export const blogData: Record<string, BlogPost> = {
         image: imgPost4,
       },
     },
+
   "/blog/what-exterior-paint-colors-look-the-best": {
     version: 1724962380183,
     data: {
@@ -75,6 +80,7 @@ export const blogData: Record<string, BlogPost> = {
       image: imgPost5,
     },
   },
+  
   "/blog/what-exterior-paint-colors-look-the-best:1724962380183": {
     version: 1724962380183,
     data: {
