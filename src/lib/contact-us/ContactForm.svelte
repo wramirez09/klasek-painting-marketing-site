@@ -1,46 +1,48 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
-  import { fade } from 'svelte/transition';
+  import { onDestroy } from "svelte";
+  import { fade } from "svelte/transition";
 
   // Form data type
   type FormData = {
     [key: string]: string;
-    'First Name': string;
-    'Last Name': string;
-    'Email': string;
-    'Phone': string;
-    'City': string;
-    'Zip Code': string;
-    'Description': string;
+    "First Name": string;
+    "Last Name": string;
+    Email: string;
+    Phone: string;
+    City: string;
+    "Zip Code": string;
+    Description: string;
   };
 
   // Form state
   let formData: FormData = {
-    'First Name': '',
-    'Last Name': '',
-    'Email': '',
-    'Phone': '',
-    'City': '',
-    'Zip Code': '',
-    'Description': ''
+    "First Name": "",
+    "Last Name": "",
+    Email: "",
+    Phone: "",
+    City: "",
+    "Zip Code": "",
+    Description: "",
   };
 
-  type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
-  let submitStatus: SubmitStatus = 'idle';
-  let submitMessage = '';
+  type SubmitStatus = "idle" | "submitting" | "success" | "error";
+  let submitStatus: SubmitStatus = "idle";
+  let submitMessage = "";
   let isSubmitting = false;
 
   // Zoho WebToLead Configuration
-  const ZOHO_FORM_ID = 'webform5683047000006693036';
-  const ZOHO_FORM_ACTION = 'https://crm.zoho.com/crm/WebToLeadForm';
-  
+  const ZOHO_FORM_ID = "webform5683047000006693036";
+  const ZOHO_FORM_ACTION = "https://crm.zoho.com/crm/WebToLeadForm";
+
   // Zoho form fields
   const ZOHO_FIELDS = {
-    xnQsjsdp: 'cdaf4fd904d1a76d463cfa7498f7083593f85a7ebaf6309bc04de2170f5c5221',
-    xmIwtLD: 'b63d7c69781dd958162b76c2f3ecab4ffd5b8b5d2d23c3e5ae5621f9cb4f47fc4fac4b525fe84a2d485aaabf4ef4373c',
-    actionType: 'TGVhZHM=',
-    returnURL: 'null',
-    aG9uZXlwb3Q: '' // Honeypot field
+    xnQsjsdp:
+      "cdaf4fd904d1a76d463cfa7498f7083593f85a7ebaf6309bc04de2170f5c5221",
+    xmIwtLD:
+      "b63d7c69781dd958162b76c2f3ecab4ffd5b8b5d2d23c3e5ae5621f9cb4f47fc4fac4b525fe84a2d485aaabf4ef4373c",
+    actionType: "TGVhZHM=",
+    returnURL: "null",
+    aG9uZXlwb3Q: "", // Honeypot field
   };
 
   function validateEmail(email: string): boolean {
@@ -50,18 +52,23 @@
   }
 
   function checkMandatory(): boolean {
-    const requiredFields: (keyof FormData)[] = ['First Name', 'Last Name', 'Phone', 'Zip Code'];
+    const requiredFields: (keyof FormData)[] = [
+      "First Name",
+      "Last Name",
+      "Phone",
+      "Zip Code",
+    ];
     for (const field of requiredFields) {
       if (!formData[field]?.trim()) {
-        submitStatus = 'error';
+        submitStatus = "error";
         submitMessage = `${field} is required`;
         return false;
       }
     }
 
     if (!validateEmail(formData.Email)) {
-      submitStatus = 'error';
-      submitMessage = 'Please enter a valid email address';
+      submitStatus = "error";
+      submitMessage = "Please enter a valid email address";
       return false;
     }
 
@@ -70,64 +77,71 @@
 
   async function handleSubmit(event: Event): Promise<void> {
     event.preventDefault();
-    
+
     if (!checkMandatory() || isSubmitting) return;
-    
+
     isSubmitting = true;
-    submitStatus = 'submitting';
-    
+    submitStatus = "submitting";
+
     try {
       // Convert form data to URLSearchParams
       const params = new URLSearchParams();
-      
+
       // Add Zoho form fields
       Object.entries(ZOHO_FIELDS).forEach(([key, value]) => {
         params.append(key, value);
       });
-      
+
       // Add form data
       Object.entries(formData).forEach(([key, value]) => {
         if (value) params.append(key, value);
       });
-      
+
       const response = await fetch(ZOHO_FORM_ACTION, {
-        method: 'POST',
+        method: "POST",
         body: params,
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
       });
-      
+
       const responseText = await response.text();
-      
-      if (response.ok || response.redirected || responseText.includes('Thank you') || responseText.includes('success')) {
-        submitStatus = 'success';
-        submitMessage = 'Thank you for your inquiry! We will contact you shortly.';
-        
+
+      if (
+        response.ok ||
+        response.redirected ||
+        responseText.includes("Thank you") ||
+        responseText.includes("success")
+      ) {
+        submitStatus = "success";
+        submitMessage =
+          "Thank you for your inquiry! We will contact you shortly.";
+
         // Reset form
         formData = {
-          'First Name': '',
-          'Last Name': '',
-          'Email': '',
-          'Phone': '',
-          'City': '',
-          'Zip Code': '',
-          'Description': ''
+          "First Name": "",
+          "Last Name": "",
+          Email: "",
+          Phone: "",
+          City: "",
+          "Zip Code": "",
+          Description: "",
         };
-        
+
         // Hide success message after 5 seconds
         const timer = setTimeout(() => {
-          submitStatus = 'idle';
+          submitStatus = "idle";
         }, 5000);
-        
+
         onDestroy(() => clearTimeout(timer));
       } else {
-        throw new Error('Failed to submit form');
+        throw new Error("Failed to submit form");
       }
     } catch (error) {
-      console.error('Form submission error:', error);
-      submitStatus = 'error';
-      submitMessage = 'An error occurred while submitting the form. Please try again.';
+      console.error("Form submission error:", error);
+      submitStatus = "error";
+      submitMessage =
+        "An error occurred while submitting the form. Please try again.";
     } finally {
       isSubmitting = false;
     }
@@ -135,46 +149,84 @@
 </script>
 
 <!-- Zoho WebToLead Form -->
-<div id="crmWebToEntityForm" class="zcwf_lblLeft crmWebToEntityForm" style="background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;">
+<div
+  id="crmWebToEntityForm"
+  class="zcwf_lblLeft crmWebToEntityForm"
+  style="background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;"
+>
   <!-- Success/Error Messages -->
-  {#if submitStatus === 'success'}
-    <div class="message success" in:fade={{ duration: 200 }} role="alert" style="background-color: #F5FAF5; color: #132C14; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #A9D3AB; display: flex; align-items: center;">
-      <div style="background-color: #12AA67; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;">
-        <div style="width: 5px; height: 10px; border-right: 2px solid white; border-bottom: 2px solid white; transform: rotate(45deg) translate(-1px, -1px);"></div>
+  {#if submitStatus === "success"}
+    <div
+      class="message success"
+      in:fade={{ duration: 200 }}
+      role="alert"
+      style="background-color: #F5FAF5; color: #132C14; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #A9D3AB; display: flex; align-items: center;"
+    >
+      <div
+        style="background-color: #12AA67; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;"
+      >
+        <div
+          style="width: 5px; height: 10px; border-right: 2px solid white; border-bottom: 2px solid white; transform: rotate(45deg) translate(-1px, -1px);"
+        ></div>
       </div>
       <span>{submitMessage}</span>
     </div>
   {/if}
 
-  {#if submitStatus === 'error'}
-    <div class="message error" in:fade={{ duration: 200 }} role="alert" style="background-color: #FDF4F5; color: #7F1D1D; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #F8B4B4; display: flex; align-items: center;">
-      <div style="background-color: #DC2626; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;">
-        <div style="color: white; font-weight: bold; font-size: 14px; margin-top: -2px;">!</div>
+  {#if submitStatus === "error"}
+    <div
+      class="message error"
+      in:fade={{ duration: 200 }}
+      role="alert"
+      style="background-color: #FDF4F5; color: #7F1D1D; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #F8B4B4; display: flex; align-items: center;"
+    >
+      <div
+        style="background-color: #DC2626; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;"
+      >
+        <div
+          style="color: white; font-weight: bold; font-size: 14px; margin-top: -2px;"
+        >
+          !
+        </div>
       </div>
       <span>{submitMessage}</span>
     </div>
   {/if}
 
-  <div class="zcwf_title" style="font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;">Contact Us</div>
-  
-  <form id={ZOHO_FORM_ID} name="WebToLeads{ZOHO_FORM_ID}" on:submit|preventDefault={handleSubmit}>
+  <div
+    class="zcwf_title"
+    style="font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;"
+  >
+    Contact Us
+  </div>
+
+  <form
+    id={ZOHO_FORM_ID}
+    name="WebToLeads{ZOHO_FORM_ID}"
+    on:submit|preventDefault={handleSubmit}
+  >
     <!-- Hidden Zoho Fields -->
     <input type="hidden" name="xnQsjsdp" value={ZOHO_FIELDS.xnQsjsdp} />
     <input type="hidden" name="xmIwtLD" value={ZOHO_FIELDS.xmIwtLD} />
     <input type="hidden" name="actionType" value={ZOHO_FIELDS.actionType} />
     <input type="hidden" name="returnURL" value={ZOHO_FIELDS.returnURL} />
     <input type="hidden" name="aG9uZXlwb3Q" value="" />
-    
+
     <div class="zcwf_row" style="margin: 15px 0;">
-      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
-        <label for="First_Name" style="font-size: 14px;">First Name <span style="color: red;">*</span></label>
+      <div
+        class="zcwf_col_lab"
+        style="width: 30%; margin-right: 10px; float: left;"
+      >
+        <label for="First_Name" style="font-size: 14px;"
+          >First Name <span style="color: red;">*</span></label
+        >
       </div>
       <div class="zcwf_col_fld" style="float: left; width: 60%;">
-        <input 
-          type="text" 
-          id="First_Name" 
-          name="First Name" 
-          bind:value={formData['First Name']}
+        <input
+          type="text"
+          id="First_Name"
+          name="First Name"
+          bind:value={formData["First Name"]}
           maxlength="40"
           aria-required="true"
           style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
@@ -182,17 +234,22 @@
       </div>
       <div style="clear: both;"></div>
     </div>
-    
+
     <div class="zcwf_row" style="margin: 15px 0;">
-      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
-        <label for="Last_Name" style="font-size: 14px;">Last Name <span style="color: red;">*</span></label>
+      <div
+        class="zcwf_col_lab"
+        style="width: 30%; margin-right: 10px; float: left;"
+      >
+        <label for="Last_Name" style="font-size: 14px;"
+          >Last Name <span style="color: red;">*</span></label
+        >
       </div>
       <div class="zcwf_col_fld" style="float: left; width: 60%;">
-        <input 
-          type="text" 
-          id="Last_Name" 
-          name="Last Name" 
-          bind:value={formData['Last Name']}
+        <input
+          type="text"
+          id="Last_Name"
+          name="Last Name"
+          bind:value={formData["Last Name"]}
           maxlength="80"
           aria-required="true"
           style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
@@ -200,16 +257,19 @@
       </div>
       <div style="clear: both;"></div>
     </div>
-    
+
     <div class="zcwf_row" style="margin: 15px 0;">
-      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+      <div
+        class="zcwf_col_lab"
+        style="width: 30%; margin-right: 10px; float: left;"
+      >
         <label for="Email" style="font-size: 14px;">Email</label>
       </div>
       <div class="zcwf_col_fld" style="float: left; width: 60%;">
-        <input 
-          type="email" 
-          id="Email" 
-          name="Email" 
+        <input
+          type="email"
+          id="Email"
+          name="Email"
           bind:value={formData.Email}
           maxlength="100"
           style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
@@ -217,16 +277,21 @@
       </div>
       <div style="clear: both;"></div>
     </div>
-    
+
     <div class="zcwf_row" style="margin: 15px 0;">
-      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
-        <label for="Phone" style="font-size: 14px;">Phone <span style="color: red;">*</span></label>
+      <div
+        class="zcwf_col_lab"
+        style="width: 30%; margin-right: 10px; float: left;"
+      >
+        <label for="Phone" style="font-size: 14px;"
+          >Phone <span style="color: red;">*</span></label
+        >
       </div>
       <div class="zcwf_col_fld" style="float: left; width: 60%;">
-        <input 
-          type="tel" 
-          id="Phone" 
-          name="Phone" 
+        <input
+          type="tel"
+          id="Phone"
+          name="Phone"
           bind:value={formData.Phone}
           maxlength="30"
           aria-required="true"
@@ -235,16 +300,19 @@
       </div>
       <div style="clear: both;"></div>
     </div>
-    
+
     <div class="zcwf_row" style="margin: 15px 0;">
-      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+      <div
+        class="zcwf_col_lab"
+        style="width: 30%; margin-right: 10px; float: left;"
+      >
         <label for="City" style="font-size: 14px;">Address</label>
       </div>
       <div class="zcwf_col_fld" style="float: left; width: 60%;">
-        <input 
-          type="text" 
-          id="City" 
-          name="City" 
+        <input
+          type="text"
+          id="City"
+          name="City"
           bind:value={formData.City}
           maxlength="100"
           style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
@@ -252,17 +320,22 @@
       </div>
       <div style="clear: both;"></div>
     </div>
-    
+
     <div class="zcwf_row" style="margin: 15px 0;">
-      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
-        <label for="Zip_Code" style="font-size: 14px;">Zip Code <span style="color: red;">*</span></label>
+      <div
+        class="zcwf_col_lab"
+        style="width: 30%; margin-right: 10px; float: left;"
+      >
+        <label for="Zip_Code" style="font-size: 14px;"
+          >Zip Code <span style="color: red;">*</span></label
+        >
       </div>
       <div class="zcwf_col_fld" style="float: left; width: 60%;">
-        <input 
-          type="text" 
-          id="Zip_Code" 
-          name="Zip Code" 
-          bind:value={formData['Zip Code']}
+        <input
+          type="text"
+          id="Zip_Code"
+          name="Zip Code"
+          bind:value={formData["Zip Code"]}
           maxlength="30"
           aria-required="true"
           style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
@@ -270,37 +343,40 @@
       </div>
       <div style="clear: both;"></div>
     </div>
-    
+
     <div class="zcwf_row" style="margin: 15px 0;">
-      <div class="zcwf_col_lab" style="width: 30%; margin-right: 10px; float: left;">
+      <div
+        class="zcwf_col_lab"
+        style="width: 30%; margin-right: 10px; float: left;"
+      >
         <label for="Description" style="font-size: 14px;">Job Details</label>
       </div>
       <div class="zcwf_col_fld" style="float: left; width: 60%;">
-        <textarea 
-          id="Description" 
-          name="Description" 
+        <textarea
+          id="Description"
+          name="Description"
           bind:value={formData.Description}
           style="width: 100%; min-height: 100px; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
         ></textarea>
       </div>
       <div style="clear: both;"></div>
     </div>
-    
+
     <div class="zcwf_row" style="margin: 25px 0 15px 0; text-align: right;">
-      <button 
-        type="reset" 
-        class="zcwf_button" 
+      <button
+        type="reset"
+        class="zcwf_button"
         style="background: #F3F4F6; border: 1px solid #D1D5DB; color: #374151; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;"
       >
         Reset
       </button>
-      <button 
-        type="submit" 
-        class="formsubmit zcwf_button" 
+      <button
+        type="submit"
+        class="formsubmit zcwf_button"
         style="background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;"
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Submitting...' : 'Submit'}
+        {isSubmitting ? "Submitting..." : "Submit"}
       </button>
     </div>
   </form>
@@ -396,7 +472,7 @@
       float: none;
       padding-right: 0;
     }
-    
+
     .zcwf_col_fld {
       margin-top: 8px;
     }
@@ -419,7 +495,7 @@
     min-height: 100px;
     resize: vertical;
   }
-  
+
   /* Buttons */
   button[type="submit"]:disabled {
     opacity: 0.7;
@@ -433,7 +509,7 @@
       flex-wrap: wrap;
       margin: 0 -10px;
     }
-    
+
     .zcwf_col_lab,
     .zcwf_col_fld {
       padding: 0 10px;

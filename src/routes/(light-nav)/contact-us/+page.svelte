@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ContactForm from "$lib/contact-us/OLD_ContactForm.svelte";
+  import ContactForm from "$lib/contact-us/ContactForm.svelte";
   import Map from "$lib/common/other/Map.svelte";
   import LocationIcon from "$images/icons/LocationIcon.svelte";
   import ClickToCall from "$lib/common/other/ClickToCall.svelte";
