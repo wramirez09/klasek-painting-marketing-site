@@ -12,9 +12,10 @@
 	<div class="relative w-full rounded-lg overflow-clip my-auto h-[250px]">
 		<div class="absolute rounded-lg size-full bg-off-white animate-pulse" />
 
-		<div
-			style={`background-image: url(${previewData.image})`}
-			class="absolute bg-cover bg-center size-full z-10 rounded-lg border-2 border-secondary-dark"
+		<img
+			src="{previewData.image}"
+			alt="{previewData.meta}"
+			class="absolute object-cover object-center size-full z-10 rounded-lg border-2 border-secondary-dark"
 		/>
 	</div>
 

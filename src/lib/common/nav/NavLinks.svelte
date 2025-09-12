@@ -8,7 +8,6 @@
 <!-- About us -->
 <Dropdown data={routes['about']} class="xl:block lg:hidden block">
 	<DropdownItem data={aboutUsRoutes['testimonials']} />
-	<DropdownItem data={aboutUsRoutes['blog']} />
 	<DropdownItem data={aboutUsRoutes['faq']} />
 </Dropdown>
 
@@ -46,3 +45,6 @@
 
 <!-- Gallery -->
 <NavItem data={routes['gallery']} class="xl:block lg:hidden block" />
+
+<!-- About -->
+<NavItem data={aboutUsRoutes['blog']} class="xl:block lg:hidden block" />
