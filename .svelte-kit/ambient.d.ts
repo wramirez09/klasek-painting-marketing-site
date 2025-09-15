@@ -51,7 +51,6 @@ declare module '$env/static/private' {
 	export const npm_package_scripts_dev: string;
 	export const MallocNanoZone: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
-	export const ZDOTDIR: string;
 	export const npm_package_devDependencies__sveltejs_kit: string;
 	export const npm_package_private: string;
 	export const npm_config_registry: string;
@@ -67,7 +66,6 @@ declare module '$env/static/private' {
 	export const SSH_AUTH_SOCK: string;
 	export const npm_package_dependencies_lodash: string;
 	export const __CF_USER_TEXT_ENCODING: string;
-	export const VSCODE_PROFILE_INITIALIZED: string;
 	export const npm_package_devDependencies_postcss: string;
 	export const npm_package_devDependencies_eslint: string;
 	export const npm_package_devDependencies__playwright_experimental_ct_svelte: string;
@@ -87,7 +85,6 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies_bits_ui: string;
 	export const _: string;
 	export const __CFBundleIdentifier: string;
-	export const USER_ZDOTDIR: string;
 	export const COREPACK_ENABLE_DOWNLOAD_PROMPT: string;
 	export const PWD: string;
 	export const npm_package_dependencies_svelte_inview: string;
@@ -111,7 +108,6 @@ declare module '$env/static/private' {
 	export const npm_package_devDependencies_eslint_config_prettier: string;
 	export const XPC_SERVICE_NAME: string;
 	export const npm_package_version: string;
-	export const VSCODE_INJECTION: string;
 	export const npm_package_devDependencies_svelte_check: string;
 	export const npm_package_devDependencies_autoprefixer: string;
 	export const HOME: string;
@@ -207,7 +203,6 @@ declare module '$env/dynamic/private' {
 		npm_package_scripts_dev: string;
 		MallocNanoZone: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
-		ZDOTDIR: string;
 		npm_package_devDependencies__sveltejs_kit: string;
 		npm_package_private: string;
 		npm_config_registry: string;
@@ -223,7 +218,6 @@ declare module '$env/dynamic/private' {
 		SSH_AUTH_SOCK: string;
 		npm_package_dependencies_lodash: string;
 		__CF_USER_TEXT_ENCODING: string;
-		VSCODE_PROFILE_INITIALIZED: string;
 		npm_package_devDependencies_postcss: string;
 		npm_package_devDependencies_eslint: string;
 		npm_package_devDependencies__playwright_experimental_ct_svelte: string;
@@ -243,7 +237,6 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies_bits_ui: string;
 		_: string;
 		__CFBundleIdentifier: string;
-		USER_ZDOTDIR: string;
 		COREPACK_ENABLE_DOWNLOAD_PROMPT: string;
 		PWD: string;
 		npm_package_dependencies_svelte_inview: string;
@@ -267,7 +260,6 @@ declare module '$env/dynamic/private' {
 		npm_package_devDependencies_eslint_config_prettier: string;
 		XPC_SERVICE_NAME: string;
 		npm_package_version: string;
-		VSCODE_INJECTION: string;
 		npm_package_devDependencies_svelte_check: string;
 		npm_package_devDependencies_autoprefixer: string;
 		HOME: string;
