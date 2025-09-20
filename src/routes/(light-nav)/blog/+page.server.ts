@@ -8,10 +8,12 @@ import { createTitleDescription } from "$lib/common/seo/metaTagHelpers";
 const blogsPerPage = 6;
 
 const blogTocData = [
+  "/blog/stucco-repair-in-oak-park-il-what-homeowners-need-to-know",
   "/blog/can-you-paint-hardie-board",
   "/blog/painting-maintenance-how-to-keep-your-home-looking-fresh",
   "/blog/diy-vs-professional-painting-when-to-hire-a-painter",
   "/blog/what-exterior-paint-colors-look-the-best",
+
 ] as const;
 
 export const load: PageServerLoad = ({ url }) => {
