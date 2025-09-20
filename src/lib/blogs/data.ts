@@ -16,7 +16,7 @@ export type BlogPost = {
 };
 
 export const blogData: Record<string, BlogPost> = {
-  "/blog/how-to-fix-cracked-stucco-exterior": {
+  "/blog/how-to-fix-cracked-stucco-exterior-a-homeowners-guide": {
     version: 1725231600007,
     data: {
       title: "How to Fix Cracked Stucco Exterior: A Homeowner’s Guide",
