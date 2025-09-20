@@ -1,5 +1,6 @@
 <script lang="ts">
   import FooterCta from "./FooterCta.svelte";
+  import EmailSignup from "../EmailSignup.svelte";
   import logo from "$images/logos/klasek-painting.webp?enhanced";
   import Map from "../other/Map.svelte";
   import Button from "$components/button/button.svelte";
@@ -20,6 +21,7 @@
 </script>
 
 <footer class="flex flex-col items-center bg-secondary px-6">
+  <EmailSignup />
   <FooterCta />
 
   <div
@@ -86,7 +88,7 @@
   <!-- Bottom banner -->
   <div class="w-full bg-secondary-dark py-4 grid place-items-center p-x">
     <p class="text-white italic text-xs text-center [&>span]:whitespace-nowrap">
-      <span>Copyright © {new Date().getFullYear()}.</span>
+      <span>Copyright {new Date().getFullYear()}.</span>
       <span>All Rights Reserved.</span>
     </p>
   </div>
