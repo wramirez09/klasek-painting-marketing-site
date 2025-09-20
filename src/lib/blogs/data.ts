@@ -8,6 +8,7 @@ import imgPost4 from '../images/services/historic-house-painting.webp';
 import imgPost5 from '../images/services/historic-house-painting.webp';
 import imgPost6 from '../images/services/brick-painting-staining-service.webp';
 import imgPost7 from '../images/services/stucco-repair-service.webp';
+import imgPost8 from '../images/services/stucco-painting-repair-services.webp';
 
 export type BlogPost = {
   version: number;
@@ -15,6 +16,17 @@ export type BlogPost = {
 };
 
 export const blogData: Record<string, BlogPost> = {
+  "/blog/how-to-fix-cracked-stucco-exterior": {
+    version: 1725231600007,
+    data: {
+      title: "How to Fix Cracked Stucco Exterior: A Homeowner’s Guide",
+      datePublished: "September 20, 2025",
+      meta: "Expert stucco repair in Oak Park, IL. Klasek Painting restores cracks, water damage & aging stucco. Free inspections & estimates.",
+      body: `<article>\n<header>\n<h1>How to Fix Cracked Stucco Exterior: A Homeowner’s Guide</h1>\n<p>Stucco is one of the most durable and attractive finishes for home exteriors, but even the toughest materials can develop cracks over time. Whether caused by weather, foundation settling, or age, stucco cracks can hurt your home’s curb appeal and, if ignored, lead to bigger problems like water intrusion.</p>\n</header>\n<main>\n<h2>Why Does Stucco Crack?</h2>\n<p>Several factors can cause stucco to develop cracks:</p>\n<ul>\n<li><strong>Weather stress</strong> – Freeze-thaw cycles in cold climates expand small cracks.</li>\n<li><strong>Foundation settling</strong> – Homes naturally shift, stressing exterior walls.</li>\n<li><strong>Improper installation</strong> – Thin coats or poor preparation can weaken stucco.</li>\n<li><strong>Moisture issues</strong> – Water seeping behind stucco can cause bulging or crumbling.</li>\n<li><strong>Aging</strong> – Stucco, like all materials, wears down over decades.</li>\n</ul>\n<h2>DIY Stucco Crack Repair (For Small Cracks Only)</h2>\n<p>Hairline cracks under ⅛ inch wide can sometimes be handled by homeowners with the right materials.</p>\n<ol>\n<li><strong>Clean the area</strong> – Use a stiff brush to remove dirt and debris from the crack.</li>\n<li><strong>Prep the crack</strong> – Use a chisel or utility knife to widen the crack slightly into a “V” shape so the filler adheres better.</li>\n<li><strong>Apply patching compound</strong> – Use premixed stucco patch or acrylic caulk designed for stucco. Smooth with a putty knife.</li>\n<li><strong>Texture to match</strong> – Dab with a sponge, brush, or trowel to blend with surrounding stucco.</li>\n<li><strong>Paint the repair</strong> – Once dry, paint over the patch with a matching exterior paint.</li>\n</ol>\n<p><em>Pro Tip:</em> Always check for signs of deeper issues like moisture or large cracks. DIY patches are only a short-term solution if there’s a bigger underlying problem.</p>\n<h2>When to Call a Professional</h2>\n<p>Not all cracks are equal. Call a professional stucco contractor if you notice:</p>\n<ul>\n<li>Cracks wider than ⅛ inch</li>\n<li>Long cracks around doors, windows, or corners</li>\n<li>Bulging, soft, or discolored stucco</li>\n<li>Chunks of stucco falling off</li>\n<li>Water stains or mold growth</li>\n</ul>\n<p>A professional can identify hidden issues like trapped moisture, damaged lath, or foundation problems. They’ll also match texture and color so repairs blend seamlessly — something that’s hard to achieve with a DIY kit.</p>\n<h2>Benefits of Professional Stucco Repair</h2>\n<ul>\n<li>Correct diagnosis of underlying issues</li>\n<li>Long-lasting repairs that prevent future cracking</li>\n<li>Seamless finish that restores curb appeal</li>\n<li>Protection against costly water damage</li>\n<li>Peace of mind knowing the repair is done right</li>\n</ul>\n<h2>Protect Your Home’s Exterior</h2>\n<p>Fixing cracked stucco early saves money and protects your home. While small cracks may be manageable as a weekend project, larger or recurring damage is best left to the experts.</p>\n<section>\n<p><strong>Klasek Painting</strong> has been repairing and restoring stucco homes in the Chicago suburbs for over 30 years. Our experienced team knows how to spot problems early, repair damage correctly, and leave your home looking beautiful again.</p>\n<p><a href="tel:PHONE_NUMBER">Call Now: PHONE_NUMBER</a> • <a href="https://BUSINESS_URL/contact">Request a Free Stucco Inspection</a></p>\n</section>\n</main>\n<footer>\n<p>© <span id="year"></span> Klasek Painting. All rights reserved.</p>\n</footer>\n</article>\n<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+`,
+      image: imgPost8,
+    },
+  },
   "/blog/stucco-repair-in-oak-park-il-what-homeowners-need-to-know": {
     version: 1725231600006,
     data: {

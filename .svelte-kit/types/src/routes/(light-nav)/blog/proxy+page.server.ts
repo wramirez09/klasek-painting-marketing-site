@@ -9,6 +9,7 @@ import { createTitleDescription } from "$lib/common/seo/metaTagHelpers";
 const blogsPerPage = 6;
 
 const blogTocData = [
+  "/blog/how-to-fix-cracked-stucco-exterior",
   "/blog/stucco-repair-in-oak-park-il-what-homeowners-need-to-know",
   "/blog/can-you-paint-hardie-board",
   "/blog/painting-maintenance-how-to-keep-your-home-looking-fresh",
