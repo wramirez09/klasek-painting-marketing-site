@@ -51,7 +51,7 @@
 		"@sinclair/typebox": "^0.32.31",
 		"clsx": "^2.1.1",
 		"formsnap": "^1.0.0",
-		"lodash": "^4.17.21",
+		"lodash": "^4.17.23",
 		"schema-dts": "^1.1.2",
 		"svelte-fast-marquee": "^0.8.0",
 		"svelte-inview": "^4.0.2",
