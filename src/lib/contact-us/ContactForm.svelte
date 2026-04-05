@@ -115,13 +115,15 @@
         responseData = null;
       }
 
-      if (
+      // Check if we got a valid response (either HTTP success or Zoho's JSON response)
+      const isSuccess = 
         response.ok ||
         response.redirected ||
         responseText.includes("Thank you") ||
         responseText.includes("success") ||
-        responseData?.actionsubmit === "Splash Message"
-      ) {
+        (responseData && (responseData.actionsubmit === "Splash Message" || responseData.actionvalue));
+
+      if (isSuccess) {
         // Reset form
         formData = {
           "First Name": "",
