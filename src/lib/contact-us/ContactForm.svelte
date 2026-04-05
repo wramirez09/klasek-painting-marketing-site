@@ -133,31 +133,22 @@
           Description: "",
         };
 
-        // Check if we should show splash message
-        if (responseData?.actionsubmit === "Splash Message") {
-          const splashInfo = document.getElementById('wf_splash_info');
-          const splash = document.getElementById('wf_splash');
-          if (splashInfo && splash) {
-            splashInfo.innerText = responseData.actionvalue || "Thank you for your response.";
-            splash.style.display = 'flex';
-            setTimeout(() => {
-              splash.style.display = 'none';
-              submitStatus = "idle";
-            }, 5000);
-          }
+        // Show inline success message
+        submitStatus = "success";
+        
+        // Use actionvalue from response if available, otherwise use default message
+        if (responseData?.actionvalue) {
+          submitMessage = responseData.actionvalue;
         } else {
-          // Show inline success message for non-splash responses
-          submitStatus = "success";
-          submitMessage =
-            "Thank you for your inquiry! We will contact you shortly.";
-
-          // Hide success message after 5 seconds
-          const timer = setTimeout(() => {
-            submitStatus = "idle";
-          }, 5000);
-
-          onDestroy(() => clearTimeout(timer));
+          submitMessage = "Thank you for your inquiry! We will contact you shortly.";
         }
+
+        // Hide success message after 5 seconds
+        const timer = setTimeout(() => {
+          submitStatus = "idle";
+        }, 5000);
+
+        onDestroy(() => clearTimeout(timer));
       } else {
         throw new Error("Failed to submit form");
       }
@@ -406,57 +397,7 @@
   </form>
 </div>
 
-<!-- Zoho WebToLead Success Message Container -->
-<div id="wf_splash" class="wf_customMessageBox" style="display: none;">
-  <div class="wf_customCircle">
-    <div class="wf_customCheckMark"></div>
-  </div>
-  <span id="wf_splash_info"></span>
-</div>
-
 <style>
-  /* Splash Message Styles */
-  .wf_customMessageBox {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #132C14;
-    background: #F5FAF5;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.25);
-    max-width: 90%;
-    width: max-content;
-    word-break: break-word;
-    z-index: 11000;
-    border-radius: 6px;
-    border: 1px solid #A9D3AB;
-    min-width: 100px;
-    padding: 10px 15px;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
-
-  .wf_customCircle {
-    background-color: #12AA67;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .wf_customCheckMark {
-    width: 5px;
-    height: 10px;
-    border-right: 2px solid white;
-    border-bottom: 2px solid white;
-    transform: rotate(45deg) translate(-1px, -1px);
-  }
-
   /* Zoho WebToLead Form Styles */
   .zcwf_lblLeft {
     font-family: Arial, sans-serif;
