@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onDestroy } from "svelte";
   import { fade } from "svelte/transition";
 
   // Form data type
@@ -152,11 +151,9 @@
         }
 
         // Hide success message after 5 seconds
-        const timer = setTimeout(() => {
+        setTimeout(() => {
           submitStatus = "idle";
         }, 5000);
-
-        onDestroy(() => clearTimeout(timer));
       } else {
         throw new Error("Failed to submit form");
       }
