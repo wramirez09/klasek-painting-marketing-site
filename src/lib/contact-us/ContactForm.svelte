@@ -105,13 +105,17 @@
         },
       });
 
+      console.log("Response status:", response.status, response.ok);
       const responseText = await response.text();
+      console.log("Response text:", responseText);
       
       // Try to parse JSON response
       let responseData;
       try {
         responseData = JSON.parse(responseText);
-      } catch {
+        console.log("Parsed JSON:", responseData);
+      } catch (e) {
+        console.log("Failed to parse JSON:", e);
         responseData = null;
       }
 
@@ -122,6 +126,8 @@
         responseText.includes("Thank you") ||
         responseText.includes("success") ||
         (responseData && (responseData.actionsubmit === "Splash Message" || responseData.actionvalue));
+
+      console.log("isSuccess:", isSuccess, "response.ok:", response.ok, "responseData:", responseData);
 
       if (isSuccess) {
         // Reset form
