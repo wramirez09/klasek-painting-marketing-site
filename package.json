@@ -19,7 +19,7 @@
 		"@playwright/test": "^1.42.1",
 		"@sveltejs/adapter-cloudflare": "^3.0.0",
 		"@sveltejs/enhanced-img": "^0.3.3",
-		"@sveltejs/kit": "^2.5.4",
+		"@sveltejs/kit": "^2.60.1",
 		"@sveltejs/vite-plugin-svelte": "^3.0.2",
 		"@types/google.maps": "^3.55.12",
 		"@types/lodash": "^4.17.4",
