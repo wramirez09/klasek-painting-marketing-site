@@ -12,29 +12,16 @@
 	<DropdownItem data={aboutUsRoutes['faq']} />
 </Dropdown>
 
-<!-- Exterior painting -->
-<Dropdown data={routes['exterior-home-painting']}>
-	<DropdownItem
-		data={{ text: 'Paint Contractor', href: routes['exterior-paint-contractor'].href }}
-	/>
-	<DropdownItem data={routes['historic-house-painting']} />
-	<DropdownItem data={{ text: 'Brick Painting', href: routes['brick-painting'].href }} />
-	<DropdownItem data={routes['stucco-painting']} />
-	<DropdownItem data={routes['hardie-painting']} />
-	<DropdownItem data={routes['aluminum-painting']} />
-	<DropdownItem data={routes['cedar-painting']} />
-	<DropdownItem data={routes['vinyl-painting']} />
+<!-- Services -->
+<Dropdown data={routes['services']}>
+	<DropdownItem data={routes['exterior-home-painting']} />
+	<DropdownItem data={routes['siding-painting-repair']} />
+	<DropdownItem data={routes['hardie-installation']} />
+	<DropdownItem data={routes['brick-painting-repair']} />
+	<DropdownItem data={routes['stucco-painting-repair']} />
+	<DropdownItem data={routes['gutters']} />
+	<DropdownItem data={routes['design-consultation']} />
 	<DropdownItem data={routes['commercial']} />
-</Dropdown>
-
-<!-- Exteior Repair -->
-<Dropdown data={{ text: 'Exterior Repair', href: routes['siding-painting-repair'].href }}>
-	<DropdownItem data={{ text: 'Brick Repair', href: routes['brick-repair'].href }} />
-	<DropdownItem data={routes['stucco-repair']} />
-	<DropdownItem data={routes['hardie-repair']} />
-	<DropdownItem data={routes['aluminum-repair']} />
-	<DropdownItem data={routes['cedar-repair']} />
-	<DropdownItem data={routes['vinyl-repair']} />
 </Dropdown>
 
 <!-- Service Area -->

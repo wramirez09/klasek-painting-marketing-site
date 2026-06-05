@@ -208,6 +208,10 @@
 		"src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.ts",
 		"src/routes/+layout.server.ts"
 	],
+	"/(light-nav)/services/gutter-installation-repair": [
+		"src/routes/(light-nav)/services/gutter-installation-repair/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
 	"/(light-nav)/services/siding-painting-repair": [
 		"src/routes/(light-nav)/services/siding-painting-repair/+page.ts",
 		"src/routes/+layout.server.ts"
@@ -226,6 +230,10 @@
 	],
 	"/(light-nav)/services/siding-painting-repair/cedar-siding-repair": [
 		"src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-repair/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(light-nav)/services/siding-painting-repair/hardie-board-installation": [
+		"src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.ts",
 		"src/routes/+layout.server.ts"
 	],
 	"/(light-nav)/services/siding-painting-repair/hardie-board-painting": [

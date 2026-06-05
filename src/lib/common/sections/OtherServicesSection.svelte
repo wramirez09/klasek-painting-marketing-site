@@ -9,6 +9,7 @@
 	export let showBrick = true;
 	export let showStucco = true;
 	export let showDesignConsultation = true;
+	export let showGutters = true;
 
 	let classes = '';
 	export { classes as class };
@@ -115,6 +116,14 @@
 					of your exterior but also ensures it remains vibrant and resistant to weather damage for years
 					to come.
 				</li>
+
+				<li>
+					<strong>Hardie Board Installation:</strong>
+					Upgrade your exterior with
+					<a href={routes['hardie-installation'].href}>Hardie Board siding installation</a>, bringing
+					decades of durability and timeless curb appeal with fiber cement siding built for Chicagoland
+					weather.
+				</li>
 			</ul>
 		{/if}
 
@@ -164,6 +173,19 @@
 					<a href={routes['stucco-repair'].href}>stucco repair services</a> to restore the integrity
 					of your exterior, ensuring a seamless finish that enhances durability and protects against
 					moisture intrusion.
+				</li>
+			</ul>
+		{/if}
+
+		<!-- Gutter services -->
+		{#if showGutters}
+			<HeadingAccent extend={true} class="w-fit mt-4"><h3>Gutter Services</h3></HeadingAccent>
+			<ul>
+				<li>
+					<strong>Gutter Installation & Repair:</strong>
+					Protect your siding, trim, and foundation with professional
+					<a href={routes['gutters'].href}>gutter installation, replacement, and repair</a> — keeping
+					water where it belongs and your exterior looking its best.
 				</li>
 			</ul>
 		{/if}

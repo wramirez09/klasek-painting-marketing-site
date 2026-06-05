@@ -66,7 +66,9 @@ export const nodes = [
 	() => import('./nodes/62'),
 	() => import('./nodes/63'),
 	() => import('./nodes/64'),
-	() => import('./nodes/65')
+	() => import('./nodes/65'),
+	() => import('./nodes/66'),
+	() => import('./nodes/67')
 ];
 
 export const server_loads = [0];
@@ -122,18 +124,20 @@ export const dictionary = {
 		"/(light-nav)/services/exterior-home-painting": [51,[3]],
 		"/(light-nav)/services/exterior-home-painting/exterior-paint-contractor": [52,[3]],
 		"/(light-nav)/services/exterior-home-painting/historic-house-painting": [53,[3]],
-		"/(light-nav)/services/siding-painting-repair": [54,[3]],
-		"/(light-nav)/services/siding-painting-repair/aluminum-siding-painting": [55,[3]],
-		"/(light-nav)/services/siding-painting-repair/aluminum-siding-repair": [56,[3]],
-		"/(light-nav)/services/siding-painting-repair/cedar-siding-painting": [57,[3]],
-		"/(light-nav)/services/siding-painting-repair/cedar-siding-repair": [58,[3]],
-		"/(light-nav)/services/siding-painting-repair/hardie-board-painting": [59,[3]],
-		"/(light-nav)/services/siding-painting-repair/hardie-board-repair": [60,[3]],
-		"/(light-nav)/services/siding-painting-repair/vinyl-siding-painting": [61,[3]],
-		"/(light-nav)/services/siding-painting-repair/vinyl-siding-repair": [62,[3]],
-		"/(light-nav)/services/stucco-painting-repair": [63,[3]],
-		"/(light-nav)/services/stucco-painting-repair/stucco-painting": [64,[3]],
-		"/(light-nav)/services/stucco-painting-repair/stucco-repair": [65,[3]]
+		"/(light-nav)/services/gutter-installation-repair": [54,[3]],
+		"/(light-nav)/services/siding-painting-repair": [55,[3]],
+		"/(light-nav)/services/siding-painting-repair/aluminum-siding-painting": [56,[3]],
+		"/(light-nav)/services/siding-painting-repair/aluminum-siding-repair": [57,[3]],
+		"/(light-nav)/services/siding-painting-repair/cedar-siding-painting": [58,[3]],
+		"/(light-nav)/services/siding-painting-repair/cedar-siding-repair": [59,[3]],
+		"/(light-nav)/services/siding-painting-repair/hardie-board-installation": [60,[3]],
+		"/(light-nav)/services/siding-painting-repair/hardie-board-painting": [61,[3]],
+		"/(light-nav)/services/siding-painting-repair/hardie-board-repair": [62,[3]],
+		"/(light-nav)/services/siding-painting-repair/vinyl-siding-painting": [63,[3]],
+		"/(light-nav)/services/siding-painting-repair/vinyl-siding-repair": [64,[3]],
+		"/(light-nav)/services/stucco-painting-repair": [65,[3]],
+		"/(light-nav)/services/stucco-painting-repair/stucco-painting": [66,[3]],
+		"/(light-nav)/services/stucco-painting-repair/stucco-repair": [67,[3]]
 	};
 
 export const hooks = {

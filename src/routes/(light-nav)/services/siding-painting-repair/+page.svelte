@@ -32,6 +32,10 @@
 
 	const repairServices: Link[] = [
 		{
+			text: 'Hardie Board Installation',
+			href: serviceRoutes['hardie-installation'].href
+		},
+		{
 			text: 'Hardie Board Repair',
 			href: serviceRoutes['hardie-repair'].href
 		},

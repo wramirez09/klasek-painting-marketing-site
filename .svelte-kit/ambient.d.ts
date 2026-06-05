@@ -35,6 +35,7 @@ declare module '$env/static/private' {
 	export const NODE: string;
 	export const INIT_CWD: string;
 	export const NVM_CD_FLAGS: string;
+	export const ANDROID_HOME: string;
 	export const npm_package_devDependencies_typescript: string;
 	export const npm_package_devDependencies_prettier_plugin_svelte: string;
 	export const npm_config_version_git_tag: string;
@@ -46,15 +47,22 @@ declare module '$env/static/private' {
 	export const npm_package_scripts_lint: string;
 	export const npm_config_init_license: string;
 	export const TERM_PROGRAM_VERSION: string;
+	export const VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 	export const npm_package_dependencies_tailwind_variants: string;
 	export const npm_package_dependencies__fontsource_montserrat: string;
+	export const FPATH: string;
 	export const npm_package_scripts_dev: string;
 	export const MallocNanoZone: string;
+<<<<<<< Updated upstream
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
+=======
+	export const ZDOTDIR: string;
+>>>>>>> Stashed changes
 	export const npm_package_devDependencies__sveltejs_kit: string;
 	export const npm_package_private: string;
 	export const npm_config_registry: string;
 	export const ZSH: string;
+	export const PNPM_HOME: string;
 	export const npm_package_dependencies_formsnap: string;
 	export const npm_package_readmeFilename: string;
 	export const npm_package_scripts_test_ct: string;
@@ -64,6 +72,7 @@ declare module '$env/static/private' {
 	export const npm_package_scripts_check_watch: string;
 	export const COMMAND_MODE: string;
 	export const SSH_AUTH_SOCK: string;
+	export const CLAUDE_CODE_SSE_PORT: string;
 	export const npm_package_dependencies_lodash: string;
 	export const __CF_USER_TEXT_ENCODING: string;
 	export const npm_package_devDependencies_postcss: string;
@@ -83,12 +92,14 @@ declare module '$env/static/private' {
 	export const npm_config_argv: string;
 	export const npm_package_dependencies_swiper: string;
 	export const npm_package_devDependencies_bits_ui: string;
+	export const LaunchInstanceID: string;
 	export const _: string;
 	export const __CFBundleIdentifier: string;
 	export const COREPACK_ENABLE_DOWNLOAD_PROMPT: string;
 	export const PWD: string;
 	export const npm_package_dependencies_svelte_inview: string;
 	export const npm_package_devDependencies_tailwindcss: string;
+	export const JAVA_HOME: string;
 	export const npm_package_devDependencies_lucide_svelte: string;
 	export const npm_package_devDependencies__types_lodash: string;
 	export const npm_package_scripts_preview: string;
@@ -132,16 +143,18 @@ declare module '$env/static/private' {
 	export const npm_config_version_git_sign: string;
 	export const npm_config_ignore_scripts: string;
 	export const npm_config_user_agent: string;
-	export const HOMEBREW_CELLAR: string;
-	export const INFOPATH: string;
 	export const GIT_ASKPASS: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
+	export const HOMEBREW_CELLAR: string;
+	export const INFOPATH: string;
 	export const npm_package_dependencies_sveltekit_superforms: string;
 	export const npm_package_dependencies_clsx: string;
 	export const npm_package_devDependencies__types_node: string;
 	export const npm_package_devDependencies__playwright_test: string;
+	export const OSLogRateLimit: string;
 	export const npm_config_init_version: string;
 	export const npm_config_ignore_optional: string;
+	export const SECURITYSESSIONID: string;
 	export const npm_package_dependencies_schema_dts: string;
 	export const npm_package_scripts_check: string;
 	export const COLORTERM: string;
@@ -187,6 +200,7 @@ declare module '$env/dynamic/private' {
 		NODE: string;
 		INIT_CWD: string;
 		NVM_CD_FLAGS: string;
+		ANDROID_HOME: string;
 		npm_package_devDependencies_typescript: string;
 		npm_package_devDependencies_prettier_plugin_svelte: string;
 		npm_config_version_git_tag: string;
@@ -198,15 +212,22 @@ declare module '$env/dynamic/private' {
 		npm_package_scripts_lint: string;
 		npm_config_init_license: string;
 		TERM_PROGRAM_VERSION: string;
+		VSCODE_PYTHON_AUTOACTIVATE_GUARD: string;
 		npm_package_dependencies_tailwind_variants: string;
 		npm_package_dependencies__fontsource_montserrat: string;
+		FPATH: string;
 		npm_package_scripts_dev: string;
 		MallocNanoZone: string;
+<<<<<<< Updated upstream
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
+=======
+		ZDOTDIR: string;
+>>>>>>> Stashed changes
 		npm_package_devDependencies__sveltejs_kit: string;
 		npm_package_private: string;
 		npm_config_registry: string;
 		ZSH: string;
+		PNPM_HOME: string;
 		npm_package_dependencies_formsnap: string;
 		npm_package_readmeFilename: string;
 		npm_package_scripts_test_ct: string;
@@ -216,6 +237,7 @@ declare module '$env/dynamic/private' {
 		npm_package_scripts_check_watch: string;
 		COMMAND_MODE: string;
 		SSH_AUTH_SOCK: string;
+		CLAUDE_CODE_SSE_PORT: string;
 		npm_package_dependencies_lodash: string;
 		__CF_USER_TEXT_ENCODING: string;
 		npm_package_devDependencies_postcss: string;
@@ -235,12 +257,14 @@ declare module '$env/dynamic/private' {
 		npm_config_argv: string;
 		npm_package_dependencies_swiper: string;
 		npm_package_devDependencies_bits_ui: string;
+		LaunchInstanceID: string;
 		_: string;
 		__CFBundleIdentifier: string;
 		COREPACK_ENABLE_DOWNLOAD_PROMPT: string;
 		PWD: string;
 		npm_package_dependencies_svelte_inview: string;
 		npm_package_devDependencies_tailwindcss: string;
+		JAVA_HOME: string;
 		npm_package_devDependencies_lucide_svelte: string;
 		npm_package_devDependencies__types_lodash: string;
 		npm_package_scripts_preview: string;
@@ -284,16 +308,18 @@ declare module '$env/dynamic/private' {
 		npm_config_version_git_sign: string;
 		npm_config_ignore_scripts: string;
 		npm_config_user_agent: string;
-		HOMEBREW_CELLAR: string;
-		INFOPATH: string;
 		GIT_ASKPASS: string;
 		VSCODE_GIT_ASKPASS_NODE: string;
+		HOMEBREW_CELLAR: string;
+		INFOPATH: string;
 		npm_package_dependencies_sveltekit_superforms: string;
 		npm_package_dependencies_clsx: string;
 		npm_package_devDependencies__types_node: string;
 		npm_package_devDependencies__playwright_test: string;
+		OSLogRateLimit: string;
 		npm_config_init_version: string;
 		npm_config_ignore_optional: string;
+		SECURITYSESSIONID: string;
 		npm_package_dependencies_schema_dts: string;
 		npm_package_scripts_check: string;
 		COLORTERM: string;
