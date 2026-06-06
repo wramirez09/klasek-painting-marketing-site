@@ -7,7 +7,7 @@
   $: isFunnelPage =
     $page.url.pathname.startsWith("/services/gutter-installation-repair") ||
     $page.url.pathname.startsWith(
-      "/services/siding-painting-repair/hardie-board-painting",
+      "/services/siding-painting-repair/hardie-board-installation",
     );
 </script>
 
