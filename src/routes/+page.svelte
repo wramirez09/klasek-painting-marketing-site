@@ -1,18 +1,4 @@
 <script lang="ts">
-<<<<<<< Updated upstream
-	import HomepageHero from '$lib/home/HomepageHero.svelte';
-	import ViewOurWorkSection from '$lib/home/ViewOurWorkSection.svelte';
-	import WhyChooseUsSection from '$lib/home/WhyChooseUsSection.svelte';
-	import ServiceAreaSection from '$lib/common/sections/ServiceAreaSection.svelte';
-	import TestimonialsSection from '$lib/common/sections/TestimonialsSection.svelte';
-	import TrustedBrandsSection from '$lib/home/TrustedBrandsSection.svelte';
-	import NavBar from '$lib/common/nav/NavBar.svelte';
-	import CtaBannerSection from '$lib/common/sections/CtaBannerSection.svelte';
-	import ServiceGridSection from '$lib/services/ServiceGridSection.svelte';
-	import OtherServicesSection from '$lib/common/sections/OtherServicesSection.svelte';
-	import Footer from '$lib/common/footer/Footer.svelte';
-	import StuccoSection from '$lib/common/sections/StuccoSection.svelte';
-=======
   import HomepageHero from "$lib/home/HomepageHero.svelte";
   import ViewOurWorkSection from "$lib/home/ViewOurWorkSection.svelte";
   import WhyChooseUsSection from "$lib/home/WhyChooseUsSection.svelte";
@@ -24,8 +10,6 @@
   import Footer from "$lib/common/footer/Footer.svelte";
   import StuccoSection from "$lib/common/sections/StuccoSection.svelte";
   import ReliableServiceSection from "$lib/common/sections/ReliableServiceSection.svelte";
-  import EmailSignup from "$lib/common/EmailSignup.svelte";
->>>>>>> Stashed changes
 </script>
 
 <NavBar />
