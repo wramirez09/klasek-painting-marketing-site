@@ -242,7 +242,7 @@
     <!-- Panel: anchored to the header container; pt bridge keeps hover alive -->
     <div
       transition:slide={{ duration: $isMobileStore ? 300 : 0 }}
-      class="lg:absolute lg:left-0 lg:top-full lg:pt-3 lg:w-[900px] lg:max-w-[calc(100vw-2rem)] size-full lg:size-auto z-50"
+      class="lg:absolute lg:left-0 lg:top-full lg:pt-3 lg:w-[1180px] lg:max-w-[calc(100vw-2rem)] size-full lg:size-auto z-50"
     >
       <!-- Card -->
       <div
@@ -255,7 +255,7 @@
           >
             Painting &amp; repair services
           </div>
-          <div class="lg:grid lg:grid-cols-2 lg:gap-x-2.5 flex flex-col">
+          <div class="lg:grid lg:grid-cols-3 lg:gap-x-2.5 flex flex-col">
             {#each items as item}
               <a
                 href={item.href}
