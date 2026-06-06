@@ -1,15 +1,15 @@
 // @ts-nocheck
-import type { PageLoad } from './$types';
-import { createTitleDescription } from '$lib/common/seo/metaTagHelpers';
+import type { PageLoad } from "./$types";
+import { createTitleDescription } from "$lib/common/seo/metaTagHelpers";
 
 export const load = () => {
-	const pageMetaTags = createTitleDescription(
-		'Gutter Installation & Repair',
-		'Protect your home with expert gutter installation, replacement, repair, and cleaning from Klasek Painting. Serving Cook County for over 30 years. Get a free estimate!'
-	);
+  const pageMetaTags = createTitleDescription(
+    "Seamless Gutter Installation & Repair",
+    "Seamless aluminum gutters cut on-site by Klasek’s own crew — no subcontractors. Installation, repair, cleaning & maintenance across Cook County. 30+ years. Free written estimates.",
+  );
 
-	return {
-		pageMetaTags
-	};
+  return {
+    pageMetaTags,
+  };
 };
 ;null as any as PageLoad;
