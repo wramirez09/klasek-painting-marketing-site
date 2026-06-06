@@ -44,9 +44,11 @@
   let showClickToCall = false;
 
   // Pages with their own sticky mobile call bar
-  $: hasOwnMobileCta = $page.url.pathname.startsWith(
-    "/services/gutter-installation-repair",
-  );
+  $: hasOwnMobileCta =
+    $page.url.pathname.startsWith("/services/gutter-installation-repair") ||
+    $page.url.pathname.startsWith(
+      "/services/siding-painting-repair/hardie-board-painting",
+    );
 </script>
 
 <!-- Dynamic meta tags -->
