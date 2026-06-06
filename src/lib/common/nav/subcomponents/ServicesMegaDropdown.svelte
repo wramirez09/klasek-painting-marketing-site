@@ -64,9 +64,9 @@
     },
     {
       icon: Wrench,
-      text: routes["hardie-repair"].text,
-      description: "Failing boards fixed first, then finished",
-      href: routes["hardie-repair"].href,
+      text: routes["hardie-installation"].text,
+      description: "New fiber cement siding, installed right",
+      href: routes["hardie-installation"].href,
     },
     {
       icon: Rows3,
