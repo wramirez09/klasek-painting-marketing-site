@@ -9,12 +9,20 @@
   import ClickToCall from "$lib/common/other/ClickToCall.svelte";
   import {
     PaintRoller,
-    Rows3,
+    HardHat,
+    Landmark,
+    Building2,
     Box,
+    Wrench,
+    Rows3,
+    Hammer,
+    TreePine,
+    Fence,
+    Paintbrush,
+    Layers,
     BrickWall,
     Grip,
-    ArrowUpRight,
-    Wrench,
+    Droplets,
     Palette,
     Phone,
   } from "lucide-svelte";
@@ -22,7 +30,9 @@
   let classes = "";
   export { classes as class };
 
-  // The 8 services: icon tile + title + one-line description
+  // All services (parity with the old Exterior Painting + Exterior Repair
+  // dropdowns, consolidated where the site uses a combined page).
+  // Laid out in pairs: painting left, matching repair right.
   const items = [
     {
       icon: PaintRoller,
@@ -31,16 +41,70 @@
       href: routes["exterior-home-painting"].href,
     },
     {
-      icon: Rows3,
-      text: routes["siding-painting-repair"].text,
-      description: "Repaint, repair & protect any siding",
-      href: routes["siding-painting-repair"].href,
+      icon: HardHat,
+      text: "Paint Contractor",
+      description: "Your trusted exterior paint contractor",
+      href: routes["exterior-paint-contractor"].href,
+    },
+    {
+      icon: Landmark,
+      text: routes["historic-house-painting"].text,
+      description: "Restoration-grade care for older homes",
+      href: routes["historic-house-painting"].href,
+    },
+    {
+      icon: Building2,
+      text: routes["commercial"].text,
+      description: "Exterior painting for business properties",
+      href: routes["commercial"].href,
     },
     {
       icon: Box,
       text: routes["hardie-painting"].text,
       description: "Primed, prepped & sprayed to last",
       href: routes["hardie-painting"].href,
+    },
+    {
+      icon: Wrench,
+      text: routes["hardie-repair"].text,
+      description: "Failing boards fixed first, then finished",
+      href: routes["hardie-repair"].href,
+    },
+    {
+      icon: Rows3,
+      text: routes["aluminum-painting"].text,
+      description: "Factory-fresh color for metal siding",
+      href: routes["aluminum-painting"].href,
+    },
+    {
+      icon: Hammer,
+      text: routes["aluminum-repair"].text,
+      description: "Dents & weathered panels repaired",
+      href: routes["aluminum-repair"].href,
+    },
+    {
+      icon: TreePine,
+      text: routes["cedar-painting"].text,
+      description: "Finishes that let cedar shine",
+      href: routes["cedar-painting"].href,
+    },
+    {
+      icon: Fence,
+      text: routes["cedar-repair"].text,
+      description: "Rot & weather damage repaired",
+      href: routes["cedar-repair"].href,
+    },
+    {
+      icon: Paintbrush,
+      text: routes["vinyl-painting"].text,
+      description: "Safe, lasting color updates for vinyl",
+      href: routes["vinyl-painting"].href,
+    },
+    {
+      icon: Layers,
+      text: routes["vinyl-repair"].text,
+      description: "Cracked & warped panels replaced",
+      href: routes["vinyl-repair"].href,
     },
     {
       icon: BrickWall,
@@ -55,16 +119,10 @@
       href: routes["stucco-painting-repair"].href,
     },
     {
-      icon: ArrowUpRight,
-      text: "Trim, Fascia & Soffit",
-      description: "Crisp semi-gloss finishing touches",
-      href: `${routes["hardie-painting"].href}#trim`,
-    },
-    {
-      icon: Wrench,
-      text: "Repair Before Painting",
-      description: "Failing boards fixed first, then finished",
-      href: `${routes["hardie-painting"].href}#repair`,
+      icon: Droplets,
+      text: routes["gutters"].text,
+      description: "Seamless gutters cut on-site",
+      href: routes["gutters"].href,
     },
     {
       icon: Palette,
