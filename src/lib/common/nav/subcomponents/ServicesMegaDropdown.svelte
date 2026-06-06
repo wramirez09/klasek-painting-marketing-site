@@ -6,7 +6,6 @@
   import { onDestroy } from "svelte";
   import { cn } from "$lib/common/utils";
   import { routes } from "$lib/common/routing/routes";
-  import ClickToCall from "$lib/common/other/ClickToCall.svelte";
   import {
     PaintRoller,
     HardHat,
@@ -24,7 +23,6 @@
     Grip,
     Droplets,
     Palette,
-    Phone,
   } from "lucide-svelte";
 
   let classes = "";
@@ -131,14 +129,6 @@
       href: routes["design-consultation"].href,
     },
   ];
-
-  // Promo panel content — confirm/edit the real seasonal offer here
-  const promo = {
-    badge: "Limited-time offer",
-    body: "New customers get 10% off any painting or repair project booked this season.",
-    ctaText: "Get Free Estimate",
-    ctaHref: routes["contact"].href,
-  };
 
   // Dropdown state
   let open = false;
@@ -255,7 +245,7 @@
           >
             Painting &amp; repair services
           </div>
-          <div class="lg:grid lg:grid-cols-3 lg:gap-x-2.5 flex flex-col">
+          <div class="lg:grid lg:grid-cols-4 lg:gap-x-2.5 flex flex-col">
             {#each items as item}
               <a
                 href={item.href}
@@ -285,42 +275,6 @@
               </a>
             {/each}
           </div>
-        </div>
-
-        <!-- right: promo (desktop only) -->
-        <div
-          class="hidden lg:flex flex-none w-[250px] bg-secondary-dark text-white p-5 flex-col relative overflow-hidden"
-        >
-          <div
-            class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-primary/20 blur-lg"
-            aria-hidden="true"
-          />
-          <span
-            class="relative self-start bg-primary-dark text-white font-extrabold text-[10px] tracking-[0.08em] uppercase px-2.5 py-1.5 rounded-full whitespace-nowrap"
-          >
-            {promo.badge}
-          </span>
-          <div
-            class="relative font-extrabold text-[21px] leading-tight mt-3 text-white"
-          >
-            Save <span class="text-primary">10%</span> this season
-          </div>
-          <p class="relative text-[12.5px] leading-snug text-white/70 mt-2">
-            {promo.body}
-          </p>
-          <a
-            href={promo.ctaHref}
-            class="relative mt-auto bg-primary-dark hover:bg-primary text-white text-center font-bold text-[14px] py-2.5 rounded-lg transition"
-          >
-            {promo.ctaText}
-          </a>
-          <ClickToCall
-            variant="link"
-            class="relative mt-2.5 !text-[13px] !font-bold text-white !no-underline justify-center gap-2 w-full"
-          >
-            <Phone size={14} strokeWidth={2.2} />
-            (708) 267-0682
-          </ClickToCall>
         </div>
       </div>
     </div>
