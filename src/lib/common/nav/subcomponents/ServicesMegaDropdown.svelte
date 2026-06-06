@@ -5,27 +5,6 @@
   import { onNavigate } from "$app/navigation";
   import { cn } from "$lib/common/utils";
   import { routes } from "$lib/common/routing/routes";
-  import exteriorPainting from "$images/services/exterior-home-painting.webp?enhanced&w=96";
-  import paintContractor from "$images/services/exterior-paint-contractor.webp?enhanced&w=96";
-  import historicHouse from "$images/services/historic-house-painting.webp?enhanced&w=96";
-  import commercial from "$images/services/exterior-commercial-painting-service.webp?enhanced&w=96";
-  import sidingPaintingRepair from "$images/services/siding-painting-repair-services.webp?enhanced&w=96";
-  import hardiePainting from "$images/services/hardie-board-siding-painting-before-after-service.webp?enhanced&w=96";
-  import aluminumPainting from "$images/services/aluminum-siding-painting-service.webp?enhanced&w=96";
-  import cedarPainting from "$images/services/cedar-siding-painting-service.webp?enhanced&w=96";
-  import vinylPainting from "$images/services/vinyl-painting-service.webp?enhanced&w=96";
-  import hardieRepair from "$images/services/hardie-board-siding-repair-service.webp?enhanced&w=96";
-  import aluminumRepair from "$images/services/aluminum-siding-repair-service.webp?enhanced&w=96";
-  import cedarRepair from "$images/services/cedar-siding-repair-service.webp?enhanced&w=96";
-  import vinylRepair from "$images/services/vinyl-siding-repair-service.webp?enhanced&w=96";
-  import brickPaintingRepair from "$images/services/brick-painting-staining-service.webp?enhanced&w=96";
-  import brickPainting from "$images/services/brick-painting-service-before-and-after.webp?enhanced&w=96";
-  import brickRepair from "$images/services/exterior-brick-repair-service.webp?enhanced&w=96";
-  import stuccoPaintingRepair from "$images/services/stucco-painting-repair-services.webp?enhanced&w=96";
-  import stuccoPainting from "$images/services/stucco-painting-service.webp?enhanced&w=96";
-  import stuccoRepair from "$images/services/stucco-repair-service.webp?enhanced&w=96";
-  import gutters from "$images/services/exterior-house-painting-services.webp?enhanced&w=96";
-  import designConsultation from "$images/services/design-consultation-service.webp?enhanced&w=96";
 
   let classes = "";
   export { classes as class };
@@ -35,65 +14,53 @@
     {
       heading: "Exterior Painting",
       items: [
-        { ...routes["exterior-home-painting"], img: exteriorPainting },
+        routes["exterior-home-painting"],
         {
           text: "Paint Contractor",
           href: routes["exterior-paint-contractor"].href,
-          img: paintContractor,
         },
-        { ...routes["historic-house-painting"], img: historicHouse },
-        { ...routes["commercial"], img: commercial },
+        routes["historic-house-painting"],
+        routes["commercial"],
       ],
     },
     {
       heading: "Siding Painting",
       items: [
-        { ...routes["siding-painting-repair"], img: sidingPaintingRepair },
-        { ...routes["hardie-painting"], img: hardiePainting },
-        { ...routes["aluminum-painting"], img: aluminumPainting },
-        { ...routes["cedar-painting"], img: cedarPainting },
-        { ...routes["vinyl-painting"], img: vinylPainting },
+        routes["siding-painting-repair"],
+        routes["hardie-painting"],
+        routes["aluminum-painting"],
+        routes["cedar-painting"],
+        routes["vinyl-painting"],
       ],
     },
     {
       heading: "Siding Repair",
       items: [
-        { ...routes["hardie-repair"], img: hardieRepair },
-        { ...routes["aluminum-repair"], img: aluminumRepair },
-        { ...routes["cedar-repair"], img: cedarRepair },
-        { ...routes["vinyl-repair"], img: vinylRepair },
+        routes["hardie-repair"],
+        routes["aluminum-repair"],
+        routes["cedar-repair"],
+        routes["vinyl-repair"],
       ],
     },
     {
       heading: "Brick",
       items: [
-        { ...routes["brick-painting-repair"], img: brickPaintingRepair },
-        {
-          text: "Brick Painting",
-          href: routes["brick-painting"].href,
-          img: brickPainting,
-        },
-        {
-          text: "Brick Repair",
-          href: routes["brick-repair"].href,
-          img: brickRepair,
-        },
+        routes["brick-painting-repair"],
+        { text: "Brick Painting", href: routes["brick-painting"].href },
+        { text: "Brick Repair", href: routes["brick-repair"].href },
       ],
     },
     {
       heading: "Stucco",
       items: [
-        { ...routes["stucco-painting-repair"], img: stuccoPaintingRepair },
-        { ...routes["stucco-painting"], img: stuccoPainting },
-        { ...routes["stucco-repair"], img: stuccoRepair },
+        routes["stucco-painting-repair"],
+        routes["stucco-painting"],
+        routes["stucco-repair"],
       ],
     },
     {
       heading: "Gutters & More",
-      items: [
-        { ...routes["gutters"], img: gutters },
-        { ...routes["design-consultation"], img: designConsultation },
-      ],
+      items: [routes["gutters"], routes["design-consultation"]],
     },
   ];
 
@@ -179,7 +146,7 @@
       class="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-full lg:w-fit lg:max-w-[calc(100vw-2rem)] size-full lg:size-auto lg:bg-white bg-secondary lg:rounded-b-lg lg:shadow-subtle lg:border lg:border-t-4 lg:border-t-primary z-10"
     >
       <div
-        class="lg:grid lg:grid-cols-[repeat(3,max-content)] lg:gap-x-10 lg:gap-y-7 lg:p-7 lg:max-h-[calc(100vh-160px)] lg:overflow-y-auto flex flex-col relative before:absolute before:content-[''] before:inset-0 before:w-[100vw] before:h-full before:bg-secondary lg:before:hidden"
+        class="lg:grid lg:grid-cols-[repeat(3,max-content)] lg:gap-x-12 lg:gap-y-7 lg:p-7 lg:max-h-[calc(100vh-160px)] lg:overflow-y-auto flex flex-col relative before:absolute before:content-[''] before:inset-0 before:w-[100vw] before:h-full before:bg-secondary lg:before:hidden"
       >
         {#each groups as group}
           <div class="relative lg:pt-0 pt-3">
@@ -188,28 +155,14 @@
             >
               {group.heading}
             </p>
-            <ul class="flex flex-col lg:gap-0.5 gap-1">
+            <ul class="flex flex-col lg:gap-0 gap-1">
               {#each group.items as item}
                 <li>
                   <a
                     href={item.href}
-                    class="flex items-center gap-3 lg:py-1.5 py-2 rounded-md lg:hover:bg-off-white group/item"
+                    class="block lg:py-1.5 py-2 font-semibold lg:text-[15px] text-lg lg:text-secondary-dark text-white whitespace-nowrap lg:hover:underline underline-offset-2"
                   >
-                    <span
-                      class="block w-12 h-12 shrink-0 rounded-md overflow-hidden border lg:border-gray-100 border-white/20"
-                    >
-                      <enhanced:img
-                        src={item.img}
-                        alt=""
-                        loading="lazy"
-                        class="w-12 h-12 max-w-none object-cover"
-                      />
-                    </span>
-                    <span
-                      class="font-semibold lg:text-[15px] text-lg lg:text-secondary-dark text-white whitespace-nowrap group-hover/item:underline underline-offset-2"
-                    >
-                      {item.text}
-                    </span>
+                    {item.text}
                   </a>
                 </li>
               {/each}
