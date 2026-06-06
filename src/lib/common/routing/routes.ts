@@ -119,7 +119,7 @@ export const serviceRoutes: RouteMap = {
 		href: '/services/stucco-painting-repair/stucco-painting'
 	},
 	'hardie-installation': {
-		text: 'Hardie Board Installation',
+		text: 'Hardie Board Services',
 		href: '/services/siding-painting-repair/hardie-board-installation'
 	},
 	// Gutter services

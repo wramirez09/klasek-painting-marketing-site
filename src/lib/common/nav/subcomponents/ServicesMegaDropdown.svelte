@@ -65,7 +65,7 @@
     {
       icon: Wrench,
       text: routes["hardie-installation"].text,
-      description: "New fiber cement siding, installed right",
+      description: "Painting, repair, trim & installation",
       href: routes["hardie-installation"].href,
     },
     {
