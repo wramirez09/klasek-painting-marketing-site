@@ -3,86 +3,110 @@
   import { slide } from "svelte/transition";
   import { isMobileStore } from "$lib/stores/isMobileStore";
   import { onNavigate } from "$app/navigation";
+  import { onDestroy } from "svelte";
   import { cn } from "$lib/common/utils";
   import { routes } from "$lib/common/routing/routes";
+  import ClickToCall from "$lib/common/other/ClickToCall.svelte";
+  import {
+    PaintRoller,
+    Rows3,
+    Box,
+    BrickWall,
+    Grip,
+    ArrowUpRight,
+    Wrench,
+    Palette,
+    Phone,
+  } from "lucide-svelte";
 
   let classes = "";
   export { classes as class };
 
-  // Category groups: 3 columns x 2 rows on desktop
-  const groups = [
+  // The 8 services: icon tile + title + one-line description
+  const items = [
     {
-      heading: "Exterior Painting",
-      items: [
-        routes["exterior-home-painting"],
-        {
-          text: "Paint Contractor",
-          href: routes["exterior-paint-contractor"].href,
-        },
-        routes["historic-house-painting"],
-        routes["commercial"],
-      ],
+      icon: PaintRoller,
+      text: routes["exterior-home-painting"].text,
+      description: "Durable finishes for the whole exterior",
+      href: routes["exterior-home-painting"].href,
     },
     {
-      heading: "Siding Painting",
-      items: [
-        routes["siding-painting-repair"],
-        routes["hardie-painting"],
-        routes["aluminum-painting"],
-        routes["cedar-painting"],
-        routes["vinyl-painting"],
-      ],
+      icon: Rows3,
+      text: routes["siding-painting-repair"].text,
+      description: "Repaint, repair & protect any siding",
+      href: routes["siding-painting-repair"].href,
     },
     {
-      heading: "Siding Repair",
-      items: [
-        routes["hardie-repair"],
-        routes["aluminum-repair"],
-        routes["cedar-repair"],
-        routes["vinyl-repair"],
-      ],
+      icon: Box,
+      text: routes["hardie-painting"].text,
+      description: "Primed, prepped & sprayed to last",
+      href: routes["hardie-painting"].href,
     },
     {
-      heading: "Brick",
-      items: [
-        routes["brick-painting-repair"],
-        { text: "Brick Painting", href: routes["brick-painting"].href },
-        { text: "Brick Repair", href: routes["brick-repair"].href },
-      ],
+      icon: BrickWall,
+      text: routes["brick-painting-repair"].text,
+      description: "Refresh & seal brick and masonry",
+      href: routes["brick-painting-repair"].href,
     },
     {
-      heading: "Stucco",
-      items: [
-        routes["stucco-painting-repair"],
-        routes["stucco-painting"],
-        routes["stucco-repair"],
-      ],
+      icon: Grip,
+      text: routes["stucco-painting-repair"].text,
+      description: "Patch, finish & paint stucco walls",
+      href: routes["stucco-painting-repair"].href,
     },
     {
-      heading: "Gutters & More",
-      items: [routes["gutters"], routes["design-consultation"]],
+      icon: ArrowUpRight,
+      text: "Trim, Fascia & Soffit",
+      description: "Crisp semi-gloss finishing touches",
+      href: `${routes["hardie-painting"].href}#trim`,
+    },
+    {
+      icon: Wrench,
+      text: "Repair Before Painting",
+      description: "Failing boards fixed first, then finished",
+      href: `${routes["hardie-painting"].href}#repair`,
+    },
+    {
+      icon: Palette,
+      text: "Free Color Consultation",
+      description: "On-site color & design guidance",
+      href: routes["design-consultation"].href,
     },
   ];
 
+  // Promo panel content — confirm/edit the real seasonal offer here
+  const promo = {
+    badge: "Limited-time offer",
+    body: "New customers get 10% off any painting or repair project booked this season.",
+    ctaText: "Get Free Estimate",
+    ctaHref: routes["contact"].href,
+  };
+
   // Dropdown state
   let open = false;
+  let closeTimer: ReturnType<typeof setTimeout> | undefined;
 
   // Close dropdown on navigation
   onNavigate(() => {
     open = false;
   });
 
-  // Open dropdown
+  onDestroy(() => clearTimeout(closeTimer));
+
+  // Open dropdown (desktop hover/focus)
   const openMenu = () => {
     if (!$isMobileStore) {
+      clearTimeout(closeTimer);
       open = true;
     }
   };
 
-  // Close dropdown
+  // Close dropdown with a short grace delay so diagonal pointer
+  // travel into the panel doesn't dismiss it
   const closeMenu = () => {
     if (!$isMobileStore) {
-      open = false;
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(() => (open = false), 150);
     }
   };
 
@@ -104,7 +128,16 @@
       },
     };
   }
+
+  // Close on Escape
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === "Escape") {
+      open = false;
+    }
+  }
 </script>
+
+<svelte:window on:keydown={handleKeydown} />
 
 <!-- Services mega dropdown -->
 <li
@@ -119,13 +152,20 @@
   >
     <a
       href={routes["services"].href}
+      aria-expanded={open}
       class="{open
         ? 'lg:underline'
         : ''} lg:hover:underline underline-offset-2 font-semibold lg:text-lg text-2xl whitespace-nowrap flex items-center"
     >
       {routes["services"].text}
-      <!-- Desktop arrow -->
-      <ArrowIcon class="lg:inline hidden lg:size-5 size-6 rotate-90 m-0" /></a
+      <!-- Desktop caret (rotates while open) -->
+      <span
+        class="{open
+          ? 'lg:rotate-180'
+          : ''} lg:inline-flex hidden transition-transform duration-150"
+      >
+        <ArrowIcon class="lg:size-5 size-6 rotate-90 m-0" />
+      </span></a
     >
 
     <!-- Mobile arrow button -->
@@ -141,34 +181,89 @@
   </div>
 
   {#if open}
+    <!-- Panel: anchored to the header container; pt bridge keeps hover alive -->
     <div
       transition:slide={{ duration: $isMobileStore ? 300 : 0 }}
-      class="lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-full lg:w-fit lg:max-w-[calc(100vw-2rem)] size-full lg:size-auto lg:bg-white bg-secondary lg:rounded-b-lg lg:shadow-subtle lg:border lg:border-t-4 lg:border-t-primary z-10"
+      class="lg:absolute lg:left-0 lg:top-full lg:pt-3 lg:w-[900px] lg:max-w-[calc(100vw-2rem)] size-full lg:size-auto z-50"
     >
+      <!-- Card -->
       <div
-        class="lg:grid lg:grid-cols-[repeat(3,max-content)] lg:gap-x-12 lg:gap-y-7 lg:p-7 lg:max-h-[calc(100vh-160px)] lg:overflow-y-auto flex flex-col relative before:absolute before:content-[''] before:inset-0 before:w-[100vw] before:h-full before:bg-secondary lg:before:hidden"
+        class="lg:bg-white bg-secondary lg:border lg:rounded-2xl lg:overflow-hidden lg:flex lg:shadow-[0_28px_70px_rgba(16,14,50,.30),0_4px_14px_rgba(16,14,50,.12)] relative before:absolute before:content-[''] before:inset-0 before:w-[100vw] before:h-full before:bg-secondary lg:before:hidden"
       >
-        {#each groups as group}
-          <div class="relative lg:pt-0 pt-3">
-            <p
-              class="text-xs font-bold uppercase tracking-[0.12em] lg:text-primary-dark text-primary mb-2 whitespace-nowrap"
-            >
-              {group.heading}
-            </p>
-            <ul class="flex flex-col lg:gap-0 gap-1">
-              {#each group.items as item}
-                <li>
-                  <a
-                    href={item.href}
-                    class="block lg:py-1.5 py-2 font-semibold lg:text-[15px] text-lg lg:text-secondary-dark text-white whitespace-nowrap lg:hover:underline underline-offset-2"
+        <!-- left: icon grid -->
+        <div class="lg:flex-1 lg:p-3.5 relative">
+          <div
+            class="lg:px-3 lg:pt-1 pt-3 pb-2 font-extrabold text-[10.5px] tracking-[0.14em] uppercase lg:text-gray-500 text-primary"
+          >
+            Painting &amp; repair services
+          </div>
+          <div class="lg:grid lg:grid-cols-2 lg:gap-x-2.5 flex flex-col">
+            {#each items as item}
+              <a
+                href={item.href}
+                class="flex items-start gap-3.5 lg:p-3 py-2 rounded-xl lg:hover:bg-off-white transition-colors duration-100 group/item"
+              >
+                <span
+                  class="w-11 h-11 rounded-[10px] lg:bg-primary-light/40 bg-white/10 lg:text-primary-dark text-primary flex items-center justify-center shrink-0 transition-colors duration-100 group-hover/item:bg-primary-dark group-hover/item:text-white"
+                >
+                  <svelte:component
+                    this={item.icon}
+                    size={21}
+                    strokeWidth={1.7}
+                  />
+                </span>
+                <span>
+                  <span
+                    class="block font-bold text-[15px] lg:text-secondary-dark text-white transition-colors duration-100 lg:group-hover/item:text-primary-dark"
                   >
                     {item.text}
-                  </a>
-                </li>
-              {/each}
-            </ul>
+                  </span>
+                  <span
+                    class="block text-[12.5px] leading-snug lg:text-gray-500 text-white/60 mt-0.5"
+                  >
+                    {item.description}
+                  </span>
+                </span>
+              </a>
+            {/each}
           </div>
-        {/each}
+        </div>
+
+        <!-- right: promo (desktop only) -->
+        <div
+          class="hidden lg:flex flex-none w-[250px] bg-secondary-dark text-white p-5 flex-col relative overflow-hidden"
+        >
+          <div
+            class="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-primary/20 blur-lg"
+            aria-hidden="true"
+          />
+          <span
+            class="relative self-start bg-primary-dark text-white font-extrabold text-[10px] tracking-[0.08em] uppercase px-2.5 py-1.5 rounded-full whitespace-nowrap"
+          >
+            {promo.badge}
+          </span>
+          <div
+            class="relative font-extrabold text-[21px] leading-tight mt-3 text-white"
+          >
+            Save <span class="text-primary">10%</span> this season
+          </div>
+          <p class="relative text-[12.5px] leading-snug text-white/70 mt-2">
+            {promo.body}
+          </p>
+          <a
+            href={promo.ctaHref}
+            class="relative mt-auto bg-primary-dark hover:bg-primary text-white text-center font-bold text-[14px] py-2.5 rounded-lg transition"
+          >
+            {promo.ctaText}
+          </a>
+          <ClickToCall
+            variant="link"
+            class="relative mt-2.5 !text-[13px] !font-bold text-white !no-underline justify-center gap-2 w-full"
+          >
+            <Phone size={14} strokeWidth={2.2} />
+            (708) 267-0682
+          </ClickToCall>
+        </div>
       </div>
     </div>
   {/if}
