@@ -1,11 +1,10 @@
 <script lang="ts">
   import type { FaqData } from "$lib/common/sections/subcomponents/Faq.svelte";
-  import ContactForm from "$lib/contact-us/ContactForm.svelte";
   import GoogleProof from "$lib/common/other/GoogleProof.svelte";
   import ClickToCall from "$lib/common/other/ClickToCall.svelte";
   import Map from "$lib/common/other/Map.svelte";
   import Button from "$components/button/button.svelte";
-  import { serviceAreaRoutes } from "$lib/common/routing/routes";
+  import { routes, serviceAreaRoutes } from "$lib/common/routing/routes";
   import heroSrc from "$images/services/exterior-home-painting.webp?enhanced";
   import splash from "$images/backgrounds/orange-paint-splash.webp";
   import stars from "$images/5-stars.svg";
@@ -191,50 +190,10 @@
         {/each}
       </ul>
       <div class="mt-8 flex flex-wrap items-center gap-3">
-        <Button href="#estimate" class="text-lg h-14 px-7">
+        <Button href={routes["contact"].href} class="text-lg h-14 px-7">
           Get a Free Estimate
         </Button>
         <ClickToCall variant="outline" class="text-lg h-14 px-6" />
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== ESTIMATE FORM BAND ===================== -->
-<section id="estimate" class="bg-off-white p-y p-x scroll-mt-24">
-  <div class="container">
-    <div
-      class="bg-white rounded-2xl shadow-subtle border overflow-hidden grid lg:grid-cols-[1fr_1.15fr]"
-    >
-      <!-- pitch side -->
-      <div
-        class="bg-secondary-dark text-white p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden"
-      >
-        <div
-          class="absolute -bottom-16 -left-10 w-64 h-64 rounded-full bg-primary/15 blur-2xl"
-          aria-hidden="true"
-        />
-        <span class="tab self-start mb-5">Free · No obligation</span>
-        <h2
-          class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-white relative"
-        >
-          Get your free gutter estimate.
-        </h2>
-        <p class="mt-4 text-white/75 leading-relaxed relative max-w-sm">
-          Tell us about your home and we'll schedule a walk-through, then
-          deliver a free, written estimate for you to evaluate. Same crew from
-          quote to clean-up.
-        </p>
-        <div class="mt-6 relative">
-          <ClickToCall
-            variant="link"
-            class="!text-xl !font-bold text-white hover:!text-primary"
-          />
-        </div>
-      </div>
-      <!-- form side -->
-      <div class="p-7 sm:p-10">
-        <ContactForm />
       </div>
     </div>
   </div>
@@ -421,7 +380,7 @@
         {/each}
       </ul>
       <div class="mt-8 flex flex-wrap items-center gap-4">
-        <Button href="#estimate" class="text-lg h-14 px-7">
+        <Button href={routes["contact"].href} class="text-lg h-14 px-7">
           Price My Gutters
         </Button>
         <p class="text-sm text-white/55 max-w-[14rem]">
@@ -479,7 +438,7 @@
         {/each}
       </div>
       <Button
-        href="#estimate"
+        href={routes["contact"].href}
         variant="secondary"
         class="mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary"
       >
@@ -524,7 +483,7 @@
             📋 Free condition report
           </span>
         </div>
-        <Button href="#estimate" class="mt-8 text-lg h-14 px-7">
+        <Button href={routes["contact"].href} class="mt-8 text-lg h-14 px-7">
           Schedule a Cleaning
         </Button>
       </div>
@@ -652,7 +611,7 @@
           </div>
         </div>
         <div class="mt-5 flex flex-wrap items-center gap-3">
-          <Button href="#estimate" class="text-lg px-6">
+          <Button href={routes["contact"].href} class="text-lg px-6">
             Request Estimate
           </Button>
           <ClickToCall
@@ -827,7 +786,7 @@
         We'll reach out to schedule your walk-through.
       </p>
       <div class="flex flex-col gap-3">
-        <Button href="#estimate" class="w-full text-lg h-14">
+        <Button href={routes["contact"].href} class="w-full text-lg h-14">
           Request My Free Estimate
         </Button>
         <ClickToCall
@@ -853,7 +812,7 @@
     >
       Call
     </ClickToCall>
-    <Button href="#estimate">Free Estimate</Button>
+    <Button href={routes["contact"].href}>Free Estimate</Button>
   </div>
 </div>
 
