@@ -1,0 +1,1 @@
+import{r as o}from"./DsXuwSGI.js";const r=o(!0,function(i){let n=()=>{};if(typeof window<"u"){const e=window.matchMedia("(max-width: 1023px)"),t=()=>i(e.matches);t(),e.addEventListener("change",t),n=()=>e.removeEventListener("change",t)}return n});export{r as i};

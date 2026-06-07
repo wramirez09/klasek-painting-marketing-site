@@ -487,6 +487,9 @@ function get_current_component() {
     throw new Error("Function called outside component initialization");
   return current_component;
 }
+function onDestroy(fn) {
+  get_current_component().$$.on_destroy.push(fn);
+}
 function createEventDispatcher() {
   const component69 = get_current_component();
   return (type, detail, { cancelable = false } = {}) => {
@@ -643,7 +646,7 @@ function create_ssr_component(fn) {
       return {
         html,
         css: {
-          code: Array.from(result.css).map((css17) => css17.code).join("\n"),
+          code: Array.from(result.css).map((css18) => css18.code).join("\n"),
           map: null
           // TODO
         },
@@ -941,7 +944,7 @@ var init_routes = __esm({
         href: "/services/stucco-painting-repair/stucco-painting"
       },
       "hardie-installation": {
-        text: "Hardie Board Installation",
+        text: "Hardie Board Services",
         href: "/services/siding-painting-repair/hardie-board-installation"
       },
       // Gutter services
@@ -6512,7 +6515,7 @@ var init_layout_svelte = __esm({
       if ($$props.data === void 0 && $$bindings.data && data !== void 0)
         $$bindings.data(data);
       metaTags = (0, import_merge.default)({}, data.baseMetaTags, $page.data.pageMetaTags);
-      $page.url.pathname.startsWith("/services/gutter-installation-repair");
+      $page.url.pathname.startsWith("/services/gutter-installation-repair") || $page.url.pathname.startsWith("/services/siding-painting-repair/hardie-board-installation");
       $$unsubscribe_page();
       $$unsubscribe_isMobileStore();
       return ` ${!$page.error ? `${validate_component(MetaTags, "MetaTags").$$render($$result, Object.assign({}, metaTags), {}, {})}` : ``}  ${validate_component(KlasekJsonSchema, "KlasekJsonSchema").$$render($$result, {}, {}, {})}  ${``} ${slots.default ? slots.default({}) : ``}`;
@@ -6538,8 +6541,8 @@ var init__ = __esm({
     index = 0;
     component = async () => component_cache ??= (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
     server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.QoEf0q0p.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CtJdNdDp.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/DHa4iQKA.js"];
-    stylesheets = ["_app/immutable/assets/0.kmA6eEum.css"];
+    imports = ["_app/immutable/nodes/0.Bo11Fb8A.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/K84N8KvY.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/DqaOeWom.js"];
+    stylesheets = ["_app/immutable/assets/0.D_MMap1k.css"];
     fonts = ["_app/immutable/assets/montserrat-latin-500-normal.DRFEGfly.woff2", "_app/immutable/assets/montserrat-latin-500-normal.Dok2oTci.woff", "_app/immutable/assets/montserrat-latin-600-normal.UVxSCcoG.woff2", "_app/immutable/assets/montserrat-latin-600-normal.CdhFl4lI.woff", "_app/immutable/assets/montserrat-latin-700-normal.BdjcYUrC.woff2", "_app/immutable/assets/montserrat-latin-700-normal.BWkrl476.woff"];
   }
 });
@@ -6674,8 +6677,72 @@ var init_ArrowIcon = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/Icon.js
+var defaultAttributes, Icon;
+var init_Icon = __esm({
+  ".svelte-kit/output/server/chunks/Icon.js"() {
+    init_ssr();
+    init_utils22();
+    defaultAttributes = {
+      xmlns: "http://www.w3.org/2000/svg",
+      width: 24,
+      height: 24,
+      viewBox: "0 0 24 24",
+      fill: "none",
+      stroke: "currentColor",
+      "stroke-width": 2,
+      "stroke-linecap": "round",
+      "stroke-linejoin": "round"
+    };
+    Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$restProps = compute_rest_props($$props, ["name", "color", "size", "strokeWidth", "absoluteStrokeWidth", "iconNode"]);
+      let { name: name2 = void 0 } = $$props;
+      let { color: color2 = "currentColor" } = $$props;
+      let { size = 24 } = $$props;
+      let { strokeWidth = 2 } = $$props;
+      let { absoluteStrokeWidth = false } = $$props;
+      let { iconNode = [] } = $$props;
+      const mergeClasses = (...classes) => classes.filter((className, index69, array2) => {
+        return Boolean(className) && array2.indexOf(className) === index69;
+      }).join(" ");
+      if ($$props.name === void 0 && $$bindings.name && name2 !== void 0)
+        $$bindings.name(name2);
+      if ($$props.color === void 0 && $$bindings.color && color2 !== void 0)
+        $$bindings.color(color2);
+      if ($$props.size === void 0 && $$bindings.size && size !== void 0)
+        $$bindings.size(size);
+      if ($$props.strokeWidth === void 0 && $$bindings.strokeWidth && strokeWidth !== void 0)
+        $$bindings.strokeWidth(strokeWidth);
+      if ($$props.absoluteStrokeWidth === void 0 && $$bindings.absoluteStrokeWidth && absoluteStrokeWidth !== void 0)
+        $$bindings.absoluteStrokeWidth(absoluteStrokeWidth);
+      if ($$props.iconNode === void 0 && $$bindings.iconNode && iconNode !== void 0)
+        $$bindings.iconNode(iconNode);
+      return `<svg${spread(
+        [
+          escape_object(defaultAttributes),
+          escape_object($$restProps),
+          { width: escape_attribute_value(size) },
+          { height: escape_attribute_value(size) },
+          { stroke: escape_attribute_value(color2) },
+          {
+            "stroke-width": escape_attribute_value(absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth)
+          },
+          {
+            class: escape_attribute_value(mergeClasses("lucide-icon", "lucide", name2 ? `lucide-${name2}` : "", $$props.class))
+          }
+        ],
+        {}
+      )}>${each(iconNode, ([tag, attrs]) => {
+        return `${((tag$1) => {
+          return tag$1 ? `<${tag}${spread([escape_object(attrs)], {})}>${is_void(tag$1) ? "" : ``}${is_void(tag$1) ? "" : `</${tag$1}>`}` : "";
+        })(tag)}`;
+      })}${slots.default ? slots.default({}) : ``}</svg>`;
+    });
+  }
+});
+
 // .svelte-kit/output/server/chunks/NavBar.js
-var NavItem, Dropdown, DropdownItem, NavLinks, logo$1, logoDark$1, DesktopNavMenu, logo, logoDark, css, Hamburger, MobileNavMenu, NavBar;
+var NavItem, Dropdown, DropdownItem, Box, Brick_wall, Building_2, Droplets, Fence, Grip, Hammer, Hard_hat, Landmark, Layers, Paint_roller, Paintbrush, Palette, Rows_3, Tree_pine, Wrench, ServicesMegaDropdown, NavLinks, logo$1, logoDark$1, DesktopNavMenu, logo, logoDark, css, Hamburger, MobileNavMenu, NavBar;
 var init_NavBar = __esm({
   ".svelte-kit/output/server/chunks/NavBar.js"() {
     init_ssr();
@@ -6688,6 +6755,7 @@ var init_NavBar = __esm({
     init_exports2();
     init_utils();
     init_routes();
+    init_Icon();
     NavItem = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $page, $$unsubscribe_page;
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
@@ -6738,6 +6806,554 @@ var init_NavBar = __esm({
         $$bindings.navHidden(navHidden);
       return `<li class="relative"><a class="block py-4 lg:py-3 lg:px-2 font-semibold lg:text-lg text-xl lg:text-secondary-dark text-white lg:hover:underline underline-offset-2"${add_attribute("href", data.href, 0)}>${escape(data.text)}</a></li>`;
     });
+    Box = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"
+          }
+        ],
+        ["path", { "d": "m3.3 7 8.7 5 8.7-5" }],
+        ["path", { "d": "M12 22V12" }]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "box" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Brick_wall = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "rect",
+          {
+            "width": "18",
+            "height": "18",
+            "x": "3",
+            "y": "3",
+            "rx": "2"
+          }
+        ],
+        ["path", { "d": "M12 9v6" }],
+        ["path", { "d": "M16 15v6" }],
+        ["path", { "d": "M16 3v6" }],
+        ["path", { "d": "M3 15h18" }],
+        ["path", { "d": "M3 9h18" }],
+        ["path", { "d": "M8 15v6" }],
+        ["path", { "d": "M8 3v6" }]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "brick-wall" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Building_2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"
+          }
+        ],
+        ["path", { "d": "M10 6h4" }],
+        ["path", { "d": "M10 10h4" }],
+        ["path", { "d": "M10 14h4" }],
+        ["path", { "d": "M10 18h4" }]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "building-2" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Droplets = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"
+          }
+        ]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "droplets" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Fence = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "M4 3 2 5v15c0 .6.4 1 1 1h2c.6 0 1-.4 1-1V5Z"
+          }
+        ],
+        ["path", { "d": "M6 8h4" }],
+        ["path", { "d": "M6 18h4" }],
+        [
+          "path",
+          {
+            "d": "m12 3-2 2v15c0 .6.4 1 1 1h2c.6 0 1-.4 1-1V5Z"
+          }
+        ],
+        ["path", { "d": "M14 8h4" }],
+        ["path", { "d": "M14 18h4" }],
+        [
+          "path",
+          {
+            "d": "m20 3-2 2v15c0 .6.4 1 1 1h2c.6 0 1-.4 1-1V5Z"
+          }
+        ]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "fence" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Grip = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        ["circle", { "cx": "12", "cy": "5", "r": "1" }],
+        ["circle", { "cx": "19", "cy": "5", "r": "1" }],
+        ["circle", { "cx": "5", "cy": "5", "r": "1" }],
+        ["circle", { "cx": "12", "cy": "12", "r": "1" }],
+        ["circle", { "cx": "19", "cy": "12", "r": "1" }],
+        ["circle", { "cx": "5", "cy": "12", "r": "1" }],
+        ["circle", { "cx": "12", "cy": "19", "r": "1" }],
+        ["circle", { "cx": "19", "cy": "19", "r": "1" }],
+        ["circle", { "cx": "5", "cy": "19", "r": "1" }]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "grip" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Hammer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9"
+          }
+        ],
+        ["path", { "d": "m18 15 4-4" }],
+        [
+          "path",
+          {
+            "d": "m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"
+          }
+        ]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "hammer" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Hard_hat = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"
+          }
+        ],
+        ["path", { "d": "M4 15v-3a6 6 0 0 1 6-6" }],
+        ["path", { "d": "M14 6a6 6 0 0 1 6 6v3" }]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "hard-hat" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Landmark = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "line",
+          {
+            "x1": "3",
+            "x2": "21",
+            "y1": "22",
+            "y2": "22"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "6",
+            "x2": "6",
+            "y1": "18",
+            "y2": "11"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "10",
+            "x2": "10",
+            "y1": "18",
+            "y2": "11"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "14",
+            "x2": "14",
+            "y1": "18",
+            "y2": "11"
+          }
+        ],
+        [
+          "line",
+          {
+            "x1": "18",
+            "x2": "18",
+            "y1": "18",
+            "y2": "11"
+          }
+        ],
+        ["polygon", { "points": "12 2 20 7 4 7" }]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "landmark" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Layers = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"
+          }
+        ]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "layers" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Paint_roller = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "rect",
+          {
+            "width": "16",
+            "height": "6",
+            "x": "2",
+            "y": "2",
+            "rx": "2"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M10 16v-2a2 2 0 0 1 2-2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"
+          }
+        ],
+        [
+          "rect",
+          {
+            "width": "4",
+            "height": "6",
+            "x": "8",
+            "y": "16",
+            "rx": "1"
+          }
+        ]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "paint-roller" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Paintbrush = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        ["path", { "d": "m14.622 17.897-10.68-2.913" }],
+        [
+          "path",
+          {
+            "d": "M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15"
+          }
+        ]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "paintbrush" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Palette = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "circle",
+          {
+            "cx": "13.5",
+            "cy": "6.5",
+            "r": ".5",
+            "fill": "currentColor"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "17.5",
+            "cy": "10.5",
+            "r": ".5",
+            "fill": "currentColor"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "8.5",
+            "cy": "7.5",
+            "r": ".5",
+            "fill": "currentColor"
+          }
+        ],
+        [
+          "circle",
+          {
+            "cx": "6.5",
+            "cy": "12.5",
+            "r": ".5",
+            "fill": "currentColor"
+          }
+        ],
+        [
+          "path",
+          {
+            "d": "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
+          }
+        ]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "palette" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Rows_3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "rect",
+          {
+            "width": "18",
+            "height": "18",
+            "x": "3",
+            "y": "3",
+            "rx": "2"
+          }
+        ],
+        ["path", { "d": "M21 9H3" }],
+        ["path", { "d": "M21 15H3" }]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "rows-3" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Tree_pine = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"
+          }
+        ],
+        ["path", { "d": "M12 22v-3" }]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "tree-pine" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    Wrench = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [
+        [
+          "path",
+          {
+            "d": "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+          }
+        ]
+      ];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "wrench" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
+    ServicesMegaDropdown = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isMobileStore, $$unsubscribe_isMobileStore;
+      $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
+      let { class: classes = "" } = $$props;
+      [
+        {
+          icon: Paint_roller,
+          text: routes["exterior-home-painting"].text,
+          description: "Durable finishes for the whole exterior",
+          href: routes["exterior-home-painting"].href
+        },
+        {
+          icon: Hard_hat,
+          text: "Paint Contractor",
+          description: "Your trusted exterior paint contractor",
+          href: routes["exterior-paint-contractor"].href
+        },
+        {
+          icon: Landmark,
+          text: routes["historic-house-painting"].text,
+          description: "Restoration-grade care for older homes",
+          href: routes["historic-house-painting"].href
+        },
+        {
+          icon: Building_2,
+          text: routes["commercial"].text,
+          description: "Exterior painting for business properties",
+          href: routes["commercial"].href
+        },
+        {
+          icon: Box,
+          text: routes["hardie-painting"].text,
+          description: "Primed, prepped & sprayed to last",
+          href: routes["hardie-painting"].href
+        },
+        {
+          icon: Wrench,
+          text: routes["hardie-installation"].text,
+          description: "Painting, repair, trim & installation",
+          href: routes["hardie-installation"].href
+        },
+        {
+          icon: Rows_3,
+          text: routes["aluminum-painting"].text,
+          description: "Factory-fresh color for metal siding",
+          href: routes["aluminum-painting"].href
+        },
+        {
+          icon: Hammer,
+          text: routes["aluminum-repair"].text,
+          description: "Dents & weathered panels repaired",
+          href: routes["aluminum-repair"].href
+        },
+        {
+          icon: Tree_pine,
+          text: routes["cedar-painting"].text,
+          description: "Finishes that let cedar shine",
+          href: routes["cedar-painting"].href
+        },
+        {
+          icon: Fence,
+          text: routes["cedar-repair"].text,
+          description: "Rot & weather damage repaired",
+          href: routes["cedar-repair"].href
+        },
+        {
+          icon: Paintbrush,
+          text: routes["vinyl-painting"].text,
+          description: "Safe, lasting color updates for vinyl",
+          href: routes["vinyl-painting"].href
+        },
+        {
+          icon: Layers,
+          text: routes["vinyl-repair"].text,
+          description: "Cracked & warped panels replaced",
+          href: routes["vinyl-repair"].href
+        },
+        {
+          icon: Brick_wall,
+          text: routes["brick-painting-repair"].text,
+          description: "Refresh & seal brick and masonry",
+          href: routes["brick-painting-repair"].href
+        },
+        {
+          icon: Grip,
+          text: routes["stucco-painting-repair"].text,
+          description: "Patch, finish & paint stucco walls",
+          href: routes["stucco-painting-repair"].href
+        },
+        {
+          icon: Droplets,
+          text: routes["gutters"].text,
+          description: "Seamless gutters cut on-site",
+          href: routes["gutters"].href
+        },
+        {
+          icon: Palette,
+          text: "Free Color Consultation",
+          description: "On-site color & design guidance",
+          href: routes["design-consultation"].href
+        }
+      ];
+      let open = false;
+      let closeTimer;
+      onDestroy(() => clearTimeout(closeTimer));
+      if ($$props.class === void 0 && $$bindings.class && classes !== void 0)
+        $$bindings.class(classes);
+      $$unsubscribe_isMobileStore();
+      return `  <li${add_attribute("class", cn("lg:static relative group", classes), 0)}><div class="lg:p-0 text-white h-full flex items-center lg:justify-start justify-between py-4 relative"><a${add_attribute("href", routes["services"].href, 0)}${add_attribute("aria-expanded", open, 0)} class="${escape("", true) + " lg:hover:underline underline-offset-2 font-semibold lg:text-lg text-2xl whitespace-nowrap flex items-center"}">${escape(routes["services"].text)}  <span class="${escape("", true) + " lg:inline-flex hidden transition-transform duration-150"}">${validate_component(ArrowIcon, "ArrowIcon").$$render($$result, { class: "lg:size-5 size-6 rotate-90 m-0" }, {}, {})}</span></a>  ${$isMobileStore ? `<button>${validate_component(ArrowIcon, "ArrowIcon").$$render(
+        $$result,
+        {
+          class: "rotate-90 lg:hidden lg:size-5 size-8 m-0 inline duration-200"
+        },
+        {},
+        {}
+      )}</button>` : ``}</div> ${``}</li>`;
+    });
     NavLinks = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return ` ${validate_component(Dropdown, "Dropdown").$$render(
         $$result,
@@ -6748,14 +7364,10 @@ var init_NavBar = __esm({
         {},
         {
           default: () => {
-            return `${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: aboutUsRoutes["testimonials"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: aboutUsRoutes["blog"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: aboutUsRoutes["faq"] }, {}, {})}`;
+            return `${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: aboutUsRoutes["testimonials"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: aboutUsRoutes["faq"] }, {}, {})}`;
           }
         }
-      )}  ${validate_component(Dropdown, "Dropdown").$$render($$result, { data: routes["services"] }, {}, {
-        default: () => {
-          return `${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: routes["exterior-home-painting"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: routes["siding-painting-repair"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: routes["hardie-installation"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: routes["brick-painting-repair"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: routes["stucco-painting-repair"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: routes["gutters"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: routes["design-consultation"] }, {}, {})} ${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data: routes["commercial"] }, {}, {})}`;
-        }
-      })}  ${validate_component(Dropdown, "Dropdown").$$render($$result, { data: aboutUsRoutes["service-area"] }, {}, {
+      )}  ${validate_component(ServicesMegaDropdown, "ServicesMegaDropdown").$$render($$result, {}, {}, {})}  ${validate_component(Dropdown, "Dropdown").$$render($$result, { data: aboutUsRoutes["service-area"] }, {}, {
         default: () => {
           return `${each(Object.values(serviceAreaRoutes), (data) => {
             return `${validate_component(DropdownItem, "DropdownItem").$$render($$result, { data }, {}, {})}`;
@@ -6765,6 +7377,14 @@ var init_NavBar = __esm({
         $$result,
         {
           data: routes["gallery"],
+          class: "xl:block lg:hidden block"
+        },
+        {},
+        {}
+      )}  ${validate_component(NavItem, "NavItem").$$render(
+        $$result,
+        {
+          data: aboutUsRoutes["blog"],
           class: "xl:block lg:hidden block"
         },
         {},
@@ -7018,7 +7638,7 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => component_cache2 ??= (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    imports2 = ["_app/immutable/nodes/1.D_fcpded.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/-MLZM03z.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/b1zVA1SQ.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js"];
+    imports2 = ["_app/immutable/nodes/1.Ctm8gEeI.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dn8aa3PJ.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js"];
     stylesheets2 = ["_app/immutable/assets/NavBar.DBFUqa5S.css", "_app/immutable/assets/1.CxTk2ocn.css"];
     fonts2 = [];
   }
@@ -7166,13 +7786,16 @@ var init_Footer = __esm({
           alt: "Yelp"
         }
       ];
-      return `<ul class="flex items-center justify-center gap-6">${each(socialLinks, ({ href, src: src28, alt }) => {
-        return `<li><a${add_attribute("href", href, 0)} target="_blank"><img class="size-6"${add_attribute("src", src28, 0)}${add_attribute("alt", alt, 0)} loading="lazy"></a> </li>`;
+      return `<ul class="flex items-center justify-center gap-6">${each(socialLinks, ({ href, src: src27, alt }) => {
+        return `<li><a${add_attribute("href", href, 0)} target="_blank"><img class="size-6"${add_attribute("src", src27, 0)}${add_attribute("alt", alt, 0)} loading="lazy"></a> </li>`;
       })}</ul>`;
     });
     Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const usefulLinks = [routes["contact"], routes["service-area"], routes["privacy"]];
-      return `<footer class="flex flex-col items-center bg-secondary px-6">${validate_component(EmailSignup, "EmailSignup").$$render($$result, {}, {}, {})} ${validate_component(FooterCta, "FooterCta").$$render($$result, {}, {}, {})} <div class="w-full py-8 p-x grid lg:grid-cols-4 grid-cols-2 lg:gap-x-12 gap-y-8 xs:gap-x-4"> <div class="flex flex-col gap-6 lg:col-span-1 col-span-2 max-w-[200px] mx-auto"><a href="/">${typeof logo$1 === "string" ? `<img${add_attribute("src", logo$1.img.src, 0)} alt="Klasek Painting" class="w-full h-auto" loading="lazy"${add_attribute("width", logo$1.img.w, 0)}${add_attribute("height", logo$1.img.h, 0)}>` : `<picture>${each(Object.entries(logo$1.sources), ([format, srcset]) => {
+      let { showEmailSignup = true } = $$props;
+      if ($$props.showEmailSignup === void 0 && $$bindings.showEmailSignup && showEmailSignup !== void 0)
+        $$bindings.showEmailSignup(showEmailSignup);
+      return `<footer class="flex flex-col items-center bg-secondary px-6">${showEmailSignup ? `${validate_component(EmailSignup, "EmailSignup").$$render($$result, {}, {}, {})}` : ``} ${validate_component(FooterCta, "FooterCta").$$render($$result, {}, {}, {})} <div class="w-full py-8 p-x grid lg:grid-cols-4 grid-cols-2 lg:gap-x-12 gap-y-8 xs:gap-x-4"> <div class="flex flex-col gap-6 lg:col-span-1 col-span-2 max-w-[200px] mx-auto"><a href="/">${typeof logo$1 === "string" ? `<img${add_attribute("src", logo$1.img.src, 0)} alt="Klasek Painting" class="w-full h-auto" loading="lazy"${add_attribute("width", logo$1.img.w, 0)}${add_attribute("height", logo$1.img.h, 0)}>` : `<picture>${each(Object.entries(logo$1.sources), ([format, srcset]) => {
         return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
       })} <img${add_attribute("src", logo$1.img.src, 0)} alt="Klasek Painting" class="w-full h-auto" loading="lazy"${add_attribute("width", logo$1.img.w, 0)}${add_attribute("height", logo$1.img.h, 0)}></picture>`}</a> ${validate_component(FooterSocialLinks, "FooterSocialLinks").$$render($$result, {}, {}, {})}</div> <div class="lg:grid grid-cols-1 grid-rows-[150px_auto] gap-2 lg:col-span-1 w-full">${validate_component(Map2, "Map").$$render(
         $$result,
@@ -7255,7 +7878,7 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => component_cache3 ??= (await Promise.resolve().then(() => (init_layout_svelte2(), layout_svelte_exports2))).default;
-    imports3 = ["_app/immutable/nodes/2.4nIdtpF6.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/-MLZM03z.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/b1zVA1SQ.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/Bhh0fL9N.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/MeiJrQww.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DHa4iQKA.js", "_app/immutable/chunks/Bs4RoRbk.js"];
+    imports3 = ["_app/immutable/nodes/2.D1GrZXON.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dn8aa3PJ.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/CnmIg4To.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DqaOeWom.js", "_app/immutable/chunks/DnNh7yYd.js"];
     stylesheets3 = ["_app/immutable/assets/NavBar.DBFUqa5S.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"];
     fonts3 = [];
   }
@@ -7272,8 +7895,14 @@ var init_layout_svelte3 = __esm({
     init_ssr();
     init_NavBar();
     init_Footer();
+    init_stores();
     Layout3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `${validate_component(NavBar, "NavBar").$$render($$result, { lightNav: true }, {}, {})} ${slots.default ? slots.default({}) : ``} ${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`;
+      let isFunnelPage;
+      let $page, $$unsubscribe_page;
+      $$unsubscribe_page = subscribe(page, (value) => $page = value);
+      isFunnelPage = $page.url.pathname.startsWith("/services/gutter-installation-repair") || $page.url.pathname.startsWith("/services/siding-painting-repair/hardie-board-installation");
+      $$unsubscribe_page();
+      return `${validate_component(NavBar, "NavBar").$$render($$result, { lightNav: true }, {}, {})} ${slots.default ? slots.default({}) : ``} ${validate_component(Footer, "Footer").$$render($$result, { showEmailSignup: !isFunnelPage }, {}, {})}`;
     });
   }
 });
@@ -7292,7 +7921,7 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => component_cache4 ??= (await Promise.resolve().then(() => (init_layout_svelte3(), layout_svelte_exports3))).default;
-    imports4 = ["_app/immutable/nodes/3.mmSqjolO.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/-MLZM03z.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/b1zVA1SQ.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/Bhh0fL9N.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/MeiJrQww.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DHa4iQKA.js", "_app/immutable/chunks/Bs4RoRbk.js"];
+    imports4 = ["_app/immutable/nodes/3.D_Mb5ke6.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dn8aa3PJ.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/CnmIg4To.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DqaOeWom.js", "_app/immutable/chunks/DnNh7yYd.js"];
     stylesheets4 = ["_app/immutable/assets/NavBar.DBFUqa5S.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"];
     fonts4 = [];
   }
@@ -7819,10 +8448,10 @@ var init_page_svelte = __esm({
         {},
         {
           default: () => {
-            return `${each(images, ({ src: src28, alt }) => {
-              return `${typeof src28 === "string" ? `<img class="h-[100px] w-auto"${add_attribute("src", src28.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src28.img.w, 0)}${add_attribute("height", src28.img.h, 0)}>` : `<picture>${each(Object.entries(src28.sources), ([format, srcset]) => {
+            return `${each(images, ({ src: src27, alt }) => {
+              return `${typeof src27 === "string" ? `<img class="h-[100px] w-auto"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
                 return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-              })} <img class="h-[100px] w-auto"${add_attribute("src", src28.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src28.img.w, 0)}${add_attribute("height", src28.img.h, 0)}> </picture>`}`;
+              })} <img class="h-[100px] w-auto"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}> </picture>`}`;
             })}`;
           }
         }
@@ -7894,7 +8523,7 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => component_cache5 ??= (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    imports5 = ["_app/immutable/nodes/4.Cdfh8HYN.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/C61OZROy.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DEuEdMQA.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/BnEpFRIx.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/CapzkwKx.js", "_app/immutable/chunks/b1zVA1SQ.js", "_app/immutable/chunks/tZ0ymlLq.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/-MLZM03z.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/wRRLkYcO.js", "_app/immutable/chunks/Bhh0fL9N.js", "_app/immutable/chunks/MeiJrQww.js", "_app/immutable/chunks/DHa4iQKA.js", "_app/immutable/chunks/DSt0beyn.js"];
+    imports5 = ["_app/immutable/nodes/4.BGiQRIFx.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/B_-KkxDB.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/D2PaxASM.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/tZ0ymlLq.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/Dn8aa3PJ.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/aArQPUwL.js", "_app/immutable/chunks/CnmIg4To.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/DqaOeWom.js", "_app/immutable/chunks/CMJKR-Ce.js"];
     stylesheets5 = ["_app/immutable/assets/Testimonial.DLYMjzrT.css", "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css", "_app/immutable/assets/NavBar.DBFUqa5S.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css", "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css", "_app/immutable/assets/4.yAOv9-SH.css"];
     fonts5 = [];
   }
@@ -8086,7 +8715,7 @@ var init__6 = __esm({
     index6 = 5;
     component6 = async () => component_cache6 ??= (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
     universal_id = "src/routes/(dark-nav)/about-us/+page.ts";
-    imports6 = ["_app/immutable/nodes/5.d-E-RCAl.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/D5BaSaoK.js", "_app/immutable/chunks/BnEpFRIx.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CapzkwKx.js", "_app/immutable/chunks/b1zVA1SQ.js", "_app/immutable/chunks/CLoLEQQ2.js"];
+    imports6 = ["_app/immutable/nodes/5.C9kcAnH1.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/B_-KkxDB.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/D2PaxASM.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/CLoLEQQ2.js"];
     stylesheets6 = ["_app/immutable/assets/Testimonial.DLYMjzrT.css", "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css"];
     fonts6 = [];
   }
@@ -8123,70 +8752,6 @@ var init_ColorHero = __esm({
       if ($$props.h1 === void 0 && $$bindings.h1 && h1 !== void 0)
         $$bindings.h1(h1);
       return `<section class="p-y p-x hero-gradient"><div class="container max-w-screen-md flex flex-col items-center justify-center lg:gap-6 gap-4 text-center text-white"><h1 class="lg:text-5xl xs:text-4xl text-3xl font-bold" data-testid="page-heading">${escape(h1)}</h1> ${slots.default ? slots.default({}) : ``}</div></section>`;
-    });
-  }
-});
-
-// .svelte-kit/output/server/chunks/Icon.js
-var defaultAttributes, Icon;
-var init_Icon = __esm({
-  ".svelte-kit/output/server/chunks/Icon.js"() {
-    init_ssr();
-    init_utils22();
-    defaultAttributes = {
-      xmlns: "http://www.w3.org/2000/svg",
-      width: 24,
-      height: 24,
-      viewBox: "0 0 24 24",
-      fill: "none",
-      stroke: "currentColor",
-      "stroke-width": 2,
-      "stroke-linecap": "round",
-      "stroke-linejoin": "round"
-    };
-    Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $$restProps = compute_rest_props($$props, ["name", "color", "size", "strokeWidth", "absoluteStrokeWidth", "iconNode"]);
-      let { name: name2 = void 0 } = $$props;
-      let { color: color2 = "currentColor" } = $$props;
-      let { size = 24 } = $$props;
-      let { strokeWidth = 2 } = $$props;
-      let { absoluteStrokeWidth = false } = $$props;
-      let { iconNode = [] } = $$props;
-      const mergeClasses = (...classes) => classes.filter((className, index69, array2) => {
-        return Boolean(className) && array2.indexOf(className) === index69;
-      }).join(" ");
-      if ($$props.name === void 0 && $$bindings.name && name2 !== void 0)
-        $$bindings.name(name2);
-      if ($$props.color === void 0 && $$bindings.color && color2 !== void 0)
-        $$bindings.color(color2);
-      if ($$props.size === void 0 && $$bindings.size && size !== void 0)
-        $$bindings.size(size);
-      if ($$props.strokeWidth === void 0 && $$bindings.strokeWidth && strokeWidth !== void 0)
-        $$bindings.strokeWidth(strokeWidth);
-      if ($$props.absoluteStrokeWidth === void 0 && $$bindings.absoluteStrokeWidth && absoluteStrokeWidth !== void 0)
-        $$bindings.absoluteStrokeWidth(absoluteStrokeWidth);
-      if ($$props.iconNode === void 0 && $$bindings.iconNode && iconNode !== void 0)
-        $$bindings.iconNode(iconNode);
-      return `<svg${spread(
-        [
-          escape_object(defaultAttributes),
-          escape_object($$restProps),
-          { width: escape_attribute_value(size) },
-          { height: escape_attribute_value(size) },
-          { stroke: escape_attribute_value(color2) },
-          {
-            "stroke-width": escape_attribute_value(absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth)
-          },
-          {
-            class: escape_attribute_value(mergeClasses("lucide-icon", "lucide", name2 ? `lucide-${name2}` : "", $$props.class))
-          }
-        ],
-        {}
-      )}>${each(iconNode, ([tag, attrs]) => {
-        return `${((tag$1) => {
-          return tag$1 ? `<${tag}${spread([escape_object(attrs)], {})}>${is_void(tag$1) ? "" : ``}${is_void(tag$1) ? "" : `</${tag$1}>`}` : "";
-        })(tag)}`;
-      })}${slots.default ? slots.default({}) : ``}</svg>`;
     });
   }
 });
@@ -8414,7 +8979,7 @@ function slide(node, { delay = 0, duration = 400, easing = cubicOut, axis = "y" 
     css: (t2) => `overflow: hidden;opacity: ${Math.min(t2 * 20, 1) * opacity};${primary_property}: ${t2 * primary_property_value}px;padding-${secondary_properties[0]}: ${t2 * padding_start_value}px;padding-${secondary_properties[1]}: ${t2 * padding_end_value}px;margin-${secondary_properties[0]}: ${t2 * margin_start_value}px;margin-${secondary_properties[1]}: ${t2 * margin_end_value}px;border-${secondary_properties[0]}-width: ${t2 * border_width_start_value}px;border-${secondary_properties[1]}-width: ${t2 * border_width_end_value}px;`
   };
 }
-var dirty_components, binding_callbacks, render_callbacks, flush_callbacks, resolved_promise, update_scheduled, seen_callbacks, flushidx, overridable, name, selector, defaults2, createAccordion, Accordion, Accordion_item$1, Accordion_header, Accordion_trigger$1, Accordion_content$1, Accordion_content, Accordion_item, Chevron_down, Accordion_trigger, Root2;
+var dirty_components, binding_callbacks, render_callbacks, flush_callbacks, resolved_promise, update_scheduled, seen_callbacks, flushidx, overridable, name, selector, defaults2, createAccordion, Accordion, Accordion_item$1, Accordion_header, Accordion_trigger$1, Accordion_content$1, Chevron_down, Accordion_content, Accordion_item, Accordion_trigger, Root2;
 var init_index4 = __esm({
   ".svelte-kit/output/server/chunks/index4.js"() {
     init_ssr();
@@ -8840,6 +9405,14 @@ var init_index4 = __esm({
       $$unsubscribe_isSelected();
       return `${asChild && $isSelected($propsStore.value) ? `${slots.default ? slots.default({ builder }) : ``}` : `${transition && $isSelected($propsStore.value) ? `<div${spread([escape_object(builder), escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</div>` : `${inTransition && outTransition && $isSelected($propsStore.value) ? `<div${spread([escape_object(builder), escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</div>` : `${inTransition && $isSelected($propsStore.value) ? `<div${spread([escape_object(builder), escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</div>` : `${outTransition && $isSelected($propsStore.value) ? `<div${spread([escape_object(builder), escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</div>` : `${$isSelected($propsStore.value) ? `<div${spread([escape_object(builder), escape_object($$restProps)], {})}${add_attribute("this", el, 0)}>${slots.default ? slots.default({ builder }) : ``}</div>` : ``}`}`}`}`}`}`;
     });
+    Chevron_down = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const iconNode = [["path", { "d": "m6 9 6 6 6-6" }]];
+      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "chevron-down" }, $$props, { iconNode }), {}, {
+        default: () => {
+          return `${slots.default ? slots.default({}) : ``}`;
+        }
+      })}`;
+    });
     Accordion_content = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $$restProps = compute_rest_props($$props, ["class", "transition", "transitionConfig"]);
       let { class: className = void 0 } = $$props;
@@ -8879,14 +9452,6 @@ var init_index4 = __esm({
       if ($$props.value === void 0 && $$bindings.value && value !== void 0)
         $$bindings.value(value);
       return `${validate_component(Accordion_item$1, "AccordionPrimitive.Item").$$render($$result, Object.assign({}, { value }, { class: cn("", className) }, $$restProps), {}, {
-        default: () => {
-          return `${slots.default ? slots.default({}) : ``}`;
-        }
-      })}`;
-    });
-    Chevron_down = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      const iconNode = [["path", { "d": "m6 9 6 6 6-6" }]];
-      return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "chevron-down" }, $$props, { iconNode }), {}, {
         default: () => {
           return `${slots.default ? slots.default({}) : ``}`;
         }
@@ -9072,7 +9637,7 @@ var init__7 = __esm({
     index7 = 6;
     component7 = async () => component_cache7 ??= (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
     universal_id2 = "src/routes/(dark-nav)/about-us/faqs/+page.ts";
-    imports7 = ["_app/immutable/nodes/6.Io3xyeeW.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CKirJmWS.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js"];
+    imports7 = ["_app/immutable/nodes/6.CrRq609q.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DFZMGrRu.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js"];
     stylesheets7 = [];
     fonts7 = [];
   }
@@ -9156,7 +9721,7 @@ var init__8 = __esm({
     index8 = 7;
     component8 = async () => component_cache8 ??= (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
     universal_id3 = "src/routes/(dark-nav)/about-us/service-area/+page.ts";
-    imports8 = ["_app/immutable/nodes/7.BeXGaiRD.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DHa4iQKA.js"];
+    imports8 = ["_app/immutable/nodes/7.BS8nMFf9.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DqaOeWom.js"];
     stylesheets8 = [];
     fonts8 = [];
   }
@@ -9953,7 +10518,7 @@ var init__9 = __esm({
     index9 = 8;
     component9 = async () => component_cache9 ??= (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
     universal_id4 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/berwyn-house-painting/+page.ts";
-    imports9 = ["_app/immutable/nodes/8.uoE4Aqrf.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports9 = ["_app/immutable/nodes/8.oxDSxkNO.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets9 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts9 = [];
   }
@@ -10071,7 +10636,7 @@ var init__10 = __esm({
     index10 = 9;
     component10 = async () => component_cache10 ??= (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
     universal_id5 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/burr-ridge-house-painting/+page.ts";
-    imports10 = ["_app/immutable/nodes/9.BnxvA2fL.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports10 = ["_app/immutable/nodes/9.5DFCoYSE.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets10 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts10 = [];
   }
@@ -10195,7 +10760,7 @@ var init__11 = __esm({
     index11 = 10;
     component11 = async () => component_cache11 ??= (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
     universal_id6 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/clarendon-hills-house-painting/+page.ts";
-    imports11 = ["_app/immutable/nodes/10.CaW-mEF2.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports11 = ["_app/immutable/nodes/10.qA1PhIY3.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets11 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts11 = [];
   }
@@ -10324,7 +10889,7 @@ var init__12 = __esm({
     index12 = 11;
     component12 = async () => component_cache12 ??= (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
     universal_id7 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/downers-grove-house-painting/+page.ts";
-    imports12 = ["_app/immutable/nodes/11.JjU2myK7.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports12 = ["_app/immutable/nodes/11.BP_Bj3n6.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets12 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts12 = [];
   }
@@ -10442,7 +11007,7 @@ var init__13 = __esm({
     index13 = 12;
     component13 = async () => component_cache13 ??= (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
     universal_id8 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/forest-park-house-painting/+page.ts";
-    imports13 = ["_app/immutable/nodes/12.292VFIus.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports13 = ["_app/immutable/nodes/12.DkAi3bpJ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets13 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts13 = [];
   }
@@ -10559,7 +11124,7 @@ var init__14 = __esm({
     index14 = 13;
     component14 = async () => component_cache14 ??= (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
     universal_id9 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/hinsdale-house-painting/+page.ts";
-    imports14 = ["_app/immutable/nodes/13.DAwJIdEV.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports14 = ["_app/immutable/nodes/13.Jc6uYGRd.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets14 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts14 = [];
   }
@@ -10674,7 +11239,7 @@ var init__15 = __esm({
     index15 = 14;
     component15 = async () => component_cache15 ??= (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
     universal_id10 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/la-grange-house-painting/+page.ts";
-    imports15 = ["_app/immutable/nodes/14.JIENoZjt.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports15 = ["_app/immutable/nodes/14.BDsuOHnq.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets15 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts15 = [];
   }
@@ -10780,7 +11345,7 @@ var init__16 = __esm({
     index16 = 15;
     component16 = async () => component_cache16 ??= (await Promise.resolve().then(() => (init_page_svelte12(), page_svelte_exports12))).default;
     universal_id11 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-brook-house-painting/+page.ts";
-    imports16 = ["_app/immutable/nodes/15.D4nMBw4h.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports16 = ["_app/immutable/nodes/15.BouPWL9J.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets16 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts16 = [];
   }
@@ -10897,7 +11462,7 @@ var init__17 = __esm({
     index17 = 16;
     component17 = async () => component_cache17 ??= (await Promise.resolve().then(() => (init_page_svelte13(), page_svelte_exports13))).default;
     universal_id12 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-park-house-painting/+page.ts";
-    imports17 = ["_app/immutable/nodes/16.M2Ta6LGy.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports17 = ["_app/immutable/nodes/16.2F0m83DB.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets17 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts17 = [];
   }
@@ -11015,7 +11580,7 @@ var init__18 = __esm({
     index18 = 17;
     component18 = async () => component_cache18 ??= (await Promise.resolve().then(() => (init_page_svelte14(), page_svelte_exports14))).default;
     universal_id13 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/orland-park-house-painting/+page.ts";
-    imports18 = ["_app/immutable/nodes/17.eGMCObzu.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports18 = ["_app/immutable/nodes/17.BkQ_C85W.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets18 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts18 = [];
   }
@@ -11137,7 +11702,7 @@ var init__19 = __esm({
     index19 = 18;
     component19 = async () => component_cache19 ??= (await Promise.resolve().then(() => (init_page_svelte15(), page_svelte_exports15))).default;
     universal_id14 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/riverside-house-painting/+page.ts";
-    imports19 = ["_app/immutable/nodes/18.BnejaTcG.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports19 = ["_app/immutable/nodes/18.DAE5hdXZ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets19 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts19 = [];
   }
@@ -11247,7 +11812,7 @@ var init__20 = __esm({
     index20 = 19;
     component20 = async () => component_cache20 ??= (await Promise.resolve().then(() => (init_page_svelte16(), page_svelte_exports16))).default;
     universal_id15 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/western-springs-house-painting/+page.ts";
-    imports20 = ["_app/immutable/nodes/19.Ba1FHVQJ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports20 = ["_app/immutable/nodes/19.ZLY4uxru.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets20 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts20 = [];
   }
@@ -11364,7 +11929,7 @@ var init__21 = __esm({
     index21 = 20;
     component21 = async () => component_cache21 ??= (await Promise.resolve().then(() => (init_page_svelte17(), page_svelte_exports17))).default;
     universal_id16 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/westmont-house-painting/+page.ts";
-    imports21 = ["_app/immutable/nodes/20.B_7d63v7.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports21 = ["_app/immutable/nodes/20.COPnnZ9f.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets21 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts21 = [];
   }
@@ -11489,7 +12054,7 @@ var init__22 = __esm({
     index22 = 21;
     component22 = async () => component_cache22 ??= (await Promise.resolve().then(() => (init_page_svelte18(), page_svelte_exports18))).default;
     universal_id17 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/willow-springs-house-painting/+page.ts";
-    imports22 = ["_app/immutable/nodes/21.CuDxqhtp.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports22 = ["_app/immutable/nodes/21.BjbX6J_F.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets22 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts22 = [];
   }
@@ -11612,7 +12177,7 @@ var init__23 = __esm({
     index23 = 22;
     component23 = async () => component_cache23 ??= (await Promise.resolve().then(() => (init_page_svelte19(), page_svelte_exports19))).default;
     universal_id18 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/willowbrook-house-painting/+page.ts";
-    imports23 = ["_app/immutable/nodes/22.B69hIynn.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C60exKi9.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/gL809UNr.js"];
+    imports23 = ["_app/immutable/nodes/22.DYY3jC2U.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
     stylesheets23 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts23 = [];
   }
@@ -11837,7 +12402,7 @@ var init__24 = __esm({
     index24 = 23;
     component24 = async () => component_cache24 ??= (await Promise.resolve().then(() => (init_page_svelte20(), page_svelte_exports20))).default;
     universal_id19 = "src/routes/(dark-nav)/about-us/testimonials/+page.ts";
-    imports24 = ["_app/immutable/nodes/23.BmlKyU7o.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CapzkwKx.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/uD0itGRs.js", "_app/immutable/chunks/C61OZROy.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CLoLEQQ2.js"];
+    imports24 = ["_app/immutable/nodes/23.Duhpj09z.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D2PaxASM.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/uD0itGRs.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CLoLEQQ2.js"];
     stylesheets24 = ["_app/immutable/assets/Testimonial.DLYMjzrT.css"];
     fonts24 = [];
   }
@@ -12557,7 +13122,7 @@ var init__25 = __esm({
     index25 = 24;
     component25 = async () => component_cache25 ??= (await Promise.resolve().then(() => (init_page_svelte21(), page_svelte_exports21))).default;
     universal_id20 = "src/routes/(dark-nav)/photo-gallery/+page.ts";
-    imports25 = ["_app/immutable/nodes/24.0KPSrCXQ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/sIz1Jrbw.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/BFi3tbP7.js"];
+    imports25 = ["_app/immutable/nodes/24.BdCAAAl_.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/sIz1Jrbw.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/DBFZJ9i3.js"];
     stylesheets25 = ["_app/immutable/assets/24.h3pv-FmW.css"];
     fonts25 = [];
   }
@@ -12944,7 +13509,7 @@ var init__26 = __esm({
     index26 = 25;
     component26 = async () => component_cache26 ??= (await Promise.resolve().then(() => (init_page_svelte22(), page_svelte_exports22))).default;
     universal_id21 = "src/routes/(dark-nav)/photo-gallery/brick-painting/+page.ts";
-    imports26 = ["_app/immutable/nodes/25.CSDLF3Gj.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports26 = ["_app/immutable/nodes/25.BwukwZt0.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets26 = [];
     fonts26 = [];
   }
@@ -13525,7 +14090,7 @@ var init__27 = __esm({
     index27 = 26;
     component27 = async () => component_cache27 ??= (await Promise.resolve().then(() => (init_page_svelte23(), page_svelte_exports23))).default;
     universal_id22 = "src/routes/(dark-nav)/photo-gallery/cedar-replacement/+page.ts";
-    imports27 = ["_app/immutable/nodes/26.DK39GzVh.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports27 = ["_app/immutable/nodes/26.BNpvrqqs.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets27 = [];
     fonts27 = [];
   }
@@ -13996,7 +14561,7 @@ var init__28 = __esm({
     index28 = 27;
     component28 = async () => component_cache28 ??= (await Promise.resolve().then(() => (init_page_svelte24(), page_svelte_exports24))).default;
     universal_id23 = "src/routes/(dark-nav)/photo-gallery/cedar-shingle-and-stucco-repair/+page.ts";
-    imports28 = ["_app/immutable/nodes/27.BB20jdz9.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports28 = ["_app/immutable/nodes/27.TS2egPwg.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets28 = [];
     fonts28 = [];
   }
@@ -14371,7 +14936,7 @@ var init__29 = __esm({
     index29 = 28;
     component29 = async () => component_cache29 ??= (await Promise.resolve().then(() => (init_page_svelte25(), page_svelte_exports25))).default;
     universal_id24 = "src/routes/(dark-nav)/photo-gallery/cedar-siding-repair-paint/+page.ts";
-    imports29 = ["_app/immutable/nodes/28.B_vG9XcR.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports29 = ["_app/immutable/nodes/28.BQQLYokK.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets29 = [];
     fonts29 = [];
   }
@@ -14811,7 +15376,7 @@ var init__30 = __esm({
     index30 = 29;
     component30 = async () => component_cache30 ??= (await Promise.resolve().then(() => (init_page_svelte26(), page_svelte_exports26))).default;
     universal_id25 = "src/routes/(dark-nav)/photo-gallery/exterior-hardie-board/+page.ts";
-    imports30 = ["_app/immutable/nodes/29.3wvH7QLh.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports30 = ["_app/immutable/nodes/29.CLw0yVKc.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets30 = [];
     fonts30 = [];
   }
@@ -15248,7 +15813,7 @@ var init__31 = __esm({
     index31 = 30;
     component31 = async () => component_cache31 ??= (await Promise.resolve().then(() => (init_page_svelte27(), page_svelte_exports27))).default;
     universal_id26 = "src/routes/(dark-nav)/photo-gallery/past-projects/+page.ts";
-    imports31 = ["_app/immutable/nodes/30.HqO8r9BO.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports31 = ["_app/immutable/nodes/30.CXc-Mvj6.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets31 = [];
     fonts31 = [];
   }
@@ -15613,7 +16178,7 @@ var init__32 = __esm({
     index32 = 31;
     component32 = async () => component_cache32 ??= (await Promise.resolve().then(() => (init_page_svelte28(), page_svelte_exports28))).default;
     universal_id27 = "src/routes/(dark-nav)/photo-gallery/siding-and-stucco/+page.ts";
-    imports32 = ["_app/immutable/nodes/31.DfyXh1JJ.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports32 = ["_app/immutable/nodes/31.Cl9IrZoT.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets32 = [];
     fonts32 = [];
   }
@@ -15906,7 +16471,7 @@ var init__33 = __esm({
     index33 = 32;
     component33 = async () => component_cache33 ??= (await Promise.resolve().then(() => (init_page_svelte29(), page_svelte_exports29))).default;
     universal_id28 = "src/routes/(dark-nav)/photo-gallery/siding-repair/+page.ts";
-    imports33 = ["_app/immutable/nodes/32.BCjffI0A.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports33 = ["_app/immutable/nodes/32.D7x866qu.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets33 = [];
     fonts33 = [];
   }
@@ -16298,7 +16863,7 @@ var init__34 = __esm({
     index34 = 33;
     component34 = async () => component_cache34 ??= (await Promise.resolve().then(() => (init_page_svelte30(), page_svelte_exports30))).default;
     universal_id29 = "src/routes/(dark-nav)/photo-gallery/stucco-and-cedar-siding/+page.ts";
-    imports34 = ["_app/immutable/nodes/33.nyXaRsqV.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports34 = ["_app/immutable/nodes/33.64mM7lQ4.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets34 = [];
     fonts34 = [];
   }
@@ -16510,7 +17075,7 @@ var init__35 = __esm({
     index35 = 34;
     component35 = async () => component_cache35 ??= (await Promise.resolve().then(() => (init_page_svelte31(), page_svelte_exports31))).default;
     universal_id30 = "src/routes/(dark-nav)/photo-gallery/stucco-and-trim/+page.ts";
-    imports35 = ["_app/immutable/nodes/34.B2qiSt71.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports35 = ["_app/immutable/nodes/34.MC0Q8VeN.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets35 = [];
     fonts35 = [];
   }
@@ -16851,7 +17416,7 @@ var init__36 = __esm({
     index36 = 35;
     component36 = async () => component_cache36 ??= (await Promise.resolve().then(() => (init_page_svelte32(), page_svelte_exports32))).default;
     universal_id31 = "src/routes/(dark-nav)/photo-gallery/stucco-repair/+page.ts";
-    imports36 = ["_app/immutable/nodes/35.D60VqWv2.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports36 = ["_app/immutable/nodes/35.Cke57QtH.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets36 = [];
     fonts36 = [];
   }
@@ -17346,7 +17911,7 @@ var init__37 = __esm({
     index37 = 36;
     component37 = async () => component_cache37 ??= (await Promise.resolve().then(() => (init_page_svelte33(), page_svelte_exports33))).default;
     universal_id32 = "src/routes/(dark-nav)/photo-gallery/stucco-siding-repair-paint/+page.ts";
-    imports37 = ["_app/immutable/nodes/36.C_ktMeqD.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports37 = ["_app/immutable/nodes/36.DUHpFIKH.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets37 = [];
     fonts37 = [];
   }
@@ -17759,7 +18324,7 @@ var init__38 = __esm({
     index38 = 37;
     component38 = async () => component_cache38 ??= (await Promise.resolve().then(() => (init_page_svelte34(), page_svelte_exports34))).default;
     universal_id33 = "src/routes/(dark-nav)/photo-gallery/trim/+page.ts";
-    imports38 = ["_app/immutable/nodes/37.BBWY02za.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports38 = ["_app/immutable/nodes/37.CNCwnWPr.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets38 = [];
     fonts38 = [];
   }
@@ -18052,7 +18617,7 @@ var init__39 = __esm({
     index39 = 38;
     component39 = async () => component_cache39 ??= (await Promise.resolve().then(() => (init_page_svelte35(), page_svelte_exports35))).default;
     universal_id34 = "src/routes/(dark-nav)/photo-gallery/victorian-homes/+page.ts";
-    imports39 = ["_app/immutable/nodes/38.DhBV5IM8.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports39 = ["_app/immutable/nodes/38.C7u-VtjT.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets39 = [];
     fonts39 = [];
   }
@@ -18312,7 +18877,7 @@ var init__40 = __esm({
     index40 = 39;
     component40 = async () => component_cache40 ??= (await Promise.resolve().then(() => (init_page_svelte36(), page_svelte_exports36))).default;
     universal_id35 = "src/routes/(dark-nav)/photo-gallery/white-cedar-siding/+page.ts";
-    imports40 = ["_app/immutable/nodes/39.DpraHU_X.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/kc1BPcHi.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CKirJmWS.js"];
+    imports40 = ["_app/immutable/nodes/39.D0Ipk0K0.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
     stylesheets40 = [];
     fonts40 = [];
   }
@@ -18683,7 +19248,7 @@ var page_svelte_exports37 = {};
 __export(page_svelte_exports37, {
   default: () => Page37
 });
-var BlogPreviewCard, House, Page37;
+var House, BlogPreviewCard, Page37;
 var init_page_svelte37 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/blog/_page.svelte.js"() {
     init_ssr();
@@ -18691,25 +19256,6 @@ var init_page_svelte37 = __esm({
     init_stores();
     init_RibbonWrapper();
     init_Icon();
-    BlogPreviewCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let { previewData } = $$props;
-      if ($$props.previewData === void 0 && $$bindings.previewData && previewData !== void 0)
-        $$bindings.previewData(previewData);
-      return `<li class="list-none grid lg:grid-cols-[400px_auto] md:grid-cols-[350px_auto] md:grid-rows-1 py-8 lg:gap-x-4 md:gap-0 gap-2"> <div class="relative w-full rounded-lg overflow-clip my-auto h-[250px]"><div class="absolute rounded-lg size-full bg-off-white animate-pulse"></div> <div${add_attribute("style", `background-image: url(${previewData.image})`, 0)} class="absolute bg-cover bg-center size-full z-10 rounded-lg border-2 border-secondary-dark"></div></div>  <div class="sm:px-8 sm:pl-4 flex flex-col sm:gap-4 gap-2 h-fit my-auto"><div><h2 class="font-semibold lg:text-4xl xs:text-2xl text-xl mb-1 text-secondary-dark">${escape(previewData.title)}</h2> <span class="text-sm text-gray-600">${escape(previewData.datePublished)}</span></div> <p>${escape(previewData.meta)}..</p> ${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          variant: "outline",
-          class: "md:w-fit text-secondary-dark",
-          href: previewData.href
-        },
-        {},
-        {
-          default: () => {
-            return `Read Post`;
-          }
-        }
-      )}</div></li>`;
-    });
     House = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const iconNode = [
         [
@@ -18730,6 +19276,25 @@ var init_page_svelte37 = __esm({
           return `${slots.default ? slots.default({}) : ``}`;
         }
       })}`;
+    });
+    BlogPreviewCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { previewData } = $$props;
+      if ($$props.previewData === void 0 && $$bindings.previewData && previewData !== void 0)
+        $$bindings.previewData(previewData);
+      return `<li class="list-none grid lg:grid-cols-[400px_auto] md:grid-cols-[350px_auto] md:grid-rows-1 py-8 lg:gap-x-4 md:gap-0 gap-2"> <div class="relative w-full rounded-lg overflow-clip my-auto h-[250px]"><div class="absolute rounded-lg size-full bg-off-white animate-pulse"></div> <div${add_attribute("style", `background-image: url(${previewData.image})`, 0)} class="absolute bg-cover bg-center size-full z-10 rounded-lg border-2 border-secondary-dark"></div></div>  <div class="sm:px-8 sm:pl-4 flex flex-col sm:gap-4 gap-2 h-fit my-auto"><div><h2 class="font-semibold lg:text-4xl xs:text-2xl text-xl mb-1 text-secondary-dark">${escape(previewData.title)}</h2> <span class="text-sm text-gray-600">${escape(previewData.datePublished)}</span></div> <p>${escape(previewData.meta)}..</p> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          variant: "outline",
+          class: "md:w-fit text-secondary-dark",
+          href: previewData.href
+        },
+        {},
+        {
+          default: () => {
+            return `Read Post`;
+          }
+        }
+      )}</div></li>`;
     });
     Page37 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let notFirstPage;
@@ -18771,7 +19336,7 @@ var init__41 = __esm({
     index41 = 40;
     component41 = async () => component_cache41 ??= (await Promise.resolve().then(() => (init_page_svelte37(), page_svelte_exports37))).default;
     server_id2 = "src/routes/(light-nav)/blog/+page.server.ts";
-    imports41 = ["_app/immutable/nodes/40.D9JtW8qM.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/z9q485jL.js"];
+    imports41 = ["_app/immutable/nodes/40.C1vCJr1K.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/BmEMjPg0.js"];
     stylesheets41 = [];
     fonts41 = [];
   }
@@ -18907,7 +19472,7 @@ var init__42 = __esm({
     index42 = 41;
     component42 = async () => component_cache42 ??= (await Promise.resolve().then(() => (init_page_svelte38(), page_svelte_exports38))).default;
     server_id3 = "src/routes/(light-nav)/blog/[title]/+page.server.ts";
-    imports42 = ["_app/immutable/nodes/41.DKu2cii4.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/b1zVA1SQ.js", "_app/immutable/chunks/CtJdNdDp.js", "_app/immutable/chunks/DOrvZIHm.js"];
+    imports42 = ["_app/immutable/nodes/41.DCz8eOf0.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/K84N8KvY.js", "_app/immutable/chunks/CAH0S1ei.js"];
     stylesheets42 = ["_app/immutable/assets/41.Cv6DcLUO.css"];
     fonts42 = [];
   }
@@ -18934,11 +19499,19 @@ var init_page_server_ts3 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/ContactForm.js
-var css11, ZOHO_FORM_ID, ContactForm;
-var init_ContactForm = __esm({
-  ".svelte-kit/output/server/chunks/ContactForm.js"() {
+// .svelte-kit/output/server/entries/pages/(light-nav)/contact-us/_page.svelte.js
+var page_svelte_exports39 = {};
+__export(page_svelte_exports39, {
+  default: () => Page39
+});
+var css11, ZOHO_FORM_ID, ContactForm, Page39;
+var init_page_svelte39 = __esm({
+  ".svelte-kit/output/server/entries/pages/(light-nav)/contact-us/_page.svelte.js"() {
     init_ssr();
+    init_Map();
+    init_LocationIcon();
+    init_ClickToCall();
+    init_routes();
     css11 = {
       code: '.zcwf_lblLeft.svelte-a2latg{font-family:Arial, sans-serif;color:#333;max-width:800px;margin:0 auto;padding:20px}.zcwf_title.svelte-a2latg{font-size:1.5rem;font-weight:bold;margin-bottom:1.5rem;color:#1a1a1a}.zcwf_row.svelte-a2latg{margin:15px 0;clear:both}.zcwf_col_lab.svelte-a2latg{width:30%;float:left;padding-right:10px;box-sizing:border-box}.zcwf_col_fld.svelte-a2latg{width:70%;float:left}.zcwf_button.svelte-a2latg{background:#f0f0f0;border:1px solid #ccc;padding:8px 16px;border-radius:4px;cursor:pointer;font-size:14px}.formsubmit.svelte-a2latg{background:#3b82f6 !important;color:white !important;border:none !important}.formsubmit.svelte-a2latg:hover{background:#2563eb !important}.message.svelte-a2latg{padding:12px 16px;margin-bottom:16px;border-radius:4px;display:flex;align-items:center}.message.success.svelte-a2latg{background-color:#f0fdf4;border:1px solid #86efac;color:#166534}.message.error.svelte-a2latg{background-color:#fef2f2;border:1px solid #fecaca;color:#991b1b}@media(max-width: 640px){.zcwf_col_lab.svelte-a2latg,.zcwf_col_fld.svelte-a2latg{width:100%;float:none;padding-right:0}.zcwf_col_fld.svelte-a2latg{margin-top:8px}}input[type="text"].svelte-a2latg,input[type="email"].svelte-a2latg,input[type="tel"].svelte-a2latg,textarea.svelte-a2latg{width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:4px;font-size:14px;margin-bottom:1rem}textarea.svelte-a2latg{min-height:100px;resize:vertical}button[type="submit"].svelte-a2latg:disabled{opacity:0.7;cursor:not-allowed}@media(min-width: 640px){.zcwf_row.svelte-a2latg{display:flex;flex-wrap:wrap;margin:0 -10px}.zcwf_col_lab.svelte-a2latg,.zcwf_col_fld.svelte-a2latg{padding:0 10px;width:50%}}',
       map: '{"version":3,"file":"ContactForm.svelte","sources":["ContactForm.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { onDestroy } from \\"svelte\\";\\nimport { fade } from \\"svelte/transition\\";\\nlet formData = {\\n  \\"First Name\\": \\"\\",\\n  \\"Last Name\\": \\"\\",\\n  Email: \\"\\",\\n  Phone: \\"\\",\\n  City: \\"\\",\\n  \\"Zip Code\\": \\"\\",\\n  Description: \\"\\"\\n};\\nlet submitStatus = \\"idle\\";\\nlet submitMessage = \\"\\";\\nlet isSubmitting = false;\\nconst ZOHO_FORM_ID = \\"webform5683047000006693036\\";\\nconst ZOHO_FORM_ACTION = \\"https://crm.zoho.com/crm/WebToLeadForm\\";\\nconst ZOHO_FIELDS = {\\n  xnQsjsdp: \\"cdaf4fd904d1a76d463cfa7498f7083593f85a7ebaf6309bc04de2170f5c5221\\",\\n  xmIwtLD: \\"b63d7c69781dd958162b76c2f3ecab4ffd5b8b5d2d23c3e5ae5621f9cb4f47fc4fac4b525fe84a2d485aaabf4ef4373c\\",\\n  actionType: \\"TGVhZHM=\\",\\n  returnURL: \\"null\\",\\n  aG9uZXlwb3Q: \\"\\"\\n  // Honeypot field\\n};\\nfunction validateEmail(email) {\\n  if (!email) return true;\\n  const re = /^[^\\\\s@]+@[^\\\\s@]+\\\\.[^\\\\s@]+$/;\\n  return re.test(email);\\n}\\nfunction checkMandatory() {\\n  const requiredFields = [\\n    \\"First Name\\",\\n    \\"Last Name\\",\\n    \\"Phone\\",\\n    \\"Zip Code\\"\\n  ];\\n  for (const field of requiredFields) {\\n    if (!formData[field]?.trim()) {\\n      submitStatus = \\"error\\";\\n      submitMessage = `${field} is required`;\\n      return false;\\n    }\\n  }\\n  if (!validateEmail(formData.Email)) {\\n    submitStatus = \\"error\\";\\n    submitMessage = \\"Please enter a valid email address\\";\\n    return false;\\n  }\\n  return true;\\n}\\nasync function handleSubmit(event) {\\n  event.preventDefault();\\n  if (!checkMandatory() || isSubmitting) return;\\n  isSubmitting = true;\\n  submitStatus = \\"submitting\\";\\n  try {\\n    const params = new URLSearchParams();\\n    Object.entries(ZOHO_FIELDS).forEach(([key, value]) => {\\n      params.append(key, value);\\n    });\\n    Object.entries(formData).forEach(([key, value]) => {\\n      if (value) params.append(key, value);\\n    });\\n    const response = await fetch(ZOHO_FORM_ACTION, {\\n      method: \\"POST\\",\\n      body: params,\\n      headers: {\\n        \\"Content-Type\\": \\"application/x-www-form-urlencoded\\"\\n      }\\n    });\\n    const responseText = await response.text();\\n    if (response.ok || response.redirected || responseText.includes(\\"Thank you\\") || responseText.includes(\\"success\\")) {\\n      submitStatus = \\"success\\";\\n      submitMessage = \\"Thank you for your inquiry! We will contact you shortly.\\";\\n      formData = {\\n        \\"First Name\\": \\"\\",\\n        \\"Last Name\\": \\"\\",\\n        Email: \\"\\",\\n        Phone: \\"\\",\\n        City: \\"\\",\\n        \\"Zip Code\\": \\"\\",\\n        Description: \\"\\"\\n      };\\n      const timer = setTimeout(() => {\\n        submitStatus = \\"idle\\";\\n      }, 5e3);\\n      onDestroy(() => clearTimeout(timer));\\n    } else {\\n      throw new Error(\\"Failed to submit form\\");\\n    }\\n  } catch (error) {\\n    console.error(\\"Form submission error:\\", error);\\n    submitStatus = \\"error\\";\\n    submitMessage = \\"An error occurred while submitting the form. Please try again.\\";\\n  } finally {\\n    isSubmitting = false;\\n  }\\n}\\n<\/script>\\n\\n<!-- Zoho WebToLead Form -->\\n<div\\n  id=\\"crmWebToEntityForm\\"\\n  class=\\"zcwf_lblLeft crmWebToEntityForm\\"\\n  style=\\"background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;\\"\\n>\\n  <!-- Success/Error Messages -->\\n  {#if submitStatus === \\"success\\"}\\n    <div\\n      class=\\"message success\\"\\n      in:fade={{ duration: 200 }}\\n      role=\\"alert\\"\\n      style=\\"background-color: #F5FAF5; color: #132C14; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #A9D3AB; display: flex; align-items: center;\\"\\n    >\\n      <div\\n        style=\\"background-color: #12AA67; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;\\"\\n      >\\n        <div\\n          style=\\"width: 5px; height: 10px; border-right: 2px solid white; border-bottom: 2px solid white; transform: rotate(45deg) translate(-1px, -1px);\\"\\n        ></div>\\n      </div>\\n      <span>{submitMessage}</span>\\n    </div>\\n  {/if}\\n\\n  {#if submitStatus === \\"error\\"}\\n    <div\\n      class=\\"message error\\"\\n      in:fade={{ duration: 200 }}\\n      role=\\"alert\\"\\n      style=\\"background-color: #FDF4F5; color: #7F1D1D; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #F8B4B4; display: flex; align-items: center;\\"\\n    >\\n      <div\\n        style=\\"background-color: #DC2626; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;\\"\\n      >\\n        <div\\n          style=\\"color: white; font-weight: bold; font-size: 14px; margin-top: -2px;\\"\\n        >\\n          !\\n        </div>\\n      </div>\\n      <span>{submitMessage}</span>\\n    </div>\\n  {/if}\\n\\n  <div\\n    class=\\"zcwf_title\\"\\n    style=\\"font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;\\"\\n  >\\n    Contact Us\\n  </div>\\n\\n  <form\\n    id={ZOHO_FORM_ID}\\n    name=\\"WebToLeads{ZOHO_FORM_ID}\\"\\n    on:submit|preventDefault={handleSubmit}\\n  >\\n    <!-- Hidden Zoho Fields -->\\n    <input type=\\"hidden\\" name=\\"xnQsjsdp\\" value={ZOHO_FIELDS.xnQsjsdp} />\\n    <input type=\\"hidden\\" name=\\"xmIwtLD\\" value={ZOHO_FIELDS.xmIwtLD} />\\n    <input type=\\"hidden\\" name=\\"actionType\\" value={ZOHO_FIELDS.actionType} />\\n    <input type=\\"hidden\\" name=\\"returnURL\\" value={ZOHO_FIELDS.returnURL} />\\n    <input type=\\"hidden\\" name=\\"aG9uZXlwb3Q\\" value=\\"\\" />\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"First_Name\\" style=\\"font-size: 14px;\\"\\n          >First Name <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"First_Name\\"\\n          name=\\"First Name\\"\\n          bind:value={formData[\\"First Name\\"]}\\n          maxlength=\\"40\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Last_Name\\" style=\\"font-size: 14px;\\"\\n          >Last Name <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"Last_Name\\"\\n          name=\\"Last Name\\"\\n          bind:value={formData[\\"Last Name\\"]}\\n          maxlength=\\"80\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Email\\" style=\\"font-size: 14px;\\">Email</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"email\\"\\n          id=\\"Email\\"\\n          name=\\"Email\\"\\n          bind:value={formData.Email}\\n          maxlength=\\"100\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Phone\\" style=\\"font-size: 14px;\\"\\n          >Phone <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"tel\\"\\n          id=\\"Phone\\"\\n          name=\\"Phone\\"\\n          bind:value={formData.Phone}\\n          maxlength=\\"30\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"City\\" style=\\"font-size: 14px;\\">Address</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"City\\"\\n          name=\\"City\\"\\n          bind:value={formData.City}\\n          maxlength=\\"100\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Zip_Code\\" style=\\"font-size: 14px;\\"\\n          >Zip Code <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"Zip_Code\\"\\n          name=\\"Zip Code\\"\\n          bind:value={formData[\\"Zip Code\\"]}\\n          maxlength=\\"30\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Description\\" style=\\"font-size: 14px;\\">Job Details</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <textarea\\n          id=\\"Description\\"\\n          name=\\"Description\\"\\n          bind:value={formData.Description}\\n          style=\\"width: 100%; min-height: 100px; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        ></textarea>\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 25px 0 15px 0; text-align: right;\\">\\n      <button\\n        type=\\"reset\\"\\n        class=\\"zcwf_button\\"\\n        style=\\"background: #F3F4F6; border: 1px solid #D1D5DB; color: #374151; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;\\"\\n      >\\n        Reset\\n      </button>\\n      <button\\n        type=\\"submit\\"\\n        class=\\"formsubmit zcwf_button\\"\\n        style=\\"background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;\\"\\n        disabled={isSubmitting}\\n      >\\n        {isSubmitting ? \\"Submitting...\\" : \\"Submit\\"}\\n      </button>\\n    </div>\\n  </form>\\n</div>\\n\\n<!-- Zoho WebToLead Success Message Container -->\\n<div id=\\"wf_splash\\" class=\\"wf_customMessageBox\\" style=\\"display: none;\\">\\n  <div class=\\"wf_customCircle\\">\\n    <div class=\\"wf_customCheckMark\\"></div>\\n  </div>\\n  <span id=\\"wf_splash_info\\"></span>\\n</div>\\n\\n<style>\\n  /* Zoho WebToLead Form Styles */\\n  .zcwf_lblLeft {\\n    font-family: Arial, sans-serif;\\n    color: #333;\\n    max-width: 800px;\\n    margin: 0 auto;\\n    padding: 20px;\\n  }\\n\\n  .zcwf_title {\\n    font-size: 1.5rem;\\n    font-weight: bold;\\n    margin-bottom: 1.5rem;\\n    color: #1a1a1a;\\n  }\\n\\n  .zcwf_row {\\n    margin: 15px 0;\\n    clear: both;\\n  }\\n\\n  .zcwf_col_lab {\\n    width: 30%;\\n    float: left;\\n    padding-right: 10px;\\n    box-sizing: border-box;\\n  }\\n\\n  .zcwf_col_fld {\\n    width: 70%;\\n    float: left;\\n  }\\n\\n  .zcwf_button {\\n    background: #f0f0f0;\\n    border: 1px solid #ccc;\\n    padding: 8px 16px;\\n    border-radius: 4px;\\n    cursor: pointer;\\n    font-size: 14px;\\n  }\\n\\n  .formsubmit {\\n    background: #3b82f6 !important;\\n    color: white !important;\\n    border: none !important;\\n  }\\n\\n  .formsubmit:hover {\\n    background: #2563eb !important;\\n  }\\n\\n  /* Success/Error Messages */\\n  .message {\\n    padding: 12px 16px;\\n    margin-bottom: 16px;\\n    border-radius: 4px;\\n    display: flex;\\n    align-items: center;\\n  }\\n\\n  .message.success {\\n    background-color: #f0fdf4;\\n    border: 1px solid #86efac;\\n    color: #166534;\\n  }\\n\\n  .message.error {\\n    background-color: #fef2f2;\\n    border: 1px solid #fecaca;\\n    color: #991b1b;\\n  }\\n\\n  /* Responsive Design */\\n  @media (max-width: 640px) {\\n    .zcwf_col_lab,\\n    .zcwf_col_fld {\\n      width: 100%;\\n      float: none;\\n      padding-right: 0;\\n    }\\n\\n    .zcwf_col_fld {\\n      margin-top: 8px;\\n    }\\n  }\\n\\n  /* Form Elements */\\n  input[type=\\"text\\"],\\n  input[type=\\"email\\"],\\n  input[type=\\"tel\\"],\\n  textarea {\\n    width: 100%;\\n    padding: 8px 12px;\\n    border: 1px solid #d1d5db;\\n    border-radius: 4px;\\n    font-size: 14px;\\n    margin-bottom: 1rem;\\n  }\\n\\n  textarea {\\n    min-height: 100px;\\n    resize: vertical;\\n  }\\n\\n  /* Buttons */\\n  button[type=\\"submit\\"]:disabled {\\n    opacity: 0.7;\\n    cursor: not-allowed;\\n  }\\n\\n  /* Responsive adjustments */\\n  @media (min-width: 640px) {\\n    .zcwf_row {\\n      display: flex;\\n      flex-wrap: wrap;\\n      margin: 0 -10px;\\n    }\\n\\n    .zcwf_col_lab,\\n    .zcwf_col_fld {\\n      padding: 0 10px;\\n      width: 50%;\\n    }\\n  }\\n</style>\\n"],"names":[],"mappings":"AAwVE,2BAAc,CACZ,WAAW,CAAE,KAAK,CAAC,CAAC,UAAU,CAC9B,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,KAAK,CAChB,MAAM,CAAE,CAAC,CAAC,IAAI,CACd,OAAO,CAAE,IACX,CAEA,yBAAY,CACV,SAAS,CAAE,MAAM,CACjB,WAAW,CAAE,IAAI,CACjB,aAAa,CAAE,MAAM,CACrB,KAAK,CAAE,OACT,CAEA,uBAAU,CACR,MAAM,CAAE,IAAI,CAAC,CAAC,CACd,KAAK,CAAE,IACT,CAEA,2BAAc,CACZ,KAAK,CAAE,GAAG,CACV,KAAK,CAAE,IAAI,CACX,aAAa,CAAE,IAAI,CACnB,UAAU,CAAE,UACd,CAEA,2BAAc,CACZ,KAAK,CAAE,GAAG,CACV,KAAK,CAAE,IACT,CAEA,0BAAa,CACX,UAAU,CAAE,OAAO,CACnB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,IAAI,CACtB,OAAO,CAAE,GAAG,CAAC,IAAI,CACjB,aAAa,CAAE,GAAG,CAClB,MAAM,CAAE,OAAO,CACf,SAAS,CAAE,IACb,CAEA,yBAAY,CACV,UAAU,CAAE,OAAO,CAAC,UAAU,CAC9B,KAAK,CAAE,KAAK,CAAC,UAAU,CACvB,MAAM,CAAE,IAAI,CAAC,UACf,CAEA,yBAAW,MAAO,CAChB,UAAU,CAAE,OAAO,CAAC,UACtB,CAGA,sBAAS,CACP,OAAO,CAAE,IAAI,CAAC,IAAI,CAClB,aAAa,CAAE,IAAI,CACnB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MACf,CAEA,QAAQ,sBAAS,CACf,gBAAgB,CAAE,OAAO,CACzB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,KAAK,CAAE,OACT,CAEA,QAAQ,oBAAO,CACb,gBAAgB,CAAE,OAAO,CACzB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,KAAK,CAAE,OACT,CAGA,MAAO,YAAY,KAAK,CAAE,CACxB,2BAAa,CACb,2BAAc,CACZ,KAAK,CAAE,IAAI,CACX,KAAK,CAAE,IAAI,CACX,aAAa,CAAE,CACjB,CAEA,2BAAc,CACZ,UAAU,CAAE,GACd,CACF,CAGA,KAAK,CAAC,IAAI,CAAC,MAAM,eAAC,CAClB,KAAK,CAAC,IAAI,CAAC,OAAO,eAAC,CACnB,KAAK,CAAC,IAAI,CAAC,KAAK,eAAC,CACjB,sBAAS,CACP,KAAK,CAAE,IAAI,CACX,OAAO,CAAE,GAAG,CAAC,IAAI,CACjB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,aAAa,CAAE,GAAG,CAClB,SAAS,CAAE,IAAI,CACf,aAAa,CAAE,IACjB,CAEA,sBAAS,CACP,UAAU,CAAE,KAAK,CACjB,MAAM,CAAE,QACV,CAGA,MAAM,CAAC,IAAI,CAAC,QAAQ,eAAC,SAAU,CAC7B,OAAO,CAAE,GAAG,CACZ,MAAM,CAAE,WACV,CAGA,MAAO,YAAY,KAAK,CAAE,CACxB,uBAAU,CACR,OAAO,CAAE,IAAI,CACb,SAAS,CAAE,IAAI,CACf,MAAM,CAAE,CAAC,CAAC,KACZ,CAEA,2BAAa,CACb,2BAAc,CACZ,OAAO,CAAE,CAAC,CAAC,IAAI,CACf,KAAK,CAAE,GACT,CACF"}'
@@ -18962,23 +19535,6 @@ var init_ContactForm = __esm({
       $$result.css.add(css11);
       return ` <div id="crmWebToEntityForm" class="zcwf_lblLeft crmWebToEntityForm svelte-a2latg" style="background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;"> ${``} ${``} <div class="zcwf_title svelte-a2latg" style="font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;" data-svelte-h="svelte-1x20wxt">Contact Us</div> <form${add_attribute("id", ZOHO_FORM_ID, 0)} name="${"WebToLeads" + escape(ZOHO_FORM_ID, true)}"> <input type="hidden" name="xnQsjsdp"${add_attribute("value", ZOHO_FIELDS.xnQsjsdp, 0)}> <input type="hidden" name="xmIwtLD"${add_attribute("value", ZOHO_FIELDS.xmIwtLD, 0)}> <input type="hidden" name="actionType"${add_attribute("value", ZOHO_FIELDS.actionType, 0)}> <input type="hidden" name="returnURL"${add_attribute("value", ZOHO_FIELDS.returnURL, 0)}> <input type="hidden" name="aG9uZXlwb3Q" value=""> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-hxujbl"><label for="First_Name" style="font-size: 14px;">First Name <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="First_Name" name="First Name" maxlength="40" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["First Name"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1i8p9rb"><label for="Last_Name" style="font-size: 14px;">Last Name <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="Last_Name" name="Last Name" maxlength="80" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["Last Name"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-h0jnqa"><label for="Email" style="font-size: 14px;">Email</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="email" id="Email" name="Email" maxlength="100" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.Email, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1y5dbks"><label for="Phone" style="font-size: 14px;">Phone <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="tel" id="Phone" name="Phone" maxlength="30" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.Phone, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1euspxd"><label for="City" style="font-size: 14px;">Address</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="City" name="City" maxlength="100" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.City, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1xbmxl5"><label for="Zip_Code" style="font-size: 14px;">Zip Code <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="Zip_Code" name="Zip Code" maxlength="30" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["Zip Code"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-l0nlrx"><label for="Description" style="font-size: 14px;">Job Details</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><textarea id="Description" name="Description" style="width: 100%; min-height: 100px; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg">${escape("")}</textarea></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 25px 0 15px 0; text-align: right;"><button type="reset" class="zcwf_button svelte-a2latg" style="background: #F3F4F6; border: 1px solid #D1D5DB; color: #374151; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;" data-svelte-h="svelte-1st9cz8">Reset</button> <button type="submit" class="formsubmit zcwf_button svelte-a2latg" style="background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;" ${""}>${escape("Submit")}</button></div></form></div>  <div id="wf_splash" class="wf_customMessageBox" style="display: none;" data-svelte-h="svelte-8ytfjg"><div class="wf_customCircle"><div class="wf_customCheckMark"></div></div> <span id="wf_splash_info"></span> </div>`;
     });
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/(light-nav)/contact-us/_page.svelte.js
-var page_svelte_exports39 = {};
-__export(page_svelte_exports39, {
-  default: () => Page39
-});
-var Page39;
-var init_page_svelte39 = __esm({
-  ".svelte-kit/output/server/entries/pages/(light-nav)/contact-us/_page.svelte.js"() {
-    init_ssr();
-    init_ContactForm();
-    init_Map();
-    init_LocationIcon();
-    init_ClickToCall();
-    init_routes();
     Page39 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<section class="bg-off-white py-8 lg:px-12 xs:px-4 px-2"><div class="container grid lg:grid-cols-2 gap-12 w-full"><div class="flex flex-col lg:gap-3 gap-2 lg:p-6 lg:rounded-lg lg:shadow-subtle lg:border lg:bg-white"><h1 class="xl:text-5xl xs:text-4xl text-3xl w-full font-semibold text-secondary-dark" data-testid="page-heading" data-svelte-h="svelte-ehwika">Sign Up for a Free\xA0Estimate</h1> <p data-svelte-h="svelte-1rl7pej">If you&#39;re considering an upgrade to the exterior of your home, contact
         the experts at Klasek Painting.</p> <p data-svelte-h="svelte-7av52f">At no cost to you, we&#39;ll view your property, assess needs, provide
@@ -19024,8 +19580,8 @@ var init__43 = __esm({
     index43 = 42;
     component43 = async () => component_cache43 ??= (await Promise.resolve().then(() => (init_page_svelte39(), page_svelte_exports39))).default;
     server_id4 = "src/routes/(light-nav)/contact-us/+page.server.ts";
-    imports43 = ["_app/immutable/nodes/42.DkqoFuaF.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DL4drOEh.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DOrvZIHm.js"];
-    stylesheets43 = ["_app/immutable/assets/ContactForm.d1O11VaS.css"];
+    imports43 = ["_app/immutable/nodes/42.iuHRsA4K.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CAH0S1ei.js"];
+    stylesheets43 = ["_app/immutable/assets/42.d1O11VaS.css"];
     fonts43 = [];
   }
 });
@@ -19140,7 +19696,7 @@ var init__44 = __esm({
     index44 = 43;
     component44 = async () => component_cache44 ??= (await Promise.resolve().then(() => (init_page_svelte40(), page_svelte_exports40))).default;
     universal_id36 = "src/routes/(light-nav)/legal/privacy-policy/+page.ts";
-    imports44 = ["_app/immutable/nodes/43.0Boc_nky.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/ecvbD-e3.js"];
+    imports44 = ["_app/immutable/nodes/43.CC6WfmeF.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/ecvbD-e3.js"];
     stylesheets44 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts44 = [];
   }
@@ -19505,7 +20061,7 @@ var init__45 = __esm({
     index45 = 44;
     component45 = async () => component_cache45 ??= (await Promise.resolve().then(() => (init_page_svelte41(), page_svelte_exports41))).default;
     universal_id37 = "src/routes/(light-nav)/services/+page.ts";
-    imports45 = ["_app/immutable/nodes/44.BPuOQmRu.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dzg24w47.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/sIz1Jrbw.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DEuEdMQA.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/BnEpFRIx.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/CapzkwKx.js", "_app/immutable/chunks/b1zVA1SQ.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/D5BaSaoK.js"];
+    imports45 = ["_app/immutable/nodes/44.BhU2QkdW.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/sIz1Jrbw.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/B_-KkxDB.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/D2PaxASM.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/DxMEPzzS.js"];
     stylesheets45 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css", "_app/immutable/assets/Testimonial.DLYMjzrT.css", "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css", "_app/immutable/assets/44.BJ-DlE7H.css"];
     fonts45 = [];
   }
@@ -19666,7 +20222,7 @@ var init__46 = __esm({
     index46 = 45;
     component46 = async () => component_cache46 ??= (await Promise.resolve().then(() => (init_page_svelte42(), page_svelte_exports42))).default;
     universal_id38 = "src/routes/(light-nav)/services/brick-painting-repair/+page.ts";
-    imports46 = ["_app/immutable/nodes/45.Ddb_TUks.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dzg24w47.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/Sd_0-2sX.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DEuEdMQA.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/D5BaSaoK.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/C61OZROy.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/wRRLkYcO.js"];
+    imports46 = ["_app/immutable/nodes/45.BEzGCae7.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/B4ToEHT_.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js"];
     stylesheets46 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts46 = [];
   }
@@ -19880,7 +20436,7 @@ var init__47 = __esm({
     index47 = 46;
     component47 = async () => component_cache47 ??= (await Promise.resolve().then(() => (init_page_svelte43(), page_svelte_exports43))).default;
     universal_id39 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-painting/+page.ts";
-    imports47 = ["_app/immutable/nodes/46.BICZwajm.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js"];
+    imports47 = ["_app/immutable/nodes/46.0Z4xUFdH.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js"];
     stylesheets47 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts47 = [];
   }
@@ -20077,7 +20633,7 @@ var init__48 = __esm({
     index48 = 47;
     component48 = async () => component_cache48 ??= (await Promise.resolve().then(() => (init_page_svelte44(), page_svelte_exports44))).default;
     universal_id40 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-repair/+page.ts";
-    imports48 = ["_app/immutable/nodes/47.DNSBVNhU.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports48 = ["_app/immutable/nodes/47.Dec2iYrL.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets48 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts48 = [];
   }
@@ -20258,7 +20814,7 @@ var init__49 = __esm({
     index49 = 48;
     component49 = async () => component_cache49 ??= (await Promise.resolve().then(() => (init_page_svelte45(), page_svelte_exports45))).default;
     universal_id41 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-staining/+page.ts";
-    imports49 = ["_app/immutable/nodes/48.DA1O167J.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports49 = ["_app/immutable/nodes/48.DF1_n75v.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets49 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts49 = [];
   }
@@ -20368,7 +20924,7 @@ var init__50 = __esm({
     index50 = 49;
     component50 = async () => component_cache50 ??= (await Promise.resolve().then(() => (init_page_svelte46(), page_svelte_exports46))).default;
     universal_id42 = "src/routes/(light-nav)/services/commercial-exterior-painting/+page.ts";
-    imports50 = ["_app/immutable/nodes/49.C4KTZOqO.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dzg24w47.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/DEuEdMQA.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/D5BaSaoK.js", "_app/immutable/chunks/C61OZROy.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/wRRLkYcO.js", "_app/immutable/chunks/DSt0beyn.js"];
+    imports50 = ["_app/immutable/nodes/49.DVXj3Y1m.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js", "_app/immutable/chunks/CMJKR-Ce.js"];
     stylesheets50 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts50 = [];
   }
@@ -20522,7 +21078,7 @@ var init__51 = __esm({
     index51 = 50;
     component51 = async () => component_cache51 ??= (await Promise.resolve().then(() => (init_page_svelte47(), page_svelte_exports47))).default;
     universal_id43 = "src/routes/(light-nav)/services/design-color-consultation/+page.ts";
-    imports51 = ["_app/immutable/nodes/50.DMAKM5UK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dzg24w47.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/Sd_0-2sX.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DEuEdMQA.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/D5BaSaoK.js", "_app/immutable/chunks/C61OZROy.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/wRRLkYcO.js"];
+    imports51 = ["_app/immutable/nodes/50.YplHN_9u.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/B4ToEHT_.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js"];
     stylesheets51 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts51 = [];
   }
@@ -20635,7 +21191,7 @@ var init__52 = __esm({
     index52 = 51;
     component52 = async () => component_cache52 ??= (await Promise.resolve().then(() => (init_page_svelte48(), page_svelte_exports48))).default;
     universal_id44 = "src/routes/(light-nav)/services/exterior-home-painting/+page.ts";
-    imports52 = ["_app/immutable/nodes/51.Cu9TjGLq.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dzg24w47.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/Sd_0-2sX.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DEuEdMQA.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/D5BaSaoK.js", "_app/immutable/chunks/C61OZROy.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/wRRLkYcO.js", "_app/immutable/chunks/MeiJrQww.js"];
+    imports52 = ["_app/immutable/nodes/51.V0rGohUR.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/B4ToEHT_.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js", "_app/immutable/chunks/DkC8G5pu.js"];
     stylesheets52 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"];
     fonts52 = [];
   }
@@ -20772,7 +21328,7 @@ var init__53 = __esm({
     index53 = 52;
     component53 = async () => component_cache53 ??= (await Promise.resolve().then(() => (init_page_svelte49(), page_svelte_exports49))).default;
     universal_id45 = "src/routes/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/+page.ts";
-    imports53 = ["_app/immutable/nodes/52.DZvY_UfQ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports53 = ["_app/immutable/nodes/52.BN6n8yiV.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets53 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts53 = [];
   }
@@ -20933,7 +21489,7 @@ var init__54 = __esm({
     index54 = 53;
     component54 = async () => component_cache54 ??= (await Promise.resolve().then(() => (init_page_svelte50(), page_svelte_exports50))).default;
     universal_id46 = "src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.ts";
-    imports54 = ["_app/immutable/nodes/53.cil55abs.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports54 = ["_app/immutable/nodes/53.qKX_G7uQ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets54 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts54 = [];
   }
@@ -20960,21 +21516,29 @@ var init_page_ts47 = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/orange-paint-splash.js
+var splash;
+var init_orange_paint_splash = __esm({
+  ".svelte-kit/output/server/chunks/orange-paint-splash.js"() {
+    splash = "/_app/immutable/assets/orange-paint-splash.Bi1EE15B.webp";
+  }
+});
+
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/gutter-installation-repair/_page.svelte.js
 var page_svelte_exports51 = {};
 __export(page_svelte_exports51, {
   default: () => Page51
 });
-var heroSrc, splash, css16, Page51;
+var heroSrc, css16, Page51;
 var init_page_svelte51 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/gutter-installation-repair/_page.svelte.js"() {
     init_ssr();
-    init_ContactForm();
     init_GoogleProof();
     init_ClickToCall();
     init_Map();
     init_button();
     init_routes();
+    init_orange_paint_splash();
     init_stars();
     init_Google_name_logo();
     init_lead_safe();
@@ -20991,10 +21555,9 @@ var init_page_svelte51 = __esm({
         h: 606
       }
     };
-    splash = "/_app/immutable/assets/orange-paint-splash.Bi1EE15B.webp";
     css16 = {
       code: ".tab.svelte-177d8eq{display:inline-flex;align-items:center;background:hsl(var(--primary-dark));color:white;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;padding:0.375rem 1.75rem 0.375rem 1rem;clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%)}.ribbon.svelte-177d8eq{display:flex;align-items:center;justify-content:center;gap:0.875rem}.flag.svelte-177d8eq{width:42px;height:17px;background:hsl(var(--primary-dark));flex:none}.flag-l.svelte-177d8eq{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%)}.flag-r.svelte-177d8eq{clip-path:polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%)}.ph.svelte-177d8eq{position:relative;background-color:#e7e8f3;background-image:repeating-linear-gradient(\n      135deg,\n      rgba(35, 32, 97, 0.06) 0 12px,\n      rgba(35, 32, 97, 0) 12px 24px\n    );border-radius:0.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center}.ph.svelte-177d8eq::after{content:attr(data-ph);position:absolute;bottom:10px;left:10px;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:11px;letter-spacing:0.02em;color:#5a5d7a;background:rgba(255, 255, 255, 0.85);padding:3px 8px;border-radius:5px}.ph-dark.svelte-177d8eq{background-color:#2a2770;background-image:repeating-linear-gradient(\n      135deg,\n      rgba(255, 255, 255, 0.06) 0 12px,\n      rgba(255, 255, 255, 0) 12px 24px\n    )}.ph-dark.svelte-177d8eq::after{color:#c8c9e6;background:rgba(21, 19, 58, 0.6)}",
-      map: `{"version":3,"file":"+page.svelte","sources":["+page.svelte"],"sourcesContent":["<script context=\\"module\\"><\/script>\\n<script lang=\\"ts\\">import ContactForm from \\"$lib/contact-us/ContactForm.svelte\\";\\nimport GoogleProof from \\"$lib/common/other/GoogleProof.svelte\\";\\nimport ClickToCall from \\"$lib/common/other/ClickToCall.svelte\\";\\nimport Map from \\"$lib/common/other/Map.svelte\\";\\nimport Button from \\"$components/button/button.svelte\\";\\nimport { serviceAreaRoutes } from \\"$lib/common/routing/routes\\";\\nimport heroSrc from \\"$images/services/exterior-home-painting.webp?enhanced\\";\\nimport splash from \\"$images/backgrounds/orange-paint-splash.webp\\";\\nimport stars from \\"$images/5-stars.svg\\";\\nimport google from \\"$images/logos/Google-name-logo.svg\\";\\nimport valspar from \\"$images/logos/trusted-brands/valspar.png?enhanced\\";\\nimport behr from \\"$images/logos/trusted-brands/behr.png?enhanced\\";\\nimport benjaminMoore from \\"$images/logos/trusted-brands/benjamin-moore.png?enhanced\\";\\nimport sherwinWilliams from \\"$images/logos/trusted-brands/sherwin-williams.png?enhanced\\";\\nimport leadSafe from \\"$images/logos/trusted-brands/lead-safe.png?enhanced\\";\\nimport pdca from \\"$images/logos/trusted-brands/pdca.png?enhanced\\";\\nimport { isMobileStore } from \\"$lib/stores/isMobileStore\\";\\nconst partnerLogos = [\\n  { src: valspar, alt: \\"Valspar\\", height: \\"h-7 sm:h-8\\" },\\n  { src: behr, alt: \\"Behr\\", height: \\"h-7 sm:h-8\\" },\\n  { src: benjaminMoore, alt: \\"Benjamin Moore\\", height: \\"h-8 sm:h-10\\" },\\n  { src: sherwinWilliams, alt: \\"Sherwin-Williams\\", height: \\"h-8 sm:h-10\\" },\\n  { src: leadSafe, alt: \\"Lead-Safe Certified\\", height: \\"h-9 sm:h-11\\" },\\n  { src: pdca, alt: \\"PDCA\\", height: \\"h-8 sm:h-10\\" }\\n];\\nlet openFaq = 0;\\nconst heroChecks = [\\n  \\"Installed by our own crew\\",\\n  \\"Free written estimates\\",\\n  \\"100% satisfaction guarantee\\",\\n  \\"Lead-Safe Certified\\"\\n];\\nconst installChecks = [\\n  [\\"K-style & half-round\\", \\"profiles\\"],\\n  [\\"Copper\\", \\"for historic homes\\"],\\n  [\\"Properly-sized\\", \\"downspouts\\"],\\n  [\\"Engineered\\", \\"pitch & flow\\"]\\n];\\nconst repairItems = [\\n  [\\"Leaks & seam sealing\\", \\"Re-sealed joints and patched corners.\\"],\\n  [\\"Sagging & pitch\\", \\"Re-hung and re-pitched to drain.\\"],\\n  [\\"Fascia & soffit repair\\", \\"Rotted wood replaced before re-hang.\\"],\\n  [\\"Storm damage & reattachment\\", \\"Pulled-away runs and downspouts.\\"]\\n];\\nconst problems = [\\n  {\\n    title: \\"Foundation cracks\\",\\n    body: \\"Overflow pools against the slab, freezes, and heaves \\\\u2014 opening cracks that let water into the basement.\\"\\n  },\\n  {\\n    title: \\"Fascia & soffit rot\\",\\n    body: \\"Water trapped behind a failing gutter soaks the wood it's bolted to, until the whole board needs replacing.\\"\\n  },\\n  {\\n    title: \\"Basement flooding\\",\\n    body: \\"Thousands of gallons a year dumped at the wrong spot is the #1 cause of wet basements and mold.\\"\\n  }\\n];\\nconst stats = [\\n  {\\n    stat: \\"30+\\",\\n    title: \\"Years in business\\",\\n    body: \\"Serving Cook County exteriors since 1994 \\\\u2014 we'll be here for the warranty.\\"\\n  },\\n  {\\n    stat: \\"0\\",\\n    title: \\"Subcontractors\\",\\n    body: \\"Your gutters are installed by Klasek employees we trained and stand behind.\\"\\n  },\\n  {\\n    stat: \\"$0\\",\\n    title: \\"Estimate cost\\",\\n    body: \\"Free, written, itemized \\\\u2014 so you know exactly what you're paying for.\\"\\n  },\\n  {\\n    stat: \\"100%\\",\\n    title: \\"Satisfaction guarantee\\",\\n    body: \\"We're not done until the water goes where it should and you're happy.\\"\\n  }\\n];\\nconst faqData = [\\n  {\\n    question: \\"Do you install gutter guards?\\",\\n    answer: \\"Yes \\\\u2014 we install leaf-guard and gutter-protection systems and can recommend the right one for your tree cover and roof type. Ask about guard options during your free estimate.\\"\\n  },\\n  {\\n    question: \\"What makes seamless gutters better than sectional?\\",\\n    answer: \\"Seams are where gutters leak. Because we roll each run to your exact roofline on-site, the only joints are at corners and downspouts \\\\u2014 meaning far fewer leak points and a cleaner look.\\"\\n  },\\n  {\\n    question: \\"How do I know if my gutters need to be repaired or replaced?\\",\\n    answer: \\"Sagging sections, persistent leaks, rust, or water spilling over during rain are all signs your gutters need attention. During your free estimate, we inspect the entire system and give you a straightforward recommendation \\\\u2014 repair what can be saved, and replace only what can't.\\"\\n  },\\n  {\\n    question: \\"How much does a new gutter system cost?\\",\\n    answer: \\"It depends on linear footage, profile (K-style, half-round, copper), and the number of downspouts and corners. That's exactly what your free written estimate spells out \\\\u2014 no surprises after the work starts.\\"\\n  },\\n  {\\n    question: \\"Do you replace rotted fascia and soffit too?\\",\\n    answer: \\"We do. As an exterior repair company, we can replace damaged fascia and soffit before re-hanging your gutters, so the new system mounts to solid wood \\\\u2014 not a problem waiting to come back.\\"\\n  },\\n  {\\n    question: \\"Do you replace gutters as part of an exterior painting project?\\",\\n    answer: \\"Yes. Many of our customers bundle gutter work with exterior painting or siding repair so everything is handled in one project, by one team, on one timeline.\\"\\n  },\\n  {\\n    question: \\"How soon can you come out for an estimate?\\",\\n    answer: \\"Usually within a few business days. Fill out the contact form or give us a call and we'll find a time to walk your property.\\"\\n  }\\n];\\n<\/script>\\n\\n<!-- ===================== HERO ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x\\"\\n  >\\n    <!-- left: framed photo + google review card -->\\n    <div class=\\"order-2 lg:order-1\\">\\n      <div class=\\"relative\\">\\n        {#if typeof heroSrc === 'string'}\\n\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home exterior with seamless gutters installed by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(heroSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home exterior with seamless gutters installed by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n\\t</picture>\\n{/if}\\n        <GoogleProof\\n          class=\\"bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl\\"\\n        />\\n      </div>\\n    </div>\\n\\n    <!-- right: copy -->\\n    <div class=\\"order-1 lg:order-2 max-w-xl\\">\\n      <span class=\\"tab mb-5\\">Cook County \xB7 30+ Years \xB7 Family Crew</span>\\n      <h1\\n        class=\\"text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white\\"\\n        data-testid=\\"page-heading\\"\\n      >\\n        Seamless gutters,<br class=\\"hidden sm:block\\" /> cut on-site by\\n        <span class=\\"text-primary\\">our own crew.</span>\\n      </h1>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        No subcontractors. No leaky seams. Klasek rolls custom aluminum gutters\\n        right in your driveway and installs them with the correct pitch \u2014 so\\n        water ends up in the downspout, not against your foundation.\\n      </p>\\n      <ul class=\\"mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5\\">\\n        {#each heroChecks as check}\\n          <li class=\\"flex items-center gap-2.5 text-white/90 font-semibold\\">\\n            <svg\\n              class=\\"text-primary shrink-0\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"3\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            {check}\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-3\\">\\n        <Button href=\\"#estimate\\" class=\\"text-lg h-14 px-7\\">\\n          Get a Free Estimate\\n        </Button>\\n        <ClickToCall variant=\\"outline\\" class=\\"text-lg h-14 px-6\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== ESTIMATE FORM BAND ===================== -->\\n<section id=\\"estimate\\" class=\\"bg-off-white p-y p-x scroll-mt-24\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"bg-white rounded-2xl shadow-subtle border overflow-hidden grid lg:grid-cols-[1fr_1.15fr]\\"\\n    >\\n      <!-- pitch side -->\\n      <div\\n        class=\\"bg-secondary-dark text-white p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden\\"\\n      >\\n        <div\\n          class=\\"absolute -bottom-16 -left-10 w-64 h-64 rounded-full bg-primary/15 blur-2xl\\"\\n          aria-hidden=\\"true\\"\\n        />\\n        <span class=\\"tab self-start mb-5\\">Free \xB7 No obligation</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-white relative\\"\\n        >\\n          Get your free gutter estimate.\\n        </h2>\\n        <p class=\\"mt-4 text-white/75 leading-relaxed relative max-w-sm\\">\\n          Tell us about your home and we'll schedule a walk-through, then\\n          deliver a free, written estimate for you to evaluate. Same crew from\\n          quote to clean-up.\\n        </p>\\n        <div class=\\"mt-6 relative\\">\\n          <ClickToCall\\n            variant=\\"link\\"\\n            class=\\"!text-xl !font-bold text-white hover:!text-primary\\"\\n          />\\n        </div>\\n      </div>\\n      <!-- form side -->\\n      <div class=\\"p-7 sm:p-10\\">\\n        <ContactForm />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRUST STRIP ===================== -->\\n<section class=\\"bg-white border-y\\">\\n  <div\\n    class=\\"container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center\\"\\n  >\\n    <span class=\\"flex items-center gap-2\\">\\n      <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n      <span class=\\"text-sm font-bold text-gray-700\\">5.0 on Google</span>\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path d=\\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\\" /></svg\\n      >\\n      Lead-Safe Certified\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path\\n          d=\\"M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\\"\\n        /></svg\\n      >\\n      100% Satisfaction Guarantee\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><circle cx=\\"12\\" cy=\\"12\\" r=\\"9\\" /><path d=\\"M12 7v5l3 2\\" /></svg\\n      >\\n      Serving Chicagoland since 1994\\n    </span>\\n  </div>\\n</section>\\n\\n<!-- ===================== PROBLEM / AGITATION ===================== -->\\n<section class=\\"bg-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11 flex flex-col items-center\\">\\n      <div class=\\"ribbon mb-4\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark\\"\\n        >\\n          The hidden cost of bad gutters\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n      <p class=\\"text-lg text-gray-600 leading-relaxed\\">\\n        When water can't drain the way it should, it finds the most expensive\\n        path instead \u2014 and the damage shows up where it's hardest to fix.\\n      </p>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-3 gap-5\\">\\n      {#each problems as problem, i}\\n        <div class=\\"rounded-xl border p-6 bg-off-white\\">\\n          <div\\n            class=\\"w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4\\"\\n          >\\n            {#if i === 0}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6\\" /></svg\\n              >\\n            {:else if i === 1}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path\\n                  d=\\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\\"\\n                /><path d=\\"M3 13h18\\" /></svg\\n              >\\n            {:else}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\\" /></svg\\n              >\\n            {/if}\\n          </div>\\n          <h3 class=\\"font-bold text-xl text-secondary-dark\\">{problem.title}</h3>\\n          <p class=\\"mt-2 text-gray-600 leading-relaxed\\">{problem.body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== INSTALLATION (HERO OFFERING) ===================== -->\\n<section\\n  id=\\"install\\"\\n  class=\\"relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden\\"\\n>\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">Our signature service</span>\\n      <h2 class=\\"text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white\\">\\n        Seamless aluminum gutters, rolled in your driveway.\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        We bring the machine to you and form each run to the exact length of\\n        your roofline \u2014 so the only seams are at the corners and downspouts.\\n        Fewer seams mean fewer leaks, and far fewer callbacks down the road.\\n      </p>\\n      <ul class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5\\">\\n        {#each installChecks as [bold, rest]}\\n          <li class=\\"flex items-start gap-3\\">\\n            <svg\\n              class=\\"mt-0.5 shrink-0 text-primary\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"2.8\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            <span class=\\"text-white/85\\">\\n              <b class=\\"text-white font-bold\\">{bold}</b>\\n              {rest}\\n            </span>\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-4\\">\\n        <Button href=\\"#estimate\\" class=\\"text-lg h-14 px-7\\">\\n          Price My Gutters\\n        </Button>\\n        <p class=\\"text-sm text-white/55 max-w-[14rem]\\">\\n          Installed by Klasek employees \u2014 never subcontracted out.\\n        </p>\\n      </div>\\n    </div>\\n    <div class=\\"grid grid-cols-2 gap-4\\">\\n      <div\\n        class=\\"ph ph-dark aspect-[3/4] ring-2 ring-white/10\\"\\n        data-ph=\\"on-site gutter machine\\"\\n      />\\n      <div class=\\"grid grid-rows-2 gap-4\\">\\n        <div\\n          class=\\"ph ph-dark ring-2 ring-white/10\\"\\n          data-ph=\\"seamless K-style run\\"\\n        />\\n        <div class=\\"ph ph-dark ring-2 ring-white/10\\" data-ph=\\"copper detail\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== REPAIR ===================== -->\\n<section id=\\"repair\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\">\\n    <div\\n      class=\\"order-2 lg:order-1 ph aspect-[4/3]\\"\\n      data-ph=\\"REPAIR \u2014 fascia / reattachment before-after\\"\\n    />\\n    <div class=\\"order-1 lg:order-2\\">\\n      <span class=\\"tab mb-5\\">Repair &amp; storm damage</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Not ready to replace? We'll make what you have watertight again.\\n      </h2>\\n      <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n        Most gutter problems are fixable. Our crew diagnoses the real cause \u2014\\n        not just the symptom \u2014 and gives you an honest call on repair vs.\\n        replacement.\\n      </p>\\n      <div class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4\\">\\n        {#each repairItems as [title, body]}\\n          <div class=\\"flex items-start gap-3\\">\\n            <span\\n              class=\\"mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0\\"\\n              aria-hidden=\\"true\\"\\n            />\\n            <p>\\n              <b class=\\"font-bold text-secondary-dark\\">{title}</b><br />\\n              <span class=\\"text-gray-600 text-[15px]\\">{body}</span>\\n            </p>\\n          </div>\\n        {/each}\\n      </div>\\n      <Button\\n        href=\\"#estimate\\"\\n        variant=\\"secondary\\"\\n        class=\\"mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary\\"\\n      >\\n        Book a Repair Visit\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== CLEANING & MAINTENANCE ===================== -->\\n<section id=\\"cleaning\\" class=\\"bg-off-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]\\"\\n    >\\n      <div class=\\"p-8 sm:p-12\\">\\n        <span class=\\"tab mb-5\\">Easiest place to start</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n        >\\n          Gutter cleaning &amp; seasonal maintenance.\\n        </h2>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          A quick, low-commitment way to meet the crew and protect your home. We\\n          clear every run, flush the downspouts, and flag anything that needs\\n          attention \u2014 before it becomes a repair.\\n        </p>\\n        <div class=\\"mt-6 flex flex-wrap gap-3\\">\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F342} Fall leaf clear-out\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F331} Spring flush &amp; inspect\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F4CB} Free condition report\\n          </span>\\n        </div>\\n        <Button href=\\"#estimate\\" class=\\"mt-8 text-lg h-14 px-7\\">\\n          Schedule a Cleaning\\n        </Button>\\n      </div>\\n      <div\\n        class=\\"ph !rounded-none min-h-[260px]\\"\\n        data-ph=\\"CLEANING \u2014 crew clearing gutters in fall\\"\\n      />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== WHY KLASEK ===================== -->\\n<section id=\\"why\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11\\">\\n      <div\\n        class=\\"inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5\\"\\n      >\\n        <span\\n          class=\\"inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide\\"\\n        >\\n          Why Choose Klasek\\n        </span>\\n      </div>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Three decades on Chicagoland ladders. One crew, start to finish.\\n      </h2>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-2 lg:grid-cols-4 gap-5\\">\\n      {#each stats as { stat, title, body }}\\n        <div\\n          class=\\"rounded-xl border p-6 text-center hover:shadow-subtle transition\\"\\n        >\\n          <div class=\\"font-extrabold text-4xl text-primary-dark\\">{stat}</div>\\n          <h3 class=\\"mt-2 font-bold text-lg text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-2 text-gray-600 text-[15px] leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BEFORE / AFTER GALLERY ===================== -->\\n<section class=\\"bg-off-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center mb-9 flex flex-col items-center\\">\\n      <span class=\\"tab mb-4\\">Our work</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Before &amp; after, around the neighborhood.\\n      </h2>\\n    </div>\\n    <div class=\\"grid grid-cols-2 lg:grid-cols-4 gap-4\\">\\n      {#each Array.from({ length: 8 }, (_, i) => i + 1) as n}\\n        <div class=\\"ph aspect-square\\" data-ph={\`before / after 0\${n}\`} />\\n      {/each}\\n    </div>\\n    <div class=\\"mt-9 flex flex-col items-center gap-3\\">\\n      <p class=\\"flex items-center gap-2 text-sm font-bold text-gray-700\\">\\n        Review us\\n        <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n        on\\n      </p>\\n      <img class=\\"w-[92px] h-auto\\" src={google} alt=\\"Google\\" />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== SERVICE AREA ===================== -->\\n<section id=\\"area\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Areas We Serve\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center\\">\\n      <div>\\n        <h3 class=\\"font-bold text-2xl text-secondary-dark\\">\\n          Gutter service across the western Cook County suburbs.\\n        </h3>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your\\n          roofline. If your town isn't listed, call us; we likely cover it.\\n        </p>\\n        <div\\n          class=\\"mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3\\"\\n        >\\n          <svg\\n            class=\\"mt-0.5 shrink-0\\"\\n            width=\\"22\\"\\n            height=\\"22\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary-dark))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          <div>\\n            <p class=\\"font-bold text-secondary-dark\\">\\n              Klasek Painting \xB7 Lyons, IL\\n            </p>\\n            <p class=\\"text-gray-600 text-[15px]\\">\\n              4415 S. Custer, Lyons, IL 60534\\n            </p>\\n            <ClickToCall\\n              variant=\\"link\\"\\n              class=\\"!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]\\"\\n            />\\n          </div>\\n        </div>\\n        <div class=\\"mt-5 flex flex-wrap items-center gap-3\\">\\n          <Button href=\\"#estimate\\" class=\\"text-lg px-6\\">\\n            Request Estimate\\n          </Button>\\n          <ClickToCall\\n            variant=\\"secondary\\"\\n            class=\\"text-lg px-6 bg-secondary-dark hover:bg-secondary text-white\\"\\n          >\\n            Call the Crew\\n          </ClickToCall>\\n        </div>\\n      </div>\\n      <div>\\n        <ul\\n          class=\\"grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700\\"\\n        >\\n          {#each Object.values(serviceAreaRoutes) as { text, href }}\\n            <li class=\\"flex items-center gap-2\\">\\n              <span\\n                class=\\"w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0\\"\\n                aria-hidden=\\"true\\"\\n              />\\n              <a class=\\"hover:text-primary-dark hover:underline\\" {href}>\\n                {text}\\n              </a>\\n            </li>\\n          {/each}\\n        </ul>\\n        <div class=\\"mt-6 h-44 rounded-lg overflow-hidden\\">\\n          <Map lazy={true} />\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BRAND PARTNERS ===================== -->\\n<section class=\\"bg-off-white py-14 border-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-8\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <p\\n          class=\\"font-bold text-lg text-secondary-dark uppercase tracking-wide text-center\\"\\n        >\\n          Our Trusted Brand Partners\\n        </p>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div\\n      class=\\"flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7\\"\\n    >\\n      {#each partnerLogos as { src, alt, height }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FAQ ===================== -->\\n<section id=\\"faq\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container max-w-3xl\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Gutter FAQs\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"divide-y border-y\\">\\n      {#each faqData as { question, answer }, i}\\n        <div class=\\"py-5\\">\\n          <button\\n            type=\\"button\\"\\n            class=\\"flex w-full items-center justify-between gap-4 text-left\\"\\n            aria-expanded={openFaq === i}\\n            on:click={() => (openFaq = openFaq === i ? -1 : i)}\\n          >\\n            <span class=\\"font-bold text-lg text-secondary-dark\\">\\n              {question}\\n            </span>\\n            <span\\n              class=\\"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition {openFaq ===\\n              i\\n                ? 'rotate-45 bg-primary-dark text-white border-primary-dark'\\n                : 'bg-off-white text-gray-600'}\\"\\n            >\\n              <svg\\n                width=\\"14\\"\\n                height=\\"14\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.5\\"\\n                stroke-linecap=\\"round\\"><path d=\\"M12 5v14M5 12h14\\" /></svg\\n              >\\n            </span>\\n          </button>\\n          {#if openFaq === i}\\n            <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{answer}</p>\\n          {/if}\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FINAL CTA ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white p-y p-x overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <img\\n    src={splash}\\n    alt=\\"\\"\\n    aria-hidden=\\"true\\"\\n    class=\\"pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">No-pressure, no-cost</span>\\n      <h2 class=\\"text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white\\">\\n        Ready to help your property look its best?\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-md\\">\\n        Send us your details and we'll schedule a walk-through, then deliver a\\n        free written estimate for you to evaluate. Call the best.\\n      </p>\\n      <div\\n        class=\\"mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold\\"\\n      >\\n        <ClickToCall\\n          variant=\\"link\\"\\n          class=\\"!text-2xl !font-bold text-white hover:!text-primary\\"\\n        />\\n        <span class=\\"inline-flex items-center gap-2\\">\\n          <svg\\n            width=\\"18\\"\\n            height=\\"18\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          4415 S. Custer, Lyons, IL\\n        </span>\\n      </div>\\n    </div>\\n    <div class=\\"bg-white rounded-2xl shadow-2xl p-6 sm:p-7\\">\\n      <p class=\\"font-bold text-xl text-secondary-dark mb-1\\">\\n        Get a Free Estimate\\n      </p>\\n      <p class=\\"text-sm text-gray-600 mb-5\\">\\n        We'll reach out to schedule your walk-through.\\n      </p>\\n      <div class=\\"flex flex-col gap-3\\">\\n        <Button href=\\"#estimate\\" class=\\"w-full text-lg h-14\\">\\n          Request My Free Estimate\\n        </Button>\\n        <ClickToCall\\n          variant=\\"secondary\\"\\n          class=\\"w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white\\"\\n        />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== STICKY MOBILE BAR ===================== -->\\n<div\\n  class=\\"lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]\\"\\n>\\n  <div\\n    class=\\"grid grid-cols-2 gap-2 p-2.5\\"\\n    style=\\"padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));\\"\\n  >\\n    <ClickToCall\\n      variant=\\"secondary\\"\\n      class=\\"bg-secondary-dark hover:bg-secondary text-white\\"\\n    >\\n      Call\\n    </ClickToCall>\\n    <Button href=\\"#estimate\\">Free Estimate</Button>\\n  </div>\\n</div>\\n\\n<style>\\n  /* orange right-pointing tab label (design's .tab) */\\n  .tab {\\n    display: inline-flex;\\n    align-items: center;\\n    background: hsl(var(--primary-dark));\\n    color: white;\\n    font-weight: 700;\\n    font-size: 12px;\\n    text-transform: uppercase;\\n    letter-spacing: 0.14em;\\n    padding: 0.375rem 1.75rem 0.375rem 1rem;\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* centered ribbon header with swallowtail flags (design's .ribbon) */\\n  .ribbon {\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n    gap: 0.875rem;\\n  }\\n  .flag {\\n    width: 42px;\\n    height: 17px;\\n    background: hsl(var(--primary-dark));\\n    flex: none;\\n  }\\n  .flag-l {\\n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%);\\n  }\\n  .flag-r {\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* striped photo placeholders (design's .ph) \u2014 swap for real photos */\\n  .ph {\\n    position: relative;\\n    background-color: #e7e8f3;\\n    background-image: repeating-linear-gradient(\\n      135deg,\\n      rgba(35, 32, 97, 0.06) 0 12px,\\n      rgba(35, 32, 97, 0) 12px 24px\\n    );\\n    border-radius: 0.5rem;\\n    overflow: hidden;\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n  }\\n  .ph::after {\\n    content: attr(data-ph);\\n    position: absolute;\\n    bottom: 10px;\\n    left: 10px;\\n    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;\\n    font-size: 11px;\\n    letter-spacing: 0.02em;\\n    color: #5a5d7a;\\n    background: rgba(255, 255, 255, 0.85);\\n    padding: 3px 8px;\\n    border-radius: 5px;\\n  }\\n  .ph-dark {\\n    background-color: #2a2770;\\n    background-image: repeating-linear-gradient(\\n      135deg,\\n      rgba(255, 255, 255, 0.06) 0 12px,\\n      rgba(255, 255, 255, 0) 12px 24px\\n    );\\n  }\\n  .ph-dark::after {\\n    color: #c8c9e6;\\n    background: rgba(21, 19, 58, 0.6);\\n  }\\n</style>\\n"],"names":[],"mappings":"AAm1BE,mBAAK,CACH,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,QAAQ,CAAC,OAAO,CAAC,QAAQ,CAAC,IAAI,CACvC,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,sBAAQ,CACN,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,GAAG,CAAE,QACP,CACA,oBAAM,CACJ,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,IAAI,CAAE,IACR,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,GAAG,CAC7D,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,kBAAI,CACF,QAAQ,CAAE,QAAQ,CAClB,gBAAgB,CAAE,OAAO,CACzB,gBAAgB,CAAE;AACtB,MAAM,MAAM;AACZ,MAAM,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI;AACnC,MAAM,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;AAC/B,KAAK,CACD,aAAa,CAAE,MAAM,CACrB,QAAQ,CAAE,MAAM,CAChB,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MACnB,CACA,kBAAG,OAAQ,CACT,OAAO,CAAE,KAAK,OAAO,CAAC,CACtB,QAAQ,CAAE,QAAQ,CAClB,MAAM,CAAE,IAAI,CACZ,IAAI,CAAE,IAAI,CACV,WAAW,CAAE,YAAY,CAAC,CAAC,cAAc,CAAC,CAAC,KAAK,CAAC,CAAC,SAAS,CAC3D,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,MAAM,CACtB,KAAK,CAAE,OAAO,CACd,UAAU,CAAE,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CACrC,OAAO,CAAE,GAAG,CAAC,GAAG,CAChB,aAAa,CAAE,GACjB,CACA,uBAAS,CACP,gBAAgB,CAAE,OAAO,CACzB,gBAAgB,CAAE;AACtB,MAAM,MAAM;AACZ,MAAM,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI;AACtC,MAAM,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;AAClC,KACE,CACA,uBAAQ,OAAQ,CACd,KAAK,CAAE,OAAO,CACd,UAAU,CAAE,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,GAAG,CAClC"}`
+      map: `{"version":3,"file":"+page.svelte","sources":["+page.svelte"],"sourcesContent":["<script context=\\"module\\"><\/script>\\n<script lang=\\"ts\\">import GoogleProof from \\"$lib/common/other/GoogleProof.svelte\\";\\nimport ClickToCall from \\"$lib/common/other/ClickToCall.svelte\\";\\nimport Map from \\"$lib/common/other/Map.svelte\\";\\nimport Button from \\"$components/button/button.svelte\\";\\nimport { routes, serviceAreaRoutes } from \\"$lib/common/routing/routes\\";\\nimport heroSrc from \\"$images/services/exterior-home-painting.webp?enhanced\\";\\nimport splash from \\"$images/backgrounds/orange-paint-splash.webp\\";\\nimport stars from \\"$images/5-stars.svg\\";\\nimport google from \\"$images/logos/Google-name-logo.svg\\";\\nimport valspar from \\"$images/logos/trusted-brands/valspar.png?enhanced\\";\\nimport behr from \\"$images/logos/trusted-brands/behr.png?enhanced\\";\\nimport benjaminMoore from \\"$images/logos/trusted-brands/benjamin-moore.png?enhanced\\";\\nimport sherwinWilliams from \\"$images/logos/trusted-brands/sherwin-williams.png?enhanced\\";\\nimport leadSafe from \\"$images/logos/trusted-brands/lead-safe.png?enhanced\\";\\nimport pdca from \\"$images/logos/trusted-brands/pdca.png?enhanced\\";\\nimport { isMobileStore } from \\"$lib/stores/isMobileStore\\";\\nconst partnerLogos = [\\n  { src: valspar, alt: \\"Valspar\\", height: \\"h-7 sm:h-8\\" },\\n  { src: behr, alt: \\"Behr\\", height: \\"h-7 sm:h-8\\" },\\n  { src: benjaminMoore, alt: \\"Benjamin Moore\\", height: \\"h-8 sm:h-10\\" },\\n  { src: sherwinWilliams, alt: \\"Sherwin-Williams\\", height: \\"h-8 sm:h-10\\" },\\n  { src: leadSafe, alt: \\"Lead-Safe Certified\\", height: \\"h-9 sm:h-11\\" },\\n  { src: pdca, alt: \\"PDCA\\", height: \\"h-8 sm:h-10\\" }\\n];\\nlet openFaq = 0;\\nconst heroChecks = [\\n  \\"Installed by our own crew\\",\\n  \\"Free written estimates\\",\\n  \\"100% satisfaction guarantee\\",\\n  \\"Lead-Safe Certified\\"\\n];\\nconst installChecks = [\\n  [\\"K-style & half-round\\", \\"profiles\\"],\\n  [\\"Copper\\", \\"for historic homes\\"],\\n  [\\"Properly-sized\\", \\"downspouts\\"],\\n  [\\"Engineered\\", \\"pitch & flow\\"]\\n];\\nconst repairItems = [\\n  [\\"Leaks & seam sealing\\", \\"Re-sealed joints and patched corners.\\"],\\n  [\\"Sagging & pitch\\", \\"Re-hung and re-pitched to drain.\\"],\\n  [\\"Fascia & soffit repair\\", \\"Rotted wood replaced before re-hang.\\"],\\n  [\\"Storm damage & reattachment\\", \\"Pulled-away runs and downspouts.\\"]\\n];\\nconst problems = [\\n  {\\n    title: \\"Foundation cracks\\",\\n    body: \\"Overflow pools against the slab, freezes, and heaves \\\\u2014 opening cracks that let water into the basement.\\"\\n  },\\n  {\\n    title: \\"Fascia & soffit rot\\",\\n    body: \\"Water trapped behind a failing gutter soaks the wood it's bolted to, until the whole board needs replacing.\\"\\n  },\\n  {\\n    title: \\"Basement flooding\\",\\n    body: \\"Thousands of gallons a year dumped at the wrong spot is the #1 cause of wet basements and mold.\\"\\n  }\\n];\\nconst stats = [\\n  {\\n    stat: \\"30+\\",\\n    title: \\"Years in business\\",\\n    body: \\"Serving Cook County exteriors since 1994 \\\\u2014 we'll be here for the warranty.\\"\\n  },\\n  {\\n    stat: \\"0\\",\\n    title: \\"Subcontractors\\",\\n    body: \\"Your gutters are installed by Klasek employees we trained and stand behind.\\"\\n  },\\n  {\\n    stat: \\"$0\\",\\n    title: \\"Estimate cost\\",\\n    body: \\"Free, written, itemized \\\\u2014 so you know exactly what you're paying for.\\"\\n  },\\n  {\\n    stat: \\"100%\\",\\n    title: \\"Satisfaction guarantee\\",\\n    body: \\"We're not done until the water goes where it should and you're happy.\\"\\n  }\\n];\\nconst faqData = [\\n  {\\n    question: \\"Do you install gutter guards?\\",\\n    answer: \\"Yes \\\\u2014 we install leaf-guard and gutter-protection systems and can recommend the right one for your tree cover and roof type. Ask about guard options during your free estimate.\\"\\n  },\\n  {\\n    question: \\"What makes seamless gutters better than sectional?\\",\\n    answer: \\"Seams are where gutters leak. Because we roll each run to your exact roofline on-site, the only joints are at corners and downspouts \\\\u2014 meaning far fewer leak points and a cleaner look.\\"\\n  },\\n  {\\n    question: \\"How do I know if my gutters need to be repaired or replaced?\\",\\n    answer: \\"Sagging sections, persistent leaks, rust, or water spilling over during rain are all signs your gutters need attention. During your free estimate, we inspect the entire system and give you a straightforward recommendation \\\\u2014 repair what can be saved, and replace only what can't.\\"\\n  },\\n  {\\n    question: \\"How much does a new gutter system cost?\\",\\n    answer: \\"It depends on linear footage, profile (K-style, half-round, copper), and the number of downspouts and corners. That's exactly what your free written estimate spells out \\\\u2014 no surprises after the work starts.\\"\\n  },\\n  {\\n    question: \\"Do you replace rotted fascia and soffit too?\\",\\n    answer: \\"We do. As an exterior repair company, we can replace damaged fascia and soffit before re-hanging your gutters, so the new system mounts to solid wood \\\\u2014 not a problem waiting to come back.\\"\\n  },\\n  {\\n    question: \\"Do you replace gutters as part of an exterior painting project?\\",\\n    answer: \\"Yes. Many of our customers bundle gutter work with exterior painting or siding repair so everything is handled in one project, by one team, on one timeline.\\"\\n  },\\n  {\\n    question: \\"How soon can you come out for an estimate?\\",\\n    answer: \\"Usually within a few business days. Fill out the contact form or give us a call and we'll find a time to walk your property.\\"\\n  }\\n];\\n<\/script>\\n\\n<!-- ===================== HERO ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x\\"\\n  >\\n    <!-- left: framed photo + google review card -->\\n    <div class=\\"order-2 lg:order-1\\">\\n      <div class=\\"relative\\">\\n        {#if typeof heroSrc === 'string'}\\n\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home exterior with seamless gutters installed by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(heroSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home exterior with seamless gutters installed by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n\\t</picture>\\n{/if}\\n        <GoogleProof\\n          class=\\"bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl\\"\\n        />\\n      </div>\\n    </div>\\n\\n    <!-- right: copy -->\\n    <div class=\\"order-1 lg:order-2 max-w-xl\\">\\n      <span class=\\"tab mb-5\\">Cook County \xB7 30+ Years \xB7 Family Crew</span>\\n      <h1\\n        class=\\"text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white\\"\\n        data-testid=\\"page-heading\\"\\n      >\\n        Seamless gutters,<br class=\\"hidden sm:block\\" /> cut on-site by\\n        <span class=\\"text-primary\\">our own crew.</span>\\n      </h1>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        No subcontractors. No leaky seams. Klasek rolls custom aluminum gutters\\n        right in your driveway and installs them with the correct pitch \u2014 so\\n        water ends up in the downspout, not against your foundation.\\n      </p>\\n      <ul class=\\"mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5\\">\\n        {#each heroChecks as check}\\n          <li class=\\"flex items-center gap-2.5 text-white/90 font-semibold\\">\\n            <svg\\n              class=\\"text-primary shrink-0\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"3\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            {check}\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Get a Free Estimate\\n        </Button>\\n        <ClickToCall variant=\\"outline\\" class=\\"text-lg h-14 px-6\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRUST STRIP ===================== -->\\n<section class=\\"bg-white border-y\\">\\n  <div\\n    class=\\"container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center\\"\\n  >\\n    <span class=\\"flex items-center gap-2\\">\\n      <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n      <span class=\\"text-sm font-bold text-gray-700\\">5.0 on Google</span>\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path d=\\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\\" /></svg\\n      >\\n      Lead-Safe Certified\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path\\n          d=\\"M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\\"\\n        /></svg\\n      >\\n      100% Satisfaction Guarantee\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><circle cx=\\"12\\" cy=\\"12\\" r=\\"9\\" /><path d=\\"M12 7v5l3 2\\" /></svg\\n      >\\n      Serving Chicagoland since 1994\\n    </span>\\n  </div>\\n</section>\\n\\n<!-- ===================== PROBLEM / AGITATION ===================== -->\\n<section class=\\"bg-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11 flex flex-col items-center\\">\\n      <div class=\\"ribbon mb-4\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark\\"\\n        >\\n          The hidden cost of bad gutters\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n      <p class=\\"text-lg text-gray-600 leading-relaxed\\">\\n        When water can't drain the way it should, it finds the most expensive\\n        path instead \u2014 and the damage shows up where it's hardest to fix.\\n      </p>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-3 gap-5\\">\\n      {#each problems as problem, i}\\n        <div class=\\"rounded-xl border p-6 bg-off-white\\">\\n          <div\\n            class=\\"w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4\\"\\n          >\\n            {#if i === 0}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6\\" /></svg\\n              >\\n            {:else if i === 1}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path\\n                  d=\\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\\"\\n                /><path d=\\"M3 13h18\\" /></svg\\n              >\\n            {:else}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\\" /></svg\\n              >\\n            {/if}\\n          </div>\\n          <h3 class=\\"font-bold text-xl text-secondary-dark\\">{problem.title}</h3>\\n          <p class=\\"mt-2 text-gray-600 leading-relaxed\\">{problem.body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== INSTALLATION (HERO OFFERING) ===================== -->\\n<section\\n  id=\\"install\\"\\n  class=\\"relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden\\"\\n>\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">Our signature service</span>\\n      <h2 class=\\"text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white\\">\\n        Seamless aluminum gutters, rolled in your driveway.\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        We bring the machine to you and form each run to the exact length of\\n        your roofline \u2014 so the only seams are at the corners and downspouts.\\n        Fewer seams mean fewer leaks, and far fewer callbacks down the road.\\n      </p>\\n      <ul class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5\\">\\n        {#each installChecks as [bold, rest]}\\n          <li class=\\"flex items-start gap-3\\">\\n            <svg\\n              class=\\"mt-0.5 shrink-0 text-primary\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"2.8\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            <span class=\\"text-white/85\\">\\n              <b class=\\"text-white font-bold\\">{bold}</b>\\n              {rest}\\n            </span>\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-4\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Price My Gutters\\n        </Button>\\n        <p class=\\"text-sm text-white/55 max-w-[14rem]\\">\\n          Installed by Klasek employees \u2014 never subcontracted out.\\n        </p>\\n      </div>\\n    </div>\\n    <div class=\\"grid grid-cols-2 gap-4\\">\\n      <div\\n        class=\\"ph ph-dark aspect-[3/4] ring-2 ring-white/10\\"\\n        data-ph=\\"on-site gutter machine\\"\\n      />\\n      <div class=\\"grid grid-rows-2 gap-4\\">\\n        <div\\n          class=\\"ph ph-dark ring-2 ring-white/10\\"\\n          data-ph=\\"seamless K-style run\\"\\n        />\\n        <div class=\\"ph ph-dark ring-2 ring-white/10\\" data-ph=\\"copper detail\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== REPAIR ===================== -->\\n<section id=\\"repair\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\">\\n    <div\\n      class=\\"order-2 lg:order-1 ph aspect-[4/3]\\"\\n      data-ph=\\"REPAIR \u2014 fascia / reattachment before-after\\"\\n    />\\n    <div class=\\"order-1 lg:order-2\\">\\n      <span class=\\"tab mb-5\\">Repair &amp; storm damage</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Not ready to replace? We'll make what you have watertight again.\\n      </h2>\\n      <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n        Most gutter problems are fixable. Our crew diagnoses the real cause \u2014\\n        not just the symptom \u2014 and gives you an honest call on repair vs.\\n        replacement.\\n      </p>\\n      <div class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4\\">\\n        {#each repairItems as [title, body]}\\n          <div class=\\"flex items-start gap-3\\">\\n            <span\\n              class=\\"mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0\\"\\n              aria-hidden=\\"true\\"\\n            />\\n            <p>\\n              <b class=\\"font-bold text-secondary-dark\\">{title}</b><br />\\n              <span class=\\"text-gray-600 text-[15px]\\">{body}</span>\\n            </p>\\n          </div>\\n        {/each}\\n      </div>\\n      <Button\\n        href={routes[\\"contact\\"].href}\\n        variant=\\"secondary\\"\\n        class=\\"mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary\\"\\n      >\\n        Book a Repair Visit\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== CLEANING & MAINTENANCE ===================== -->\\n<section id=\\"cleaning\\" class=\\"bg-off-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]\\"\\n    >\\n      <div class=\\"p-8 sm:p-12\\">\\n        <span class=\\"tab mb-5\\">Easiest place to start</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n        >\\n          Gutter cleaning &amp; seasonal maintenance.\\n        </h2>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          A quick, low-commitment way to meet the crew and protect your home. We\\n          clear every run, flush the downspouts, and flag anything that needs\\n          attention \u2014 before it becomes a repair.\\n        </p>\\n        <div class=\\"mt-6 flex flex-wrap gap-3\\">\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F342} Fall leaf clear-out\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F331} Spring flush &amp; inspect\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F4CB} Free condition report\\n          </span>\\n        </div>\\n        <Button href={routes[\\"contact\\"].href} class=\\"mt-8 text-lg h-14 px-7\\">\\n          Schedule a Cleaning\\n        </Button>\\n      </div>\\n      <div\\n        class=\\"ph !rounded-none min-h-[260px]\\"\\n        data-ph=\\"CLEANING \u2014 crew clearing gutters in fall\\"\\n      />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== WHY KLASEK ===================== -->\\n<section id=\\"why\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11\\">\\n      <div\\n        class=\\"inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5\\"\\n      >\\n        <span\\n          class=\\"inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide\\"\\n        >\\n          Why Choose Klasek\\n        </span>\\n      </div>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Three decades on Chicagoland ladders. One crew, start to finish.\\n      </h2>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-2 lg:grid-cols-4 gap-5\\">\\n      {#each stats as { stat, title, body }}\\n        <div\\n          class=\\"rounded-xl border p-6 text-center hover:shadow-subtle transition\\"\\n        >\\n          <div class=\\"font-extrabold text-4xl text-primary-dark\\">{stat}</div>\\n          <h3 class=\\"mt-2 font-bold text-lg text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-2 text-gray-600 text-[15px] leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BEFORE / AFTER GALLERY ===================== -->\\n<section class=\\"bg-off-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center mb-9 flex flex-col items-center\\">\\n      <span class=\\"tab mb-4\\">Our work</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Before &amp; after, around the neighborhood.\\n      </h2>\\n    </div>\\n    <div class=\\"grid grid-cols-2 lg:grid-cols-4 gap-4\\">\\n      {#each Array.from({ length: 8 }, (_, i) => i + 1) as n}\\n        <div class=\\"ph aspect-square\\" data-ph={\`before / after 0\${n}\`} />\\n      {/each}\\n    </div>\\n    <div class=\\"mt-9 flex flex-col items-center gap-3\\">\\n      <p class=\\"flex items-center gap-2 text-sm font-bold text-gray-700\\">\\n        Review us\\n        <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n        on\\n      </p>\\n      <img class=\\"w-[92px] h-auto\\" src={google} alt=\\"Google\\" />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== SERVICE AREA ===================== -->\\n<section id=\\"area\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Areas We Serve\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center\\">\\n      <div>\\n        <h3 class=\\"font-bold text-2xl text-secondary-dark\\">\\n          Gutter service across the western Cook County suburbs.\\n        </h3>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your\\n          roofline. If your town isn't listed, call us; we likely cover it.\\n        </p>\\n        <div\\n          class=\\"mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3\\"\\n        >\\n          <svg\\n            class=\\"mt-0.5 shrink-0\\"\\n            width=\\"22\\"\\n            height=\\"22\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary-dark))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          <div>\\n            <p class=\\"font-bold text-secondary-dark\\">\\n              Klasek Painting \xB7 Lyons, IL\\n            </p>\\n            <p class=\\"text-gray-600 text-[15px]\\">\\n              4415 S. Custer, Lyons, IL 60534\\n            </p>\\n            <ClickToCall\\n              variant=\\"link\\"\\n              class=\\"!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]\\"\\n            />\\n          </div>\\n        </div>\\n        <div class=\\"mt-5 flex flex-wrap items-center gap-3\\">\\n          <Button href={routes[\\"contact\\"].href} class=\\"text-lg px-6\\">\\n            Request Estimate\\n          </Button>\\n          <ClickToCall\\n            variant=\\"secondary\\"\\n            class=\\"text-lg px-6 bg-secondary-dark hover:bg-secondary text-white\\"\\n          >\\n            Call the Crew\\n          </ClickToCall>\\n        </div>\\n      </div>\\n      <div>\\n        <ul\\n          class=\\"grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700\\"\\n        >\\n          {#each Object.values(serviceAreaRoutes) as { text, href }}\\n            <li class=\\"flex items-center gap-2\\">\\n              <span\\n                class=\\"w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0\\"\\n                aria-hidden=\\"true\\"\\n              />\\n              <a class=\\"hover:text-primary-dark hover:underline\\" {href}>\\n                {text}\\n              </a>\\n            </li>\\n          {/each}\\n        </ul>\\n        <div class=\\"mt-6 h-44 rounded-lg overflow-hidden\\">\\n          <Map lazy={true} />\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BRAND PARTNERS ===================== -->\\n<section class=\\"bg-off-white py-14 border-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-8\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <p\\n          class=\\"font-bold text-lg text-secondary-dark uppercase tracking-wide text-center\\"\\n        >\\n          Our Trusted Brand Partners\\n        </p>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div\\n      class=\\"flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7\\"\\n    >\\n      {#each partnerLogos as { src, alt, height }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FAQ ===================== -->\\n<section id=\\"faq\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container max-w-3xl\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Gutter FAQs\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"divide-y border-y\\">\\n      {#each faqData as { question, answer }, i}\\n        <div class=\\"py-5\\">\\n          <button\\n            type=\\"button\\"\\n            class=\\"flex w-full items-center justify-between gap-4 text-left\\"\\n            aria-expanded={openFaq === i}\\n            on:click={() => (openFaq = openFaq === i ? -1 : i)}\\n          >\\n            <span class=\\"font-bold text-lg text-secondary-dark\\">\\n              {question}\\n            </span>\\n            <span\\n              class=\\"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition {openFaq ===\\n              i\\n                ? 'rotate-45 bg-primary-dark text-white border-primary-dark'\\n                : 'bg-off-white text-gray-600'}\\"\\n            >\\n              <svg\\n                width=\\"14\\"\\n                height=\\"14\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.5\\"\\n                stroke-linecap=\\"round\\"><path d=\\"M12 5v14M5 12h14\\" /></svg\\n              >\\n            </span>\\n          </button>\\n          {#if openFaq === i}\\n            <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{answer}</p>\\n          {/if}\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FINAL CTA ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white p-y p-x overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <img\\n    src={splash}\\n    alt=\\"\\"\\n    aria-hidden=\\"true\\"\\n    class=\\"pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">No-pressure, no-cost</span>\\n      <h2 class=\\"text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white\\">\\n        Ready to help your property look its best?\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-md\\">\\n        Send us your details and we'll schedule a walk-through, then deliver a\\n        free written estimate for you to evaluate. Call the best.\\n      </p>\\n      <div\\n        class=\\"mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold\\"\\n      >\\n        <ClickToCall\\n          variant=\\"link\\"\\n          class=\\"!text-2xl !font-bold text-white hover:!text-primary\\"\\n        />\\n        <span class=\\"inline-flex items-center gap-2\\">\\n          <svg\\n            width=\\"18\\"\\n            height=\\"18\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          4415 S. Custer, Lyons, IL\\n        </span>\\n      </div>\\n    </div>\\n    <div class=\\"bg-white rounded-2xl shadow-2xl p-6 sm:p-7\\">\\n      <p class=\\"font-bold text-xl text-secondary-dark mb-1\\">\\n        Get a Free Estimate\\n      </p>\\n      <p class=\\"text-sm text-gray-600 mb-5\\">\\n        We'll reach out to schedule your walk-through.\\n      </p>\\n      <div class=\\"flex flex-col gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"w-full text-lg h-14\\">\\n          Request My Free Estimate\\n        </Button>\\n        <ClickToCall\\n          variant=\\"secondary\\"\\n          class=\\"w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white\\"\\n        />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== STICKY MOBILE BAR ===================== -->\\n<div\\n  class=\\"lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]\\"\\n>\\n  <div\\n    class=\\"grid grid-cols-2 gap-2 p-2.5\\"\\n    style=\\"padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));\\"\\n  >\\n    <ClickToCall\\n      variant=\\"secondary\\"\\n      class=\\"bg-secondary-dark hover:bg-secondary text-white\\"\\n    >\\n      Call\\n    </ClickToCall>\\n    <Button href={routes[\\"contact\\"].href}>Free Estimate</Button>\\n  </div>\\n</div>\\n\\n<style>\\n  /* orange right-pointing tab label (design's .tab) */\\n  .tab {\\n    display: inline-flex;\\n    align-items: center;\\n    background: hsl(var(--primary-dark));\\n    color: white;\\n    font-weight: 700;\\n    font-size: 12px;\\n    text-transform: uppercase;\\n    letter-spacing: 0.14em;\\n    padding: 0.375rem 1.75rem 0.375rem 1rem;\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* centered ribbon header with swallowtail flags (design's .ribbon) */\\n  .ribbon {\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n    gap: 0.875rem;\\n  }\\n  .flag {\\n    width: 42px;\\n    height: 17px;\\n    background: hsl(var(--primary-dark));\\n    flex: none;\\n  }\\n  .flag-l {\\n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%);\\n  }\\n  .flag-r {\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* striped photo placeholders (design's .ph) \u2014 swap for real photos */\\n  .ph {\\n    position: relative;\\n    background-color: #e7e8f3;\\n    background-image: repeating-linear-gradient(\\n      135deg,\\n      rgba(35, 32, 97, 0.06) 0 12px,\\n      rgba(35, 32, 97, 0) 12px 24px\\n    );\\n    border-radius: 0.5rem;\\n    overflow: hidden;\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n  }\\n  .ph::after {\\n    content: attr(data-ph);\\n    position: absolute;\\n    bottom: 10px;\\n    left: 10px;\\n    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;\\n    font-size: 11px;\\n    letter-spacing: 0.02em;\\n    color: #5a5d7a;\\n    background: rgba(255, 255, 255, 0.85);\\n    padding: 3px 8px;\\n    border-radius: 5px;\\n  }\\n  .ph-dark {\\n    background-color: #2a2770;\\n    background-image: repeating-linear-gradient(\\n      135deg,\\n      rgba(255, 255, 255, 0.06) 0 12px,\\n      rgba(255, 255, 255, 0) 12px 24px\\n    );\\n  }\\n  .ph-dark::after {\\n    color: #c8c9e6;\\n    background: rgba(21, 19, 58, 0.6);\\n  }\\n</style>\\n"],"names":[],"mappings":"AA0yBE,mBAAK,CACH,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,QAAQ,CAAC,OAAO,CAAC,QAAQ,CAAC,IAAI,CACvC,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,sBAAQ,CACN,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,GAAG,CAAE,QACP,CACA,oBAAM,CACJ,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,IAAI,CAAE,IACR,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,GAAG,CAC7D,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,kBAAI,CACF,QAAQ,CAAE,QAAQ,CAClB,gBAAgB,CAAE,OAAO,CACzB,gBAAgB,CAAE;AACtB,MAAM,MAAM;AACZ,MAAM,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI;AACnC,MAAM,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;AAC/B,KAAK,CACD,aAAa,CAAE,MAAM,CACrB,QAAQ,CAAE,MAAM,CAChB,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MACnB,CACA,kBAAG,OAAQ,CACT,OAAO,CAAE,KAAK,OAAO,CAAC,CACtB,QAAQ,CAAE,QAAQ,CAClB,MAAM,CAAE,IAAI,CACZ,IAAI,CAAE,IAAI,CACV,WAAW,CAAE,YAAY,CAAC,CAAC,cAAc,CAAC,CAAC,KAAK,CAAC,CAAC,SAAS,CAC3D,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,MAAM,CACtB,KAAK,CAAE,OAAO,CACd,UAAU,CAAE,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CACrC,OAAO,CAAE,GAAG,CAAC,GAAG,CAChB,aAAa,CAAE,GACjB,CACA,uBAAS,CACP,gBAAgB,CAAE,OAAO,CACzB,gBAAgB,CAAE;AACtB,MAAM,MAAM;AACZ,MAAM,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI;AACtC,MAAM,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;AAClC,KACE,CACA,uBAAQ,OAAQ,CACd,KAAK,CAAE,OAAO,CACd,UAAU,CAAE,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,GAAG,CAClC"}`
     };
     Page51 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
@@ -21135,7 +21698,7 @@ var init_page_svelte51 = __esm({
       })}</ul> <div class="mt-8 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render(
         $$result,
         {
-          href: "#estimate",
+          href: routes["contact"].href,
           class: "text-lg h-14 px-7"
         },
         {},
@@ -21152,17 +21715,7 @@ var init_page_svelte51 = __esm({
         },
         {},
         {}
-      )}</div></div></div></section>  <section id="estimate" class="bg-off-white p-y p-x scroll-mt-24"><div class="container"><div class="bg-white rounded-2xl shadow-subtle border overflow-hidden grid lg:grid-cols-[1fr_1.15fr]"> <div class="bg-secondary-dark text-white p-8 sm:p-10 flex flex-col justify-center relative overflow-hidden"><div class="absolute -bottom-16 -left-10 w-64 h-64 rounded-full bg-primary/15 blur-2xl" aria-hidden="true"></div> <span class="tab self-start mb-5 svelte-177d8eq" data-svelte-h="svelte-1t9hfzk">Free \xB7 No obligation</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-white relative" data-svelte-h="svelte-xb7jjq">Get your free gutter estimate.</h2> <p class="mt-4 text-white/75 leading-relaxed relative max-w-sm" data-svelte-h="svelte-ygr5j6">Tell us about your home and we&#39;ll schedule a walk-through, then
-          deliver a free, written estimate for you to evaluate. Same crew from
-          quote to clean-up.</p> <div class="mt-6 relative">${validate_component(ClickToCall, "ClickToCall").$$render(
-        $$result,
-        {
-          variant: "link",
-          class: "!text-xl !font-bold text-white hover:!text-primary"
-        },
-        {},
-        {}
-      )}</div></div>  <div class="p-7 sm:p-10">${validate_component(ContactForm, "ContactForm").$$render($$result, {}, {}, {})}</div></div></div></section>  <section class="bg-white border-y" data-svelte-h="svelte-1xq72kb"><div class="container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center"><span class="flex items-center gap-2"><img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars"> <span class="text-sm font-bold text-gray-700">5.0 on Google</span></span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      )}</div></div></div></section>  <section class="bg-white border-y" data-svelte-h="svelte-1xq72kb"><div class="container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center"><span class="flex items-center gap-2"><img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars"> <span class="text-sm font-bold text-gray-700">5.0 on Google</span></span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
       Lead-Safe Certified</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
       100% Satisfaction Guarantee</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
       Serving Chicagoland since 1994</span></div></section>  <section class="bg-white p-y p-x"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11 flex flex-col items-center" data-svelte-h="svelte-4l8rc"><div class="ribbon mb-4 svelte-177d8eq"><span class="flag flag-l svelte-177d8eq" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark">The hidden cost of bad gutters</h2> <span class="flag flag-r svelte-177d8eq" aria-hidden="true"></span></div> <p class="text-lg text-gray-600 leading-relaxed">When water can&#39;t drain the way it should, it finds the most expensive
@@ -21175,7 +21728,7 @@ var init_page_svelte51 = __esm({
       })}</ul> <div class="mt-8 flex flex-wrap items-center gap-4">${validate_component(Button, "Button").$$render(
         $$result,
         {
-          href: "#estimate",
+          href: routes["contact"].href,
           class: "text-lg h-14 px-7"
         },
         {},
@@ -21191,7 +21744,7 @@ var init_page_svelte51 = __esm({
       })}</div> ${validate_component(Button, "Button").$$render(
         $$result,
         {
-          href: "#estimate",
+          href: routes["contact"].href,
           variant: "secondary",
           class: "mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary"
         },
@@ -21206,7 +21759,7 @@ var init_page_svelte51 = __esm({
           attention \u2014 before it becomes a repair.</p> <div class="mt-6 flex flex-wrap gap-3" data-svelte-h="svelte-16g99xs"><span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">\u{1F342} Fall leaf clear-out</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">\u{1F331} Spring flush &amp; inspect</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">\u{1F4CB} Free condition report</span></div> ${validate_component(Button, "Button").$$render(
         $$result,
         {
-          href: "#estimate",
+          href: routes["contact"].href,
           class: "mt-8 text-lg h-14 px-7"
         },
         {},
@@ -21230,11 +21783,19 @@ var init_page_svelte51 = __esm({
         },
         {},
         {}
-      )}</div></div> <div class="mt-5 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render($$result, { href: "#estimate", class: "text-lg px-6" }, {}, {
-        default: () => {
-          return `Request Estimate`;
+      )}</div></div> <div class="mt-5 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg px-6"
+        },
+        {},
+        {
+          default: () => {
+            return `Request Estimate`;
+          }
         }
-      })} ${validate_component(ClickToCall, "ClickToCall").$$render(
+      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
         $$result,
         {
           variant: "secondary",
@@ -21248,10 +21809,10 @@ var init_page_svelte51 = __esm({
         }
       )}</div></div> <div><ul class="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700">${each(Object.values(serviceAreaRoutes), ({ text: text2, href }) => {
         return `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <a class="hover:text-primary-dark hover:underline"${add_attribute("href", href, 0)}>${escape(text2)}</a> </li>`;
-      })}</ul> <div class="mt-6 h-44 rounded-lg overflow-hidden">${validate_component(Map2, "Map").$$render($$result, { lazy: true }, {}, {})}</div></div></div></div></section>  <section class="bg-off-white py-14 border-y p-x"><div class="container"><div class="mb-8" data-svelte-h="svelte-1jx66ah"><div class="ribbon svelte-177d8eq"><span class="flag flag-l svelte-177d8eq" aria-hidden="true"></span> <p class="font-bold text-lg text-secondary-dark uppercase tracking-wide text-center">Our Trusted Brand Partners</p> <span class="flag flag-r svelte-177d8eq" aria-hidden="true"></span></div></div> <div class="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7">${each(partnerLogos, ({ src: src28, alt, height }) => {
-        return `${typeof src28 === "string" ? `<img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-177d8eq"}"${add_attribute("src", src28.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src28.img.w, 0)}${add_attribute("height", src28.img.h, 0)}>` : `<picture>${each(Object.entries(src28.sources), ([format, srcset]) => {
+      })}</ul> <div class="mt-6 h-44 rounded-lg overflow-hidden">${validate_component(Map2, "Map").$$render($$result, { lazy: true }, {}, {})}</div></div></div></div></section>  <section class="bg-off-white py-14 border-y p-x"><div class="container"><div class="mb-8" data-svelte-h="svelte-1jx66ah"><div class="ribbon svelte-177d8eq"><span class="flag flag-l svelte-177d8eq" aria-hidden="true"></span> <p class="font-bold text-lg text-secondary-dark uppercase tracking-wide text-center">Our Trusted Brand Partners</p> <span class="flag flag-r svelte-177d8eq" aria-hidden="true"></span></div></div> <div class="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7">${each(partnerLogos, ({ src: src27, alt, height }) => {
+        return `${typeof src27 === "string" ? `<img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-177d8eq"}"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
           return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-        })} <img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-177d8eq"}"${add_attribute("src", src28.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src28.img.w, 0)}${add_attribute("height", src28.img.h, 0)}> </picture>`}`;
+        })} <img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-177d8eq"}"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}> </picture>`}`;
       })}</div></div></section>  <section id="faq" class="bg-white p-y p-x scroll-mt-20"><div class="container max-w-3xl"><div class="mb-10" data-svelte-h="svelte-127g7oy"><div class="ribbon svelte-177d8eq"><span class="flag flag-l svelte-177d8eq" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Gutter FAQs</h2> <span class="flag flag-r svelte-177d8eq" aria-hidden="true"></span></div></div> <div class="divide-y border-y">${each(faqData, ({ question, answer }, i2) => {
         return `<div class="py-5"><button type="button" class="flex w-full items-center justify-between gap-4 text-left"${add_attribute("aria-expanded", openFaq === i2, 0)}><span class="font-bold text-lg text-secondary-dark">${escape(question)}</span> <span class="${"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition " + escape(
           openFaq === i2 ? "rotate-45 bg-primary-dark text-white border-primary-dark" : "bg-off-white text-gray-600",
@@ -21270,7 +21831,7 @@ var init_page_svelte51 = __esm({
           4415 S. Custer, Lyons, IL</span></div></div> <div class="bg-white rounded-2xl shadow-2xl p-6 sm:p-7"><p class="font-bold text-xl text-secondary-dark mb-1" data-svelte-h="svelte-1ue4w2h">Get a Free Estimate</p> <p class="text-sm text-gray-600 mb-5" data-svelte-h="svelte-brv2iu">We&#39;ll reach out to schedule your walk-through.</p> <div class="flex flex-col gap-3">${validate_component(Button, "Button").$$render(
         $$result,
         {
-          href: "#estimate",
+          href: routes["contact"].href,
           class: "w-full text-lg h-14"
         },
         {},
@@ -21299,7 +21860,7 @@ var init_page_svelte51 = __esm({
             return `Call`;
           }
         }
-      )} ${validate_component(Button, "Button").$$render($$result, { href: "#estimate" }, {}, {
+      )} ${validate_component(Button, "Button").$$render($$result, { href: routes["contact"].href }, {}, {
         default: () => {
           return `Free Estimate`;
         }
@@ -21326,8 +21887,8 @@ var init__55 = __esm({
     index55 = 54;
     component55 = async () => component_cache55 ??= (await Promise.resolve().then(() => (init_page_svelte51(), page_svelte_exports51))).default;
     universal_id47 = "src/routes/(light-nav)/services/gutter-installation-repair/+page.ts";
-    imports55 = ["_app/immutable/nodes/54.BRTS5w3e.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DL4drOEh.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/tZ0ymlLq.js", "_app/immutable/chunks/y7dt2DGo.js"];
-    stylesheets55 = ["_app/immutable/assets/ContactForm.d1O11VaS.css", "_app/immutable/assets/54.gfoa4xwi.css"];
+    imports55 = ["_app/immutable/nodes/54.UFhcHEhs.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/xRuhivlF.js", "_app/immutable/chunks/tZ0ymlLq.js", "_app/immutable/chunks/Wt7Ns1lL.js"];
+    stylesheets55 = ["_app/immutable/assets/54.gfoa4xwi.css"];
     fonts55 = [];
   }
 });
@@ -21482,7 +22043,7 @@ var init__56 = __esm({
     index56 = 55;
     component56 = async () => component_cache56 ??= (await Promise.resolve().then(() => (init_page_svelte52(), page_svelte_exports52))).default;
     universal_id48 = "src/routes/(light-nav)/services/siding-painting-repair/+page.ts";
-    imports56 = ["_app/immutable/nodes/55.BjiAmU52.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dzg24w47.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/DEuEdMQA.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/D5BaSaoK.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/C61OZROy.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/wRRLkYcO.js"];
+    imports56 = ["_app/immutable/nodes/55.BroZ46rx.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js"];
     stylesheets56 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts56 = [];
   }
@@ -21627,7 +22188,7 @@ var init__57 = __esm({
     index57 = 56;
     component57 = async () => component_cache57 ??= (await Promise.resolve().then(() => (init_page_svelte53(), page_svelte_exports53))).default;
     universal_id49 = "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/+page.ts";
-    imports57 = ["_app/immutable/nodes/56.kxD44uDH.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports57 = ["_app/immutable/nodes/56.D13HQ1c8.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets57 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts57 = [];
   }
@@ -21805,7 +22366,7 @@ var init__58 = __esm({
     index58 = 57;
     component58 = async () => component_cache58 ??= (await Promise.resolve().then(() => (init_page_svelte54(), page_svelte_exports54))).default;
     universal_id50 = "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/+page.ts";
-    imports58 = ["_app/immutable/nodes/57.CCsAUc2L.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports58 = ["_app/immutable/nodes/57.BkxmkHYC.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets58 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts58 = [];
   }
@@ -21982,7 +22543,7 @@ var init__59 = __esm({
     index59 = 58;
     component59 = async () => component_cache59 ??= (await Promise.resolve().then(() => (init_page_svelte55(), page_svelte_exports55))).default;
     universal_id51 = "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-painting/+page.ts";
-    imports59 = ["_app/immutable/nodes/58.3BdKF2FF.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports59 = ["_app/immutable/nodes/58.B7bl3cZM.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets59 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts59 = [];
   }
@@ -22165,7 +22726,7 @@ var init__60 = __esm({
     index60 = 59;
     component60 = async () => component_cache60 ??= (await Promise.resolve().then(() => (init_page_svelte56(), page_svelte_exports56))).default;
     universal_id52 = "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-repair/+page.ts";
-    imports60 = ["_app/immutable/nodes/59.BKyEIfkA.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports60 = ["_app/immutable/nodes/59.A9iuredp.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets60 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts60 = [];
   }
@@ -22192,23 +22753,66 @@ var init_page_ts53 = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/hardie-board-siding-repair-service.js
+var src20;
+var init_hardie_board_siding_repair_service = __esm({
+  ".svelte-kit/output/server/chunks/hardie-board-siding-repair-service.js"() {
+    src20 = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-board-siding-repair-service.CwNEPP8u.avif 331w, /_app/immutable/assets/hardie-board-siding-repair-service.BIpZsb1W.avif 661w",
+        webp: "/_app/immutable/assets/hardie-board-siding-repair-service.DcBBusKa.webp 331w, /_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp 661w",
+        png: "/_app/immutable/assets/hardie-board-siding-repair-service.CEnpMnwS.png 331w, /_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png 661w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png",
+        w: 661,
+        h: 434
+      }
+    };
+  }
+});
+
+// .svelte-kit/output/server/chunks/hardie-board-siding-painting-before-after-service.js
+var src21;
+var init_hardie_board_siding_painting_before_after_service = __esm({
+  ".svelte-kit/output/server/chunks/hardie-board-siding-painting-before-after-service.js"() {
+    src21 = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif 641w",
+        webp: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp 641w",
+        png: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png 641w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png",
+        w: 641,
+        h: 641
+      }
+    };
+  }
+});
+
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.svelte.js
 var page_svelte_exports57 = {};
 __export(page_svelte_exports57, {
   default: () => Page57
 });
-var src20, Page57;
+var heroSrc2, paintingTall, paintingTop, paintingBottom, trimSrc, guideFront, guideAngle, gallery8, gallery9, gallery10, gallery11, gallery12, gallery13, gallery14, css17, Page57;
 var init_page_svelte57 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.svelte.js"() {
     init_ssr();
-    init_FaqSection();
-    init_ColumnTemplateSection();
-    init_BasicTemplateSection();
+    init_GoogleProof();
+    init_ClickToCall();
+    init_Map();
+    init_button();
     init_routes();
-    init_HeadingAccent();
+    init_hardie_board_siding_repair_service();
+    init_hardie_board_siding_painting_before_after_service();
+    init_orange_paint_splash();
+    init_stars();
+    init_Google_name_logo();
+    init_lead_safe();
     init_isMobileStore();
-    init_GalleryLinkBlock();
-    src20 = {
+    heroSrc2 = {
       sources: {
         avif: "/_app/immutable/assets/exterior-hardie-board-1.C9LR72Vk.avif 200w, /_app/immutable/assets/exterior-hardie-board-1.BP2Xa993.avif 400w",
         webp: "/_app/immutable/assets/exterior-hardie-board-1.So7ecRbF.webp 200w, /_app/immutable/assets/exterior-hardie-board-1.BL-SdGeB.webp 400w",
@@ -22220,102 +22824,563 @@ var init_page_svelte57 = __esm({
         h: 224
       }
     };
+    paintingTall = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-2.CUrjlj4b.avif 200w, /_app/immutable/assets/exterior-hardie-board-2.BGtE0MUI.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-2.KmAkXME3.webp 200w, /_app/immutable/assets/exterior-hardie-board-2.CB1p8ABP.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-2.tvgOBTQq.png 200w, /_app/immutable/assets/exterior-hardie-board-2.Cg64khCH.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-2.Cg64khCH.png",
+        w: 400,
+        h: 224
+      }
+    };
+    paintingTop = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-3.CgpQlWKy.avif 200w, /_app/immutable/assets/exterior-hardie-board-3.B55EULWx.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-3.Di2PlErd.webp 200w, /_app/immutable/assets/exterior-hardie-board-3.Dl6rok0V.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-3.7nIhlrsy.png 200w, /_app/immutable/assets/exterior-hardie-board-3.D9HX3LO1.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-3.D9HX3LO1.png",
+        w: 400,
+        h: 224
+      }
+    };
+    paintingBottom = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-4.CglGMmn8.avif 200w, /_app/immutable/assets/exterior-hardie-board-4.BtbCZWl5.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-4.BvCzUoWm.webp 200w, /_app/immutable/assets/exterior-hardie-board-4.C_VYxt8n.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-4.BjKLVzvb.png 200w, /_app/immutable/assets/exterior-hardie-board-4.7ebTpcOU.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-4.7ebTpcOU.png",
+        w: 400,
+        h: 224
+      }
+    };
+    trimSrc = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-5.bzXQS01H.avif 200w, /_app/immutable/assets/exterior-hardie-board-5.DhaSQpdo.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-5.VNgpZ69a.webp 200w, /_app/immutable/assets/exterior-hardie-board-5.CfNo3AiQ.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-5.CUtMiAZq.png 200w, /_app/immutable/assets/exterior-hardie-board-5.Cl-Z5cm-.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-5.Cl-Z5cm-.png",
+        w: 400,
+        h: 224
+      }
+    };
+    guideFront = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-6.GSsvA_cN.avif 200w, /_app/immutable/assets/exterior-hardie-board-6.U5t380xK.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-6.CeIfvedw.webp 200w, /_app/immutable/assets/exterior-hardie-board-6.Z_dAWJo8.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-6.CTuNZqAB.png 200w, /_app/immutable/assets/exterior-hardie-board-6.CPViXenp.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-6.CPViXenp.png",
+        w: 400,
+        h: 224
+      }
+    };
+    guideAngle = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-7.B4eG7DmT.avif 200w, /_app/immutable/assets/exterior-hardie-board-7.ywt5duci.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-7.x-sWdkv0.webp 200w, /_app/immutable/assets/exterior-hardie-board-7.DFqgsBTr.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-7.C0AFaop5.png 200w, /_app/immutable/assets/exterior-hardie-board-7.DmXGz4tC.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-7.DmXGz4tC.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery8 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-8.DjWiLSyl.avif 200w, /_app/immutable/assets/exterior-hardie-board-8.8q-EyMk7.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-8.BYFW84D7.webp 200w, /_app/immutable/assets/exterior-hardie-board-8.BJUz1RnE.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-8.CZwIuFUt.png 200w, /_app/immutable/assets/exterior-hardie-board-8.BQf6HCSw.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-8.BQf6HCSw.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery9 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-9.0k8s2wzN.avif 200w, /_app/immutable/assets/exterior-hardie-board-9.CFzYAWAM.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-9.BVp2O2qH.webp 200w, /_app/immutable/assets/exterior-hardie-board-9.WIqvzLAy.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-9.C1K37Wnf.png 200w, /_app/immutable/assets/exterior-hardie-board-9.DnKjA59-.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-9.DnKjA59-.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery10 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-10.BUBSUQwU.avif 200w, /_app/immutable/assets/exterior-hardie-board-10.DPsTRKiV.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-10.C9QN9pGl.webp 200w, /_app/immutable/assets/exterior-hardie-board-10.BZ01cpEN.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-10.opD691r9.png 200w, /_app/immutable/assets/exterior-hardie-board-10.EKZrvkyO.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-10.EKZrvkyO.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery11 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-11.BiP5D8fr.avif 200w, /_app/immutable/assets/exterior-hardie-board-11.CTBspFN0.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-11.0L3xhmF3.webp 200w, /_app/immutable/assets/exterior-hardie-board-11.DaRJYDie.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-11.BZgcmoHj.png 200w, /_app/immutable/assets/exterior-hardie-board-11.D_TmP3WU.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-11.D_TmP3WU.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery12 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-12.CqsFOu7K.avif 200w, /_app/immutable/assets/exterior-hardie-board-12.C1_Dtjm-.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-12.Cv47y8oZ.webp 200w, /_app/immutable/assets/exterior-hardie-board-12.kOBHn5Ja.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-12.oEwuljK3.png 200w, /_app/immutable/assets/exterior-hardie-board-12.B_XJH95Q.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-12.B_XJH95Q.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery13 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-13.FkomS3tq.avif 200w, /_app/immutable/assets/exterior-hardie-board-13.DI-0djG0.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-13.D0CnvcPk.webp 200w, /_app/immutable/assets/exterior-hardie-board-13.qOcjaLnc.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-13.wKprW6aG.png 200w, /_app/immutable/assets/exterior-hardie-board-13.CeYTgYsh.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-13.CeYTgYsh.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery14 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-14.5ws0NZmJ.avif 200w, /_app/immutable/assets/exterior-hardie-board-14.SDEuRSNX.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-14.CBj7gpDN.webp 200w, /_app/immutable/assets/exterior-hardie-board-14.B5IcW8yh.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-14.BIryb3Q6.png 200w, /_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png",
+        w: 400,
+        h: 224
+      }
+    };
+    css17 = {
+      code: ".tab.svelte-18ua8g5{display:inline-flex;align-items:center;background:hsl(var(--primary-dark));color:white;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;padding:0.375rem 1.75rem 0.375rem 1rem;clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%)}.ribbon.svelte-18ua8g5{display:flex;align-items:center;justify-content:center;gap:0.875rem}.flag.svelte-18ua8g5{width:42px;height:17px;background:hsl(var(--primary-dark));flex:none}.flag-l.svelte-18ua8g5{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%)}.flag-r.svelte-18ua8g5{clip-path:polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%)}",
+      map: `{"version":3,"file":"+page.svelte","sources":["+page.svelte"],"sourcesContent":["<script context=\\"module\\"><\/script>\\n<script lang=\\"ts\\">import GoogleProof from \\"$lib/common/other/GoogleProof.svelte\\";\\nimport ClickToCall from \\"$lib/common/other/ClickToCall.svelte\\";\\nimport Map from \\"$lib/common/other/Map.svelte\\";\\nimport Button from \\"$components/button/button.svelte\\";\\nimport { routes, serviceAreaRoutes } from \\"$lib/common/routing/routes\\";\\nimport heroSrc from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-1.webp?enhanced\\";\\nimport paintingTall from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-2.webp?enhanced\\";\\nimport paintingTop from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-3.webp?enhanced\\";\\nimport paintingBottom from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-4.webp?enhanced\\";\\nimport repairSrc from \\"$images/services/hardie-board-siding-repair-service.webp?enhanced\\";\\nimport trimSrc from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-5.webp?enhanced\\";\\nimport guideFront from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-6.webp?enhanced\\";\\nimport guideAngle from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-7.webp?enhanced\\";\\nimport galleryBeforeAfter from \\"$images/services/hardie-board-siding-painting-before-after-service.webp?enhanced\\";\\nimport gallery8 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-8.webp?enhanced\\";\\nimport gallery9 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-9.webp?enhanced\\";\\nimport gallery10 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-10.webp?enhanced\\";\\nimport gallery11 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-11.webp?enhanced\\";\\nimport gallery12 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-12.webp?enhanced\\";\\nimport gallery13 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-13.webp?enhanced\\";\\nimport gallery14 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-14.webp?enhanced\\";\\nimport splash from \\"$images/backgrounds/orange-paint-splash.webp\\";\\nimport stars from \\"$images/5-stars.svg\\";\\nimport google from \\"$images/logos/Google-name-logo.svg\\";\\nimport valspar from \\"$images/logos/trusted-brands/valspar.png?enhanced\\";\\nimport behr from \\"$images/logos/trusted-brands/behr.png?enhanced\\";\\nimport benjaminMoore from \\"$images/logos/trusted-brands/benjamin-moore.png?enhanced\\";\\nimport sherwinWilliams from \\"$images/logos/trusted-brands/sherwin-williams.png?enhanced\\";\\nimport leadSafe from \\"$images/logos/trusted-brands/lead-safe.png?enhanced\\";\\nimport pdca from \\"$images/logos/trusted-brands/pdca.png?enhanced\\";\\nimport { isMobileStore } from \\"$lib/stores/isMobileStore\\";\\nconst heroChecks = [\\n  \\"Painted by our own crew\\",\\n  \\"Free written estimates\\",\\n  \\"100% satisfaction guarantee\\",\\n  \\"Lead-Safe Certified\\"\\n];\\nconst paintingChecks = [\\n  [\\"Edge & bare-spot priming\\", \\"\\"],\\n  [\\"Loxon masonry primer\\", \\"by Sherwin-Williams\\"],\\n  [\\"Premium acrylic latex\\", \\"topcoat\\"],\\n  [\\"Sprayed\\", \\"for full coverage\\"]\\n];\\nconst repairItems = [\\n  [\\"Set popped nails\\", \\"Reset and spot-primed before topcoat.\\"],\\n  [\\"Caulk & seal gaps\\", \\"Joints sealed to keep moisture out.\\"],\\n  [\\"Replace damaged board\\", \\"Deteriorated sections cut out and swapped.\\"],\\n  [\\"Scrape loose paint\\", \\"Failing coats removed down to sound siding.\\"]\\n];\\nconst problems = [\\n  {\\n    title: \\"Color fades in the sun\\",\\n    body: \\"The intense Chicago heat chalks and dulls factory color over time, leaving the whole house looking tired and washed-out.\\"\\n  },\\n  {\\n    title: \\"Cheap paint peels\\",\\n    body: \\"Factory primer is thin and never covers the cut edges. Paint over it without priming and the coat flakes off within a season.\\"\\n  },\\n  {\\n    title: \\"Moisture & ground contact\\",\\n    body: \\"Hardie board wicks moisture, and boards in direct contact with the ground can deteriorate \\\\u2014 needing repair before any paint goes on.\\"\\n  }\\n];\\nconst guideCards = [\\n  {\\n    number: \\"1\\",\\n    label: \\"New board\\",\\n    title: \\"Prime the edges first.\\",\\n    body: \\"Factory primer is thin and never covers the cut edges, so an extra primer coat is a must. We use a masonry primer like Loxon by Sherwin-Williams, then top-coat in a high-quality acrylic latex exterior paint \\\\u2014 Sherwin-Williams, Benjamin Moore, or Behr. You can roll it, but spraying drives paint into every groove for full, even coverage.\\"\\n  },\\n  {\\n    number: \\"2\\",\\n    label: \\"Faded board\\",\\n    title: \\"Prep beats the fade.\\",\\n    body: 'Hardie board is \\"hardy,\\" but its color fades in our intense Chicago heat. A repaint is all about thorough prep: setting popped nails, scraping any loose or peeling paint, and caulking the gaps. The board wicks moisture well, but sections in direct ground contact can deteriorate \\\\u2014 those get repaired or replaced before painting.'\\n  },\\n  {\\n    number: \\"3\\",\\n    label: \\"Trim work\\",\\n    title: \\"The icing on the cake.\\",\\n    body: \\"Once the siding is painted, the trim is what ties it together. We sand and scrape off loose paint, caulk large cracks, and replace any dry rot. Bare wood, doors, columns, or metal get a primer coat first \\\\u2014 and we finish trim in a semi-gloss that looks sharp and stays cleaner.\\"\\n  }\\n];\\nconst stats = [\\n  {\\n    stat: \\"30+\\",\\n    title: \\"Years in business\\",\\n    body: \\"Serving Cook County exteriors since 1994 \\\\u2014 we'll be here for the warranty.\\"\\n  },\\n  {\\n    stat: \\"0\\",\\n    title: \\"Subcontractors\\",\\n    body: \\"Your siding is painted by Klasek employees we trained and stand behind \\\\u2014 led by owner Pete Klasek.\\"\\n  },\\n  {\\n    stat: \\"$0\\",\\n    title: \\"Estimate cost\\",\\n    body: \\"Free, written, itemized \\\\u2014 so you know exactly what you're paying for.\\"\\n  },\\n  {\\n    stat: \\"100%\\",\\n    title: \\"Satisfaction guarantee\\",\\n    body: \\"We're not done until the color is even, the trim is crisp, and you're happy with the finish.\\"\\n  }\\n];\\nconst galleryImages = [\\n  { src: galleryBeforeAfter, alt: \\"Hardie board painting before and after\\" },\\n  { src: gallery8, alt: \\"Painted Hardie board siding\\" },\\n  { src: gallery9, alt: \\"Hardie board home exterior\\" },\\n  { src: gallery10, alt: \\"Freshly painted fiber cement siding\\" },\\n  { src: gallery11, alt: \\"Hardie board siding detail\\" },\\n  { src: gallery12, alt: \\"Painted Hardie board home\\" },\\n  { src: gallery13, alt: \\"Hardie board exterior project\\" },\\n  { src: gallery14, alt: \\"Completed Hardie board painting project\\" }\\n];\\nconst partnerLogos = [\\n  { src: valspar, alt: \\"Valspar\\", height: \\"h-7 sm:h-8\\" },\\n  { src: behr, alt: \\"Behr\\", height: \\"h-7 sm:h-8\\" },\\n  { src: benjaminMoore, alt: \\"Benjamin Moore\\", height: \\"h-8 sm:h-10\\" },\\n  { src: sherwinWilliams, alt: \\"Sherwin-Williams\\", height: \\"h-8 sm:h-10\\" },\\n  { src: leadSafe, alt: \\"Lead-Safe Certified\\", height: \\"h-9 sm:h-11\\" },\\n  { src: pdca, alt: \\"PDCA\\", height: \\"h-8 sm:h-10\\" }\\n];\\nconst faqData = [\\n  {\\n    question: \\"What is Hardie board siding made of?\\",\\n    answer: \\"Hardie board is a fiber-cement siding made from mechanical pulp. You'll also hear it called HardiePlank, concrete siding, cement-fiber siding, or fiber cement cladding. It comes in finishes that mimic chipboard, plywood, or real wood grain.\\"\\n  },\\n  {\\n    question: \\"Do I need to prime new Hardie board before painting?\\",\\n    answer: \\"Yes. Even though new Hardie board ships with a factory primer, the coating is thin and doesn't cover the cut edges \\\\u2014 so a high-quality primer coat is essential for proper coverage. We recommend a masonry primer like Loxon by Sherwin-Williams.\\"\\n  },\\n  {\\n    question: \\"What type of paint should I use on Hardie board siding?\\",\\n    answer: \\"A high-quality acrylic latex exterior paint. Sticking with a trusted brand like Sherwin-Williams, Benjamin Moore, or Behr keeps the siding protected and helps the finish last much longer.\\"\\n  },\\n  {\\n    question: \\"Can I roll on paint when painting Hardie board?\\",\\n    answer: \\"You can roll it, but we spray. Spraying drives paint into every crack and groove of the board's texture and ensures the entire surface is covered evenly \\\\u2014 a roller tends to skip the recesses.\\"\\n  },\\n  {\\n    question: \\"How should I prepare faded Hardie board for painting?\\",\\n    answer: \\"Thorough prep is everything. That means setting any popped nails, scraping off loose or peeling paint, and caulking significant gaps. If a section in direct ground contact has deteriorated, it should be repaired or replaced before painting.\\"\\n  },\\n  {\\n    question: \\"What are the best practices for painting Hardie board trim?\\",\\n    answer: \\"Finish the trim after the siding. Sand and scrape loose paint, caulk large cracks, and replace any dry rot. Prime all bare wood or metal first, and use a semi-gloss sheen \\\\u2014 it looks best on trim and stays cleaner over time.\\"\\n  }\\n];\\nlet openFaq = 0;\\n<\/script>\\n\\n<!-- ===================== HERO ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x\\"\\n  >\\n    <!-- left: framed photo + google review card -->\\n    <div class=\\"order-2 lg:order-1\\">\\n      <div class=\\"relative\\">\\n        {#if typeof heroSrc === 'string'}\\n\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home with Hardie board siding painted by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(heroSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home with Hardie board siding painted by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n\\t</picture>\\n{/if}\\n        <GoogleProof\\n          class=\\"bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl\\"\\n        />\\n      </div>\\n    </div>\\n\\n    <!-- right: copy -->\\n    <div class=\\"order-1 lg:order-2 max-w-xl\\">\\n      <span class=\\"tab mb-5\\">#1 Hardie Board Painters \xB7 Cook County</span>\\n      <h1\\n        class=\\"text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white\\"\\n        data-testid=\\"page-heading\\"\\n      >\\n        Hardie board siding,<br class=\\"hidden sm:block\\" /> painted to last by\\n        <span class=\\"text-primary\\">our own crew.</span>\\n      </h1>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        Fiber cement is tough \u2014 but its factory color fades under the Chicago\\n        sun, and a botched repaint peels in a season. Klasek primes the edges,\\n        preps every board, and sprays on premium acrylic latex so your siding\\n        looks new again and stays that way for years.\\n      </p>\\n      <ul class=\\"mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5\\">\\n        {#each heroChecks as check}\\n          <li class=\\"flex items-center gap-2.5 text-white/90 font-semibold\\">\\n            <svg\\n              class=\\"text-primary shrink-0\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"3\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            {check}\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Get a Free Estimate\\n        </Button>\\n        <ClickToCall variant=\\"outline\\" class=\\"text-lg h-14 px-6\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRUST STRIP ===================== -->\\n<section class=\\"bg-white border-y\\">\\n  <div\\n    class=\\"container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center\\"\\n  >\\n    <span class=\\"flex items-center gap-2\\">\\n      <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n      <span class=\\"text-sm font-bold text-gray-700\\">5.0 on Google</span>\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path d=\\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\\" /></svg\\n      >\\n      Lead-Safe Certified\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path\\n          d=\\"M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\\"\\n        /></svg\\n      >\\n      100% Satisfaction Guarantee\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><circle cx=\\"12\\" cy=\\"12\\" r=\\"9\\" /><path d=\\"M12 7v5l3 2\\" /></svg\\n      >\\n      Serving Chicagoland since 1994\\n    </span>\\n  </div>\\n</section>\\n\\n<!-- ===================== PROBLEM / AGITATION ===================== -->\\n<section class=\\"bg-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11 flex flex-col items-center\\">\\n      <div class=\\"ribbon mb-4\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark\\"\\n        >\\n          Why Hardie board needs a real paint job\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n      <p class=\\"text-lg text-gray-600 leading-relaxed\\">\\n        Fiber cement is built to last \u2014 but the finish on it isn't forever. Skip\\n        the prep, and a fresh coat peels before the next summer's out.\\n      </p>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-3 gap-5\\">\\n      {#each problems as problem, i}\\n        <div class=\\"rounded-xl border p-6 bg-off-white\\">\\n          <div\\n            class=\\"w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4\\"\\n          >\\n            {#if i === 0}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6\\" /></svg\\n              >\\n            {:else if i === 1}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path\\n                  d=\\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\\"\\n                /><path d=\\"M3 13h18\\" /></svg\\n              >\\n            {:else}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\\" /></svg\\n              >\\n            {/if}\\n          </div>\\n          <h3 class=\\"font-bold text-xl text-secondary-dark\\">{problem.title}</h3>\\n          <p class=\\"mt-2 text-gray-600 leading-relaxed\\">{problem.body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== PAINTING (HERO OFFERING) ===================== -->\\n<section\\n  id=\\"painting\\"\\n  class=\\"relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden\\"\\n>\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">Our signature service</span>\\n      <h2 class=\\"text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white\\">\\n        Primed, prepped, and sprayed \u2014 the way fiber cement should be painted.\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        A Hardie board repaint lives or dies on prep. We set popped nails,\\n        scrape loose paint, caulk the gaps, and prime the bare edges \u2014 then\\n        spray on premium acrylic latex so paint works into every groove and the\\n        whole wall cures to one even finish.\\n      </p>\\n      <ul class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5\\">\\n        {#each paintingChecks as [bold, rest]}\\n          <li class=\\"flex items-start gap-3\\">\\n            <svg\\n              class=\\"mt-0.5 shrink-0 text-primary\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"2.8\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            <span class=\\"text-white/85\\">\\n              <b class=\\"text-white font-bold\\">{bold}</b>\\n              {rest}\\n            </span>\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-4\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Price My Repaint\\n        </Button>\\n        <p class=\\"text-sm text-white/55 max-w-[14rem]\\">\\n          Painted by Klasek employees \u2014 never subcontracted out.\\n        </p>\\n      </div>\\n    </div>\\n    <div class=\\"grid grid-cols-2 gap-4\\">\\n      {#if typeof paintingTall === 'string'}\\n\\t<img class=\\"w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10\\" src={paintingTall.img.src} alt=\\"Spraying Hardie board siding\\" loading=\\"lazy\\" width={paintingTall.img.w} height={paintingTall.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingTall.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10\\" src={paintingTall.img.src} alt=\\"Spraying Hardie board siding\\" loading=\\"lazy\\" width={paintingTall.img.w} height={paintingTall.img.h} />\\n\\t</picture>\\n{/if}\\n      <div class=\\"grid grid-rows-2 gap-4\\">\\n        <div class=\\"relative rounded-lg overflow-hidden ring-2 ring-white/10\\">\\n          {#if typeof paintingTop === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingTop.img.src} alt=\\"Priming Hardie board cut edges\\" loading=\\"lazy\\" width={paintingTop.img.w} height={paintingTop.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingTop.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingTop.img.src} alt=\\"Priming Hardie board cut edges\\" loading=\\"lazy\\" width={paintingTop.img.w} height={paintingTop.img.h} />\\n\\t</picture>\\n{/if}\\n        </div>\\n        <div class=\\"relative rounded-lg overflow-hidden ring-2 ring-white/10\\">\\n          {#if typeof paintingBottom === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingBottom.img.src} alt=\\"Finished Hardie lap siding\\" loading=\\"lazy\\" width={paintingBottom.img.w} height={paintingBottom.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingBottom.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingBottom.img.src} alt=\\"Finished Hardie lap siding\\" loading=\\"lazy\\" width={paintingBottom.img.w} height={paintingBottom.img.h} />\\n\\t</picture>\\n{/if}\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== REPAIR ===================== -->\\n<section id=\\"repair\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\">\\n    {#if typeof repairSrc === 'string'}\\n\\t<img class=\\"order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg\\" src={repairSrc.img.src} alt=\\"Hardie board siding repair before painting\\" loading=\\"lazy\\" width={repairSrc.img.w} height={repairSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(repairSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg\\" src={repairSrc.img.src} alt=\\"Hardie board siding repair before painting\\" loading=\\"lazy\\" width={repairSrc.img.w} height={repairSrc.img.h} />\\n\\t</picture>\\n{/if}\\n    <div class=\\"order-1 lg:order-2\\">\\n      <span class=\\"tab mb-5\\">Repair before painting</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        We fix the failing boards first \u2014 then paint over solid siding.\\n      </h2>\\n      <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n        Painting over rotted or cracked board just hides the problem. Where\\n        siding has deteriorated \u2014 often where it meets the ground \u2014 we repair or\\n        replace the damaged section so the finish goes on solid and lasts.\\n      </p>\\n      <div class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4\\">\\n        {#each repairItems as [title, body]}\\n          <div class=\\"flex items-start gap-3\\">\\n            <span\\n              class=\\"mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0\\"\\n              aria-hidden=\\"true\\"\\n            />\\n            <p>\\n              <b class=\\"font-bold text-secondary-dark\\">{title}</b><br />\\n              <span class=\\"text-gray-600 text-[15px]\\">{body}</span>\\n            </p>\\n          </div>\\n        {/each}\\n      </div>\\n      <Button\\n        href={routes[\\"contact\\"].href}\\n        variant=\\"secondary\\"\\n        class=\\"mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary\\"\\n      >\\n        Book a Repair Visit\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRIM, FASCIA & SOFFIT ===================== -->\\n<section id=\\"trim\\" class=\\"bg-off-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]\\"\\n    >\\n      <div class=\\"p-8 sm:p-12\\">\\n        <span class=\\"tab mb-5\\">The finishing touch</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n        >\\n          Trim, fascia &amp; soffit \u2014 the detail that makes it pop.\\n        </h2>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Crisp trim is the icing on the cake. We sand and scrape loose paint,\\n          caulk the cracks, replace any dry rot, and prime every bare spot \u2014\\n          then finish in a semi-gloss that frames the house and wipes clean.\\n        </p>\\n        <div class=\\"mt-6 flex flex-wrap gap-3\\">\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Sand &amp; scrape\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Caulk &amp; prime bare wood\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Semi-gloss finish\\n          </span>\\n        </div>\\n        <Button href={routes[\\"contact\\"].href} class=\\"mt-8 text-lg h-14 px-7\\">\\n          Get a Trim Quote\\n        </Button>\\n      </div>\\n      <div class=\\"relative min-h-[260px]\\">\\n        {#if typeof trimSrc === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={trimSrc.img.src} alt=\\"Fresh trim on Hardie board siding\\" loading=\\"lazy\\" width={trimSrc.img.w} height={trimSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(trimSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={trimSrc.img.src} alt=\\"Fresh trim on Hardie board siding\\" loading=\\"lazy\\" width={trimSrc.img.w} height={trimSrc.img.h} />\\n\\t</picture>\\n{/if}\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== ALL ABOUT / KNOWLEDGE GUIDE ===================== -->\\n<section id=\\"guide\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center\\">\\n      <!-- intro copy -->\\n      <div>\\n        <span class=\\"tab mb-5\\">A quick field guide</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.07] font-extrabold text-secondary-dark\\"\\n        >\\n          All about painting exterior Hardie board siding.\\n        </h2>\\n        <p class=\\"mt-5 text-lg text-gray-600 leading-relaxed\\">\\n          Hardie board is a dense fiber-cement board made from mechanical pulp \u2014\\n          you'll also hear it called HardiePlank, cement-fiber siding, or fiber\\n          cement cladding. It's all over the Chicago suburbs in finishes that\\n          mimic coarse chipboard, plywood, or real wood grain.\\n        </p>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n          Because the siding almost always ships\\n          <b class=\\"text-secondary-dark font-bold\\">pre-primed</b> to protect it in\\n          transit, a great paint job is less about the color and more about the prep.\\n          Here's how we approach each situation.\\n        </p>\\n      </div>\\n      <!-- overlapping photos -->\\n      <div class=\\"relative h-[380px] sm:h-[440px]\\">\\n        {#if typeof guideFront === 'string'}\\n\\t<img class=\\"absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideFront.img.src} alt=\\"Hardie board home \u2014 front view\\" loading=\\"lazy\\" width={guideFront.img.w} height={guideFront.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(guideFront.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideFront.img.src} alt=\\"Hardie board home \u2014 front view\\" loading=\\"lazy\\" width={guideFront.img.w} height={guideFront.img.h} />\\n\\t</picture>\\n{/if}\\n        {#if typeof guideAngle === 'string'}\\n\\t<img class=\\"absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideAngle.img.src} alt=\\"Hardie board home \u2014 angle view\\" loading=\\"lazy\\" width={guideAngle.img.w} height={guideAngle.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(guideAngle.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideAngle.img.src} alt=\\"Hardie board home \u2014 angle view\\" loading=\\"lazy\\" width={guideAngle.img.w} height={guideAngle.img.h} />\\n\\t</picture>\\n{/if}\\n      </div>\\n    </div>\\n\\n    <!-- recommendation columns -->\\n    <div class=\\"mt-14 grid md:grid-cols-3 gap-6\\">\\n      {#each guideCards as { number, label, title, body }}\\n        <div class=\\"rounded-2xl border bg-off-white p-7\\">\\n          <span\\n            class=\\"inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-primary-dark\\"\\n          >\\n            <span\\n              class=\\"w-6 h-6 rounded-full bg-primary-dark text-white flex items-center justify-center text-[13px]\\"\\n            >\\n              {number}\\n            </span>\\n            {label}\\n          </span>\\n          <h3 class=\\"mt-4 font-bold text-xl text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n\\n    <!-- serving chicagoland note -->\\n    <div\\n      class=\\"mt-10 rounded-2xl bg-secondary-dark text-white p-7 sm:p-9 flex flex-col sm:flex-row sm:items-center gap-6 justify-between\\"\\n    >\\n      <div class=\\"max-w-2xl\\">\\n        <h3 class=\\"font-bold text-xl sm:text-2xl text-white\\">\\n          Klasek Painting, serving Chicagoland for 30+ years.\\n        </h3>\\n        <p class=\\"mt-2 text-white/75 leading-relaxed\\">\\n          Owner Pete Klasek is happy to answer any questions about your Hardie\\n          board project. We're known for high-quality work, dependable service,\\n          a satisfaction guarantee, and on-time completion \u2014 at competitive\\n          pricing.\\n        </p>\\n      </div>\\n      <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7 shrink-0\\">\\n        Contact Klasek\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== WHY KLASEK ===================== -->\\n<section id=\\"why\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11\\">\\n      <div\\n        class=\\"inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5\\"\\n      >\\n        <span\\n          class=\\"inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide\\"\\n        >\\n          Why Choose Klasek\\n        </span>\\n      </div>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Three decades on Chicagoland ladders. One crew, start to finish.\\n      </h2>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-2 lg:grid-cols-4 gap-5\\">\\n      {#each stats as { stat, title, body }}\\n        <div\\n          class=\\"rounded-xl border p-6 text-center hover:shadow-subtle transition\\"\\n        >\\n          <div class=\\"font-extrabold text-4xl text-primary-dark\\">{stat}</div>\\n          <h3 class=\\"mt-2 font-bold text-lg text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-2 text-gray-600 text-[15px] leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BEFORE / AFTER GALLERY ===================== -->\\n<section class=\\"bg-off-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center mb-9 flex flex-col items-center\\">\\n      <span class=\\"tab mb-4\\">Our work</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Before &amp; after, around the neighborhood.\\n      </h2>\\n    </div>\\n    <div class=\\"grid grid-cols-2 lg:grid-cols-4 gap-4\\">\\n      {#each galleryImages as { src, alt }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"w-full h-full aspect-square object-cover rounded-lg\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full aspect-square object-cover rounded-lg\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n    <div class=\\"mt-9 flex flex-col items-center gap-3\\">\\n      <p class=\\"flex items-center gap-2 text-sm font-bold text-gray-700\\">\\n        Review us\\n        <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n        on\\n      </p>\\n      <img class=\\"w-[92px] h-auto\\" src={google} alt=\\"Google\\" />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== SERVICE AREA ===================== -->\\n<section id=\\"area\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Areas We Serve\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center\\">\\n      <div>\\n        <h3 class=\\"font-bold text-2xl text-secondary-dark\\">\\n          Hardie board painting across the western Cook County suburbs.\\n        </h3>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your home.\\n          If your town isn't listed, call us; we likely cover it.\\n        </p>\\n        <div\\n          class=\\"mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3\\"\\n        >\\n          <svg\\n            class=\\"mt-0.5 shrink-0\\"\\n            width=\\"22\\"\\n            height=\\"22\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary-dark))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          <div>\\n            <p class=\\"font-bold text-secondary-dark\\">\\n              Klasek Painting \xB7 Lyons, IL\\n            </p>\\n            <p class=\\"text-gray-600 text-[15px]\\">\\n              4415 S. Custer, Lyons, IL 60534\\n            </p>\\n            <ClickToCall\\n              variant=\\"link\\"\\n              class=\\"!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]\\"\\n            />\\n          </div>\\n        </div>\\n        <div class=\\"mt-5 flex flex-wrap items-center gap-3\\">\\n          <Button href={routes[\\"contact\\"].href} class=\\"text-lg px-6\\">\\n            Request Estimate\\n          </Button>\\n          <ClickToCall\\n            variant=\\"secondary\\"\\n            class=\\"text-lg px-6 bg-secondary-dark hover:bg-secondary text-white\\"\\n          >\\n            Call the Crew\\n          </ClickToCall>\\n        </div>\\n      </div>\\n      <div>\\n        <ul\\n          class=\\"grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700\\"\\n        >\\n          {#each Object.values(serviceAreaRoutes) as { text, href }}\\n            <li class=\\"flex items-center gap-2\\">\\n              <span\\n                class=\\"w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0\\"\\n                aria-hidden=\\"true\\"\\n              />\\n              <a class=\\"hover:text-primary-dark hover:underline\\" {href}>\\n                {text}\\n              </a>\\n            </li>\\n          {/each}\\n        </ul>\\n        <div class=\\"mt-6 h-44 rounded-lg overflow-hidden\\">\\n          <Map lazy={true} />\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BRAND PARTNERS ===================== -->\\n<section class=\\"bg-off-white py-14 border-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-8\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <p\\n          class=\\"font-bold text-lg text-secondary-dark uppercase tracking-wide text-center\\"\\n        >\\n          Our Trusted Brand Partners\\n        </p>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div\\n      class=\\"flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7\\"\\n    >\\n      {#each partnerLogos as { src, alt, height }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FAQ ===================== -->\\n<section id=\\"faq\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container max-w-3xl\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Frequently Asked Questions\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"divide-y border-y\\">\\n      {#each faqData as { question, answer }, i}\\n        <div class=\\"py-5\\">\\n          <button\\n            type=\\"button\\"\\n            class=\\"flex w-full items-center justify-between gap-4 text-left\\"\\n            aria-expanded={openFaq === i}\\n            on:click={() => (openFaq = openFaq === i ? -1 : i)}\\n          >\\n            <span class=\\"font-bold text-lg text-secondary-dark\\">\\n              {question}\\n            </span>\\n            <span\\n              class=\\"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition {openFaq ===\\n              i\\n                ? 'rotate-45 bg-primary-dark text-white border-primary-dark'\\n                : 'bg-off-white text-gray-600'}\\"\\n            >\\n              <svg\\n                width=\\"14\\"\\n                height=\\"14\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.5\\"\\n                stroke-linecap=\\"round\\"><path d=\\"M12 5v14M5 12h14\\" /></svg\\n              >\\n            </span>\\n          </button>\\n          {#if openFaq === i}\\n            <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{answer}</p>\\n          {/if}\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FINAL CTA ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white p-y p-x overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <img\\n    src={splash}\\n    alt=\\"\\"\\n    aria-hidden=\\"true\\"\\n    class=\\"pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">No-pressure, no-cost</span>\\n      <h2 class=\\"text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white\\">\\n        Ready to help your property look its best?\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-md\\">\\n        Send us your details and we'll schedule a walk-through, then deliver a\\n        free written estimate for you to evaluate. Call the best.\\n      </p>\\n      <div\\n        class=\\"mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold\\"\\n      >\\n        <ClickToCall\\n          variant=\\"link\\"\\n          class=\\"!text-2xl !font-bold text-white hover:!text-primary\\"\\n        />\\n        <span class=\\"inline-flex items-center gap-2\\">\\n          <svg\\n            width=\\"18\\"\\n            height=\\"18\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          4415 S. Custer, Lyons, IL\\n        </span>\\n      </div>\\n    </div>\\n    <div class=\\"bg-white rounded-2xl shadow-2xl p-6 sm:p-7\\">\\n      <p class=\\"font-bold text-xl text-secondary-dark mb-1\\">\\n        Get a Free Estimate\\n      </p>\\n      <p class=\\"text-sm text-gray-600 mb-5\\">\\n        We'll reach out to schedule your walk-through.\\n      </p>\\n      <div class=\\"flex flex-col gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"w-full text-lg h-14\\">\\n          Request My Free Estimate\\n        </Button>\\n        <ClickToCall\\n          variant=\\"secondary\\"\\n          class=\\"w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white\\"\\n        />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== STICKY MOBILE BAR ===================== -->\\n<div\\n  class=\\"lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]\\"\\n>\\n  <div\\n    class=\\"grid grid-cols-2 gap-2 p-2.5\\"\\n    style=\\"padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));\\"\\n  >\\n    <ClickToCall\\n      variant=\\"secondary\\"\\n      class=\\"bg-secondary-dark hover:bg-secondary text-white\\"\\n    >\\n      Call\\n    </ClickToCall>\\n    <Button href={routes[\\"contact\\"].href}>Free Estimate</Button>\\n  </div>\\n</div>\\n\\n<style>\\n  /* orange right-pointing tab label (design's .tab) */\\n  .tab {\\n    display: inline-flex;\\n    align-items: center;\\n    background: hsl(var(--primary-dark));\\n    color: white;\\n    font-weight: 700;\\n    font-size: 12px;\\n    text-transform: uppercase;\\n    letter-spacing: 0.14em;\\n    padding: 0.375rem 1.75rem 0.375rem 1rem;\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* centered ribbon header with swallowtail flags (design's .ribbon) */\\n  .ribbon {\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n    gap: 0.875rem;\\n  }\\n  .flag {\\n    width: 42px;\\n    height: 17px;\\n    background: hsl(var(--primary-dark));\\n    flex: none;\\n  }\\n  .flag-l {\\n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%);\\n  }\\n  .flag-r {\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%);\\n  }\\n</style>\\n"],"names":[],"mappings":"AAi+BE,mBAAK,CACH,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,QAAQ,CAAC,OAAO,CAAC,QAAQ,CAAC,IAAI,CACvC,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,sBAAQ,CACN,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,GAAG,CAAE,QACP,CACA,oBAAM,CACJ,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,IAAI,CAAE,IACR,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,GAAG,CAC7D,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E"}`
+    };
     Page57 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
       $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
-      const faqData = [
+      const heroChecks = [
+        "Painted by our own crew",
+        "Free written estimates",
+        "100% satisfaction guarantee",
+        "Lead-Safe Certified"
+      ];
+      const paintingChecks = [
+        ["Edge & bare-spot priming", ""],
+        ["Loxon masonry primer", "by Sherwin-Williams"],
+        ["Premium acrylic latex", "topcoat"],
+        ["Sprayed", "for full coverage"]
+      ];
+      const repairItems = [
+        ["Set popped nails", "Reset and spot-primed before topcoat."],
+        ["Caulk & seal gaps", "Joints sealed to keep moisture out."],
+        ["Replace damaged board", "Deteriorated sections cut out and swapped."],
+        ["Scrape loose paint", "Failing coats removed down to sound siding."]
+      ];
+      const problems = [
         {
-          question: "What is Hardie Board siding?",
-          answer: "Hardie Board is a fiber cement siding made by James Hardie. It combines the look of wood siding with far greater durability \u2014 it resists rot, pests, fire, and the freeze-thaw cycles that wear out other siding materials in the Chicago area."
+          title: "Color fades in the sun",
+          body: "The intense Chicago heat chalks and dulls factory color over time, leaving the whole house looking tired and washed-out."
         },
         {
-          question: "Is Hardie Board a good choice for Chicago-area homes?",
-          answer: "Yes \u2014 it's one of the best. Fiber cement handles our region's temperature swings, snow, and humidity far better than vinyl or wood, holding its appearance for decades with minimal upkeep."
+          title: "Cheap paint peels",
+          body: "Factory primer is thin and never covers the cut edges. Paint over it without priming and the coat flakes off within a season."
         },
         {
-          question: "How long does Hardie Board siding last?",
-          answer: "With professional installation, Hardie Board siding routinely lasts 30 to 50 years. James Hardie backs its products with industry-leading warranties, and we back our installation with a 100% satisfaction guarantee."
-        },
-        {
-          question: "Can you replace just part of my siding with Hardie Board?",
-          answer: "Yes. We handle everything from full-home re-siding to replacing damaged sections, color-matched and blended with your existing exterior."
-        },
-        {
-          question: "Do you paint the new siding as well?",
-          answer: "We do. As exterior painting specialists, we can finish your new Hardie Board in any color you choose \u2014 one team handles the entire project from installation through final coat."
-        },
-        {
-          question: "How much does Hardie Board installation cost?",
-          answer: "Cost depends on the size of your home and the scope of the project. Every project starts with a free, written estimate that lays out your options and pricing clearly \u2014 no surprises."
+          title: "Moisture & ground contact",
+          body: "Hardie board wicks moisture, and boards in direct contact with the ground can deteriorate \u2014 needing repair before any paint goes on."
         }
       ];
+      const guideCards = [
+        {
+          number: "1",
+          label: "New board",
+          title: "Prime the edges first.",
+          body: "Factory primer is thin and never covers the cut edges, so an extra primer coat is a must. We use a masonry primer like Loxon by Sherwin-Williams, then top-coat in a high-quality acrylic latex exterior paint \u2014 Sherwin-Williams, Benjamin Moore, or Behr. You can roll it, but spraying drives paint into every groove for full, even coverage."
+        },
+        {
+          number: "2",
+          label: "Faded board",
+          title: "Prep beats the fade.",
+          body: 'Hardie board is "hardy," but its color fades in our intense Chicago heat. A repaint is all about thorough prep: setting popped nails, scraping any loose or peeling paint, and caulking the gaps. The board wicks moisture well, but sections in direct ground contact can deteriorate \u2014 those get repaired or replaced before painting.'
+        },
+        {
+          number: "3",
+          label: "Trim work",
+          title: "The icing on the cake.",
+          body: "Once the siding is painted, the trim is what ties it together. We sand and scrape off loose paint, caulk large cracks, and replace any dry rot. Bare wood, doors, columns, or metal get a primer coat first \u2014 and we finish trim in a semi-gloss that looks sharp and stays cleaner."
+        }
+      ];
+      const stats = [
+        {
+          stat: "30+",
+          title: "Years in business",
+          body: "Serving Cook County exteriors since 1994 \u2014 we'll be here for the warranty."
+        },
+        {
+          stat: "0",
+          title: "Subcontractors",
+          body: "Your siding is painted by Klasek employees we trained and stand behind \u2014 led by owner Pete Klasek."
+        },
+        {
+          stat: "$0",
+          title: "Estimate cost",
+          body: "Free, written, itemized \u2014 so you know exactly what you're paying for."
+        },
+        {
+          stat: "100%",
+          title: "Satisfaction guarantee",
+          body: "We're not done until the color is even, the trim is crisp, and you're happy with the finish."
+        }
+      ];
+      const galleryImages = [
+        {
+          src: src21,
+          alt: "Hardie board painting before and after"
+        },
+        {
+          src: gallery8,
+          alt: "Painted Hardie board siding"
+        },
+        {
+          src: gallery9,
+          alt: "Hardie board home exterior"
+        },
+        {
+          src: gallery10,
+          alt: "Freshly painted fiber cement siding"
+        },
+        {
+          src: gallery11,
+          alt: "Hardie board siding detail"
+        },
+        {
+          src: gallery12,
+          alt: "Painted Hardie board home"
+        },
+        {
+          src: gallery13,
+          alt: "Hardie board exterior project"
+        },
+        {
+          src: gallery14,
+          alt: "Completed Hardie board painting project"
+        }
+      ];
+      const partnerLogos = [
+        {
+          src: valspar,
+          alt: "Valspar",
+          height: "h-7 sm:h-8"
+        },
+        {
+          src: behr,
+          alt: "Behr",
+          height: "h-7 sm:h-8"
+        },
+        {
+          src: benjaminMoore,
+          alt: "Benjamin Moore",
+          height: "h-8 sm:h-10"
+        },
+        {
+          src: sherwinWilliams,
+          alt: "Sherwin-Williams",
+          height: "h-8 sm:h-10"
+        },
+        {
+          src: leadSafe,
+          alt: "Lead-Safe Certified",
+          height: "h-9 sm:h-11"
+        },
+        {
+          src: pdca,
+          alt: "PDCA",
+          height: "h-8 sm:h-10"
+        }
+      ];
+      const faqData = [
+        {
+          question: "What is Hardie board siding made of?",
+          answer: "Hardie board is a fiber-cement siding made from mechanical pulp. You'll also hear it called HardiePlank, concrete siding, cement-fiber siding, or fiber cement cladding. It comes in finishes that mimic chipboard, plywood, or real wood grain."
+        },
+        {
+          question: "Do I need to prime new Hardie board before painting?",
+          answer: "Yes. Even though new Hardie board ships with a factory primer, the coating is thin and doesn't cover the cut edges \u2014 so a high-quality primer coat is essential for proper coverage. We recommend a masonry primer like Loxon by Sherwin-Williams."
+        },
+        {
+          question: "What type of paint should I use on Hardie board siding?",
+          answer: "A high-quality acrylic latex exterior paint. Sticking with a trusted brand like Sherwin-Williams, Benjamin Moore, or Behr keeps the siding protected and helps the finish last much longer."
+        },
+        {
+          question: "Can I roll on paint when painting Hardie board?",
+          answer: "You can roll it, but we spray. Spraying drives paint into every crack and groove of the board's texture and ensures the entire surface is covered evenly \u2014 a roller tends to skip the recesses."
+        },
+        {
+          question: "How should I prepare faded Hardie board for painting?",
+          answer: "Thorough prep is everything. That means setting any popped nails, scraping off loose or peeling paint, and caulking significant gaps. If a section in direct ground contact has deteriorated, it should be repaired or replaced before painting."
+        },
+        {
+          question: "What are the best practices for painting Hardie board trim?",
+          answer: "Finish the trim after the siding. Sand and scrape loose paint, caulk large cracks, and replace any dry rot. Prime all bare wood or metal first, and use a semi-gloss sheen \u2014 it looks best on trim and stays cleaner over time."
+        }
+      ];
+      let openFaq = 0;
+      $$result.css.add(css17);
       $$unsubscribe_isMobileStore();
-      return `${validate_component(SubServiceHero, "SubServiceHero").$$render(
+      return ` <section class="relative bg-secondary-dark text-white overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark" aria-hidden="true"></div> <div class="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div> <div class="container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x"> <div class="order-2 lg:order-1"><div class="relative">${typeof heroSrc2 === "string" ? `<img class="w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl"${add_attribute("src", heroSrc2.img.src, 0)} alt="Home with Hardie board siding painted by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", heroSrc2.img.w, 0)}${add_attribute("height", heroSrc2.img.h, 0)}>` : `<picture>${each(Object.entries(heroSrc2.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl"${add_attribute("src", heroSrc2.img.src, 0)} alt="Home with Hardie board siding painted by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", heroSrc2.img.w, 0)}${add_attribute("height", heroSrc2.img.h, 0)}></picture>`} ${validate_component(GoogleProof, "GoogleProof").$$render(
         $$result,
         {
-          data: {
-            h1: "#1 Hardie Board Siding Installation Company",
-            listItems: [
-              "Fiber Cement Siding Experts",
-              "High-Quality Materials",
-              "Experienced Installers",
-              "100% Satisfaction Guaranteed"
-            ]
-          }
+          class: "bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl"
         },
         {},
         {}
-      )} ${validate_component(ColumnTemplateSection, "ColumnTemplateSection").$$render($$result, { class: "lg:pt-12 pt-4" }, {}, {
-        "right-column": () => {
-          return `<div slot="right-column" data-svelte-h="svelte-b5jbet"><h2>Upgrade Your Home with Hardie Board Siding</h2> <p>Hardie Board fiber cement siding gives your home the warmth of wood with the durability to
-			stand up to decades of Chicagoland weather. At Klasek Painting, we install new Hardie Board
-			siding and replace aging or damaged siding, transforming your home&#39;s exterior with a material
-			built to last. From full re-siding projects to targeted replacement, our experienced team
-			delivers a precise fit and a flawless finish.</p> <p>Ready to see what Hardie Board can do for your home? <a${add_attribute("href", routes["contact"].href, 0)}>Contact us</a> for a free design consultation and written estimate.</p></div>`;
+      )}</div></div>  <div class="order-1 lg:order-2 max-w-xl"><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-1fgrw5z">#1 Hardie Board Painters \xB7 Cook County</span> <h1 class="text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white" data-testid="page-heading" data-svelte-h="svelte-y4vxn2">Hardie board siding,<br class="hidden sm:block"> painted to last by
+        <span class="text-primary">our own crew.</span></h1> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-1j43g8k">Fiber cement is tough \u2014 but its factory color fades under the Chicago
+        sun, and a botched repaint peels in a season. Klasek primes the edges,
+        preps every board, and sprays on premium acrylic latex so your siding
+        looks new again and stays that way for years.</p> <ul class="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5">${each(heroChecks, (check) => {
+        return `<li class="flex items-center gap-2.5 text-white/90 font-semibold"><svg class="text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> ${escape(check)} </li>`;
+      })}</ul> <div class="mt-8 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg h-14 px-7"
         },
-        "left-column": () => {
-          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src20 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src20.img.src, 0)} alt="New Hardie board siding installation by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}>` : `<picture>${each(Object.entries(src20.sources), ([format, srcset]) => {
-            return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src20.img.src, 0)} alt="New Hardie board siding installation by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}></picture>`}</div>`;
+        {},
+        {
+          default: () => {
+            return `Get a Free Estimate`;
+          }
         }
-      })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
+      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "outline",
+          class: "text-lg h-14 px-6"
+        },
+        {},
+        {}
+      )}</div></div></div></section>  <section class="bg-white border-y" data-svelte-h="svelte-1xq72kb"><div class="container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center"><span class="flex items-center gap-2"><img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars"> <span class="text-sm font-bold text-gray-700">5.0 on Google</span></span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      Lead-Safe Certified</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+      100% Satisfaction Guarantee</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+      Serving Chicagoland since 1994</span></div></section>  <section class="bg-white p-y p-x"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11 flex flex-col items-center" data-svelte-h="svelte-rysvw3"><div class="ribbon mb-4 svelte-18ua8g5"><span class="flag flag-l svelte-18ua8g5" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark">Why Hardie board needs a real paint job</h2> <span class="flag flag-r svelte-18ua8g5" aria-hidden="true"></span></div> <p class="text-lg text-gray-600 leading-relaxed">Fiber cement is built to last \u2014 but the finish on it isn&#39;t forever. Skip
+        the prep, and a fresh coat peels before the next summer&#39;s out.</p></div> <div class="grid sm:grid-cols-3 gap-5">${each(problems, (problem, i2) => {
+        return `<div class="rounded-xl border p-6 bg-off-white"><div class="w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4">${i2 === 0 ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"></path></svg>` : `${i2 === 1 ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M3 13h18"></path></svg>` : `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>`}`}</div> <h3 class="font-bold text-xl text-secondary-dark">${escape(problem.title)}</h3> <p class="mt-2 text-gray-600 leading-relaxed">${escape(problem.body)}</p> </div>`;
+      })}</div></div></section>  <section id="painting" class="relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden"><div class="absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70" aria-hidden="true"></div> <div class="container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-1gr8jly">Our signature service</span> <h2 class="text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white" data-svelte-h="svelte-um7sg2">Primed, prepped, and sprayed \u2014 the way fiber cement should be painted.</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-j0bm8y">A Hardie board repaint lives or dies on prep. We set popped nails,
+        scrape loose paint, caulk the gaps, and prime the bare edges \u2014 then
+        spray on premium acrylic latex so paint works into every groove and the
+        whole wall cures to one even finish.</p> <ul class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5">${each(paintingChecks, ([bold, rest]) => {
+        return `<li class="flex items-start gap-3"><svg class="mt-0.5 shrink-0 text-primary" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> <span class="text-white/85"><b class="text-white font-bold">${escape(bold)}</b> ${escape(rest)}</span> </li>`;
+      })}</ul> <div class="mt-8 flex flex-wrap items-center gap-4">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg h-14 px-7"
+        },
+        {},
+        {
+          default: () => {
+            return `Price My Repaint`;
+          }
+        }
+      )} <p class="text-sm text-white/55 max-w-[14rem]" data-svelte-h="svelte-sl531a">Painted by Klasek employees \u2014 never subcontracted out.</p></div></div> <div class="grid grid-cols-2 gap-4">${typeof paintingTall === "string" ? `<img class="w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", paintingTall.img.src, 0)} alt="Spraying Hardie board siding" loading="lazy"${add_attribute("width", paintingTall.img.w, 0)}${add_attribute("height", paintingTall.img.h, 0)}>` : `<picture>${each(Object.entries(paintingTall.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", paintingTall.img.src, 0)} alt="Spraying Hardie board siding" loading="lazy"${add_attribute("width", paintingTall.img.w, 0)}${add_attribute("height", paintingTall.img.h, 0)}></picture>`} <div class="grid grid-rows-2 gap-4"><div class="relative rounded-lg overflow-hidden ring-2 ring-white/10">${typeof paintingTop === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingTop.img.src, 0)} alt="Priming Hardie board cut edges" loading="lazy"${add_attribute("width", paintingTop.img.w, 0)}${add_attribute("height", paintingTop.img.h, 0)}>` : `<picture>${each(Object.entries(paintingTop.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingTop.img.src, 0)} alt="Priming Hardie board cut edges" loading="lazy"${add_attribute("width", paintingTop.img.w, 0)}${add_attribute("height", paintingTop.img.h, 0)}></picture>`}</div> <div class="relative rounded-lg overflow-hidden ring-2 ring-white/10">${typeof paintingBottom === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingBottom.img.src, 0)} alt="Finished Hardie lap siding" loading="lazy"${add_attribute("width", paintingBottom.img.w, 0)}${add_attribute("height", paintingBottom.img.h, 0)}>` : `<picture>${each(Object.entries(paintingBottom.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingBottom.img.src, 0)} alt="Finished Hardie lap siding" loading="lazy"${add_attribute("width", paintingBottom.img.w, 0)}${add_attribute("height", paintingBottom.img.h, 0)}></picture>`}</div></div></div></div></section>  <section id="repair" class="bg-white p-y p-x scroll-mt-20"><div class="container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">${typeof src20 === "string" ? `<img class="order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg"${add_attribute("src", src20.img.src, 0)} alt="Hardie board siding repair before painting" loading="lazy"${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}>` : `<picture>${each(Object.entries(src20.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg"${add_attribute("src", src20.img.src, 0)} alt="Hardie board siding repair before painting" loading="lazy"${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}></picture>`} <div class="order-1 lg:order-2"><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-5lt5ch">Repair before painting</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-mdqthf">We fix the failing boards first \u2014 then paint over solid siding.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed" data-svelte-h="svelte-6rcql9">Painting over rotted or cracked board just hides the problem. Where
+        siding has deteriorated \u2014 often where it meets the ground \u2014 we repair or
+        replace the damaged section so the finish goes on solid and lasts.</p> <div class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4">${each(repairItems, ([title, body2]) => {
+        return `<div class="flex items-start gap-3"><span class="mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <p><b class="font-bold text-secondary-dark">${escape(title)}</b><br> <span class="text-gray-600 text-[15px]">${escape(body2)}</span></p> </div>`;
+      })}</div> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          variant: "secondary",
+          class: "mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary"
+        },
+        {},
+        {
+          default: () => {
+            return `Book a Repair Visit`;
+          }
+        }
+      )}</div></div></section>  <section id="trim" class="bg-off-white p-y p-x scroll-mt-20"><div class="container"><div class="rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]"><div class="p-8 sm:p-12"><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-gis3g8">The finishing touch</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-11hbk1j">Trim, fascia &amp; soffit \u2014 the detail that makes it pop.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-cgidqx">Crisp trim is the icing on the cake. We sand and scrape loose paint,
+          caulk the cracks, replace any dry rot, and prime every bare spot \u2014
+          then finish in a semi-gloss that frames the house and wipes clean.</p> <div class="mt-6 flex flex-wrap gap-3" data-svelte-h="svelte-wje02d"><span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Sand &amp; scrape</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Caulk &amp; prime bare wood</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Semi-gloss finish</span></div> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "mt-8 text-lg h-14 px-7"
+        },
+        {},
+        {
+          default: () => {
+            return `Get a Trim Quote`;
+          }
+        }
+      )}</div> <div class="relative min-h-[260px]">${typeof trimSrc === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", trimSrc.img.src, 0)} alt="Fresh trim on Hardie board siding" loading="lazy"${add_attribute("width", trimSrc.img.w, 0)}${add_attribute("height", trimSrc.img.h, 0)}>` : `<picture>${each(Object.entries(trimSrc.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", trimSrc.img.src, 0)} alt="Fresh trim on Hardie board siding" loading="lazy"${add_attribute("width", trimSrc.img.w, 0)}${add_attribute("height", trimSrc.img.h, 0)}></picture>`}</div></div></div></section>  <section id="guide" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center"> <div data-svelte-h="svelte-5a9gso"><span class="tab mb-5 svelte-18ua8g5">A quick field guide</span> <h2 class="text-3xl sm:text-4xl leading-[1.07] font-extrabold text-secondary-dark">All about painting exterior Hardie board siding.</h2> <p class="mt-5 text-lg text-gray-600 leading-relaxed">Hardie board is a dense fiber-cement board made from mechanical pulp \u2014
+          you&#39;ll also hear it called HardiePlank, cement-fiber siding, or fiber
+          cement cladding. It&#39;s all over the Chicago suburbs in finishes that
+          mimic coarse chipboard, plywood, or real wood grain.</p> <p class="mt-4 text-lg text-gray-600 leading-relaxed">Because the siding almost always ships
+          <b class="text-secondary-dark font-bold">pre-primed</b> to protect it in
+          transit, a great paint job is less about the color and more about the prep.
+          Here&#39;s how we approach each situation.</p></div>  <div class="relative h-[380px] sm:h-[440px]">${typeof guideFront === "string" ? `<img class="absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideFront.img.src, 0)} alt="Hardie board home \u2014 front view" loading="lazy"${add_attribute("width", guideFront.img.w, 0)}${add_attribute("height", guideFront.img.h, 0)}>` : `<picture>${each(Object.entries(guideFront.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideFront.img.src, 0)} alt="Hardie board home \u2014 front view" loading="lazy"${add_attribute("width", guideFront.img.w, 0)}${add_attribute("height", guideFront.img.h, 0)}></picture>`} ${typeof guideAngle === "string" ? `<img class="absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideAngle.img.src, 0)} alt="Hardie board home \u2014 angle view" loading="lazy"${add_attribute("width", guideAngle.img.w, 0)}${add_attribute("height", guideAngle.img.h, 0)}>` : `<picture>${each(Object.entries(guideAngle.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideAngle.img.src, 0)} alt="Hardie board home \u2014 angle view" loading="lazy"${add_attribute("width", guideAngle.img.w, 0)}${add_attribute("height", guideAngle.img.h, 0)}></picture>`}</div></div>  <div class="mt-14 grid md:grid-cols-3 gap-6">${each(guideCards, ({ number, label, title, body: body2 }) => {
+        return `<div class="rounded-2xl border bg-off-white p-7"><span class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-primary-dark"><span class="w-6 h-6 rounded-full bg-primary-dark text-white flex items-center justify-center text-[13px]">${escape(number)}</span> ${escape(label)}</span> <h3 class="mt-4 font-bold text-xl text-secondary-dark">${escape(title)}</h3> <p class="mt-3 text-gray-600 leading-relaxed">${escape(body2)}</p> </div>`;
+      })}</div>  <div class="mt-10 rounded-2xl bg-secondary-dark text-white p-7 sm:p-9 flex flex-col sm:flex-row sm:items-center gap-6 justify-between"><div class="max-w-2xl" data-svelte-h="svelte-15fhd0k"><h3 class="font-bold text-xl sm:text-2xl text-white">Klasek Painting, serving Chicagoland for 30+ years.</h3> <p class="mt-2 text-white/75 leading-relaxed">Owner Pete Klasek is happy to answer any questions about your Hardie
+          board project. We&#39;re known for high-quality work, dependable service,
+          a satisfaction guarantee, and on-time completion \u2014 at competitive
+          pricing.</p></div> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg h-14 px-7 shrink-0"
+        },
+        {},
+        {
+          default: () => {
+            return `Contact Klasek`;
+          }
+        }
+      )}</div></div></section>  <section id="why" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11" data-svelte-h="svelte-1fia0mq"><div class="inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5"><span class="inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide">Why Choose Klasek</span></div> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Three decades on Chicagoland ladders. One crew, start to finish.</h2></div> <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">${each(stats, ({ stat, title, body: body2 }) => {
+        return `<div class="rounded-xl border p-6 text-center hover:shadow-subtle transition"><div class="font-extrabold text-4xl text-primary-dark">${escape(stat)}</div> <h3 class="mt-2 font-bold text-lg text-secondary-dark">${escape(title)}</h3> <p class="mt-2 text-gray-600 text-[15px] leading-relaxed">${escape(body2)}</p> </div>`;
+      })}</div></div></section>  <section class="bg-off-white p-y p-x"><div class="container"><div class="text-center mb-9 flex flex-col items-center" data-svelte-h="svelte-oo9x63"><span class="tab mb-4 svelte-18ua8g5">Our work</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Before &amp; after, around the neighborhood.</h2></div> <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${each(galleryImages, ({ src: src27, alt }) => {
+        return `${typeof src27 === "string" ? `<img class="w-full h-full aspect-square object-cover rounded-lg"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
+          return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+        })} <img class="w-full h-full aspect-square object-cover rounded-lg"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}> </picture>`}`;
+      })}</div> <div class="mt-9 flex flex-col items-center gap-3" data-svelte-h="svelte-r14l7e"><p class="flex items-center gap-2 text-sm font-bold text-gray-700">Review us
+        <img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars">
+        on</p> <img class="w-[92px] h-auto"${add_attribute("src", google, 0)} alt="Google"></div></div></section>  <section id="area" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="mb-10" data-svelte-h="svelte-1jsmhnv"><div class="ribbon svelte-18ua8g5"><span class="flag flag-l svelte-18ua8g5" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Areas We Serve</h2> <span class="flag flag-r svelte-18ua8g5" aria-hidden="true"></span></div></div> <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center"><div><h3 class="font-bold text-2xl text-secondary-dark" data-svelte-h="svelte-4ddwp4">Hardie board painting across the western Cook County suburbs.</h3> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-1oelp02">Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your home.
+          If your town isn&#39;t listed, call us; we likely cover it.</p> <div class="mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3"><svg class="mt-0.5 shrink-0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <div><p class="font-bold text-secondary-dark" data-svelte-h="svelte-75sjm3">Klasek Painting \xB7 Lyons, IL</p> <p class="text-gray-600 text-[15px]" data-svelte-h="svelte-1qewt9m">4415 S. Custer, Lyons, IL 60534</p> ${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "link",
+          class: "!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]"
+        },
+        {},
+        {}
+      )}</div></div> <div class="mt-5 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg px-6"
+        },
+        {},
+        {
+          default: () => {
+            return `Request Estimate`;
+          }
+        }
+      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "secondary",
+          class: "text-lg px-6 bg-secondary-dark hover:bg-secondary text-white"
+        },
+        {},
+        {
+          default: () => {
+            return `Call the Crew`;
+          }
+        }
+      )}</div></div> <div><ul class="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700">${each(Object.values(serviceAreaRoutes), ({ text: text2, href }) => {
+        return `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <a class="hover:text-primary-dark hover:underline"${add_attribute("href", href, 0)}>${escape(text2)}</a> </li>`;
+      })}</ul> <div class="mt-6 h-44 rounded-lg overflow-hidden">${validate_component(Map2, "Map").$$render($$result, { lazy: true }, {}, {})}</div></div></div></div></section>  <section class="bg-off-white py-14 border-y p-x"><div class="container"><div class="mb-8" data-svelte-h="svelte-1jx66ah"><div class="ribbon svelte-18ua8g5"><span class="flag flag-l svelte-18ua8g5" aria-hidden="true"></span> <p class="font-bold text-lg text-secondary-dark uppercase tracking-wide text-center">Our Trusted Brand Partners</p> <span class="flag flag-r svelte-18ua8g5" aria-hidden="true"></span></div></div> <div class="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7">${each(partnerLogos, ({ src: src27, alt, height }) => {
+        return `${typeof src27 === "string" ? `<img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-18ua8g5"}"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
+          return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+        })} <img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-18ua8g5"}"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}> </picture>`}`;
+      })}</div></div></section>  <section id="faq" class="bg-white p-y p-x scroll-mt-20"><div class="container max-w-3xl"><div class="mb-10" data-svelte-h="svelte-1d4vlt2"><div class="ribbon svelte-18ua8g5"><span class="flag flag-l svelte-18ua8g5" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Frequently Asked Questions</h2> <span class="flag flag-r svelte-18ua8g5" aria-hidden="true"></span></div></div> <div class="divide-y border-y">${each(faqData, ({ question, answer }, i2) => {
+        return `<div class="py-5"><button type="button" class="flex w-full items-center justify-between gap-4 text-left"${add_attribute("aria-expanded", openFaq === i2, 0)}><span class="font-bold text-lg text-secondary-dark">${escape(question)}</span> <span class="${"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition " + escape(
+          openFaq === i2 ? "rotate-45 bg-primary-dark text-white border-primary-dark" : "bg-off-white text-gray-600",
+          true
+        )}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg> </span></button> ${openFaq === i2 ? `<p class="mt-3 text-gray-600 leading-relaxed">${escape(answer)}</p>` : ``} </div>`;
+      })}</div></div></section>  <section class="relative bg-secondary-dark text-white p-y p-x overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark" aria-hidden="true"></div> <img${add_attribute("src", splash, 0)} alt="" aria-hidden="true" class="pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block"> <div class="container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-1k9bb3x">No-pressure, no-cost</span> <h2 class="text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white" data-svelte-h="svelte-5g88fm">Ready to help your property look its best?</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-md" data-svelte-h="svelte-jj4wmq">Send us your details and we&#39;ll schedule a walk-through, then deliver a
+        free written estimate for you to evaluate. Call the best.</p> <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold">${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "link",
+          class: "!text-2xl !font-bold text-white hover:!text-primary"
+        },
+        {},
+        {}
+      )} <span class="inline-flex items-center gap-2" data-svelte-h="svelte-1n0zcwg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          4415 S. Custer, Lyons, IL</span></div></div> <div class="bg-white rounded-2xl shadow-2xl p-6 sm:p-7"><p class="font-bold text-xl text-secondary-dark mb-1" data-svelte-h="svelte-1ue4w2h">Get a Free Estimate</p> <p class="text-sm text-gray-600 mb-5" data-svelte-h="svelte-brv2iu">We&#39;ll reach out to schedule your walk-through.</p> <div class="flex flex-col gap-3">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "w-full text-lg h-14"
+        },
+        {},
+        {
+          default: () => {
+            return `Request My Free Estimate`;
+          }
+        }
+      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "secondary",
+          class: "w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white"
+        },
+        {},
+        {}
+      )}</div></div></div></section>  <div class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]"><div class="grid grid-cols-2 gap-2 p-2.5" style="padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));">${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "secondary",
+          class: "bg-secondary-dark hover:bg-secondary text-white"
+        },
+        {},
+        {
+          default: () => {
+            return `Call`;
+          }
+        }
+      )} ${validate_component(Button, "Button").$$render($$result, { href: routes["contact"].href }, {}, {
         default: () => {
-          return `${validate_component(HeadingAccent, "HeadingAccent").$$render($$result, { extend: true, class: "sm:w-fit" }, {}, {
-            default: () => {
-              return `<h2 data-svelte-h="svelte-y82adz">Why Homeowners Choose Hardie Board</h2>`;
-            }
-          })} <p data-svelte-h="svelte-1s7zfma">There&#39;s a reason Hardie Board is one of the most popular siding upgrades in the Chicago suburbs
-		\u2014 it solves the problems other siding materials create:</p> <ul data-svelte-h="svelte-1lol2k"><li><strong>Built for our climate:</strong> fiber cement shrugs off freeze-thaw cycles, snow, and humidity
-			that crack and warp lesser materials</li> <li><strong>Decades of service life:</strong> properly installed Hardie Board lasts 30\u201350 years, backed
-			by industry-leading manufacturer warranties</li> <li><strong>Low maintenance:</strong> resists rot, pests, and fire \u2014 no constant scraping, patching,
-			or worrying</li> <li><strong>Timeless curb appeal:</strong> crisp lines and a wide range of styles and colors that elevate
-			any architecture, from historic homes to new construction</li> <li><strong>Lasting value:</strong> siding replacement consistently ranks among the highest-return exterior
-			improvements you can make</li></ul>`;
+          return `Free Estimate`;
         }
-      })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "pb-0" }, {}, {
-        default: () => {
-          return `${validate_component(HeadingAccent, "HeadingAccent").$$render($$result, { extend: true, class: "sm:w-fit" }, {}, {
-            default: () => {
-              return `<h2 data-svelte-h="svelte-dr3awc">Our Hardie Board Installation Process</h2>`;
-            }
-          })} <p data-svelte-h="svelte-9sb0gu">Great siding starts with great installation. Fiber cement only delivers on its promise when it&#39;s
-		fitted, fastened, and sealed correctly \u2014 and that&#39;s where our experience shows:</p> <ol data-svelte-h="svelte-1t55i7h"><li><strong>Free Consultation:</strong> we assess your current siding, walk you through style and color
-			options, and provide a clear written estimate</li> <li><strong>Preparation:</strong> we remove old or damaged siding and make sure the structure beneath
-			is sound before anything new goes up</li> <li><strong>Precision Installation:</strong> every board is cut, fitted, fastened, and flashed to James
-			Hardie&#39;s specifications for a weather-tight exterior</li> <li><strong>Sealing &amp; Finishing:</strong> joints and edges are sealed, and trim is finished for clean
-			lines around windows, doors, and corners</li> <li><strong>Final Walkthrough:</strong> we inspect every detail with you and don&#39;t call it done until
-			you&#39;re completely satisfied</li></ol> <p data-svelte-h="svelte-1giuj0e">Because we&#39;re also <a${add_attribute("href", routes["hardie-painting"].href, 0)}>Hardie Board painting specialists</a>, one team can take your project from bare walls to a beautifully finished exterior. Already
-		have Hardie siding that needs attention? See our
-		<a${add_attribute("href", routes["hardie-repair"].href, 0)}>Hardie Board repair services</a>.</p> ${validate_component(GalleryLinkBlock, "GalleryLinkBlock").$$render(
-            $$result,
-            {
-              data: [galleryRoutes["hardie-board"], galleryRoutes["siding-repair"]]
-            },
-            {},
-            {}
-          )}`;
-        }
-      })} ${validate_component(FaqSection, "FaqSection").$$render($$result, { faqData }, {}, {})}`;
+      })}</div> </div>`;
     });
   }
 });
@@ -22338,8 +23403,8 @@ var init__61 = __esm({
     index61 = 60;
     component61 = async () => component_cache61 ??= (await Promise.resolve().then(() => (init_page_svelte57(), page_svelte_exports57))).default;
     universal_id53 = "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.ts";
-    imports61 = ["_app/immutable/nodes/60.dRV42gCs.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
-    stylesheets61 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    imports61 = ["_app/immutable/nodes/60.C7S3blzR.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/GRGG0YDU.js", "_app/immutable/chunks/Cuz4b9uy.js", "_app/immutable/chunks/xRuhivlF.js", "_app/immutable/chunks/tZ0ymlLq.js", "_app/immutable/chunks/Wt7Ns1lL.js"];
+    stylesheets61 = ["_app/immutable/assets/60.Dp6q8Ut_.css"];
     fonts61 = [];
   }
 });
@@ -22370,7 +23435,7 @@ var page_svelte_exports58 = {};
 __export(page_svelte_exports58, {
   default: () => Page58
 });
-var src21, Page58;
+var Page58;
 var init_page_svelte58 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.svelte.js"() {
     init_ssr();
@@ -22379,20 +23444,9 @@ var init_page_svelte58 = __esm({
     init_BasicTemplateSection();
     init_routes();
     init_HeadingAccent();
+    init_hardie_board_siding_painting_before_after_service();
     init_isMobileStore();
     init_GalleryLinkBlock();
-    src21 = {
-      sources: {
-        avif: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif 641w",
-        webp: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp 641w",
-        png: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png 641w"
-      },
-      img: {
-        src: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png",
-        w: 641,
-        h: 641
-      }
-    };
     Page58 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
       $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
@@ -22490,7 +23544,7 @@ var init__62 = __esm({
     index62 = 61;
     component62 = async () => component_cache62 ??= (await Promise.resolve().then(() => (init_page_svelte58(), page_svelte_exports58))).default;
     universal_id54 = "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.ts";
-    imports62 = ["_app/immutable/nodes/61.jAPpflIR.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports62 = ["_app/immutable/nodes/61.BrljLS6T.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/Cuz4b9uy.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets62 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts62 = [];
   }
@@ -22522,7 +23576,7 @@ var page_svelte_exports59 = {};
 __export(page_svelte_exports59, {
   default: () => Page59
 });
-var src22, Page59;
+var Page59;
 var init_page_svelte59 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.svelte.js"() {
     init_ssr();
@@ -22530,21 +23584,10 @@ var init_page_svelte59 = __esm({
     init_ColumnTemplateSection();
     init_BasicTemplateSection();
     init_HeadingAccent();
+    init_hardie_board_siding_repair_service();
     init_isMobileStore();
     init_GalleryLinkBlock();
     init_routes();
-    src22 = {
-      sources: {
-        avif: "/_app/immutable/assets/hardie-board-siding-repair-service.CwNEPP8u.avif 331w, /_app/immutable/assets/hardie-board-siding-repair-service.BIpZsb1W.avif 661w",
-        webp: "/_app/immutable/assets/hardie-board-siding-repair-service.DcBBusKa.webp 331w, /_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp 661w",
-        png: "/_app/immutable/assets/hardie-board-siding-repair-service.CEnpMnwS.png 331w, /_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png 661w"
-      },
-      img: {
-        src: "/_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png",
-        w: 661,
-        h: 434
-      }
-    };
     Page59 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
       $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
@@ -22616,9 +23659,9 @@ var init_page_svelte59 = __esm({
 			curb appeal.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src22 === "string" ? `<img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", src22.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}>` : `<picture>${each(Object.entries(src22.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src20 === "string" ? `<img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", src20.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}>` : `<picture>${each(Object.entries(src20.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", src22.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}></picture>`}</div>`;
+          })} <img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", src20.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -22669,7 +23712,7 @@ var init__63 = __esm({
     index63 = 62;
     component63 = async () => component_cache63 ??= (await Promise.resolve().then(() => (init_page_svelte59(), page_svelte_exports59))).default;
     universal_id55 = "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts";
-    imports63 = ["_app/immutable/nodes/62.Cmx1mpc-.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports63 = ["_app/immutable/nodes/62.EDAwV6qo.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/GRGG0YDU.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets63 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts63 = [];
   }
@@ -22701,7 +23744,7 @@ var page_svelte_exports60 = {};
 __export(page_svelte_exports60, {
   default: () => Page60
 });
-var src23, Page60;
+var src22, Page60;
 var init_page_svelte60 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/_page.svelte.js"() {
     init_ssr();
@@ -22712,7 +23755,7 @@ var init_page_svelte60 = __esm({
     init_HeadingAccent();
     init_isMobileStore();
     init_GalleryLinkBlock();
-    src23 = {
+    src22 = {
       sources: {
         avif: "/_app/immutable/assets/vinyl-painting-service.SWez0p4k.avif 376w, /_app/immutable/assets/vinyl-painting-service.C64YWON6.avif 752w",
         webp: "/_app/immutable/assets/vinyl-painting-service.BQgjJ7aP.webp 376w, /_app/immutable/assets/vinyl-painting-service.BAQVDd_S.webp 752w",
@@ -22783,9 +23826,9 @@ var init_page_svelte60 = __esm({
 			spacious two-story, our team has the expertise to handle it all.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src23 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src23.img.src, 0)} alt=""${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src23.img.w, 0)}${add_attribute("height", src23.img.h, 0)}>` : `<picture>${each(Object.entries(src23.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src22 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src22.img.src, 0)} alt=""${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}>` : `<picture>${each(Object.entries(src22.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src23.img.src, 0)} alt=""${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src23.img.w, 0)}${add_attribute("height", src23.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src22.img.src, 0)} alt=""${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -22858,7 +23901,7 @@ var init__64 = __esm({
     index64 = 63;
     component64 = async () => component_cache64 ??= (await Promise.resolve().then(() => (init_page_svelte60(), page_svelte_exports60))).default;
     universal_id56 = "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/+page.ts";
-    imports64 = ["_app/immutable/nodes/63.fw5kxXBY.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports64 = ["_app/immutable/nodes/63.DkWoDzRF.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets64 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts64 = [];
   }
@@ -22890,7 +23933,7 @@ var page_svelte_exports61 = {};
 __export(page_svelte_exports61, {
   default: () => Page61
 });
-var src24, Page61;
+var src23, Page61;
 var init_page_svelte61 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/_page.svelte.js"() {
     init_ssr();
@@ -22900,7 +23943,7 @@ var init_page_svelte61 = __esm({
     init_routes();
     init_HeadingAccent();
     init_GalleryLinkBlock();
-    src24 = {
+    src23 = {
       sources: {
         avif: "/_app/immutable/assets/vinyl-siding-repair-service.BQsdArC0.avif 317w, /_app/immutable/assets/vinyl-siding-repair-service.CtUxU9ui.avif 633w",
         webp: "/_app/immutable/assets/vinyl-siding-repair-service.BH8cB_vK.webp 317w, /_app/immutable/assets/vinyl-siding-repair-service.DVn9QOnS.webp 633w",
@@ -22981,9 +24024,9 @@ var init_page_svelte61 = __esm({
 			book your service now!</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:order-first order-last">${typeof src24 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src24.img.src, 0)} alt="Vinyl siding repair project by Klasek Painting"${add_attribute("width", src24.img.w, 0)}${add_attribute("height", src24.img.h, 0)}>` : `<picture>${each(Object.entries(src24.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:order-first order-last">${typeof src23 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src23.img.src, 0)} alt="Vinyl siding repair project by Klasek Painting"${add_attribute("width", src23.img.w, 0)}${add_attribute("height", src23.img.h, 0)}>` : `<picture>${each(Object.entries(src23.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src24.img.src, 0)} alt="Vinyl siding repair project by Klasek Painting"${add_attribute("width", src24.img.w, 0)}${add_attribute("height", src24.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src23.img.src, 0)} alt="Vinyl siding repair project by Klasek Painting"${add_attribute("width", src23.img.w, 0)}${add_attribute("height", src23.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -23037,7 +24080,7 @@ var init__65 = __esm({
     index65 = 64;
     component65 = async () => component_cache65 ??= (await Promise.resolve().then(() => (init_page_svelte61(), page_svelte_exports61))).default;
     universal_id57 = "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/+page.ts";
-    imports65 = ["_app/immutable/nodes/64.DVNHaIKq.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports65 = ["_app/immutable/nodes/64.CkcjwudG.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets65 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts65 = [];
   }
@@ -23069,7 +24112,7 @@ var page_svelte_exports62 = {};
 __export(page_svelte_exports62, {
   default: () => Page62
 });
-var src25, painting, repair2, Page62;
+var src24, painting, repair2, Page62;
 var init_page_svelte62 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/_page.svelte.js"() {
     init_ssr();
@@ -23078,7 +24121,7 @@ var init_page_svelte62 = __esm({
     init_routes();
     init_ServiceAreaSection();
     init_PaintingPromisesSection();
-    src25 = "/_app/immutable/assets/stucco-painting-repair-services.D5bzhR67.webp";
+    src24 = "/_app/immutable/assets/stucco-painting-repair-services.D5bzhR67.webp";
     painting = "/_app/immutable/assets/stucco-painting-service.BEgKulgW.webp";
     repair2 = "/_app/immutable/assets/stucco-repair-service.Dqv7zbqz.webp";
     Page62 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -23094,7 +24137,7 @@ var init_page_svelte62 = __esm({
               "Meticulous Surface Preparation"
             ],
             image: {
-              src: src25,
+              src: src24,
               alt: "Beautiful house with newly repair stucco and paint job done by Klasek Painting"
             }
           }
@@ -23150,7 +24193,7 @@ var init__66 = __esm({
     index66 = 65;
     component66 = async () => component_cache66 ??= (await Promise.resolve().then(() => (init_page_svelte62(), page_svelte_exports62))).default;
     universal_id58 = "src/routes/(light-nav)/services/stucco-painting-repair/+page.ts";
-    imports66 = ["_app/immutable/nodes/65.Dwf_xr3f.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dzg24w47.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/zxfV3lJA.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/Sd_0-2sX.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DEuEdMQA.js", "_app/immutable/chunks/gL809UNr.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/BeSI2jC2.js", "_app/immutable/chunks/Bs4RoRbk.js", "_app/immutable/chunks/D5BaSaoK.js"];
+    imports66 = ["_app/immutable/nodes/65.BmwLip-T.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/B4ToEHT_.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js"];
     stylesheets66 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts66 = [];
   }
@@ -23182,7 +24225,7 @@ var page_svelte_exports63 = {};
 __export(page_svelte_exports63, {
   default: () => Page63
 });
-var src26, Page63;
+var src25, Page63;
 var init_page_svelte63 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-painting/_page.svelte.js"() {
     init_ssr();
@@ -23194,7 +24237,7 @@ var init_page_svelte63 = __esm({
     init_HeadingAccent();
     init_isMobileStore();
     init_GalleryLinkBlock();
-    src26 = {
+    src25 = {
       sources: {
         avif: "/_app/immutable/assets/exterior-stucco-painting-service.C5WJG5eC.avif 285w, /_app/immutable/assets/stucco-feature.DjbCYtpG.avif 569w",
         webp: "/_app/immutable/assets/exterior-stucco-painting-service.DM0Cd0m4.webp 285w, /_app/immutable/assets/exterior-stucco-painting-service.CUeHgcoi.webp 569w",
@@ -23275,9 +24318,9 @@ var init_page_svelte63 = __esm({
       finish.</p> <p>Interested in revitalizing your stucco exterior? <a${add_attribute("href", routes["contact"].href, 0)}>Contact us</a> today to discuss your project with our expert painters.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src26 === "string" ? `<img class="w-full h-auto max-w-[500px] bord rounded-lg"${add_attribute("src", src26.img.src, 0)} alt="White exterior stucco painting project in progress by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src26.img.w, 0)}${add_attribute("height", src26.img.h, 0)}>` : `<picture>${each(Object.entries(src26.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src25 === "string" ? `<img class="w-full h-auto max-w-[500px] bord rounded-lg"${add_attribute("src", src25.img.src, 0)} alt="White exterior stucco painting project in progress by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src25.img.w, 0)}${add_attribute("height", src25.img.h, 0)}>` : `<picture>${each(Object.entries(src25.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] bord rounded-lg"${add_attribute("src", src26.img.src, 0)} alt="White exterior stucco painting project in progress by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src26.img.w, 0)}${add_attribute("height", src26.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] bord rounded-lg"${add_attribute("src", src25.img.src, 0)} alt="White exterior stucco painting project in progress by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src25.img.w, 0)}${add_attribute("height", src25.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -23366,7 +24409,7 @@ var init__67 = __esm({
     index67 = 66;
     component67 = async () => component_cache67 ??= (await Promise.resolve().then(() => (init_page_svelte63(), page_svelte_exports63))).default;
     universal_id59 = "src/routes/(light-nav)/services/stucco-painting-repair/stucco-painting/+page.ts";
-    imports67 = ["_app/immutable/nodes/66.H9WA_BjR.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/MeiJrQww.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports67 = ["_app/immutable/nodes/66.7LQA1lNV.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets67 = ["_app/immutable/assets/EmailSignup.CZe4dQ9e.css", "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts67 = [];
   }
@@ -23398,7 +24441,7 @@ var page_svelte_exports64 = {};
 __export(page_svelte_exports64, {
   default: () => Page64
 });
-var src27, Page64;
+var src26, Page64;
 var init_page_svelte64 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-repair/_page.svelte.js"() {
     init_ssr();
@@ -23410,7 +24453,7 @@ var init_page_svelte64 = __esm({
     init_HeadingAccent();
     init_isMobileStore();
     init_GalleryLinkBlock();
-    src27 = {
+    src26 = {
       sources: {
         avif: "/_app/immutable/assets/exterior-stucco-repair-service.DKhbR85G.avif 306w, /_app/immutable/assets/exterior-stucco-repair-service.DHjyDFgG.avif 611w",
         webp: "/_app/immutable/assets/exterior-stucco-repair-service.DXbMpyFh.webp 306w, /_app/immutable/assets/exterior-stucco-repair-service.BF7f6Lbm.webp 611w",
@@ -23478,9 +24521,9 @@ var init_page_svelte64 = __esm({
       functional and attractive.</p></div>`;
         },
         "right-column": () => {
-          return `<div slot="right-column">${typeof src27 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src27.img.src, 0)} alt="Pete Klasek working on a stucco repair exterior house project"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
+          return `<div slot="right-column">${typeof src26 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src26.img.src, 0)} alt="Pete Klasek working on a stucco repair exterior house project"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src26.img.w, 0)}${add_attribute("height", src26.img.h, 0)}>` : `<picture>${each(Object.entries(src26.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src27.img.src, 0)} alt="Pete Klasek working on a stucco repair exterior house project"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src26.img.src, 0)} alt="Pete Klasek working on a stucco repair exterior house project"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src26.img.w, 0)}${add_attribute("height", src26.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -23543,7 +24586,7 @@ var init__68 = __esm({
     index68 = 67;
     component68 = async () => component_cache68 ??= (await Promise.resolve().then(() => (init_page_svelte64(), page_svelte_exports64))).default;
     universal_id60 = "src/routes/(light-nav)/services/stucco-painting-repair/stucco-repair/+page.ts";
-    imports68 = ["_app/immutable/nodes/67.Cd1DQo1f.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVJ5oFgp.js", "_app/immutable/chunks/BFi3tbP7.js", "_app/immutable/chunks/BVz_jPKa.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/chunks/B5WQ0k4l.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DDyZ1PNc.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/DciVrEmK.js", "_app/immutable/chunks/DOrvZIHm.js", "_app/immutable/chunks/CGbcYlYu.js", "_app/immutable/chunks/DM5Wh9PU.js", "_app/immutable/chunks/z9q485jL.js", "_app/immutable/chunks/y7dt2DGo.js", "_app/immutable/chunks/MeiJrQww.js", "_app/immutable/chunks/DSt0beyn.js", "_app/immutable/chunks/DcyhoWgL.js", "_app/immutable/chunks/BcUfM_Xj.js", "_app/immutable/chunks/BWikkAay.js"];
+    imports68 = ["_app/immutable/nodes/67.BWMBrvRP.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
     stylesheets68 = ["_app/immutable/assets/EmailSignup.CZe4dQ9e.css", "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts68 = [];
   }
@@ -24857,7 +25900,7 @@ var options = {
 </style>
 `
   },
-  version_hash: "npqgxj"
+  version_hash: "amp8ja"
 };
 async function get_hooks() {
   let handle2;
@@ -26516,22 +27559,22 @@ export const route = ${csr_route}; export const params = ${JSON.stringify(params
 }
 function create_css_import(route, url, manifest2) {
   const { errors, layouts, leaf } = route;
-  let css17 = "";
+  let css18 = "";
   for (const node of [...errors, ...layouts.map((l2) => l2?.[1]), leaf[1]]) {
     if (typeof node !== "number")
       continue;
     const node_css = manifest2._.client.css?.[node];
     for (const css_path of node_css ?? []) {
-      css17 += `'${assets || base}/${css_path}',`;
+      css18 += `'${assets || base}/${css_path}',`;
     }
   }
-  if (!css17)
+  if (!css18)
     return "";
   return `${create_client_import(
     /** @type {string} */
     manifest2._.client.start,
     url
-  )}.then(x => x.load_css([${css17}]));`;
+  )}.then(x => x.load_css([${css18}]));`;
 }
 var updated = {
   ...readable(false),
@@ -28719,7 +29762,7 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "klasek-painting.png", "klasek_blog.webp", "klasek_blog_what-exterior-paint-colors-look-the-best-2.webp", "klasek_blog_what-exterior-paint-colors-look-the-best-3.webp", "klasek_blog_what-exterior-paint-colors-look-the-best.webp", "robots.txt"]),
     mimeTypes: { ".png": "image/png", ".webp": "image/webp", ".txt": "text/plain" },
     _: {
-      client: { start: "_app/immutable/entry/start.BxP_PZp7.js", app: "_app/immutable/entry/app.C2oY7mJi.js", imports: ["_app/immutable/entry/start.BxP_PZp7.js", "_app/immutable/chunks/CPGwwV9Y.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/BzDfcGes.js", "_app/immutable/entry/app.C2oY7mJi.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/CwTS8T7P.js", "_app/immutable/chunks/IHki7fMi.js"], stylesheets: [], fonts: [], uses_env_dynamic_public: false },
+      client: { start: "_app/immutable/entry/start.CjN_6J3s.js", app: "_app/immutable/entry/app.BVxu0fr2.js", imports: ["_app/immutable/entry/start.CjN_6J3s.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/entry/app.BVxu0fr2.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js"], stylesheets: [], fonts: [], uses_env_dynamic_public: false },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
         __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),

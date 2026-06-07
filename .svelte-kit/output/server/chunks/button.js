@@ -1,4 +1,4 @@
-import { c as create_ssr_component, t as compute_rest_props, d as spread, a as add_attribute, u as escape_attribute_value, f as escape_object, v as validate_component } from "./ssr.js";
+import { c as create_ssr_component, u as compute_rest_props, d as spread, a as add_attribute, w as escape_attribute_value, f as escape_object, v as validate_component } from "./ssr.js";
 import "dequal";
 import "./create.js";
 import { i as is_void, c as cn } from "./utils2.js";

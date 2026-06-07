@@ -47,7 +47,7 @@
   $: hasOwnMobileCta =
     $page.url.pathname.startsWith("/services/gutter-installation-repair") ||
     $page.url.pathname.startsWith(
-      "/services/siding-painting-repair/hardie-board-installation",
+      "/services/siding-painting-repair/hardie-board-services",
     );
 </script>
 

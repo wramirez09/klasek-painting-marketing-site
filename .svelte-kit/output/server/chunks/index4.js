@@ -1,4 +1,4 @@
-import { w as set_current_component, x as current_component, r as run_all, y as createEventDispatcher, s as setContext, p as getContext, c as create_ssr_component, t as compute_rest_props, g as subscribe, d as spread, a as add_attribute, f as escape_object, v as validate_component } from "./ssr.js";
+import { x as set_current_component, y as current_component, r as run_all, z as createEventDispatcher, s as setContext, q as getContext, c as create_ssr_component, u as compute_rest_props, g as subscribe, d as spread, a as add_attribute, f as escape_object, v as validate_component } from "./ssr.js";
 import "dequal";
 import { w as withGet, o as omit, m as makeElement, c as createElHelpers, d as disabledAttr, e as executeCallbacks, a as addMeltEventListener, i as isHTMLElement, s as styleToString, k as kbd, g as getElementByMeltId } from "./create.js";
 import { c as cn } from "./utils2.js";
@@ -603,6 +603,14 @@ function slide(node, { delay = 0, duration = 400, easing = cubicOut, axis = "y" 
     css: (t) => `overflow: hidden;opacity: ${Math.min(t * 20, 1) * opacity};${primary_property}: ${t * primary_property_value}px;padding-${secondary_properties[0]}: ${t * padding_start_value}px;padding-${secondary_properties[1]}: ${t * padding_end_value}px;margin-${secondary_properties[0]}: ${t * margin_start_value}px;margin-${secondary_properties[1]}: ${t * margin_end_value}px;border-${secondary_properties[0]}-width: ${t * border_width_start_value}px;border-${secondary_properties[1]}-width: ${t * border_width_end_value}px;`
   };
 }
+const Chevron_down = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  const iconNode = [["path", { "d": "m6 9 6 6 6-6" }]];
+  return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "chevron-down" }, $$props, { iconNode }), {}, {
+    default: () => {
+      return `${slots.default ? slots.default({}) : ``}`;
+    }
+  })}`;
+});
 const Accordion_content = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$restProps = compute_rest_props($$props, ["class", "transition", "transitionConfig"]);
   let { class: className = void 0 } = $$props;
@@ -637,14 +645,6 @@ const Accordion_item = create_ssr_component(($$result, $$props, $$bindings, slot
   if ($$props.class === void 0 && $$bindings.class && className !== void 0) $$bindings.class(className);
   if ($$props.value === void 0 && $$bindings.value && value !== void 0) $$bindings.value(value);
   return `${validate_component(Accordion_item$1, "AccordionPrimitive.Item").$$render($$result, Object.assign({}, { value }, { class: cn("", className) }, $$restProps), {}, {
-    default: () => {
-      return `${slots.default ? slots.default({}) : ``}`;
-    }
-  })}`;
-});
-const Chevron_down = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  const iconNode = [["path", { "d": "m6 9 6 6 6-6" }]];
-  return `${validate_component(Icon, "Icon").$$render($$result, Object.assign({}, { name: "chevron-down" }, $$props, { iconNode }), {}, {
     default: () => {
       return `${slots.default ? slots.default({}) : ``}`;
     }

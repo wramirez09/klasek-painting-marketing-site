@@ -1,4 +1,4 @@
-import { c as create_ssr_component, a as add_attribute, e as each, v as validate_component, z as is_promise, k as noop, b as escape } from "./ssr.js";
+import { c as create_ssr_component, a as add_attribute, e as each, v as validate_component, A as is_promise, k as noop, b as escape } from "./ssr.js";
 import { B as Button } from "./button.js";
 const SpinnerIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { class: classes = "" } = $$props;

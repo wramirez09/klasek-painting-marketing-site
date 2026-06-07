@@ -1,6 +1,6 @@
 import "dequal";
 import { d as derived, w as writable, r as readable } from "./index.js";
-import { q as get_store_value } from "./ssr.js";
+import { t as get_store_value } from "./ssr.js";
 function styleToString(style) {
   return Object.keys(style).reduce((str, key) => {
     if (style[key] === void 0)

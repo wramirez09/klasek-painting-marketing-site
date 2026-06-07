@@ -1,26 +1,8 @@
-import { c as create_ssr_component, a as add_attribute, b as escape, v as validate_component, g as subscribe, e as each } from "../../../../chunks/ssr.js";
+import { c as create_ssr_component, v as validate_component, a as add_attribute, b as escape, g as subscribe, e as each } from "../../../../chunks/ssr.js";
 import { B as Button } from "../../../../chunks/button.js";
 import { p as page } from "../../../../chunks/stores.js";
 import { R as RibbonWrapper } from "../../../../chunks/RibbonWrapper.js";
 import { I as Icon } from "../../../../chunks/Icon.js";
-const BlogPreviewCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  let { previewData } = $$props;
-  if ($$props.previewData === void 0 && $$bindings.previewData && previewData !== void 0) $$bindings.previewData(previewData);
-  return `<li class="list-none grid lg:grid-cols-[400px_auto] md:grid-cols-[350px_auto] md:grid-rows-1 py-8 lg:gap-x-4 md:gap-0 gap-2"> <div class="relative w-full rounded-lg overflow-clip my-auto h-[250px]"><div class="absolute rounded-lg size-full bg-off-white animate-pulse"></div> <div${add_attribute("style", `background-image: url(${previewData.image})`, 0)} class="absolute bg-cover bg-center size-full z-10 rounded-lg border-2 border-secondary-dark"></div></div>  <div class="sm:px-8 sm:pl-4 flex flex-col sm:gap-4 gap-2 h-fit my-auto"><div><h2 class="font-semibold lg:text-4xl xs:text-2xl text-xl mb-1 text-secondary-dark">${escape(previewData.title)}</h2> <span class="text-sm text-gray-600">${escape(previewData.datePublished)}</span></div> <p>${escape(previewData.meta)}..</p> ${validate_component(Button, "Button").$$render(
-    $$result,
-    {
-      variant: "outline",
-      class: "md:w-fit text-secondary-dark",
-      href: previewData.href
-    },
-    {},
-    {
-      default: () => {
-        return `Read Post`;
-      }
-    }
-  )}</div></li>`;
-});
 const House = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const iconNode = [
     [
@@ -41,6 +23,24 @@ const House = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${slots.default ? slots.default({}) : ``}`;
     }
   })}`;
+});
+const BlogPreviewCard = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { previewData } = $$props;
+  if ($$props.previewData === void 0 && $$bindings.previewData && previewData !== void 0) $$bindings.previewData(previewData);
+  return `<li class="list-none grid lg:grid-cols-[400px_auto] md:grid-cols-[350px_auto] md:grid-rows-1 py-8 lg:gap-x-4 md:gap-0 gap-2"> <div class="relative w-full rounded-lg overflow-clip my-auto h-[250px]"><div class="absolute rounded-lg size-full bg-off-white animate-pulse"></div> <div${add_attribute("style", `background-image: url(${previewData.image})`, 0)} class="absolute bg-cover bg-center size-full z-10 rounded-lg border-2 border-secondary-dark"></div></div>  <div class="sm:px-8 sm:pl-4 flex flex-col sm:gap-4 gap-2 h-fit my-auto"><div><h2 class="font-semibold lg:text-4xl xs:text-2xl text-xl mb-1 text-secondary-dark">${escape(previewData.title)}</h2> <span class="text-sm text-gray-600">${escape(previewData.datePublished)}</span></div> <p>${escape(previewData.meta)}..</p> ${validate_component(Button, "Button").$$render(
+    $$result,
+    {
+      variant: "outline",
+      class: "md:w-fit text-secondary-dark",
+      href: previewData.href
+    },
+    {},
+    {
+      default: () => {
+        return `Read Post`;
+      }
+    }
+  )}</div></li>`;
 });
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let notFirstPage;

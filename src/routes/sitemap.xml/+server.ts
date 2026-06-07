@@ -188,7 +188,7 @@ export const GET = () => {
     <loc>${siteName}/services/siding-painting-repair/vinyl-siding-repair</loc>
   </url>
   <url>
-    <loc>${siteName}/services/siding-painting-repair/hardie-board-installation</loc>
+    <loc>${siteName}/services/siding-painting-repair/hardie-board-services</loc>
   </url>
   <url>
     <loc>${siteName}/services/gutter-installation-repair</loc>

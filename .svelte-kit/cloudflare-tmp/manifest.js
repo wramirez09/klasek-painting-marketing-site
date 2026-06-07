@@ -10,7 +10,7 @@ return {
 	assets: new Set(["favicon.png","klasek-painting.png","klasek_blog.webp","klasek_blog_what-exterior-paint-colors-look-the-best-2.webp","klasek_blog_what-exterior-paint-colors-look-the-best-3.webp","klasek_blog_what-exterior-paint-colors-look-the-best.webp","robots.txt"]),
 	mimeTypes: {".png":"image/png",".webp":"image/webp",".txt":"text/plain"},
 	_: {
-		client: {start:"_app/immutable/entry/start.BxP_PZp7.js",app:"_app/immutable/entry/app.C2oY7mJi.js",imports:["_app/immutable/entry/start.BxP_PZp7.js","_app/immutable/chunks/CPGwwV9Y.js","_app/immutable/chunks/CwTS8T7P.js","_app/immutable/chunks/BzDfcGes.js","_app/immutable/entry/app.C2oY7mJi.js","_app/immutable/chunks/C1FmrZbK.js","_app/immutable/chunks/CwTS8T7P.js","_app/immutable/chunks/IHki7fMi.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.CjN_6J3s.js",app:"_app/immutable/entry/app.BVxu0fr2.js",imports:["_app/immutable/entry/start.CjN_6J3s.js","_app/immutable/chunks/BZgZIqmN.js","_app/immutable/chunks/KUc_ZfUX.js","_app/immutable/chunks/DsXuwSGI.js","_app/immutable/entry/app.BVxu0fr2.js","_app/immutable/chunks/C1FmrZbK.js","_app/immutable/chunks/KUc_ZfUX.js","_app/immutable/chunks/IHki7fMi.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('../output/server/nodes/0.js')),
 			__memo(() => import('../output/server/nodes/1.js')),

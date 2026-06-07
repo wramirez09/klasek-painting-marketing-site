@@ -182,7 +182,7 @@ const options = {
 </style>
 `
   },
-  version_hash: "npqgxj"
+  version_hash: "amp8ja"
 };
 async function get_hooks() {
   let handle;

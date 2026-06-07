@@ -232,16 +232,16 @@
 		"src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-repair/+page.ts",
 		"src/routes/+layout.server.ts"
 	],
-	"/(light-nav)/services/siding-painting-repair/hardie-board-installation": [
-		"src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.ts",
-		"src/routes/+layout.server.ts"
-	],
 	"/(light-nav)/services/siding-painting-repair/hardie-board-painting": [
 		"src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.ts",
 		"src/routes/+layout.server.ts"
 	],
 	"/(light-nav)/services/siding-painting-repair/hardie-board-repair": [
 		"src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(light-nav)/services/siding-painting-repair/hardie-board-services": [
+		"src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.ts",
 		"src/routes/+layout.server.ts"
 	],
 	"/(light-nav)/services/siding-painting-repair/vinyl-siding-painting": [

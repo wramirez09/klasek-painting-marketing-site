@@ -82,16 +82,6 @@
       "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"
     ]
   },
-  "_ContactForm.js": {
-    "file": "chunks/ContactForm.js",
-    "name": "ContactForm",
-    "imports": [
-      "_ssr.js"
-    ],
-    "css": [
-      "_app/immutable/assets/ContactForm.d1O11VaS.css"
-    ]
-  },
   "_CtaBannerSection.js": {
     "file": "chunks/CtaBannerSection.js",
     "name": "CtaBannerSection",
@@ -229,7 +219,8 @@
       "_isMobileStore.js",
       "_exports.js",
       "_utils.js",
-      "_routes.js"
+      "_routes.js",
+      "_Icon.js"
     ],
     "css": [
       "_app/immutable/assets/NavBar.DBFUqa5S.css"
@@ -383,6 +374,30 @@
     "file": "chunks/galleryHelpers.js",
     "name": "galleryHelpers"
   },
+  "_hardie-board-siding-painting-before-after-service.js": {
+    "file": "chunks/hardie-board-siding-painting-before-after-service.js",
+    "name": "hardie-board-siding-painting-before-after-service",
+    "assets": [
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png"
+    ]
+  },
+  "_hardie-board-siding-repair-service.js": {
+    "file": "chunks/hardie-board-siding-repair-service.js",
+    "name": "hardie-board-siding-repair-service",
+    "assets": [
+      "_app/immutable/assets/hardie-board-siding-repair-service.CwNEPP8u.avif",
+      "_app/immutable/assets/hardie-board-siding-repair-service.BIpZsb1W.avif",
+      "_app/immutable/assets/hardie-board-siding-repair-service.DcBBusKa.webp",
+      "_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp",
+      "_app/immutable/assets/hardie-board-siding-repair-service.CEnpMnwS.png",
+      "_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png"
+    ]
+  },
   "_index.js": {
     "file": "chunks/index.js",
     "name": "index",
@@ -491,6 +506,13 @@
   "_metaTagHelpers.js": {
     "file": "chunks/metaTagHelpers.js",
     "name": "metaTagHelpers"
+  },
+  "_orange-paint-splash.js": {
+    "file": "chunks/orange-paint-splash.js",
+    "name": "orange-paint-splash",
+    "assets": [
+      "_app/immutable/assets/orange-paint-splash.Bi1EE15B.webp"
+    ]
   },
   "_routes.js": {
     "file": "chunks/routes.js",
@@ -6954,7 +6976,8 @@
     "imports": [
       "_ssr.js",
       "_NavBar.js",
-      "_Footer.js"
+      "_Footer.js",
+      "_stores.js"
     ]
   },
   "src/routes/(light-nav)/blog/+page.server.ts": {
@@ -7023,11 +7046,13 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_ContactForm.js",
       "_Map.js",
       "_LocationIcon.js",
       "_ClickToCall.js",
       "_routes.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.d1O11VaS.css"
     ]
   },
   "src/routes/(light-nav)/legal/privacy-policy/+page.svelte": {
@@ -7380,12 +7405,12 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_ContactForm.js",
       "_GoogleProof.js",
       "_ClickToCall.js",
       "_Map.js",
       "_button.js",
       "_routes.js",
+      "_orange-paint-splash.js",
       "_5-stars.js",
       "_Google-name-logo.js",
       "_lead-safe.js",
@@ -7400,8 +7425,7 @@
       "_app/immutable/assets/exterior-home-painting.WX3HoXxC.webp",
       "_app/immutable/assets/exterior-home-painting.DH4vjNhU.webp",
       "_app/immutable/assets/exterior-home-painting.tcNBtJ77.png",
-      "_app/immutable/assets/exterior-home-painting.DY868983.png",
-      "_app/immutable/assets/orange-paint-splash.Bi1EE15B.webp"
+      "_app/immutable/assets/exterior-home-painting.DY868983.png"
     ]
   },
   "src/routes/(light-nav)/services/gutter-installation-repair/+page.ts": {
@@ -7581,13 +7605,21 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_FaqSection.js",
-      "_ColumnTemplateSection.js",
-      "_BasicTemplateSection.js",
+      "_GoogleProof.js",
+      "_ClickToCall.js",
+      "_Map.js",
+      "_button.js",
       "_routes.js",
-      "_HeadingAccent.js",
-      "_isMobileStore.js",
-      "_GalleryLinkBlock.js"
+      "_hardie-board-siding-repair-service.js",
+      "_hardie-board-siding-painting-before-after-service.js",
+      "_orange-paint-splash.js",
+      "_5-stars.js",
+      "_Google-name-logo.js",
+      "_lead-safe.js",
+      "_isMobileStore.js"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.Dp6q8Ut_.css"
     ],
     "assets": [
       "_app/immutable/assets/exterior-hardie-board-1.C9LR72Vk.avif",
@@ -7595,7 +7627,85 @@
       "_app/immutable/assets/exterior-hardie-board-1.So7ecRbF.webp",
       "_app/immutable/assets/exterior-hardie-board-1.BL-SdGeB.webp",
       "_app/immutable/assets/exterior-hardie-board-1.CMi3El4J.png",
-      "_app/immutable/assets/exterior-hardie-board-1.Cdn2AquH.png"
+      "_app/immutable/assets/exterior-hardie-board-1.Cdn2AquH.png",
+      "_app/immutable/assets/exterior-hardie-board-2.CUrjlj4b.avif",
+      "_app/immutable/assets/exterior-hardie-board-2.BGtE0MUI.avif",
+      "_app/immutable/assets/exterior-hardie-board-2.KmAkXME3.webp",
+      "_app/immutable/assets/exterior-hardie-board-2.CB1p8ABP.webp",
+      "_app/immutable/assets/exterior-hardie-board-2.tvgOBTQq.png",
+      "_app/immutable/assets/exterior-hardie-board-2.Cg64khCH.png",
+      "_app/immutable/assets/exterior-hardie-board-3.CgpQlWKy.avif",
+      "_app/immutable/assets/exterior-hardie-board-3.B55EULWx.avif",
+      "_app/immutable/assets/exterior-hardie-board-3.Di2PlErd.webp",
+      "_app/immutable/assets/exterior-hardie-board-3.Dl6rok0V.webp",
+      "_app/immutable/assets/exterior-hardie-board-3.7nIhlrsy.png",
+      "_app/immutable/assets/exterior-hardie-board-3.D9HX3LO1.png",
+      "_app/immutable/assets/exterior-hardie-board-4.CglGMmn8.avif",
+      "_app/immutable/assets/exterior-hardie-board-4.BtbCZWl5.avif",
+      "_app/immutable/assets/exterior-hardie-board-4.BvCzUoWm.webp",
+      "_app/immutable/assets/exterior-hardie-board-4.C_VYxt8n.webp",
+      "_app/immutable/assets/exterior-hardie-board-4.BjKLVzvb.png",
+      "_app/immutable/assets/exterior-hardie-board-4.7ebTpcOU.png",
+      "_app/immutable/assets/exterior-hardie-board-5.bzXQS01H.avif",
+      "_app/immutable/assets/exterior-hardie-board-5.DhaSQpdo.avif",
+      "_app/immutable/assets/exterior-hardie-board-5.VNgpZ69a.webp",
+      "_app/immutable/assets/exterior-hardie-board-5.CfNo3AiQ.webp",
+      "_app/immutable/assets/exterior-hardie-board-5.CUtMiAZq.png",
+      "_app/immutable/assets/exterior-hardie-board-5.Cl-Z5cm-.png",
+      "_app/immutable/assets/exterior-hardie-board-6.GSsvA_cN.avif",
+      "_app/immutable/assets/exterior-hardie-board-6.U5t380xK.avif",
+      "_app/immutable/assets/exterior-hardie-board-6.CeIfvedw.webp",
+      "_app/immutable/assets/exterior-hardie-board-6.Z_dAWJo8.webp",
+      "_app/immutable/assets/exterior-hardie-board-6.CTuNZqAB.png",
+      "_app/immutable/assets/exterior-hardie-board-6.CPViXenp.png",
+      "_app/immutable/assets/exterior-hardie-board-7.B4eG7DmT.avif",
+      "_app/immutable/assets/exterior-hardie-board-7.ywt5duci.avif",
+      "_app/immutable/assets/exterior-hardie-board-7.x-sWdkv0.webp",
+      "_app/immutable/assets/exterior-hardie-board-7.DFqgsBTr.webp",
+      "_app/immutable/assets/exterior-hardie-board-7.C0AFaop5.png",
+      "_app/immutable/assets/exterior-hardie-board-7.DmXGz4tC.png",
+      "_app/immutable/assets/exterior-hardie-board-8.DjWiLSyl.avif",
+      "_app/immutable/assets/exterior-hardie-board-8.8q-EyMk7.avif",
+      "_app/immutable/assets/exterior-hardie-board-8.BYFW84D7.webp",
+      "_app/immutable/assets/exterior-hardie-board-8.BJUz1RnE.webp",
+      "_app/immutable/assets/exterior-hardie-board-8.CZwIuFUt.png",
+      "_app/immutable/assets/exterior-hardie-board-8.BQf6HCSw.png",
+      "_app/immutable/assets/exterior-hardie-board-9.0k8s2wzN.avif",
+      "_app/immutable/assets/exterior-hardie-board-9.CFzYAWAM.avif",
+      "_app/immutable/assets/exterior-hardie-board-9.BVp2O2qH.webp",
+      "_app/immutable/assets/exterior-hardie-board-9.WIqvzLAy.webp",
+      "_app/immutable/assets/exterior-hardie-board-9.C1K37Wnf.png",
+      "_app/immutable/assets/exterior-hardie-board-9.DnKjA59-.png",
+      "_app/immutable/assets/exterior-hardie-board-10.BUBSUQwU.avif",
+      "_app/immutable/assets/exterior-hardie-board-10.DPsTRKiV.avif",
+      "_app/immutable/assets/exterior-hardie-board-10.C9QN9pGl.webp",
+      "_app/immutable/assets/exterior-hardie-board-10.BZ01cpEN.webp",
+      "_app/immutable/assets/exterior-hardie-board-10.opD691r9.png",
+      "_app/immutable/assets/exterior-hardie-board-10.EKZrvkyO.png",
+      "_app/immutable/assets/exterior-hardie-board-11.BiP5D8fr.avif",
+      "_app/immutable/assets/exterior-hardie-board-11.CTBspFN0.avif",
+      "_app/immutable/assets/exterior-hardie-board-11.0L3xhmF3.webp",
+      "_app/immutable/assets/exterior-hardie-board-11.DaRJYDie.webp",
+      "_app/immutable/assets/exterior-hardie-board-11.BZgcmoHj.png",
+      "_app/immutable/assets/exterior-hardie-board-11.D_TmP3WU.png",
+      "_app/immutable/assets/exterior-hardie-board-12.CqsFOu7K.avif",
+      "_app/immutable/assets/exterior-hardie-board-12.C1_Dtjm-.avif",
+      "_app/immutable/assets/exterior-hardie-board-12.Cv47y8oZ.webp",
+      "_app/immutable/assets/exterior-hardie-board-12.kOBHn5Ja.webp",
+      "_app/immutable/assets/exterior-hardie-board-12.oEwuljK3.png",
+      "_app/immutable/assets/exterior-hardie-board-12.B_XJH95Q.png",
+      "_app/immutable/assets/exterior-hardie-board-13.FkomS3tq.avif",
+      "_app/immutable/assets/exterior-hardie-board-13.DI-0djG0.avif",
+      "_app/immutable/assets/exterior-hardie-board-13.D0CnvcPk.webp",
+      "_app/immutable/assets/exterior-hardie-board-13.qOcjaLnc.webp",
+      "_app/immutable/assets/exterior-hardie-board-13.wKprW6aG.png",
+      "_app/immutable/assets/exterior-hardie-board-13.CeYTgYsh.png",
+      "_app/immutable/assets/exterior-hardie-board-14.5ws0NZmJ.avif",
+      "_app/immutable/assets/exterior-hardie-board-14.SDEuRSNX.avif",
+      "_app/immutable/assets/exterior-hardie-board-14.CBj7gpDN.webp",
+      "_app/immutable/assets/exterior-hardie-board-14.B5IcW8yh.webp",
+      "_app/immutable/assets/exterior-hardie-board-14.BIryb3Q6.png",
+      "_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png"
     ]
   },
   "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.ts": {
@@ -7619,16 +7729,9 @@
       "_BasicTemplateSection.js",
       "_routes.js",
       "_HeadingAccent.js",
+      "_hardie-board-siding-painting-before-after-service.js",
       "_isMobileStore.js",
       "_GalleryLinkBlock.js"
-    ],
-    "assets": [
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png"
     ]
   },
   "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.ts": {
@@ -7651,17 +7754,10 @@
       "_ColumnTemplateSection.js",
       "_BasicTemplateSection.js",
       "_HeadingAccent.js",
+      "_hardie-board-siding-repair-service.js",
       "_isMobileStore.js",
       "_GalleryLinkBlock.js",
       "_routes.js"
-    ],
-    "assets": [
-      "_app/immutable/assets/hardie-board-siding-repair-service.CwNEPP8u.avif",
-      "_app/immutable/assets/hardie-board-siding-repair-service.BIpZsb1W.avif",
-      "_app/immutable/assets/hardie-board-siding-repair-service.DcBBusKa.webp",
-      "_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp",
-      "_app/immutable/assets/hardie-board-siding-repair-service.CEnpMnwS.png",
-      "_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png"
     ]
   },
   "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts": {
@@ -7873,7 +7969,7 @@
       "_index2.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.BF70syWC.css"
+      "_app/immutable/assets/_layout.DxoXQsSG.css"
     ],
     "assets": [
       "_app/immutable/assets/montserrat-latin-500-normal.DRFEGfly.woff2",

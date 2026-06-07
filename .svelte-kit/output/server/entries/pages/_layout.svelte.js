@@ -294,7 +294,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let metaTags;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
   metaTags = merge({}, data.baseMetaTags, $page.data.pageMetaTags);
-  $page.url.pathname.startsWith("/services/gutter-installation-repair");
+  $page.url.pathname.startsWith("/services/gutter-installation-repair") || $page.url.pathname.startsWith("/services/siding-painting-repair/hardie-board-installation");
   $$unsubscribe_page();
   $$unsubscribe_isMobileStore();
   return ` ${!$page.error ? `${validate_component(MetaTags, "MetaTags").$$render($$result, Object.assign({}, metaTags), {}, {})}` : ``}  ${validate_component(KlasekJsonSchema, "KlasekJsonSchema").$$render($$result, {}, {}, {})}  ${``} ${slots.default ? slots.default({}) : ``}`;

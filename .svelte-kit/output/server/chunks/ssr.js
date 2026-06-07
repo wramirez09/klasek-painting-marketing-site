@@ -61,6 +61,9 @@ function get_current_component() {
   if (!current_component) throw new Error("Function called outside component initialization");
   return current_component;
 }
+function onDestroy(fn) {
+  get_current_component().$$.on_destroy.push(fn);
+}
 function createEventDispatcher() {
   const component = get_current_component();
   return (type, detail, { cancelable = false } = {}) => {
@@ -273,6 +276,7 @@ function add_styles(style_object) {
   return styles ? ` style="${styles}"` : "";
 }
 export {
+  is_promise as A,
   add_attribute as a,
   escape as b,
   create_ssr_component as c,
@@ -287,16 +291,16 @@ export {
   safe_not_equal as l,
   missing_component as m,
   null_to_empty as n,
-  is_function as o,
-  getContext as p,
-  get_store_value as q,
+  onDestroy as o,
+  is_function as p,
+  getContext as q,
   run_all as r,
   setContext as s,
-  compute_rest_props as t,
-  escape_attribute_value as u,
+  get_store_value as t,
+  compute_rest_props as u,
   validate_component as v,
-  set_current_component as w,
-  current_component as x,
-  createEventDispatcher as y,
-  is_promise as z
+  escape_attribute_value as w,
+  set_current_component as x,
+  current_component as y,
+  createEventDispatcher as z
 };

@@ -1,12 +1,12 @@
 {
   ".svelte-kit/generated/client-optimized/app.js": {
-    "file": "_app/immutable/entry/app.C2oY7mJi.js",
+    "file": "_app/immutable/entry/app.BVxu0fr2.js",
     "name": "entry/app",
     "src": ".svelte-kit/generated/client-optimized/app.js",
     "isEntry": true,
     "imports": [
       "_C1FmrZbK.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js"
     ],
     "dynamicImports": [
@@ -81,27 +81,27 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/0.js": {
-    "file": "_app/immutable/nodes/0.QoEf0q0p.js",
+    "file": "_app/immutable/nodes/0.Bo11Fb8A.js",
     "name": "nodes/0",
     "src": ".svelte-kit/generated/client-optimized/nodes/0.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_CwTS8T7P.js",
-      "_BVz_jPKa.js",
+      "_KUc_ZfUX.js",
+      "_JVHgtmp5.js",
       "_IHki7fMi.js",
       "_D6YF6ztN.js",
       "_C-3b_GTw.js",
-      "_DDyZ1PNc.js",
+      "_CndC7wym.js",
       "_ecvbD-e3.js",
-      "_CtJdNdDp.js",
-      "_y7dt2DGo.js",
-      "_gL809UNr.js",
-      "_DM5Wh9PU.js",
-      "_DHa4iQKA.js"
+      "_K84N8KvY.js",
+      "_Wt7Ns1lL.js",
+      "_Bev2196b.js",
+      "_xp-We38U.js",
+      "_DqaOeWom.js"
     ],
     "css": [
-      "_app/immutable/assets/0.kmA6eEum.css"
+      "_app/immutable/assets/0.D_MMap1k.css"
     ],
     "assets": [
       "_app/immutable/assets/montserrat-latin-500-normal.DRFEGfly.woff2",
@@ -113,267 +113,267 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/1.js": {
-    "file": "_app/immutable/nodes/1.D_fcpded.js",
+    "file": "_app/immutable/nodes/1.Ctm8gEeI.js",
     "name": "nodes/1",
     "src": ".svelte-kit/generated/client-optimized/nodes/1.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_DDyZ1PNc.js",
-      "_-MLZM03z.js",
-      "_gL809UNr.js"
+      "_CndC7wym.js",
+      "_Dn8aa3PJ.js",
+      "_Bev2196b.js"
     ],
     "css": [
       "_app/immutable/assets/1.CxTk2ocn.css"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/10.js": {
-    "file": "_app/immutable/nodes/10.CaW-mEF2.js",
+    "file": "_app/immutable/nodes/10.qA1PhIY3.js",
     "name": "nodes/10",
     "src": ".svelte-kit/generated/client-optimized/nodes/10.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js",
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js",
       "_ecvbD-e3.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/11.js": {
-    "file": "_app/immutable/nodes/11.JjU2myK7.js",
+    "file": "_app/immutable/nodes/11.BP_Bj3n6.js",
     "name": "nodes/11",
     "src": ".svelte-kit/generated/client-optimized/nodes/11.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js",
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js",
       "_ecvbD-e3.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/12.js": {
-    "file": "_app/immutable/nodes/12.292VFIus.js",
+    "file": "_app/immutable/nodes/12.DkAi3bpJ.js",
     "name": "nodes/12",
     "src": ".svelte-kit/generated/client-optimized/nodes/12.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js",
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js",
       "_ecvbD-e3.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/13.js": {
-    "file": "_app/immutable/nodes/13.DAwJIdEV.js",
+    "file": "_app/immutable/nodes/13.Jc6uYGRd.js",
     "name": "nodes/13",
     "src": ".svelte-kit/generated/client-optimized/nodes/13.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/14.js": {
-    "file": "_app/immutable/nodes/14.JIENoZjt.js",
+    "file": "_app/immutable/nodes/14.BDsuOHnq.js",
     "name": "nodes/14",
     "src": ".svelte-kit/generated/client-optimized/nodes/14.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/15.js": {
-    "file": "_app/immutable/nodes/15.D4nMBw4h.js",
+    "file": "_app/immutable/nodes/15.BouPWL9J.js",
     "name": "nodes/15",
     "src": ".svelte-kit/generated/client-optimized/nodes/15.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/16.js": {
-    "file": "_app/immutable/nodes/16.M2Ta6LGy.js",
+    "file": "_app/immutable/nodes/16.2F0m83DB.js",
     "name": "nodes/16",
     "src": ".svelte-kit/generated/client-optimized/nodes/16.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/17.js": {
-    "file": "_app/immutable/nodes/17.eGMCObzu.js",
+    "file": "_app/immutable/nodes/17.BkQ_C85W.js",
     "name": "nodes/17",
     "src": ".svelte-kit/generated/client-optimized/nodes/17.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/18.js": {
-    "file": "_app/immutable/nodes/18.BnejaTcG.js",
+    "file": "_app/immutable/nodes/18.DAE5hdXZ.js",
     "name": "nodes/18",
     "src": ".svelte-kit/generated/client-optimized/nodes/18.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/19.js": {
-    "file": "_app/immutable/nodes/19.Ba1FHVQJ.js",
+    "file": "_app/immutable/nodes/19.ZLY4uxru.js",
     "name": "nodes/19",
     "src": ".svelte-kit/generated/client-optimized/nodes/19.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/2.js": {
-    "file": "_app/immutable/nodes/2.4nIdtpF6.js",
+    "file": "_app/immutable/nodes/2.D1GrZXON.js",
     "name": "nodes/2",
     "src": ".svelte-kit/generated/client-optimized/nodes/2.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_-MLZM03z.js",
-      "_Bhh0fL9N.js"
+      "_Dn8aa3PJ.js",
+      "_CnmIg4To.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/20.js": {
-    "file": "_app/immutable/nodes/20.B_7d63v7.js",
+    "file": "_app/immutable/nodes/20.COPnnZ9f.js",
     "name": "nodes/20",
     "src": ".svelte-kit/generated/client-optimized/nodes/20.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/21.js": {
-    "file": "_app/immutable/nodes/21.CuDxqhtp.js",
+    "file": "_app/immutable/nodes/21.BjbX6J_F.js",
     "name": "nodes/21",
     "src": ".svelte-kit/generated/client-optimized/nodes/21.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/22.js": {
-    "file": "_app/immutable/nodes/22.B69hIynn.js",
+    "file": "_app/immutable/nodes/22.DYY3jC2U.js",
     "name": "nodes/22",
     "src": ".svelte-kit/generated/client-optimized/nodes/22.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js"
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/23.js": {
-    "file": "_app/immutable/nodes/23.BmlKyU7o.js",
+    "file": "_app/immutable/nodes/23.Duhpj09z.js",
     "name": "nodes/23",
     "src": ".svelte-kit/generated/client-optimized/nodes/23.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_CapzkwKx.js",
+      "_D2PaxASM.js",
       "src/lib/common/sections/subcomponents/shortTestimonials.ts",
-      "_C61OZROy.js"
+      "_BHf_1ObT.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/24.js": {
-    "file": "_app/immutable/nodes/24.0KPSrCXQ.js",
+    "file": "_app/immutable/nodes/24.BdCAAAl_.js",
     "name": "nodes/24",
     "src": ".svelte-kit/generated/client-optimized/nodes/24.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
       "_D6YF6ztN.js",
-      "_DciVrEmK.js",
+      "_CuPoDCWn.js",
       "_CLoLEQQ2.js",
-      "_DM5Wh9PU.js",
-      "_DOrvZIHm.js",
+      "_xp-We38U.js",
+      "_CAH0S1ei.js",
       "_sIz1Jrbw.js",
       "_CTglDDcc.js",
-      "_BFi3tbP7.js"
+      "_DBFZJ9i3.js"
     ],
     "css": [
       "_app/immutable/assets/24.h3pv-FmW.css"
@@ -557,7 +557,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/25.js": {
-    "file": "_app/immutable/nodes/25.CSDLF3Gj.js",
+    "file": "_app/immutable/nodes/25.BwukwZt0.js",
     "name": "nodes/25",
     "src": ".svelte-kit/generated/client-optimized/nodes/25.js",
     "isEntry": true,
@@ -565,11 +565,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/brick-painting/brick-painting-1.webp?enhanced=true",
@@ -584,7 +584,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/26.js": {
-    "file": "_app/immutable/nodes/26.DK39GzVh.js",
+    "file": "_app/immutable/nodes/26.BNpvrqqs.js",
     "name": "nodes/26",
     "src": ".svelte-kit/generated/client-optimized/nodes/26.js",
     "isEntry": true,
@@ -592,11 +592,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/cedar-replacement/klasek-painting-cedar-replacement-1.webp?enhanced=true",
@@ -623,7 +623,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/27.js": {
-    "file": "_app/immutable/nodes/27.BB20jdz9.js",
+    "file": "_app/immutable/nodes/27.TS2egPwg.js",
     "name": "nodes/27",
     "src": ".svelte-kit/generated/client-optimized/nodes/27.js",
     "isEntry": true,
@@ -631,11 +631,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/cedar-shingle-and-stucco-repair/cedar-shingle-and-stucco-repair-1.webp?enhanced=true",
@@ -657,7 +657,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/28.js": {
-    "file": "_app/immutable/nodes/28.B_vG9XcR.js",
+    "file": "_app/immutable/nodes/28.BQQLYokK.js",
     "name": "nodes/28",
     "src": ".svelte-kit/generated/client-optimized/nodes/28.js",
     "isEntry": true,
@@ -665,11 +665,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/cedar-siding-repair-paint/cedar-siding-repair-paint-1.webp?enhanced=true",
@@ -687,7 +687,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/29.js": {
-    "file": "_app/immutable/nodes/29.3wvH7QLh.js",
+    "file": "_app/immutable/nodes/29.CLw0yVKc.js",
     "name": "nodes/29",
     "src": ".svelte-kit/generated/client-optimized/nodes/29.js",
     "isEntry": true,
@@ -695,11 +695,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/exterior-hardie-board/exterior-hardie-board-1.webp?enhanced=true",
@@ -720,20 +720,21 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/3.js": {
-    "file": "_app/immutable/nodes/3.mmSqjolO.js",
+    "file": "_app/immutable/nodes/3.D_Mb5ke6.js",
     "name": "nodes/3",
     "src": ".svelte-kit/generated/client-optimized/nodes/3.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_-MLZM03z.js",
-      "_Bhh0fL9N.js"
+      "_Dn8aa3PJ.js",
+      "_CnmIg4To.js",
+      "_CndC7wym.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/30.js": {
-    "file": "_app/immutable/nodes/30.HqO8r9BO.js",
+    "file": "_app/immutable/nodes/30.CXc-Mvj6.js",
     "name": "nodes/30",
     "src": ".svelte-kit/generated/client-optimized/nodes/30.js",
     "isEntry": true,
@@ -741,11 +742,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/past-projects/klasek-painting-past-project-1.webp?enhanced=true",
@@ -766,7 +767,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/31.js": {
-    "file": "_app/immutable/nodes/31.DfyXh1JJ.js",
+    "file": "_app/immutable/nodes/31.Cl9IrZoT.js",
     "name": "nodes/31",
     "src": ".svelte-kit/generated/client-optimized/nodes/31.js",
     "isEntry": true,
@@ -774,11 +775,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/siding-and-stucco/klasek-painting-siding-and-stucco-1.webp?enhanced=true",
@@ -796,7 +797,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/32.js": {
-    "file": "_app/immutable/nodes/32.BCjffI0A.js",
+    "file": "_app/immutable/nodes/32.D7x866qu.js",
     "name": "nodes/32",
     "src": ".svelte-kit/generated/client-optimized/nodes/32.js",
     "isEntry": true,
@@ -804,11 +805,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/siding-repair/klasek-painting-siding-repair-1.webp?enhanced=true",
@@ -823,7 +824,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/33.js": {
-    "file": "_app/immutable/nodes/33.nyXaRsqV.js",
+    "file": "_app/immutable/nodes/33.64mM7lQ4.js",
     "name": "nodes/33",
     "src": ".svelte-kit/generated/client-optimized/nodes/33.js",
     "isEntry": true,
@@ -831,11 +832,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/stucco-and-cedar-siding/stucco-and-cedar-siding-1.webp?enhanced=true",
@@ -854,7 +855,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/34.js": {
-    "file": "_app/immutable/nodes/34.B2qiSt71.js",
+    "file": "_app/immutable/nodes/34.MC0Q8VeN.js",
     "name": "nodes/34",
     "src": ".svelte-kit/generated/client-optimized/nodes/34.js",
     "isEntry": true,
@@ -862,11 +863,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/stucco-and-trim/klasek-painting-stucco-and-trim-1.webp?enhanced=true",
@@ -878,7 +879,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/35.js": {
-    "file": "_app/immutable/nodes/35.D60VqWv2.js",
+    "file": "_app/immutable/nodes/35.Cke57QtH.js",
     "name": "nodes/35",
     "src": ".svelte-kit/generated/client-optimized/nodes/35.js",
     "isEntry": true,
@@ -886,11 +887,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/stucco-repair/klasek-painting-stucco-repair-1.webp?enhanced=true",
@@ -907,7 +908,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/36.js": {
-    "file": "_app/immutable/nodes/36.C_ktMeqD.js",
+    "file": "_app/immutable/nodes/36.DUHpFIKH.js",
     "name": "nodes/36",
     "src": ".svelte-kit/generated/client-optimized/nodes/36.js",
     "isEntry": true,
@@ -915,11 +916,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/stucco-siding-repair-paint/stucco-siding-paint-and-repair-1.webp?enhanced=true",
@@ -942,7 +943,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/37.js": {
-    "file": "_app/immutable/nodes/37.BBWY02za.js",
+    "file": "_app/immutable/nodes/37.CNCwnWPr.js",
     "name": "nodes/37",
     "src": ".svelte-kit/generated/client-optimized/nodes/37.js",
     "isEntry": true,
@@ -950,11 +951,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/trim/klasek-painting-trim-1.webp?enhanced=true",
@@ -974,7 +975,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/38.js": {
-    "file": "_app/immutable/nodes/38.DhBV5IM8.js",
+    "file": "_app/immutable/nodes/38.C7u-VtjT.js",
     "name": "nodes/38",
     "src": ".svelte-kit/generated/client-optimized/nodes/38.js",
     "isEntry": true,
@@ -982,11 +983,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/victorian-homes/klasek-painting-victorian-homes-1.webp?enhanced=true",
@@ -1001,7 +1002,7 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/39.js": {
-    "file": "_app/immutable/nodes/39.DpraHU_X.js",
+    "file": "_app/immutable/nodes/39.D0Ipk0K0.js",
     "name": "nodes/39",
     "src": ".svelte-kit/generated/client-optimized/nodes/39.js",
     "isEntry": true,
@@ -1009,11 +1010,11 @@
     "imports": [
       "_C1FmrZbK.js",
       "_Bk7kNPIw.js",
-      "_kc1BPcHi.js",
-      "_CwTS8T7P.js",
+      "_DuxLLNSv.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_B5WQ0k4l.js",
-      "_CKirJmWS.js"
+      "_C3Wj5nSj.js",
+      "_DFZMGrRu.js"
     ],
     "dynamicImports": [
       "src/lib/images/galleries/white-cedar-siding/klasek-painting-white-cedar-siding-1.webp?enhanced=true",
@@ -1027,29 +1028,29 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/4.js": {
-    "file": "_app/immutable/nodes/4.Cdfh8HYN.js",
+    "file": "_app/immutable/nodes/4.BGiQRIFx.js",
     "name": "nodes/4",
     "src": ".svelte-kit/generated/client-optimized/nodes/4.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
       "_D6YF6ztN.js",
-      "_zxfV3lJA.js",
-      "_DciVrEmK.js",
-      "_DOrvZIHm.js",
-      "_C61OZROy.js",
-      "_DEuEdMQA.js",
-      "_BnEpFRIx.js",
-      "_BFi3tbP7.js",
+      "_Dpi67cLs.js",
+      "_CuPoDCWn.js",
+      "_CAH0S1ei.js",
+      "_BHf_1ObT.js",
+      "_Box2BUpB.js",
+      "_B_-KkxDB.js",
+      "_DBFZJ9i3.js",
       "_tZ0ymlLq.js",
-      "_y7dt2DGo.js",
-      "_-MLZM03z.js",
-      "_wRRLkYcO.js",
-      "_Bhh0fL9N.js",
-      "_BVz_jPKa.js",
-      "_DSt0beyn.js"
+      "_Wt7Ns1lL.js",
+      "_Dn8aa3PJ.js",
+      "_aArQPUwL.js",
+      "_CnmIg4To.js",
+      "_JVHgtmp5.js",
+      "_CMJKR-Ce.js"
     ],
     "css": [
       "_app/immutable/assets/4.yAOv9-SH.css"
@@ -1060,98 +1061,101 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/40.js": {
-    "file": "_app/immutable/nodes/40.D9JtW8qM.js",
+    "file": "_app/immutable/nodes/40.C1vCJr1K.js",
     "name": "nodes/40",
     "src": ".svelte-kit/generated/client-optimized/nodes/40.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DciVrEmK.js",
-      "_DDyZ1PNc.js",
-      "_BFi3tbP7.js",
-      "_BVz_jPKa.js",
-      "_z9q485jL.js"
+      "_CuPoDCWn.js",
+      "_CndC7wym.js",
+      "_DBFZJ9i3.js",
+      "_JVHgtmp5.js",
+      "_BmEMjPg0.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/41.js": {
-    "file": "_app/immutable/nodes/41.DKu2cii4.js",
+    "file": "_app/immutable/nodes/41.DCz8eOf0.js",
     "name": "nodes/41",
     "src": ".svelte-kit/generated/client-optimized/nodes/41.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DDyZ1PNc.js",
-      "_b1zVA1SQ.js",
-      "_CtJdNdDp.js",
-      "_DOrvZIHm.js"
+      "_CndC7wym.js",
+      "_Cs50DVaY.js",
+      "_K84N8KvY.js",
+      "_CAH0S1ei.js"
     ],
     "css": [
       "_app/immutable/assets/41.Cv6DcLUO.css"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/42.js": {
-    "file": "_app/immutable/nodes/42.DkqoFuaF.js",
+    "file": "_app/immutable/nodes/42.iuHRsA4K.js",
     "name": "nodes/42",
     "src": ".svelte-kit/generated/client-optimized/nodes/42.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DL4drOEh.js",
-      "_BeSI2jC2.js",
-      "_Bs4RoRbk.js",
-      "_gL809UNr.js",
-      "_DOrvZIHm.js"
+      "_xp-We38U.js",
+      "_d3Ql8cvb.js",
+      "_DnNh7yYd.js",
+      "_Bev2196b.js",
+      "_CAH0S1ei.js"
+    ],
+    "css": [
+      "_app/immutable/assets/42.d1O11VaS.css"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/43.js": {
-    "file": "_app/immutable/nodes/43.0Boc_nky.js",
+    "file": "_app/immutable/nodes/43.CC6WfmeF.js",
     "name": "nodes/43",
     "src": ".svelte-kit/generated/client-optimized/nodes/43.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_gL809UNr.js"
+      "_Bev2196b.js"
     ],
     "css": [
       "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/44.js": {
-    "file": "_app/immutable/nodes/44.BPuOQmRu.js",
+    "file": "_app/immutable/nodes/44.BhU2QkdW.js",
     "name": "nodes/44",
     "src": ".svelte-kit/generated/client-optimized/nodes/44.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_Dzg24w47.js",
+      "_D78W9CBg.js",
       "_D6YF6ztN.js",
-      "_DciVrEmK.js",
-      "_DOrvZIHm.js",
-      "_DM5Wh9PU.js",
-      "_BVz_jPKa.js",
-      "_z9q485jL.js",
+      "_CuPoDCWn.js",
+      "_CAH0S1ei.js",
+      "_xp-We38U.js",
+      "_JVHgtmp5.js",
+      "_BmEMjPg0.js",
       "_sIz1Jrbw.js",
       "_CLoLEQQ2.js",
-      "_DEuEdMQA.js",
-      "_BnEpFRIx.js",
-      "_DcyhoWgL.js",
-      "_BFi3tbP7.js",
-      "_D5BaSaoK.js"
+      "_Box2BUpB.js",
+      "_B_-KkxDB.js",
+      "_C2sSNMQN.js",
+      "_DBFZJ9i3.js",
+      "_DxMEPzzS.js"
     ],
     "css": [
       "_app/immutable/assets/44.BJ-DlE7H.css"
@@ -1163,24 +1167,24 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/45.js": {
-    "file": "_app/immutable/nodes/45.Ddb_TUks.js",
+    "file": "_app/immutable/nodes/45.BEzGCae7.js",
     "name": "nodes/45",
     "src": ".svelte-kit/generated/client-optimized/nodes/45.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_Dzg24w47.js",
-      "_Sd_0-2sX.js",
-      "_DOrvZIHm.js",
-      "_DEuEdMQA.js",
-      "_D5BaSaoK.js",
-      "_DSt0beyn.js",
-      "_C61OZROy.js",
-      "_wRRLkYcO.js"
+      "_D78W9CBg.js",
+      "_B4ToEHT_.js",
+      "_CAH0S1ei.js",
+      "_Box2BUpB.js",
+      "_DxMEPzzS.js",
+      "_CMJKR-Ce.js",
+      "_BHf_1ObT.js",
+      "_aArQPUwL.js"
     ],
     "assets": [
       "_app/immutable/assets/brick-painting-staining-service.CXVHz8Wj.webp",
@@ -1188,19 +1192,19 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/46.js": {
-    "file": "_app/immutable/nodes/46.BICZwajm.js",
+    "file": "_app/immutable/nodes/46.0Z4xUFdH.js",
     "name": "nodes/46",
     "src": ".svelte-kit/generated/client-optimized/nodes/46.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DOrvZIHm.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_CAH0S1ei.js"
     ],
     "assets": [
       "_app/immutable/assets/brick-painting-service-before-and-after.BsL7QMso.avif",
@@ -1212,22 +1216,22 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/47.js": {
-    "file": "_app/immutable/nodes/47.DNSBVNhU.js",
+    "file": "_app/immutable/nodes/47.Dec2iYrL.js",
     "name": "nodes/47",
     "src": ".svelte-kit/generated/client-optimized/nodes/47.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/exterior-brick-repair-service.DfZItOVp.avif",
@@ -1239,22 +1243,22 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/48.js": {
-    "file": "_app/immutable/nodes/48.DA1O167J.js",
+    "file": "_app/immutable/nodes/48.DF1_n75v.js",
     "name": "nodes/48",
     "src": ".svelte-kit/generated/client-optimized/nodes/48.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/exterior-brick-staining-service.3J0QLfda.avif",
@@ -1266,22 +1270,22 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/49.js": {
-    "file": "_app/immutable/nodes/49.C4KTZOqO.js",
+    "file": "_app/immutable/nodes/49.DVXj3Y1m.js",
     "name": "nodes/49",
     "src": ".svelte-kit/generated/client-optimized/nodes/49.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_Dzg24w47.js",
-      "_DEuEdMQA.js",
-      "_D5BaSaoK.js",
-      "_C61OZROy.js",
-      "_wRRLkYcO.js",
-      "_DSt0beyn.js"
+      "_D78W9CBg.js",
+      "_Box2BUpB.js",
+      "_DxMEPzzS.js",
+      "_BHf_1ObT.js",
+      "_aArQPUwL.js",
+      "_CMJKR-Ce.js"
     ],
     "assets": [
       "_app/immutable/assets/new-exteior-commercial-painting-job-klasek-painting.DnurnCnC.webp",
@@ -1294,46 +1298,46 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/5.js": {
-    "file": "_app/immutable/nodes/5.d-E-RCAl.js",
+    "file": "_app/immutable/nodes/5.C9kcAnH1.js",
     "name": "nodes/5",
     "src": ".svelte-kit/generated/client-optimized/nodes/5.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
       "_D6YF6ztN.js",
-      "_BFi3tbP7.js",
-      "_BcUfM_Xj.js",
-      "_DOrvZIHm.js",
-      "_DciVrEmK.js",
+      "_DBFZJ9i3.js",
+      "_B8EaqeP2.js",
+      "_CAH0S1ei.js",
+      "_CuPoDCWn.js",
       "_CTglDDcc.js",
-      "_D5BaSaoK.js",
-      "_BnEpFRIx.js"
+      "_DxMEPzzS.js",
+      "_B_-KkxDB.js"
     ],
     "assets": [
       "_app/immutable/assets/about-klasek-painting.C7nfp2vF.webp"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/50.js": {
-    "file": "_app/immutable/nodes/50.DMAKM5UK.js",
+    "file": "_app/immutable/nodes/50.YplHN_9u.js",
     "name": "nodes/50",
     "src": ".svelte-kit/generated/client-optimized/nodes/50.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_Dzg24w47.js",
-      "_Sd_0-2sX.js",
-      "_DOrvZIHm.js",
-      "_DEuEdMQA.js",
-      "_DciVrEmK.js",
-      "_D5BaSaoK.js",
-      "_C61OZROy.js",
-      "_wRRLkYcO.js"
+      "_D78W9CBg.js",
+      "_B4ToEHT_.js",
+      "_CAH0S1ei.js",
+      "_Box2BUpB.js",
+      "_CuPoDCWn.js",
+      "_DxMEPzzS.js",
+      "_BHf_1ObT.js",
+      "_aArQPUwL.js"
     ],
     "assets": [
       "_app/immutable/assets/design-and-color-consultation-services.BRlaaiqu.webp",
@@ -1342,23 +1346,23 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/51.js": {
-    "file": "_app/immutable/nodes/51.Cu9TjGLq.js",
+    "file": "_app/immutable/nodes/51.V0rGohUR.js",
     "name": "nodes/51",
     "src": ".svelte-kit/generated/client-optimized/nodes/51.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_Dzg24w47.js",
-      "_Sd_0-2sX.js",
-      "_DOrvZIHm.js",
-      "_DEuEdMQA.js",
-      "_D5BaSaoK.js",
-      "_C61OZROy.js",
-      "_wRRLkYcO.js",
-      "_MeiJrQww.js"
+      "_D78W9CBg.js",
+      "_B4ToEHT_.js",
+      "_CAH0S1ei.js",
+      "_Box2BUpB.js",
+      "_DxMEPzzS.js",
+      "_BHf_1ObT.js",
+      "_aArQPUwL.js",
+      "_DkC8G5pu.js"
     ],
     "assets": [
       "_app/immutable/assets/exterior-home-painting.JNOrapCC.webp",
@@ -1367,20 +1371,20 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/52.js": {
-    "file": "_app/immutable/nodes/52.DZvY_UfQ.js",
+    "file": "_app/immutable/nodes/52.BN6n8yiV.js",
     "name": "nodes/52",
     "src": ".svelte-kit/generated/client-optimized/nodes/52.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_BWikkAay.js",
-      "_DOrvZIHm.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_BHMLneZA.js",
+      "_CAH0S1ei.js"
     ],
     "assets": [
       "_app/immutable/assets/exterior-paint-contractor.MFLL9Gbv.avif",
@@ -1392,20 +1396,20 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/53.js": {
-    "file": "_app/immutable/nodes/53.cil55abs.js",
+    "file": "_app/immutable/nodes/53.qKX_G7uQ.js",
     "name": "nodes/53",
     "src": ".svelte-kit/generated/client-optimized/nodes/53.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_BWikkAay.js",
-      "_DOrvZIHm.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_BHMLneZA.js",
+      "_CAH0S1ei.js"
     ],
     "assets": [
       "_app/immutable/assets/historic-house-remodeling.BYH-5Gb5.avif",
@@ -1423,26 +1427,26 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/54.js": {
-    "file": "_app/immutable/nodes/54.BRTS5w3e.js",
+    "file": "_app/immutable/nodes/54.UFhcHEhs.js",
     "name": "nodes/54",
     "src": ".svelte-kit/generated/client-optimized/nodes/54.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DL4drOEh.js",
-      "_zxfV3lJA.js",
-      "_gL809UNr.js",
-      "_BeSI2jC2.js",
-      "_DciVrEmK.js",
-      "_DOrvZIHm.js",
+      "_Dpi67cLs.js",
+      "_Bev2196b.js",
+      "_d3Ql8cvb.js",
+      "_CuPoDCWn.js",
+      "_CAH0S1ei.js",
+      "_xRuhivlF.js",
       "_D2UcJ3wG.js",
       "_Bv2Voov8.js",
       "_tZ0ymlLq.js",
-      "_y7dt2DGo.js"
+      "_Wt7Ns1lL.js"
     ],
     "css": [
       "_app/immutable/assets/54.gfoa4xwi.css"
@@ -1453,50 +1457,49 @@
       "_app/immutable/assets/exterior-home-painting.WX3HoXxC.webp",
       "_app/immutable/assets/exterior-home-painting.DH4vjNhU.webp",
       "_app/immutable/assets/exterior-home-painting.tcNBtJ77.png",
-      "_app/immutable/assets/exterior-home-painting.DY868983.png",
-      "_app/immutable/assets/orange-paint-splash.Bi1EE15B.webp"
+      "_app/immutable/assets/exterior-home-painting.DY868983.png"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/55.js": {
-    "file": "_app/immutable/nodes/55.BjiAmU52.js",
+    "file": "_app/immutable/nodes/55.BroZ46rx.js",
     "name": "nodes/55",
     "src": ".svelte-kit/generated/client-optimized/nodes/55.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_Dzg24w47.js",
-      "_DOrvZIHm.js",
-      "_DEuEdMQA.js",
-      "_D5BaSaoK.js",
-      "_DSt0beyn.js",
-      "_C61OZROy.js",
-      "_wRRLkYcO.js"
+      "_D78W9CBg.js",
+      "_CAH0S1ei.js",
+      "_Box2BUpB.js",
+      "_DxMEPzzS.js",
+      "_CMJKR-Ce.js",
+      "_BHf_1ObT.js",
+      "_aArQPUwL.js"
     ],
     "assets": [
       "_app/immutable/assets/siding-painting-repair-services.C5psbMAx.webp"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/56.js": {
-    "file": "_app/immutable/nodes/56.kxD44uDH.js",
+    "file": "_app/immutable/nodes/56.D13HQ1c8.js",
     "name": "nodes/56",
     "src": ".svelte-kit/generated/client-optimized/nodes/56.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/aluminum-siding-painting-service.DDBeBD7T.avif",
@@ -1508,23 +1511,23 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/57.js": {
-    "file": "_app/immutable/nodes/57.CCsAUc2L.js",
+    "file": "_app/immutable/nodes/57.BkxmkHYC.js",
     "name": "nodes/57",
     "src": ".svelte-kit/generated/client-optimized/nodes/57.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_y7dt2DGo.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_Wt7Ns1lL.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/aluminum-siding-repair-service.e_F8kGC-.avif",
@@ -1536,22 +1539,22 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/58.js": {
-    "file": "_app/immutable/nodes/58.3BdKF2FF.js",
+    "file": "_app/immutable/nodes/58.B7bl3cZM.js",
     "name": "nodes/58",
     "src": ".svelte-kit/generated/client-optimized/nodes/58.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/cedar-siding-painting-service.DRbadkuu.avif",
@@ -1563,20 +1566,20 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/59.js": {
-    "file": "_app/immutable/nodes/59.BKyEIfkA.js",
+    "file": "_app/immutable/nodes/59.A9iuredp.js",
     "name": "nodes/59",
     "src": ".svelte-kit/generated/client-optimized/nodes/59.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DOrvZIHm.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_CAH0S1ei.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/cedar-siding-repair-service.CFP9bz2e.avif",
@@ -1594,39 +1597,47 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/6.js": {
-    "file": "_app/immutable/nodes/6.Io3xyeeW.js",
+    "file": "_app/immutable/nodes/6.CrRq609q.js",
     "name": "nodes/6",
     "src": ".svelte-kit/generated/client-optimized/nodes/6.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_CKirJmWS.js",
-      "_CGbcYlYu.js",
-      "_y7dt2DGo.js"
+      "_DFZMGrRu.js",
+      "_0AlyfXL7.js",
+      "_Wt7Ns1lL.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/60.js": {
-    "file": "_app/immutable/nodes/60.dRV42gCs.js",
+    "file": "_app/immutable/nodes/60.C7S3blzR.js",
     "name": "nodes/60",
     "src": ".svelte-kit/generated/client-optimized/nodes/60.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_y7dt2DGo.js",
-      "_BWikkAay.js"
+      "_Dpi67cLs.js",
+      "_Bev2196b.js",
+      "_d3Ql8cvb.js",
+      "_CuPoDCWn.js",
+      "_CAH0S1ei.js",
+      "_GRGG0YDU.js",
+      "_Cuz4b9uy.js",
+      "_xRuhivlF.js",
+      "_D2UcJ3wG.js",
+      "_Bv2Voov8.js",
+      "_tZ0ymlLq.js",
+      "_Wt7Ns1lL.js"
+    ],
+    "css": [
+      "_app/immutable/assets/60.Dp6q8Ut_.css"
     ],
     "assets": [
       "_app/immutable/assets/exterior-hardie-board-1.C9LR72Vk.avif",
@@ -1634,83 +1645,147 @@
       "_app/immutable/assets/exterior-hardie-board-1.So7ecRbF.webp",
       "_app/immutable/assets/exterior-hardie-board-1.BL-SdGeB.webp",
       "_app/immutable/assets/exterior-hardie-board-1.CMi3El4J.png",
-      "_app/immutable/assets/exterior-hardie-board-1.Cdn2AquH.png"
+      "_app/immutable/assets/exterior-hardie-board-1.Cdn2AquH.png",
+      "_app/immutable/assets/exterior-hardie-board-2.CUrjlj4b.avif",
+      "_app/immutable/assets/exterior-hardie-board-2.BGtE0MUI.avif",
+      "_app/immutable/assets/exterior-hardie-board-2.KmAkXME3.webp",
+      "_app/immutable/assets/exterior-hardie-board-2.CB1p8ABP.webp",
+      "_app/immutable/assets/exterior-hardie-board-2.tvgOBTQq.png",
+      "_app/immutable/assets/exterior-hardie-board-2.Cg64khCH.png",
+      "_app/immutable/assets/exterior-hardie-board-3.CgpQlWKy.avif",
+      "_app/immutable/assets/exterior-hardie-board-3.B55EULWx.avif",
+      "_app/immutable/assets/exterior-hardie-board-3.Di2PlErd.webp",
+      "_app/immutable/assets/exterior-hardie-board-3.Dl6rok0V.webp",
+      "_app/immutable/assets/exterior-hardie-board-3.7nIhlrsy.png",
+      "_app/immutable/assets/exterior-hardie-board-3.D9HX3LO1.png",
+      "_app/immutable/assets/exterior-hardie-board-4.CglGMmn8.avif",
+      "_app/immutable/assets/exterior-hardie-board-4.BtbCZWl5.avif",
+      "_app/immutable/assets/exterior-hardie-board-4.BvCzUoWm.webp",
+      "_app/immutable/assets/exterior-hardie-board-4.C_VYxt8n.webp",
+      "_app/immutable/assets/exterior-hardie-board-4.BjKLVzvb.png",
+      "_app/immutable/assets/exterior-hardie-board-4.7ebTpcOU.png",
+      "_app/immutable/assets/exterior-hardie-board-5.bzXQS01H.avif",
+      "_app/immutable/assets/exterior-hardie-board-5.DhaSQpdo.avif",
+      "_app/immutable/assets/exterior-hardie-board-5.VNgpZ69a.webp",
+      "_app/immutable/assets/exterior-hardie-board-5.CfNo3AiQ.webp",
+      "_app/immutable/assets/exterior-hardie-board-5.CUtMiAZq.png",
+      "_app/immutable/assets/exterior-hardie-board-5.Cl-Z5cm-.png",
+      "_app/immutable/assets/exterior-hardie-board-6.GSsvA_cN.avif",
+      "_app/immutable/assets/exterior-hardie-board-6.U5t380xK.avif",
+      "_app/immutable/assets/exterior-hardie-board-6.CeIfvedw.webp",
+      "_app/immutable/assets/exterior-hardie-board-6.Z_dAWJo8.webp",
+      "_app/immutable/assets/exterior-hardie-board-6.CTuNZqAB.png",
+      "_app/immutable/assets/exterior-hardie-board-6.CPViXenp.png",
+      "_app/immutable/assets/exterior-hardie-board-7.B4eG7DmT.avif",
+      "_app/immutable/assets/exterior-hardie-board-7.ywt5duci.avif",
+      "_app/immutable/assets/exterior-hardie-board-7.x-sWdkv0.webp",
+      "_app/immutable/assets/exterior-hardie-board-7.DFqgsBTr.webp",
+      "_app/immutable/assets/exterior-hardie-board-7.C0AFaop5.png",
+      "_app/immutable/assets/exterior-hardie-board-7.DmXGz4tC.png",
+      "_app/immutable/assets/exterior-hardie-board-8.DjWiLSyl.avif",
+      "_app/immutable/assets/exterior-hardie-board-8.8q-EyMk7.avif",
+      "_app/immutable/assets/exterior-hardie-board-8.BYFW84D7.webp",
+      "_app/immutable/assets/exterior-hardie-board-8.BJUz1RnE.webp",
+      "_app/immutable/assets/exterior-hardie-board-8.CZwIuFUt.png",
+      "_app/immutable/assets/exterior-hardie-board-8.BQf6HCSw.png",
+      "_app/immutable/assets/exterior-hardie-board-9.0k8s2wzN.avif",
+      "_app/immutable/assets/exterior-hardie-board-9.CFzYAWAM.avif",
+      "_app/immutable/assets/exterior-hardie-board-9.BVp2O2qH.webp",
+      "_app/immutable/assets/exterior-hardie-board-9.WIqvzLAy.webp",
+      "_app/immutable/assets/exterior-hardie-board-9.C1K37Wnf.png",
+      "_app/immutable/assets/exterior-hardie-board-9.DnKjA59-.png",
+      "_app/immutable/assets/exterior-hardie-board-10.BUBSUQwU.avif",
+      "_app/immutable/assets/exterior-hardie-board-10.DPsTRKiV.avif",
+      "_app/immutable/assets/exterior-hardie-board-10.C9QN9pGl.webp",
+      "_app/immutable/assets/exterior-hardie-board-10.BZ01cpEN.webp",
+      "_app/immutable/assets/exterior-hardie-board-10.opD691r9.png",
+      "_app/immutable/assets/exterior-hardie-board-10.EKZrvkyO.png",
+      "_app/immutable/assets/exterior-hardie-board-11.BiP5D8fr.avif",
+      "_app/immutable/assets/exterior-hardie-board-11.CTBspFN0.avif",
+      "_app/immutable/assets/exterior-hardie-board-11.0L3xhmF3.webp",
+      "_app/immutable/assets/exterior-hardie-board-11.DaRJYDie.webp",
+      "_app/immutable/assets/exterior-hardie-board-11.BZgcmoHj.png",
+      "_app/immutable/assets/exterior-hardie-board-11.D_TmP3WU.png",
+      "_app/immutable/assets/exterior-hardie-board-12.CqsFOu7K.avif",
+      "_app/immutable/assets/exterior-hardie-board-12.C1_Dtjm-.avif",
+      "_app/immutable/assets/exterior-hardie-board-12.Cv47y8oZ.webp",
+      "_app/immutable/assets/exterior-hardie-board-12.kOBHn5Ja.webp",
+      "_app/immutable/assets/exterior-hardie-board-12.oEwuljK3.png",
+      "_app/immutable/assets/exterior-hardie-board-12.B_XJH95Q.png",
+      "_app/immutable/assets/exterior-hardie-board-13.FkomS3tq.avif",
+      "_app/immutable/assets/exterior-hardie-board-13.DI-0djG0.avif",
+      "_app/immutable/assets/exterior-hardie-board-13.D0CnvcPk.webp",
+      "_app/immutable/assets/exterior-hardie-board-13.qOcjaLnc.webp",
+      "_app/immutable/assets/exterior-hardie-board-13.wKprW6aG.png",
+      "_app/immutable/assets/exterior-hardie-board-13.CeYTgYsh.png",
+      "_app/immutable/assets/exterior-hardie-board-14.5ws0NZmJ.avif",
+      "_app/immutable/assets/exterior-hardie-board-14.SDEuRSNX.avif",
+      "_app/immutable/assets/exterior-hardie-board-14.CBj7gpDN.webp",
+      "_app/immutable/assets/exterior-hardie-board-14.B5IcW8yh.webp",
+      "_app/immutable/assets/exterior-hardie-board-14.BIryb3Q6.png",
+      "_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/61.js": {
-    "file": "_app/immutable/nodes/61.jAPpflIR.js",
+    "file": "_app/immutable/nodes/61.BrljLS6T.js",
     "name": "nodes/61",
     "src": ".svelte-kit/generated/client-optimized/nodes/61.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_y7dt2DGo.js",
-      "_BWikkAay.js"
-    ],
-    "assets": [
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png",
-      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_Cuz4b9uy.js",
+      "_Wt7Ns1lL.js",
+      "_BHMLneZA.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/62.js": {
-    "file": "_app/immutable/nodes/62.Cmx1mpc-.js",
+    "file": "_app/immutable/nodes/62.EDAwV6qo.js",
     "name": "nodes/62",
     "src": ".svelte-kit/generated/client-optimized/nodes/62.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_BcUfM_Xj.js",
-      "_y7dt2DGo.js",
-      "_BWikkAay.js",
-      "_DOrvZIHm.js"
-    ],
-    "assets": [
-      "_app/immutable/assets/hardie-board-siding-repair-service.CwNEPP8u.avif",
-      "_app/immutable/assets/hardie-board-siding-repair-service.BIpZsb1W.avif",
-      "_app/immutable/assets/hardie-board-siding-repair-service.DcBBusKa.webp",
-      "_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp",
-      "_app/immutable/assets/hardie-board-siding-repair-service.CEnpMnwS.png",
-      "_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_B8EaqeP2.js",
+      "_GRGG0YDU.js",
+      "_Wt7Ns1lL.js",
+      "_BHMLneZA.js",
+      "_CAH0S1ei.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/63.js": {
-    "file": "_app/immutable/nodes/63.fw5kxXBY.js",
+    "file": "_app/immutable/nodes/63.DkWoDzRF.js",
     "name": "nodes/63",
     "src": ".svelte-kit/generated/client-optimized/nodes/63.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_y7dt2DGo.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_Wt7Ns1lL.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/vinyl-painting-service.SWez0p4k.avif",
@@ -1722,22 +1797,22 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/64.js": {
-    "file": "_app/immutable/nodes/64.DVNHaIKq.js",
+    "file": "_app/immutable/nodes/64.CkcjwudG.js",
     "name": "nodes/64",
     "src": ".svelte-kit/generated/client-optimized/nodes/64.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/vinyl-siding-repair-service.BQsdArC0.avif",
@@ -1749,20 +1824,20 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/65.js": {
-    "file": "_app/immutable/nodes/65.Dwf_xr3f.js",
+    "file": "_app/immutable/nodes/65.BmwLip-T.js",
     "name": "nodes/65",
     "src": ".svelte-kit/generated/client-optimized/nodes/65.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_Dzg24w47.js",
-      "_Sd_0-2sX.js",
-      "_DOrvZIHm.js",
-      "_DEuEdMQA.js",
-      "_D5BaSaoK.js"
+      "_D78W9CBg.js",
+      "_B4ToEHT_.js",
+      "_CAH0S1ei.js",
+      "_Box2BUpB.js",
+      "_DxMEPzzS.js"
     ],
     "assets": [
       "_app/immutable/assets/stucco-painting-repair-services.D5bzhR67.webp",
@@ -1771,24 +1846,24 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/66.js": {
-    "file": "_app/immutable/nodes/66.H9WA_BjR.js",
+    "file": "_app/immutable/nodes/66.7LQA1lNV.js",
     "name": "nodes/66",
     "src": ".svelte-kit/generated/client-optimized/nodes/66.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_MeiJrQww.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_y7dt2DGo.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_DkC8G5pu.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_Wt7Ns1lL.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/exterior-stucco-painting-service.C5WJG5eC.avif",
@@ -1800,24 +1875,24 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/67.js": {
-    "file": "_app/immutable/nodes/67.Cd1DQo1f.js",
+    "file": "_app/immutable/nodes/67.BWMBrvRP.js",
     "name": "nodes/67",
     "src": ".svelte-kit/generated/client-optimized/nodes/67.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DVJ5oFgp.js",
-      "_MeiJrQww.js",
-      "_DSt0beyn.js",
-      "_DcyhoWgL.js",
-      "_DOrvZIHm.js",
-      "_BcUfM_Xj.js",
-      "_y7dt2DGo.js",
-      "_BWikkAay.js"
+      "_BF1rISpH.js",
+      "_DkC8G5pu.js",
+      "_CMJKR-Ce.js",
+      "_C2sSNMQN.js",
+      "_CAH0S1ei.js",
+      "_B8EaqeP2.js",
+      "_Wt7Ns1lL.js",
+      "_BHMLneZA.js"
     ],
     "assets": [
       "_app/immutable/assets/exterior-stucco-repair-service.DKhbR85G.avif",
@@ -1829,54 +1904,54 @@
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/7.js": {
-    "file": "_app/immutable/nodes/7.BeXGaiRD.js",
+    "file": "_app/immutable/nodes/7.BS8nMFf9.js",
     "name": "nodes/7",
     "src": ".svelte-kit/generated/client-optimized/nodes/7.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_BeSI2jC2.js",
-      "_DOrvZIHm.js",
-      "_DciVrEmK.js",
-      "_Bs4RoRbk.js",
-      "_gL809UNr.js",
-      "_DHa4iQKA.js",
+      "_d3Ql8cvb.js",
+      "_CAH0S1ei.js",
+      "_CuPoDCWn.js",
+      "_DnNh7yYd.js",
+      "_Bev2196b.js",
+      "_DqaOeWom.js",
       "_ecvbD-e3.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/8.js": {
-    "file": "_app/immutable/nodes/8.uoE4Aqrf.js",
+    "file": "_app/immutable/nodes/8.oxDSxkNO.js",
     "name": "nodes/8",
     "src": ".svelte-kit/generated/client-optimized/nodes/8.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js",
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js",
       "_ecvbD-e3.js"
     ]
   },
   ".svelte-kit/generated/client-optimized/nodes/9.js": {
-    "file": "_app/immutable/nodes/9.BnxvA2fL.js",
+    "file": "_app/immutable/nodes/9.5DFCoYSE.js",
     "name": "nodes/9",
     "src": ".svelte-kit/generated/client-optimized/nodes/9.js",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_Bk7kNPIw.js",
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_C60exKi9.js",
-      "_DOrvZIHm.js",
-      "_gL809UNr.js",
+      "_B1MAyza-.js",
+      "_CAH0S1ei.js",
+      "_Bev2196b.js",
       "_ecvbD-e3.js"
     ]
   },
@@ -1884,53 +1959,421 @@
     "file": "_app/immutable/assets/NavBar.DBFUqa5S.css",
     "src": "_!~{019}~.js"
   },
-  "_!~{01D}~.js": {
-    "file": "_app/immutable/assets/ContactForm.d1O11VaS.css",
-    "src": "_!~{01D}~.js"
-  },
-  "_!~{04E}~.js": {
+  "_!~{04G}~.js": {
     "file": "_app/immutable/assets/CityPageBody.Bh_hEQ0q.css",
-    "src": "_!~{04E}~.js"
+    "src": "_!~{04G}~.js"
   },
-  "_!~{04I}~.js": {
+  "_!~{04L}~.js": {
     "file": "_app/immutable/assets/EmailSignup.CZe4dQ9e.css",
-    "src": "_!~{04I}~.js"
-  },
-  "_!~{04J}~.js": {
-    "file": "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css",
-    "src": "_!~{04J}~.js"
+    "src": "_!~{04L}~.js"
   },
   "_!~{04M}~.js": {
     "file": "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css",
-    "src": "_!~{04J}~.js"
+    "src": "_!~{04M}~.js"
   },
-  "_!~{04N}~.js": {
+  "_!~{04O}~.js": {
     "file": "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css",
-    "src": "_!~{04J}~.js"
+    "src": "_!~{04M}~.js"
   },
   "_!~{04Q}~.js": {
+    "file": "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css",
+    "src": "_!~{04M}~.js"
+  },
+  "_!~{04S}~.js": {
     "file": "_app/immutable/assets/Testimonial.DLYMjzrT.css",
-    "src": "_!~{04Q}~.js"
+    "src": "_!~{04S}~.js"
   },
-  "_!~{04T}~.js": {
+  "_!~{04V}~.js": {
     "file": "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css",
-    "src": "_!~{04T}~.js"
+    "src": "_!~{04V}~.js"
   },
-  "_-MLZM03z.js": {
-    "file": "_app/immutable/chunks/-MLZM03z.js",
+  "_0AlyfXL7.js": {
+    "file": "_app/immutable/chunks/0AlyfXL7.js",
+    "name": "index",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_JVHgtmp5.js",
+      "_IHki7fMi.js",
+      "_xp-We38U.js",
+      "_BmEMjPg0.js",
+      "_DsXuwSGI.js"
+    ]
+  },
+  "_B1MAyza-.js": {
+    "file": "_app/immutable/chunks/B1MAyza-.js",
+    "name": "CityPageBody",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_CuPoDCWn.js",
+      "_C3Wj5nSj.js",
+      "_Dpi67cLs.js",
+      "_CAH0S1ei.js"
+    ],
+    "css": [
+      "_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"
+    ]
+  },
+  "_B4ToEHT_.js": {
+    "file": "_app/immutable/chunks/B4ToEHT_.js",
+    "name": "RootServiceSection",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_D6YF6ztN.js",
+      "_IHki7fMi.js",
+      "_CuPoDCWn.js",
+      "_JVHgtmp5.js",
+      "_CLoLEQQ2.js"
+    ]
+  },
+  "_B8EaqeP2.js": {
+    "file": "_app/immutable/chunks/B8EaqeP2.js",
+    "name": "HeadingAccent",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js"
+    ]
+  },
+  "_BF1rISpH.js": {
+    "file": "_app/immutable/chunks/BF1rISpH.js",
+    "name": "FaqSection",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_D6YF6ztN.js",
+      "_IHki7fMi.js",
+      "_DBFZJ9i3.js",
+      "_C3Wj5nSj.js",
+      "_CuPoDCWn.js",
+      "_CAH0S1ei.js",
+      "_0AlyfXL7.js",
+      "_JVHgtmp5.js",
+      "_Wt7Ns1lL.js"
+    ]
+  },
+  "_BHMLneZA.js": {
+    "file": "_app/immutable/chunks/BHMLneZA.js",
+    "name": "GalleryLinkBlock",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_D6YF6ztN.js",
+      "_IHki7fMi.js"
+    ]
+  },
+  "_BHf_1ObT.js": {
+    "file": "_app/immutable/chunks/BHf_1ObT.js",
+    "name": "ViewOurWorkSection",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_B8EaqeP2.js",
+      "_CAH0S1ei.js",
+      "_CuPoDCWn.js",
+      "_CTglDDcc.js",
+      "_JVHgtmp5.js",
+      "_CLoLEQQ2.js"
+    ]
+  },
+  "_BZgZIqmN.js": {
+    "file": "_app/immutable/chunks/BZgZIqmN.js",
+    "name": "entry",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_DsXuwSGI.js"
+    ]
+  },
+  "_B_-KkxDB.js": {
+    "file": "_app/immutable/chunks/B_-KkxDB.js",
+    "name": "TestimonialsSection",
+    "imports": [
+      "_C1FmrZbK.js",
+      "_KUc_ZfUX.js",
+      "_D6YF6ztN.js",
+      "_IHki7fMi.js",
+      "_D2UcJ3wG.js",
+      "_Bv2Voov8.js",
+      "_D2PaxASM.js",
+      "_Cs50DVaY.js",
+      "_CLoLEQQ2.js",
+      "_CAH0S1ei.js"
+    ],
+    "dynamicImports": [
+      "src/lib/common/sections/subcomponents/shortTestimonials.ts",
+      "node_modules/swiper/swiper.mjs",
+      "node_modules/swiper/modules/index.mjs",
+      "node_modules/swiper/modules/index.mjs"
+    ],
+    "css": [
+      "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/gray-paint-top.DO3rUwGc.webp",
+      "_app/immutable/assets/gray-paint-bottom.Dsykmqr1.webp"
+    ]
+  },
+  "_Bev2196b.js": {
+    "file": "_app/immutable/chunks/Bev2196b.js",
+    "name": "ClickToCall",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_CuPoDCWn.js",
+      "_ecvbD-e3.js"
+    ]
+  },
+  "_Bk7kNPIw.js": {
+    "file": "_app/immutable/chunks/Bk7kNPIw.js",
+    "name": "metaTagHelpers"
+  },
+  "_BmEMjPg0.js": {
+    "file": "_app/immutable/chunks/BmEMjPg0.js",
+    "name": "Icon",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_D6YF6ztN.js",
+      "_JVHgtmp5.js",
+      "_IHki7fMi.js"
+    ]
+  },
+  "_Box2BUpB.js": {
+    "file": "_app/immutable/chunks/Box2BUpB.js",
+    "name": "ServiceAreaSection",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_CuPoDCWn.js",
+      "_B8EaqeP2.js",
+      "_CAH0S1ei.js",
+      "_JVHgtmp5.js",
+      "_CLoLEQQ2.js",
+      "_D6YF6ztN.js",
+      "_DBFZJ9i3.js",
+      "_Bev2196b.js",
+      "_d3Ql8cvb.js",
+      "_DnNh7yYd.js"
+    ],
+    "assets": [
+      "_app/immutable/assets/why-choose-klasek-painting.DZEsK3_U.webp"
+    ]
+  },
+  "_Bv2Voov8.js": {
+    "file": "_app/immutable/chunks/Bv2Voov8.js",
+    "name": "Google-name-logo"
+  },
+  "_C-3b_GTw.js": {
+    "file": "_app/immutable/chunks/C-3b_GTw.js",
+    "name": "isArray"
+  },
+  "_C1FmrZbK.js": {
+    "file": "_app/immutable/chunks/C1FmrZbK.js",
+    "name": "preload-helper"
+  },
+  "_C2sSNMQN.js": {
+    "file": "_app/immutable/chunks/C2sSNMQN.js",
+    "name": "BasicTemplateSection",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_JVHgtmp5.js"
+    ],
+    "css": [
+      "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"
+    ]
+  },
+  "_C3Wj5nSj.js": {
+    "file": "_app/immutable/chunks/C3Wj5nSj.js",
+    "name": "Breadcrumb",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_D6YF6ztN.js",
+      "_IHki7fMi.js",
+      "_C-3b_GTw.js",
+      "_ecvbD-e3.js",
+      "_CndC7wym.js",
+      "_JVHgtmp5.js"
+    ]
+  },
+  "_CAH0S1ei.js": {
+    "file": "_app/immutable/chunks/CAH0S1ei.js",
+    "name": "routes"
+  },
+  "_CLoLEQQ2.js": {
+    "file": "_app/immutable/chunks/CLoLEQQ2.js",
+    "name": "index"
+  },
+  "_CMJKR-Ce.js": {
+    "file": "_app/immutable/chunks/CMJKR-Ce.js",
+    "name": "ColumnTemplateSection",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_JVHgtmp5.js"
+    ],
+    "css": [
+      "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"
+    ]
+  },
+  "_CTglDDcc.js": {
+    "file": "_app/immutable/chunks/CTglDDcc.js",
+    "name": "klasek-before-after-gallery",
+    "assets": [
+      "_app/immutable/assets/klasek-before-after-gallery.CNJ981Jl.webp"
+    ]
+  },
+  "_CUBDBEVm.js": {
+    "file": "_app/immutable/chunks/CUBDBEVm.js",
+    "name": "utils"
+  },
+  "_CndC7wym.js": {
+    "file": "_app/immutable/chunks/CndC7wym.js",
+    "name": "stores",
+    "imports": [
+      "_BZgZIqmN.js"
+    ]
+  },
+  "_CnmIg4To.js": {
+    "file": "_app/immutable/chunks/CnmIg4To.js",
+    "name": "Footer",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_D6YF6ztN.js",
+      "_IHki7fMi.js",
+      "_CuPoDCWn.js",
+      "_CndC7wym.js",
+      "_CAH0S1ei.js",
+      "_CLoLEQQ2.js",
+      "_DkC8G5pu.js",
+      "_Dn8aa3PJ.js",
+      "_d3Ql8cvb.js",
+      "_Bev2196b.js",
+      "_DqaOeWom.js",
+      "_DnNh7yYd.js",
+      "_ecvbD-e3.js"
+    ],
+    "assets": [
+      "_app/immutable/assets/orange-paint-splash.Bs5lhImV.avif",
+      "_app/immutable/assets/orange-paint-splash.D-yEuqk9.avif",
+      "_app/immutable/assets/orange-paint-splash.0poxOjC8.webp",
+      "_app/immutable/assets/orange-paint-splash.BxBFNege.webp",
+      "_app/immutable/assets/orange-paint-splash.Bcgie3MD.png",
+      "_app/immutable/assets/orange-paint-splash.SNWOUdYZ.png",
+      "_app/immutable/assets/orange-paint-top.By55GIEV.webp",
+      "_app/immutable/assets/orange-paint-bottom.DcXzi2sz.webp"
+    ]
+  },
+  "_Cs50DVaY.js": {
+    "file": "_app/immutable/chunks/Cs50DVaY.js",
+    "name": "ArrowIcon",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js"
+    ]
+  },
+  "_CuPoDCWn.js": {
+    "file": "_app/immutable/chunks/CuPoDCWn.js",
+    "name": "button",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_JVHgtmp5.js",
+      "_IHki7fMi.js"
+    ]
+  },
+  "_Cuz4b9uy.js": {
+    "file": "_app/immutable/chunks/Cuz4b9uy.js",
+    "name": "hardie-board-siding-painting-before-after-service",
+    "assets": [
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png",
+      "_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png"
+    ]
+  },
+  "_D2PaxASM.js": {
+    "file": "_app/immutable/chunks/D2PaxASM.js",
+    "name": "Testimonial",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_D2UcJ3wG.js"
+    ],
+    "css": [
+      "_app/immutable/assets/Testimonial.DLYMjzrT.css"
+    ],
+    "assets": [
+      "_app/immutable/assets/yelp.DjsREaCW.svg"
+    ]
+  },
+  "_D2UcJ3wG.js": {
+    "file": "_app/immutable/chunks/D2UcJ3wG.js",
+    "name": "5-stars"
+  },
+  "_D6YF6ztN.js": {
+    "file": "_app/immutable/chunks/D6YF6ztN.js",
+    "name": "each"
+  },
+  "_D78W9CBg.js": {
+    "file": "_app/immutable/chunks/D78W9CBg.js",
+    "name": "OtherServicesSection",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_D6YF6ztN.js",
+      "_IHki7fMi.js",
+      "_CuPoDCWn.js",
+      "_Dpi67cLs.js",
+      "_B8EaqeP2.js",
+      "_CAH0S1ei.js",
+      "_DBFZJ9i3.js",
+      "_JVHgtmp5.js"
+    ],
+    "css": [
+      "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"
+    ]
+  },
+  "_DBFZJ9i3.js": {
+    "file": "_app/immutable/chunks/DBFZJ9i3.js",
+    "name": "RibbonWrapper",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_JVHgtmp5.js"
+    ]
+  },
+  "_DFZMGrRu.js": {
+    "file": "_app/immutable/chunks/DFZMGrRu.js",
+    "name": "ColorHero",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js"
+    ]
+  },
+  "_DkC8G5pu.js": {
+    "file": "_app/immutable/chunks/DkC8G5pu.js",
+    "name": "EmailSignup",
+    "imports": [
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js"
+    ],
+    "css": [
+      "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"
+    ]
+  },
+  "_Dn8aa3PJ.js": {
+    "file": "_app/immutable/chunks/Dn8aa3PJ.js",
     "name": "NavBar",
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
       "_D6YF6ztN.js",
-      "_DciVrEmK.js",
-      "_DDyZ1PNc.js",
-      "_BVz_jPKa.js",
-      "_b1zVA1SQ.js",
-      "_DM5Wh9PU.js",
-      "_y7dt2DGo.js",
-      "_CPGwwV9Y.js",
-      "_DOrvZIHm.js"
+      "_CuPoDCWn.js",
+      "_CndC7wym.js",
+      "_JVHgtmp5.js",
+      "_Cs50DVaY.js",
+      "_xp-We38U.js",
+      "_Wt7Ns1lL.js",
+      "_BZgZIqmN.js",
+      "_CAH0S1ei.js",
+      "_BmEMjPg0.js"
     ],
     "css": [
       "_app/immutable/assets/NavBar.DBFUqa5S.css"
@@ -1952,455 +2395,125 @@
       "_app/immutable/assets/kalsek-painting-dark.-xsWA5cJ.webp"
     ]
   },
-  "_B5WQ0k4l.js": {
-    "file": "_app/immutable/chunks/B5WQ0k4l.js",
-    "name": "Breadcrumb",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_D6YF6ztN.js",
-      "_IHki7fMi.js",
-      "_C-3b_GTw.js",
-      "_ecvbD-e3.js",
-      "_DDyZ1PNc.js",
-      "_BVz_jPKa.js"
-    ]
-  },
-  "_BFi3tbP7.js": {
-    "file": "_app/immutable/chunks/BFi3tbP7.js",
-    "name": "RibbonWrapper",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_BVz_jPKa.js"
-    ]
-  },
-  "_BVz_jPKa.js": {
-    "file": "_app/immutable/chunks/BVz_jPKa.js",
-    "name": "utils",
-    "imports": [
-      "_BzDfcGes.js",
-      "_CwTS8T7P.js"
-    ]
-  },
-  "_BWikkAay.js": {
-    "file": "_app/immutable/chunks/BWikkAay.js",
-    "name": "GalleryLinkBlock",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_D6YF6ztN.js",
-      "_IHki7fMi.js"
-    ]
-  },
-  "_BcUfM_Xj.js": {
-    "file": "_app/immutable/chunks/BcUfM_Xj.js",
-    "name": "HeadingAccent",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js"
-    ]
-  },
-  "_BeSI2jC2.js": {
-    "file": "_app/immutable/chunks/BeSI2jC2.js",
-    "name": "Map",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_CLoLEQQ2.js",
-      "_BVz_jPKa.js"
-    ]
-  },
-  "_Bhh0fL9N.js": {
-    "file": "_app/immutable/chunks/Bhh0fL9N.js",
-    "name": "Footer",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_D6YF6ztN.js",
-      "_IHki7fMi.js",
-      "_DciVrEmK.js",
-      "_DDyZ1PNc.js",
-      "_DOrvZIHm.js",
-      "_CLoLEQQ2.js",
-      "_MeiJrQww.js",
-      "_-MLZM03z.js",
-      "_BeSI2jC2.js",
-      "_gL809UNr.js",
-      "_DHa4iQKA.js",
-      "_Bs4RoRbk.js",
-      "_ecvbD-e3.js"
-    ],
-    "assets": [
-      "_app/immutable/assets/orange-paint-splash.Bs5lhImV.avif",
-      "_app/immutable/assets/orange-paint-splash.D-yEuqk9.avif",
-      "_app/immutable/assets/orange-paint-splash.0poxOjC8.webp",
-      "_app/immutable/assets/orange-paint-splash.BxBFNege.webp",
-      "_app/immutable/assets/orange-paint-splash.Bcgie3MD.png",
-      "_app/immutable/assets/orange-paint-splash.SNWOUdYZ.png",
-      "_app/immutable/assets/orange-paint-top.By55GIEV.webp",
-      "_app/immutable/assets/orange-paint-bottom.DcXzi2sz.webp"
-    ]
-  },
-  "_Bk7kNPIw.js": {
-    "file": "_app/immutable/chunks/Bk7kNPIw.js",
-    "name": "metaTagHelpers"
-  },
-  "_BnEpFRIx.js": {
-    "file": "_app/immutable/chunks/BnEpFRIx.js",
-    "name": "TestimonialsSection",
-    "imports": [
-      "_C1FmrZbK.js",
-      "_CwTS8T7P.js",
-      "_D6YF6ztN.js",
-      "_IHki7fMi.js",
-      "_D2UcJ3wG.js",
-      "_Bv2Voov8.js",
-      "_CapzkwKx.js",
-      "_b1zVA1SQ.js",
-      "_CLoLEQQ2.js",
-      "_DOrvZIHm.js"
-    ],
-    "dynamicImports": [
-      "src/lib/common/sections/subcomponents/shortTestimonials.ts",
-      "node_modules/swiper/swiper.mjs",
-      "node_modules/swiper/modules/index.mjs",
-      "node_modules/swiper/modules/index.mjs"
-    ],
-    "css": [
-      "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css"
-    ],
-    "assets": [
-      "_app/immutable/assets/gray-paint-top.DO3rUwGc.webp",
-      "_app/immutable/assets/gray-paint-bottom.Dsykmqr1.webp"
-    ]
-  },
-  "_Bs4RoRbk.js": {
-    "file": "_app/immutable/chunks/Bs4RoRbk.js",
+  "_DnNh7yYd.js": {
+    "file": "_app/immutable/chunks/DnNh7yYd.js",
     "name": "LocationIcon",
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js"
     ]
   },
-  "_Bv2Voov8.js": {
-    "file": "_app/immutable/chunks/Bv2Voov8.js",
-    "name": "Google-name-logo"
-  },
-  "_BzDfcGes.js": {
-    "file": "_app/immutable/chunks/BzDfcGes.js",
-    "name": "index",
+  "_Dpi67cLs.js": {
+    "file": "_app/immutable/chunks/Dpi67cLs.js",
+    "name": "GoogleProof",
     "imports": [
-      "_CwTS8T7P.js"
-    ]
-  },
-  "_C-3b_GTw.js": {
-    "file": "_app/immutable/chunks/C-3b_GTw.js",
-    "name": "isArray"
-  },
-  "_C1FmrZbK.js": {
-    "file": "_app/immutable/chunks/C1FmrZbK.js",
-    "name": "preload-helper"
-  },
-  "_C60exKi9.js": {
-    "file": "_app/immutable/chunks/C60exKi9.js",
-    "name": "CityPageBody",
-    "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_DciVrEmK.js",
-      "_B5WQ0k4l.js",
-      "_zxfV3lJA.js",
-      "_DOrvZIHm.js"
-    ],
-    "css": [
-      "_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"
+      "_D2UcJ3wG.js",
+      "_Bv2Voov8.js"
     ]
   },
-  "_C61OZROy.js": {
-    "file": "_app/immutable/chunks/C61OZROy.js",
-    "name": "ViewOurWorkSection",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_BcUfM_Xj.js",
-      "_DOrvZIHm.js",
-      "_DciVrEmK.js",
-      "_CTglDDcc.js",
-      "_BVz_jPKa.js",
-      "_CLoLEQQ2.js"
-    ]
-  },
-  "_CGbcYlYu.js": {
-    "file": "_app/immutable/chunks/CGbcYlYu.js",
-    "name": "index",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_BVz_jPKa.js",
-      "_IHki7fMi.js",
-      "_DM5Wh9PU.js",
-      "_z9q485jL.js",
-      "_BzDfcGes.js"
-    ]
-  },
-  "_CKirJmWS.js": {
-    "file": "_app/immutable/chunks/CKirJmWS.js",
-    "name": "ColorHero",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js"
-    ]
-  },
-  "_CLoLEQQ2.js": {
-    "file": "_app/immutable/chunks/CLoLEQQ2.js",
-    "name": "index"
-  },
-  "_CPGwwV9Y.js": {
-    "file": "_app/immutable/chunks/CPGwwV9Y.js",
-    "name": "entry",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_BzDfcGes.js"
-    ]
-  },
-  "_CTglDDcc.js": {
-    "file": "_app/immutable/chunks/CTglDDcc.js",
-    "name": "klasek-before-after-gallery",
-    "assets": [
-      "_app/immutable/assets/klasek-before-after-gallery.CNJ981Jl.webp"
-    ]
-  },
-  "_CUBDBEVm.js": {
-    "file": "_app/immutable/chunks/CUBDBEVm.js",
-    "name": "utils"
-  },
-  "_CapzkwKx.js": {
-    "file": "_app/immutable/chunks/CapzkwKx.js",
-    "name": "Testimonial",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_D2UcJ3wG.js"
-    ],
-    "css": [
-      "_app/immutable/assets/Testimonial.DLYMjzrT.css"
-    ],
-    "assets": [
-      "_app/immutable/assets/yelp.DjsREaCW.svg"
-    ]
-  },
-  "_CtJdNdDp.js": {
-    "file": "_app/immutable/chunks/CtJdNdDp.js",
-    "name": "JsonLd",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js"
-    ]
-  },
-  "_CwTS8T7P.js": {
-    "file": "_app/immutable/chunks/CwTS8T7P.js",
-    "name": "Component"
-  },
-  "_D2UcJ3wG.js": {
-    "file": "_app/immutable/chunks/D2UcJ3wG.js",
-    "name": "5-stars"
-  },
-  "_D5BaSaoK.js": {
-    "file": "_app/immutable/chunks/D5BaSaoK.js",
-    "name": "PaintingPromisesSection",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_D6YF6ztN.js",
-      "_IHki7fMi.js",
-      "_BFi3tbP7.js",
-      "_BVz_jPKa.js"
-    ]
-  },
-  "_D6YF6ztN.js": {
-    "file": "_app/immutable/chunks/D6YF6ztN.js",
-    "name": "each"
-  },
-  "_DDyZ1PNc.js": {
-    "file": "_app/immutable/chunks/DDyZ1PNc.js",
-    "name": "stores",
-    "imports": [
-      "_CPGwwV9Y.js"
-    ]
-  },
-  "_DEuEdMQA.js": {
-    "file": "_app/immutable/chunks/DEuEdMQA.js",
-    "name": "ServiceAreaSection",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_DciVrEmK.js",
-      "_BcUfM_Xj.js",
-      "_DOrvZIHm.js",
-      "_BVz_jPKa.js",
-      "_CLoLEQQ2.js",
-      "_D6YF6ztN.js",
-      "_BFi3tbP7.js",
-      "_gL809UNr.js",
-      "_BeSI2jC2.js",
-      "_Bs4RoRbk.js"
-    ],
-    "assets": [
-      "_app/immutable/assets/why-choose-klasek-painting.DZEsK3_U.webp"
-    ]
-  },
-  "_DHa4iQKA.js": {
-    "file": "_app/immutable/chunks/DHa4iQKA.js",
+  "_DqaOeWom.js": {
+    "file": "_app/immutable/chunks/DqaOeWom.js",
     "name": "PhoneIcon",
     "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js"
     ]
   },
-  "_DL4drOEh.js": {
-    "file": "_app/immutable/chunks/DL4drOEh.js",
-    "name": "ContactForm",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_DM5Wh9PU.js"
-    ],
-    "css": [
-      "_app/immutable/assets/ContactForm.d1O11VaS.css"
-    ]
-  },
-  "_DM5Wh9PU.js": {
-    "file": "_app/immutable/chunks/DM5Wh9PU.js",
+  "_DsXuwSGI.js": {
+    "file": "_app/immutable/chunks/DsXuwSGI.js",
     "name": "index",
     "imports": [
-      "_CwTS8T7P.js"
+      "_KUc_ZfUX.js"
     ]
   },
-  "_DOrvZIHm.js": {
-    "file": "_app/immutable/chunks/DOrvZIHm.js",
-    "name": "routes"
-  },
-  "_DSt0beyn.js": {
-    "file": "_app/immutable/chunks/DSt0beyn.js",
-    "name": "ColumnTemplateSection",
+  "_DuxLLNSv.js": {
+    "file": "_app/immutable/chunks/DuxLLNSv.js",
+    "name": "GalleryPage",
     "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_BVz_jPKa.js"
-    ],
-    "css": [
-      "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"
-    ]
-  },
-  "_DVJ5oFgp.js": {
-    "file": "_app/immutable/chunks/DVJ5oFgp.js",
-    "name": "FaqSection",
-    "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_BFi3tbP7.js",
-      "_B5WQ0k4l.js",
-      "_DciVrEmK.js",
-      "_DOrvZIHm.js",
-      "_CGbcYlYu.js",
-      "_BVz_jPKa.js",
-      "_y7dt2DGo.js"
+      "_CuPoDCWn.js"
     ]
   },
-  "_DciVrEmK.js": {
-    "file": "_app/immutable/chunks/DciVrEmK.js",
-    "name": "button",
+  "_DxMEPzzS.js": {
+    "file": "_app/immutable/chunks/DxMEPzzS.js",
+    "name": "PaintingPromisesSection",
     "imports": [
-      "_CwTS8T7P.js",
-      "_BVz_jPKa.js",
-      "_IHki7fMi.js"
-    ]
-  },
-  "_DcyhoWgL.js": {
-    "file": "_app/immutable/chunks/DcyhoWgL.js",
-    "name": "BasicTemplateSection",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_BVz_jPKa.js"
-    ],
-    "css": [
-      "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"
-    ]
-  },
-  "_Dzg24w47.js": {
-    "file": "_app/immutable/chunks/Dzg24w47.js",
-    "name": "OtherServicesSection",
-    "imports": [
-      "_CwTS8T7P.js",
+      "_KUc_ZfUX.js",
       "_D6YF6ztN.js",
       "_IHki7fMi.js",
-      "_DciVrEmK.js",
-      "_zxfV3lJA.js",
-      "_BcUfM_Xj.js",
-      "_DOrvZIHm.js",
-      "_BFi3tbP7.js",
-      "_BVz_jPKa.js"
-    ],
-    "css": [
-      "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"
+      "_DBFZJ9i3.js",
+      "_JVHgtmp5.js"
+    ]
+  },
+  "_GRGG0YDU.js": {
+    "file": "_app/immutable/chunks/GRGG0YDU.js",
+    "name": "hardie-board-siding-repair-service",
+    "assets": [
+      "_app/immutable/assets/hardie-board-siding-repair-service.CwNEPP8u.avif",
+      "_app/immutable/assets/hardie-board-siding-repair-service.BIpZsb1W.avif",
+      "_app/immutable/assets/hardie-board-siding-repair-service.DcBBusKa.webp",
+      "_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp",
+      "_app/immutable/assets/hardie-board-siding-repair-service.CEnpMnwS.png",
+      "_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png"
     ]
   },
   "_IHki7fMi.js": {
     "file": "_app/immutable/chunks/IHki7fMi.js",
     "name": "index"
   },
-  "_MeiJrQww.js": {
-    "file": "_app/immutable/chunks/MeiJrQww.js",
-    "name": "EmailSignup",
+  "_JVHgtmp5.js": {
+    "file": "_app/immutable/chunks/JVHgtmp5.js",
+    "name": "utils",
     "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js"
-    ],
-    "css": [
-      "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"
+      "_DsXuwSGI.js",
+      "_KUc_ZfUX.js"
     ]
   },
-  "_Sd_0-2sX.js": {
-    "file": "_app/immutable/chunks/Sd_0-2sX.js",
-    "name": "RootServiceSection",
+  "_K84N8KvY.js": {
+    "file": "_app/immutable/chunks/K84N8KvY.js",
+    "name": "JsonLd",
     "imports": [
-      "_CwTS8T7P.js",
-      "_D6YF6ztN.js",
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js"
+    ]
+  },
+  "_KUc_ZfUX.js": {
+    "file": "_app/immutable/chunks/KUc_ZfUX.js",
+    "name": "Component"
+  },
+  "_Wt7Ns1lL.js": {
+    "file": "_app/immutable/chunks/Wt7Ns1lL.js",
+    "name": "isMobileStore",
+    "imports": [
+      "_DsXuwSGI.js"
+    ]
+  },
+  "_aArQPUwL.js": {
+    "file": "_app/immutable/chunks/aArQPUwL.js",
+    "name": "CtaBannerSection",
+    "imports": [
+      "_KUc_ZfUX.js",
       "_IHki7fMi.js",
-      "_DciVrEmK.js",
-      "_BVz_jPKa.js",
-      "_CLoLEQQ2.js"
+      "_Bev2196b.js"
     ]
   },
-  "_b1zVA1SQ.js": {
-    "file": "_app/immutable/chunks/b1zVA1SQ.js",
-    "name": "ArrowIcon",
+  "_d3Ql8cvb.js": {
+    "file": "_app/immutable/chunks/d3Ql8cvb.js",
+    "name": "Map",
     "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js"
+      "_KUc_ZfUX.js",
+      "_IHki7fMi.js",
+      "_CLoLEQQ2.js",
+      "_JVHgtmp5.js"
     ]
   },
   "_ecvbD-e3.js": {
     "file": "_app/immutable/chunks/ecvbD-e3.js",
     "name": "siteData"
-  },
-  "_gL809UNr.js": {
-    "file": "_app/immutable/chunks/gL809UNr.js",
-    "name": "ClickToCall",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_DciVrEmK.js",
-      "_ecvbD-e3.js"
-    ]
-  },
-  "_kc1BPcHi.js": {
-    "file": "_app/immutable/chunks/kc1BPcHi.js",
-    "name": "GalleryPage",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_D6YF6ztN.js",
-      "_IHki7fMi.js",
-      "_DciVrEmK.js"
-    ]
   },
   "_sIz1Jrbw.js": {
     "file": "_app/immutable/chunks/sIz1Jrbw.js",
@@ -2452,40 +2565,18 @@
       "_app/immutable/assets/lead-safe.81jiSqOp.png"
     ]
   },
-  "_wRRLkYcO.js": {
-    "file": "_app/immutable/chunks/wRRLkYcO.js",
-    "name": "CtaBannerSection",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_gL809UNr.js"
+  "_xRuhivlF.js": {
+    "file": "_app/immutable/chunks/xRuhivlF.js",
+    "name": "orange-paint-splash",
+    "assets": [
+      "_app/immutable/assets/orange-paint-splash.Bi1EE15B.webp"
     ]
   },
-  "_y7dt2DGo.js": {
-    "file": "_app/immutable/chunks/y7dt2DGo.js",
-    "name": "isMobileStore",
+  "_xp-We38U.js": {
+    "file": "_app/immutable/chunks/xp-We38U.js",
+    "name": "index",
     "imports": [
-      "_BzDfcGes.js"
-    ]
-  },
-  "_z9q485jL.js": {
-    "file": "_app/immutable/chunks/z9q485jL.js",
-    "name": "Icon",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_D6YF6ztN.js",
-      "_BVz_jPKa.js",
-      "_IHki7fMi.js"
-    ]
-  },
-  "_zxfV3lJA.js": {
-    "file": "_app/immutable/chunks/zxfV3lJA.js",
-    "name": "GoogleProof",
-    "imports": [
-      "_CwTS8T7P.js",
-      "_IHki7fMi.js",
-      "_D2UcJ3wG.js",
-      "_Bv2Voov8.js"
+      "_KUc_ZfUX.js"
     ]
   },
   "aluminum-siding-painting-service.avif": {
@@ -4733,12 +4824,12 @@
     "src": "node_modules/@fontsource/montserrat/files/montserrat-latin-700-normal.woff2"
   },
   "node_modules/@sveltejs/kit/src/runtime/client/entry.js": {
-    "file": "_app/immutable/entry/start.BxP_PZp7.js",
+    "file": "_app/immutable/entry/start.CjN_6J3s.js",
     "name": "entry/start",
     "src": "node_modules/@sveltejs/kit/src/runtime/client/entry.js",
     "isEntry": true,
     "imports": [
-      "_CPGwwV9Y.js"
+      "_BZgZIqmN.js"
     ]
   },
   "node_modules/swiper/modules/index.mjs": {

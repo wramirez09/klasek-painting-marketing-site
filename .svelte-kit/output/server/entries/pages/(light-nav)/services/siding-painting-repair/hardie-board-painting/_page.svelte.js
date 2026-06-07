@@ -4,20 +4,9 @@ import { C as ColumnTemplateSection } from "../../../../../../chunks/ColumnTempl
 import { B as BasicTemplateSection } from "../../../../../../chunks/BasicTemplateSection.js";
 import { r as routes, g as galleryRoutes } from "../../../../../../chunks/routes.js";
 import { H as HeadingAccent } from "../../../../../../chunks/HeadingAccent.js";
+import { s as src } from "../../../../../../chunks/hardie-board-siding-painting-before-after-service.js";
 import { i as isMobileStore } from "../../../../../../chunks/isMobileStore.js";
 import { G as GalleryLinkBlock } from "../../../../../../chunks/GalleryLinkBlock.js";
-const src = {
-  sources: {
-    avif: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif 641w",
-    webp: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp 641w",
-    png: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png 641w"
-  },
-  img: {
-    src: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png",
-    w: 641,
-    h: 641
-  }
-};
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $isMobileStore, $$unsubscribe_isMobileStore;
   $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
