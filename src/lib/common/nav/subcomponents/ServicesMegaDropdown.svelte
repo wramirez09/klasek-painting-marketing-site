@@ -238,8 +238,9 @@
       <div
         class="lg:bg-white bg-secondary lg:border lg:rounded-2xl lg:overflow-hidden lg:flex lg:shadow-[0_28px_70px_rgba(16,14,50,.30),0_4px_14px_rgba(16,14,50,.12)] relative before:absolute before:content-[''] before:inset-0 before:w-[100vw] before:h-full before:bg-secondary lg:before:hidden"
       >
-        <!-- left: icon grid -->
-        <div class="lg:flex-1 lg:p-3.5 relative">
+        <!-- left: icon grid; negative mobile margin pulls content back toward
+             the screen edge (the mobile menu ul applies px-8/xs:px-12) -->
+        <div class="lg:flex-1 lg:p-3.5 -mx-6 xs:-mx-10 lg:mx-0 relative">
           <div
             class="lg:px-3 lg:pt-1 pt-3 pb-2 font-extrabold text-[10.5px] tracking-[0.14em] uppercase lg:text-gray-500 text-primary"
           >
@@ -252,7 +253,7 @@
                 class="flex items-start gap-3.5 lg:p-3 py-2 rounded-xl lg:hover:bg-off-white transition-colors duration-100 group/item"
               >
                 <span
-                  class="w-11 h-11 rounded-[10px] lg:bg-primary-light/40 bg-white/10 lg:text-primary-dark text-primary flex items-center justify-center shrink-0 transition-colors duration-100 group-hover/item:bg-primary-dark group-hover/item:text-white"
+                  class="w-11 h-11 rounded-[10px] lg:bg-primary-light/40 lg:text-primary-dark text-primary flex items-center justify-center shrink-0 transition-colors duration-100 group-hover/item:bg-primary-dark group-hover/item:text-white"
                 >
                   <svelte:component
                     this={item.icon}

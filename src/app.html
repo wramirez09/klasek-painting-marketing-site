@@ -4,8 +4,7 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-998511498"></script>
+		<!-- Google tag (gtag.js) — only loads on the production domain -->
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
@@ -13,7 +12,18 @@
 			}
 			gtag('js', new Date());
 
-			gtag('config', 'AW-998511498');
+			if (
+				location.hostname === 'klasekpainting.com' ||
+				location.hostname.endsWith('.klasekpainting.com')
+			) {
+				var gtagScript = document.createElement('script');
+				gtagScript.async = true;
+				gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-CFPXT55K8H';
+				document.head.appendChild(gtagScript);
+
+				gtag('config', 'G-CFPXT55K8H');
+				gtag('config', 'AW-998511498');
+			}
 		</script>
 		%sveltekit.head%
 	</head>
