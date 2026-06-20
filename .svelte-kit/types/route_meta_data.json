@@ -96,6 +96,13 @@
 		"src/routes/(light-nav)/blog/[title]/+page.server.ts",
 		"src/routes/+layout.server.ts"
 	],
+	"/(light-nav)/careers": [
+		"src/routes/(light-nav)/careers/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(light-nav)/careers/apply": [
+		"src/routes/(light-nav)/careers/apply/+server.ts"
+	],
 	"/(light-nav)/contact-us": [
 		"src/routes/(light-nav)/contact-us/+page.server.ts",
 		"src/routes/+layout.server.ts"

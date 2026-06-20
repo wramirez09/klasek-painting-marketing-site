@@ -34,6 +34,10 @@
   const ZOHO_FORM_ID = "webform5683047000006693036";
   const ZOHO_FORM_ACTION = "https://crm.zoho.com/crm/WebToLeadForm";
 
+  // Source attribution. The WebToLead form does not map a "Lead Source" field,
+  // so we fold the origin into the (mapped) Description field for CRM tracking.
+  const LEAD_SOURCE_TAG = "Submitted via Website Contact Form";
+
   // Zoho form fields
   const ZOHO_FIELDS = {
     xnQsjsdp:
@@ -92,10 +96,18 @@
         params.append(key, value);
       });
 
-      // Add form data
+      // Add form data (Description is handled below so we can tag the source)
       Object.entries(formData).forEach(([key, value]) => {
+        if (key === "Description") return;
         if (value) params.append(key, value);
       });
+
+      // Always send a Description carrying the lead source, with the user's
+      // job details appended underneath when provided.
+      const descriptionWithSource = [LEAD_SOURCE_TAG, formData.Description.trim()]
+        .filter(Boolean)
+        .join("\n\n");
+      params.append("Description", descriptionWithSource);
 
       const response = await fetch(ZOHO_FORM_ACTION, {
         method: "POST",

@@ -135,7 +135,7 @@
 		start with a <a href={routes['design-consultation'].href}
 			>comprehensive evaluation and design consultation</a
 		> to help you visualize the transformation of your home with premium exterior house painting in Berwyn,
-		Illinois. With 25+ years in the field, we guarantee clarity on project details and competitive pricing.
+		Illinois. With 30+ years in the field, we guarantee clarity on project details and competitive pricing.
 	</p>
 	<p>
 		All exterior painting begins with meticulous surface prep, whether your home is sided with

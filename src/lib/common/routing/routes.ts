@@ -178,6 +178,7 @@ export const routes: RouteMap = {
 	contact: { text: 'Contact Us', href: '/contact-us' },
 	about: { text: 'About', href: '/about-us' },
 	services: { text: 'Services', href: '/services' },
+	careers: { text: 'Careers', href: '/careers' },
 	...aboutUsRoutes,
 	...serviceRoutes,
 	...legalRoutes

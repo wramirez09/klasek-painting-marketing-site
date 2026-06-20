@@ -31,3 +31,6 @@
 
 <!-- Blog -->
 <NavItem data={aboutUsRoutes["blog"]} class="xl:block lg:hidden block" />
+
+<!-- Careers -->
+<NavItem data={routes["careers"]} class="xl:block lg:hidden block" />

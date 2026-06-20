@@ -8,7 +8,6 @@
   import heroSrc from "$images/services/exterior-home-painting.webp?enhanced";
   import splash from "$images/backgrounds/orange-paint-splash.webp";
   import stars from "$images/5-stars.svg";
-  import google from "$images/logos/Google-name-logo.svg";
   import valspar from "$images/logos/trusted-brands/valspar.png?enhanced";
   import behr from "$images/logos/trusted-brands/behr.png?enhanced";
   import benjaminMoore from "$images/logos/trusted-brands/benjamin-moore.png?enhanced";
@@ -16,6 +15,15 @@
   import leadSafe from "$images/logos/trusted-brands/lead-safe.png?enhanced";
   import pdca from "$images/logos/trusted-brands/pdca.png?enhanced";
   import { isMobileStore } from "$lib/stores/isMobileStore";
+
+  // Section photos — high-res exterior project shots from the service area
+  // showing rooflines, eaves, fascia & gutters. (No gutter-machine photos
+  // exist in the library yet — see the asset-capture note for real gutter content.)
+  import installTall from "$images/services/stucco-painting-service.webp?enhanced";
+  import installDetail from "$images/services/exterior-brick-repair-service.webp?enhanced";
+  import installGutters from "$images/services/expert-historic-house-painting.webp?enhanced";
+  import repairImg from "$images/galleries/before-after/stucco-and-trim-before.webp?enhanced";
+  import cleaningImg from "$images/services/exterior-paint-contractor.webp?enhanced";
 
   const partnerLogos = [
     { src: valspar, alt: "Valspar", height: "h-7 sm:h-8" },
@@ -389,16 +397,25 @@
       </div>
     </div>
     <div class="grid grid-cols-2 gap-4">
-      <div
-        class="ph ph-dark aspect-[3/4] ring-2 ring-white/10"
-        data-ph="on-site gutter machine"
+      <enhanced:img
+        class="aspect-[3/4] w-full h-full object-cover rounded-lg ring-2 ring-white/10"
+        src={installTall}
+        alt="Stone-and-stucco Cook County home with steep rooflines and deep eaves where Klasek installs seamless gutters"
+        loading="lazy"
       />
       <div class="grid grid-rows-2 gap-4">
-        <div
-          class="ph ph-dark ring-2 ring-white/10"
-          data-ph="seamless K-style run"
+        <enhanced:img
+          class="w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10"
+          src={installDetail}
+          alt="Close-up of a gabled roofline, soffit and eave where seamless gutters mount"
+          loading="lazy"
         />
-        <div class="ph ph-dark ring-2 ring-white/10" data-ph="copper detail" />
+        <enhanced:img
+          class="w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10"
+          src={installGutters}
+          alt="Large suburban home with white seamless gutters and downspouts along the eaves"
+          loading="lazy"
+        />
       </div>
     </div>
   </div>
@@ -407,9 +424,11 @@
 <!-- ===================== REPAIR ===================== -->
 <section id="repair" class="bg-white p-y p-x scroll-mt-20">
   <div class="container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-    <div
-      class="order-2 lg:order-1 ph aspect-[4/3]"
-      data-ph="REPAIR — fascia / reattachment before-after"
+    <enhanced:img
+      class="order-2 lg:order-1 w-full aspect-[4/3] object-cover rounded-xl shadow-subtle"
+      src={repairImg}
+      alt="Klasek crew on ladders repairing fascia and trim along the roofline before re-hanging gutters"
+      loading="lazy"
     />
     <div class="order-1 lg:order-2">
       <span class="tab mb-5">Repair &amp; storm damage</span>
@@ -487,9 +506,11 @@
           Schedule a Cleaning
         </Button>
       </div>
-      <div
-        class="ph !rounded-none min-h-[260px]"
-        data-ph="CLEANING — crew clearing gutters in fall"
+      <enhanced:img
+        class="w-full h-full min-h-[260px] object-cover"
+        src={cleaningImg}
+        alt="Gray suburban home with seamless gutters and downspouts along the porch roofline"
+        loading="lazy"
       />
     </div>
   </div>
@@ -524,33 +545,6 @@
           <p class="mt-2 text-gray-600 text-[15px] leading-relaxed">{body}</p>
         </div>
       {/each}
-    </div>
-  </div>
-</section>
-
-<!-- ===================== BEFORE / AFTER GALLERY ===================== -->
-<section class="bg-off-white p-y p-x">
-  <div class="container">
-    <div class="text-center mb-9 flex flex-col items-center">
-      <span class="tab mb-4">Our work</span>
-      <h2
-        class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark"
-      >
-        Before &amp; after, around the neighborhood.
-      </h2>
-    </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      {#each Array.from({ length: 8 }, (_, i) => i + 1) as n}
-        <div class="ph aspect-square" data-ph={`before / after 0${n}`} />
-      {/each}
-    </div>
-    <div class="mt-9 flex flex-col items-center gap-3">
-      <p class="flex items-center gap-2 text-sm font-bold text-gray-700">
-        Review us
-        <img class="w-[80px] h-[14px]" src={stars} alt="5 stars" />
-        on
-      </p>
-      <img class="w-[92px] h-auto" src={google} alt="Google" />
     </div>
   </div>
 </section>
@@ -837,6 +831,11 @@
     align-items: center;
     justify-content: center;
     gap: 0.875rem;
+    width: 100%;
+    clip-path: none;
+    background: none;
+    padding-inline: 0;
+    line-height: normal;
   }
   .flag {
     width: 42px;
@@ -849,46 +848,5 @@
   }
   .flag-r {
     clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%);
-  }
-
-  /* striped photo placeholders (design's .ph) — swap for real photos */
-  .ph {
-    position: relative;
-    background-color: #e7e8f3;
-    background-image: repeating-linear-gradient(
-      135deg,
-      rgba(35, 32, 97, 0.06) 0 12px,
-      rgba(35, 32, 97, 0) 12px 24px
-    );
-    border-radius: 0.5rem;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .ph::after {
-    content: attr(data-ph);
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 11px;
-    letter-spacing: 0.02em;
-    color: #5a5d7a;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 3px 8px;
-    border-radius: 5px;
-  }
-  .ph-dark {
-    background-color: #2a2770;
-    background-image: repeating-linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.06) 0 12px,
-      rgba(255, 255, 255, 0) 12px 24px
-    );
-  }
-  .ph-dark::after {
-    color: #c8c9e6;
-    background: rgba(21, 19, 58, 0.6);
   }
 </style>

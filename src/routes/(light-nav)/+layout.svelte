@@ -29,6 +29,15 @@
         { text: "Painting guide", href: "#guide" },
       ],
     },
+    "/careers": {
+      description:
+        "Exterior painting & repair specialists serving Lyons and the western Chicago suburbs for 30+ years. Now hiring.",
+      services: [
+        { text: "Why Klasek", href: "#positions" },
+        { text: "Open positions", href: "#positions" },
+        { text: "Apply now", href: "#apply" },
+      ],
+    },
   };
 
   $: funnelFooter = Object.entries(funnelFooters).find(([path]) =>

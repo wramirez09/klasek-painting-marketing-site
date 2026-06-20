@@ -4,15 +4,19 @@
   import ClickToCall from "$lib/common/other/ClickToCall.svelte";
   import Map from "$lib/common/other/Map.svelte";
   import Button from "$components/button/button.svelte";
+  import EstimateFormBand from "$lib/contact-us/EstimateFormBand.svelte";
   import { routes, serviceAreaRoutes } from "$lib/common/routing/routes";
-  import heroSrc from "$images/galleries/exterior-hardie-board/exterior-hardie-board-1.webp?enhanced";
-  import paintingTall from "$images/galleries/exterior-hardie-board/exterior-hardie-board-2.webp?enhanced";
-  import paintingTop from "$images/galleries/exterior-hardie-board/exterior-hardie-board-3.webp?enhanced";
-  import paintingBottom from "$images/galleries/exterior-hardie-board/exterior-hardie-board-4.webp?enhanced";
+  // Hero + painting trio: high-res lap-siding photos (1600px) — replaces the
+  // low-res (400px) gallery shots that repeated the same navy Victorian. Source: Pexels (see hardie/SOURCE.md).
+  import heroSrc from "$images/services/hardie/hardie-suburban-home-exterior.jpg?enhanced";
+  import paintingTall from "$images/services/hardie/hardie-gray-lap-siding-home.jpg?enhanced";
+  import paintingTop from "$images/services/hardie/hardie-white-siding-trim.jpg?enhanced";
+  import paintingBottom from "$images/services/hardie/hardie-lap-siding-detail.jpg?enhanced";
   import repairSrc from "$images/services/hardie-board-siding-repair-service.webp?enhanced";
-  import trimSrc from "$images/galleries/exterior-hardie-board/exterior-hardie-board-5.webp?enhanced";
-  import guideFront from "$images/galleries/exterior-hardie-board/exterior-hardie-board-6.webp?enhanced";
-  import guideAngle from "$images/galleries/exterior-hardie-board/exterior-hardie-board-7.webp?enhanced";
+  // Trim + guide: high-res (1600px) lap-siding homes, each a distinct house. Source: Pexels (see hardie/SOURCE.md).
+  import trimSrc from "$images/services/hardie/hardie-home-white-trim.jpg?enhanced";
+  import guideFront from "$images/services/hardie/hardie-home-gray-porch.jpg?enhanced";
+  import guideAngle from "$images/services/hardie/hardie-home-classic.jpg?enhanced";
   import galleryBeforeAfter from "$images/services/hardie-board-siding-painting-before-after-service.webp?enhanced";
   import gallery8 from "$images/galleries/exterior-hardie-board/exterior-hardie-board-8.webp?enhanced";
   import gallery9 from "$images/galleries/exterior-hardie-board/exterior-hardie-board-9.webp?enhanced";
@@ -169,6 +173,16 @@
   let openFaq = 0;
 </script>
 
+<!-- ===================== ANNOUNCEMENT BAR ===================== -->
+<div
+  class="bg-white border-b text-center text-[13px] font-bold text-gray-700 py-2 p-x"
+>
+  <span class="inline-flex items-center gap-2">
+    <span class="w-2 h-2 rounded-full bg-primary animate-pulse" aria-hidden="true" />
+    #1 Hardie Board Painting Company in Cook County — Book Your Free Estimate
+  </span>
+</div>
+
 <!-- ===================== HERO ===================== -->
 <section class="relative bg-secondary-dark text-white overflow-hidden">
   <div
@@ -188,7 +202,7 @@
         <enhanced:img
           class="w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl"
           src={heroSrc}
-          alt="Home with Hardie board siding painted by Klasek Painting"
+          alt="Suburban home with fiber-cement lap siding and board-and-batten gables"
           loading={$isMobileStore ? "lazy" : "eager"}
         />
         <GoogleProof
@@ -240,6 +254,19 @@
     </div>
   </div>
 </section>
+
+<!-- ===================== ESTIMATE FORM BAND ===================== -->
+<EstimateFormBand
+  leadSource="Hardie Board page — estimate form"
+  serviceOptions={[
+    "Hardie board repaint",
+    "New / unpainted Hardie board",
+    "Faded & weathered siding",
+    "Trim & soffit painting",
+    "Repair before painting",
+    "Not sure — need advice",
+  ]}
+/>
 
 <!-- ===================== TRUST STRIP ===================== -->
 <section class="bg-white border-y">
@@ -435,7 +462,7 @@
       <enhanced:img
         class="w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10"
         src={paintingTall}
-        alt="Spraying Hardie board siding"
+        alt="Gray fiber-cement lap siding on a modern home exterior"
         loading="lazy"
       />
       <div class="grid grid-rows-2 gap-4">
@@ -443,7 +470,7 @@
           <enhanced:img
             class="absolute inset-0 w-full h-full object-cover"
             src={paintingTop}
-            alt="Priming Hardie board cut edges"
+            alt="Crisp white lap siding with clean window trim"
             loading="lazy"
           />
         </div>
@@ -451,7 +478,7 @@
           <enhanced:img
             class="absolute inset-0 w-full h-full object-cover"
             src={paintingBottom}
-            alt="Finished Hardie lap siding"
+            alt="Close-up of clean painted lap siding"
             loading="lazy"
           />
         </div>
@@ -549,7 +576,7 @@
         <enhanced:img
           class="absolute inset-0 w-full h-full object-cover"
           src={trimSrc}
-          alt="Fresh trim on Hardie board siding"
+          alt="Two-story home with lap siding and crisp white trim and columns"
           loading="lazy"
         />
       </div>
@@ -587,13 +614,13 @@
         <enhanced:img
           class="absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"
           src={guideFront}
-          alt="Hardie board home — front view"
+          alt="Gray lap-siding home with covered front porch"
           loading="lazy"
         />
         <enhanced:img
           class="absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"
           src={guideAngle}
-          alt="Hardie board home — angle view"
+          alt="Classic two-story home with fiber-cement siding and balcony"
           loading="lazy"
         />
       </div>
@@ -983,11 +1010,18 @@
   }
 
   /* centered ribbon header with swallowtail flags (design's .ribbon) */
+  /* width/clip-path/background reset overrides the global .ribbon in app.css,
+     which otherwise leaks `width: fit-content` and shrink-wraps this row to the left */
   .ribbon {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.875rem;
+    width: 100%;
+    clip-path: none;
+    background: none;
+    padding-inline: 0;
+    line-height: normal;
   }
   .flag {
     width: 42px;

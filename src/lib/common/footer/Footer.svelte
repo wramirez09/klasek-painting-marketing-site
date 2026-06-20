@@ -16,6 +16,7 @@
   const usefulLinks: Link[] = [
     routes["contact"],
     routes["service-area"],
+    routes["careers"],
     routes["privacy"],
   ];
 

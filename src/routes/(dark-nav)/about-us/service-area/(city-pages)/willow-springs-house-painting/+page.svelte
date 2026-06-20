@@ -75,7 +75,7 @@
 	</p>
 
 	<p>
-		With over 20 years of experience and the use of top-quality materials, you can rely on us to
+		With over 30 years of experience and the use of top-quality materials, you can rely on us to
 		prepare your home for a beautiful and long-lasting paint or stain job.
 	</p>
 
