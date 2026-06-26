@@ -1,19 +1,41 @@
-import { c as create_ssr_component, a as add_attribute, v as validate_component, e as each, b as escape, h as add_styles, i as merge_ssr_styles, g as subscribe, n as null_to_empty } from "../../chunks/ssr.js";
+import { c as create_ssr_component, a as add_attribute, v as validate_component, b as escape, e as each, h as add_styles, i as merge_ssr_styles, g as subscribe, n as null_to_empty } from "../../chunks/ssr.js";
 import { G as GoogleProof } from "../../chunks/GoogleProof.js";
 import { B as Button } from "../../chunks/button.js";
 import { r as routes } from "../../chunks/routes.js";
+import { h as heroPhoto } from "../../chunks/klasek-painting-professional-exterior-painters.js";
 import { V as ViewOurWorkSection } from "../../chunks/ViewOurWorkSection.js";
 import { W as WhyChooseUsSection, S as ServiceAreaSection } from "../../chunks/ServiceAreaSection.js";
 import { T as TestimonialsSection } from "../../chunks/TestimonialsSection.js";
 import { R as RibbonWrapper } from "../../chunks/RibbonWrapper.js";
-import { v as valspar, b as behr, l as leadSafe, a as benjaminMoore, p as pdca, s as sherwinWilliams } from "../../chunks/lead-safe.js";
+import { v as valspar, b as behr, a as benjaminMoore, s as sherwinWilliams } from "../../chunks/valspar.js";
+import { l as leadSafe, p as pdca } from "../../chunks/lead-safe.js";
 import { i as isMobileStore } from "../../chunks/isMobileStore.js";
 import { N as NavBar } from "../../chunks/NavBar.js";
 import { C as CtaBannerSection } from "../../chunks/CtaBannerSection.js";
 import { F as Footer } from "../../chunks/Footer.js";
 import { c as cn } from "../../chunks/utils2.js";
 import { C as ColumnTemplateSection } from "../../chunks/ColumnTemplateSection.js";
-const src = "/_app/immutable/assets/klasek-painting-professional-exterior-painters.DJK4DWtY.webp";
+const HeroQuickForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let name = "";
+  let phone = "";
+  let zip = "";
+  let honeypot = "";
+  let status = "idle";
+  return ` <form${add_attribute("action", routes["contact"].href, 0)} method="GET" class="flex flex-col gap-2 rounded-lg bg-white p-4 text-secondary-dark shadow-subtle"><p class="font-semibold" data-svelte-h="svelte-izx4cd">Get your free estimate in 60 seconds</p>  <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[9999px] h-0 w-0 opacity-0"${add_attribute("value", honeypot, 0)}> <label class="sr-only" for="hero-name" data-svelte-h="svelte-182ljd0">Name</label> <input id="hero-name" name="name" type="text" placeholder="Name" autocomplete="name" class="w-full rounded-md border border-gray-300 px-3 py-2"${add_attribute("value", name, 0)}> <div class="flex flex-col gap-2 sm:flex-row"><div class="flex-1"><label class="sr-only" for="hero-phone" data-svelte-h="svelte-1hvq77s">Phone</label> <input id="hero-phone" name="phone" type="tel" placeholder="Phone" autocomplete="tel" class="w-full rounded-md border border-gray-300 px-3 py-2"${add_attribute("value", phone, 0)}></div> <div class="sm:w-32"><label class="sr-only" for="hero-zip" data-svelte-h="svelte-17m2x3">Zip Code</label> <input id="hero-zip" name="zip" type="text" inputmode="numeric" placeholder="Zip" autocomplete="postal-code" class="w-full rounded-md border border-gray-300 px-3 py-2"${add_attribute("value", zip, 0)}></div></div> ${validate_component(Button, "Button").$$render(
+    $$result,
+    {
+      type: "submit",
+      class: "w-full",
+      disabled: status === "submitting"
+    },
+    {},
+    {
+      default: () => {
+        return `${escape("Get My Free Estimate")}`;
+      }
+    }
+  )} ${``} <p class="text-xs text-gray-500" data-svelte-h="svelte-1csrcoi">No obligation. We reply within 1 business day.</p></form>`;
+});
 const HomepageHero = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const listitems = [
     "Expert Craftsmanship - Every Time",
@@ -21,24 +43,12 @@ const HomepageHero = create_ssr_component(($$result, $$props, $$bindings, slots)
     "Free Consultation from Design Pros",
     "Siding, Brick, & Stucco Experts"
   ];
-  return `<section class="p-x p-y hero-gradient"><div class="container grid lg:grid-cols-2 lg:gap-12 gap-6"> <div class="hidden lg:flex flex-col gap-2"><div${add_attribute("style", `background-image: url(${src})`, 0)} class="size-full lg:rounded-lg rounded-b-lg bg-center bg-cover"></div> ${validate_component(GoogleProof, "GoogleProof").$$render($$result, {}, {}, {})}</div>  <div class="flex flex-col lg:gap-6 gap-4 text-white"><h1 class="order-1 xl:text-5xl md:text-4xl xs:text-3xl text-2xl font-semibold" data-testid="page-heading" data-svelte-h="svelte-ww5fto">Premium Exterior House Painting &amp; Design Services</h1> <p class="order-2 lg:font-semibold" data-svelte-h="svelte-im9ma6">Klasek Painting has over 30 years of experience delivering beautiful, long-lasting results
-				to homeowners in Chicago. Our mission is to be the area&#39;s most trusted exterior repair and
-				exterior painting contractor, so we are committed to providing first class service at a fair
-				price.</p> <ul class="lg:order-3 order-4 lg:text-lg lg:font-semibold flex flex-col gap-1">${each(listitems, (item) => {
+  return `<section class="p-x p-y hero-gradient"><div class="container grid lg:grid-cols-2 lg:gap-12 gap-6"> <div class="hidden lg:flex flex-col gap-2"><div${add_attribute("style", `background-image: url(${heroPhoto})`, 0)} class="size-full lg:rounded-lg rounded-b-lg bg-center bg-cover"></div> ${validate_component(GoogleProof, "GoogleProof").$$render($$result, {}, {}, {})}</div>  <div class="flex flex-col lg:gap-6 gap-4 text-white"><h1 class="order-1 xl:text-5xl md:text-4xl xs:text-3xl text-2xl font-semibold" data-testid="page-heading" data-svelte-h="svelte-1vy2bvo">Premium Exterior House Painting &amp; Design Services</h1> <p class="order-2 lg:font-semibold" data-svelte-h="svelte-a0yb97">Klasek Painting has over 30 years of experience delivering beautiful,
+        long-lasting results to homeowners in Chicago. Our mission is to be the
+        area&#39;s most trusted exterior repair and exterior painting contractor, so
+        we are committed to providing first class service at a fair price.</p> <ul class="lg:order-3 order-4 lg:text-lg lg:font-semibold flex flex-col gap-1">${each(listitems, (item) => {
     return `<li class="disc lg:[--top:12px] [--top:10px]">${escape(item)}</li>`;
-  })}</ul> ${validate_component(Button, "Button").$$render(
-    $$result,
-    {
-      class: "lg:order-4 order-3 w-fit",
-      href: routes["contact"].href
-    },
-    {},
-    {
-      default: () => {
-        return `${escape(routes["contact"].text)}`;
-      }
-    }
-  )}</div></div></section>`;
+  })}</ul> <div class="lg:order-4 order-3">${validate_component(HeroQuickForm, "HeroQuickForm").$$render($$result, {}, {}, {})}</div></div></div></section>`;
 });
 const css$1 = {
   code: '.marquee-container.svelte-11dmb27.svelte-11dmb27{display:flex;width:100%;overflow-x:hidden;flex-direction:row;position:relative}.marquee-container.svelte-11dmb27:hover .marquee.svelte-11dmb27{animation-play-state:var(--pause-on-hover)}.marquee-container.svelte-11dmb27:active .marquee.svelte-11dmb27{animation-play-state:var(--pause-on-click)}.marquee.svelte-11dmb27.svelte-11dmb27{flex:0 0 auto;min-width:100%;z-index:1;display:flex;flex-direction:row;align-items:center;gap:var(--gap, 0);animation:svelte-11dmb27-scroll var(--duration) linear infinite;animation-play-state:var(--play);animation-direction:var(--direction);padding-right:var(--gap, 0)}@keyframes svelte-11dmb27-scroll{0%{transform:translateX(0%)}100%{transform:translateX(-100%)}}.initial-child-container.svelte-11dmb27.svelte-11dmb27{flex:0 0 auto;display:flex;min-width:auto;flex-direction:row}.gradient.svelte-11dmb27.svelte-11dmb27::after,.gradient.svelte-11dmb27.svelte-11dmb27::before{background:linear-gradient(\n			to right,\n			var(--gradientColor, white),\n			transparent\n		);content:"";height:100%;position:absolute;width:var(--gradientWidth, 10%);z-index:2}.gradient.svelte-11dmb27.svelte-11dmb27::before{left:0;top:0}.gradient.svelte-11dmb27.svelte-11dmb27::after{right:0;top:0;transform:rotateZ(180deg)}',
@@ -115,10 +125,10 @@ const TrustedBrandsSection = create_ssr_component(($$result, $$props, $$bindings
     {},
     {
       default: () => {
-        return `${each(images, ({ src: src2, alt }) => {
-          return `${typeof src2 === "string" ? `<img class="h-[100px] w-auto"${add_attribute("src", src2.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src2.img.w, 0)}${add_attribute("height", src2.img.h, 0)}>` : `<picture>${each(Object.entries(src2.sources), ([format, srcset]) => {
+        return `${each(images, ({ src, alt }) => {
+          return `${typeof src === "string" ? `<img class="h-[100px] w-auto"${add_attribute("src", src.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}>` : `<picture>${each(Object.entries(src.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="h-[100px] w-auto"${add_attribute("src", src2.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src2.img.w, 0)}${add_attribute("height", src2.img.h, 0)}> </picture>`}`;
+          })} <img class="h-[100px] w-auto"${add_attribute("src", src.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}> </picture>`}`;
         })}`;
       }
     }

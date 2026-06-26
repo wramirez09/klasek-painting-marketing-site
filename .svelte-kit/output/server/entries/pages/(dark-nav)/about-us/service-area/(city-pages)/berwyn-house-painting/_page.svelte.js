@@ -2,7 +2,7 @@ import { c as create_ssr_component, v as validate_component, a as add_attribute,
 import { C as CityHero, a as CityPageBody } from "../../../../../../../chunks/CityPageBody.js";
 import { r as routes } from "../../../../../../../chunks/routes.js";
 import { C as ClickToCall } from "../../../../../../../chunks/ClickToCall.js";
-import { d as destinationPhone } from "../../../../../../../chunks/siteData.js";
+import { e as destinationPhone } from "../../../../../../../chunks/siteData.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(CityHero, "CityHero").$$render($$result, { city: "Berwyn" }, {}, {})} ${validate_component(CityPageBody, "CityPageBody").$$render($$result, {}, {}, {
     default: () => {
@@ -38,9 +38,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 		in Berwyn, Illinois, our <a${add_attribute("href", routes["gallery"].href, 0)}>portfolio</a> and
 		<a${add_attribute("href", routes["testimonials"].href, 0)}>client reviews</a> showcase our excellence.</p> <p data-svelte-h="svelte-1d770fu">When you hire an exterior paint contractor, it&#39;s about more than just applying paint. It&#39;s about
 		professional color consultation, precise surface prep, and clear communication. Our goal is to
-		provide an exceptional experience from the initial assessment to the final reveal.</p>  <h3 data-svelte-h="svelte-a99g1g">Complete Exterior House Painting in Berwyn, Illinois</h3> <p data-svelte-h="svelte-bqzbm6">Be it refreshing your home&#39;s style or creating a new look, Klasek Painting is here to help. We
+		provide an exceptional experience from the initial assessment to the final reveal.</p>  <h3 data-svelte-h="svelte-a99g1g">Complete Exterior House Painting in Berwyn, Illinois</h3> <p data-svelte-h="svelte-1u1jtac">Be it refreshing your home&#39;s style or creating a new look, Klasek Painting is here to help. We
 		start with a <a${add_attribute("href", routes["design-consultation"].href, 0)}>comprehensive evaluation and design consultation</a> to help you visualize the transformation of your home with premium exterior house painting in Berwyn,
-		Illinois. With 25+ years in the field, we guarantee clarity on project details and competitive pricing.</p> <p data-svelte-h="svelte-150xy1u">All exterior painting begins with meticulous surface prep, whether your home is sided with
+		Illinois. With 30+ years in the field, we guarantee clarity on project details and competitive pricing.</p> <p data-svelte-h="svelte-150xy1u">All exterior painting begins with meticulous surface prep, whether your home is sided with
 		stucco, siding, or brick. Professional power washing and prep distinguish top painting companies
 		from the rest.</p> <p>To arrange a free estimate or consultation, ${validate_component(ClickToCall, "ClickToCall").$$render($$result, { class: "!font-semibold", variant: "link" }, {}, {
         default: () => {

@@ -3,7 +3,7 @@ import { S as SubServiceHero, F as FaqSection } from "../../../../../../chunks/F
 import { C as ColumnTemplateSection } from "../../../../../../chunks/ColumnTemplateSection.js";
 import { B as BasicTemplateSection } from "../../../../../../chunks/BasicTemplateSection.js";
 import { H as HeadingAccent } from "../../../../../../chunks/HeadingAccent.js";
-import { s as src } from "../../../../../../chunks/hardie-board-siding-repair-service.js";
+import { r as repairSrc } from "../../../../../../chunks/hardie-board-siding-repair-service.js";
 import { i as isMobileStore } from "../../../../../../chunks/isMobileStore.js";
 import { G as GalleryLinkBlock } from "../../../../../../chunks/GalleryLinkBlock.js";
 import { g as galleryRoutes } from "../../../../../../chunks/routes.js";
@@ -78,9 +78,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 			curb appeal.</p></div>`;
     },
     "left-column": () => {
-      return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src === "string" ? `<img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", src.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}>` : `<picture>${each(Object.entries(src.sources), ([format, srcset]) => {
+      return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof repairSrc === "string" ? `<img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", repairSrc.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", repairSrc.img.w, 0)}${add_attribute("height", repairSrc.img.h, 0)}>` : `<picture>${each(Object.entries(repairSrc.sources), ([format, srcset]) => {
         return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", src.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}></picture>`}</div>`;
+      })} <img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", repairSrc.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", repairSrc.img.w, 0)}${add_attribute("height", repairSrc.img.h, 0)}></picture>`}</div>`;
     }
   })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
     default: () => {

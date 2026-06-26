@@ -1,7 +1,7 @@
 import { c as create_ssr_component, a as add_attribute, e as each, b as escape, d as spread, f as escape_object, g as subscribe, v as validate_component } from "../../chunks/ssr.js";
 import merge from "lodash/merge.js";
 import { p as page } from "../../chunks/stores.js";
-import { a as serviceAreaRadius, d as destinationPhone, p as publicLogoUrl } from "../../chunks/siteData.js";
+import { o as openingHours, a as serviceAreaRadius, b as businessGeo, c as businessAddress, d as businessProfiles, e as destinationPhone, p as publicLogoUrl, f as businessName, g as establishedYear, h as experienceYears } from "../../chunks/siteData.js";
 import { J as JsonLd } from "../../chunks/JsonLd.js";
 import { i as isMobileStore } from "../../chunks/isMobileStore.js";
 import "dequal";
@@ -85,29 +85,19 @@ const KlasekJsonSchema = create_ssr_component(($$result, $$props, $$bindings, sl
   const schema = {
     "@context": "https://schema.org",
     "@type": "HousePainter",
-    name: "Klasek Painting",
-    description: "Klasek Painting is a team of licensed and fully certified painters offering homes in Cook County top-quality painting solutions. Call for a free estimate.",
+    name: businessName,
+    description: `${businessName} is a family-owned exterior painting and siding repair specialist serving Chicago and Cook County since ${establishedYear} — ${experienceYears} years of historic-home painting, siding, brick, and stucco work. Call for a free estimate.`,
     image: publicLogoUrl,
     logo: publicLogoUrl,
     url: $page.url.origin,
     telephone: destinationPhone,
-    sameAs: ["https://www.facebook.com/peter.klasek.3/"],
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        opens: "00:00",
-        closes: "23:59"
-      }
-    ],
+    sameAs: businessProfiles,
+    openingHoursSpecification: openingHours.map((h) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: h.dayOfWeek,
+      opens: h.opens,
+      closes: h.closes
+    })),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Exterior Home Painting Services",
@@ -256,18 +246,14 @@ const KlasekJsonSchema = create_ssr_component(($$result, $$props, $$bindings, sl
     },
     address: {
       "@type": "PostalAddress",
-      streetAddress: "4415 S. Custer",
-      addressLocality: "Lyons",
-      addressRegion: "IL",
-      postalCode: "60534",
-      addressCountry: "US"
+      ...businessAddress
     },
     location: {
       "@type": "Place",
       geo: {
         "@type": "GeoCoordinates",
-        latitude: "27.896240",
-        longitude: "-81.863586"
+        latitude: businessGeo.latitude,
+        longitude: businessGeo.longitude
       }
     },
     areaServed: [
@@ -275,8 +261,8 @@ const KlasekJsonSchema = create_ssr_component(($$result, $$props, $$bindings, sl
         "@type": "GeoCircle",
         geoMidpoint: {
           "@type": "GeoCoordinates",
-          latitude: "41.81041",
-          longitude: "-87.839737"
+          latitude: businessGeo.latitude,
+          longitude: businessGeo.longitude
         },
         geoRadius: serviceAreaRadius
       }
@@ -294,7 +280,7 @@ const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let metaTags;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0) $$bindings.data(data);
   metaTags = merge({}, data.baseMetaTags, $page.data.pageMetaTags);
-  $page.url.pathname.startsWith("/services/gutter-installation-repair") || $page.url.pathname.startsWith("/services/siding-painting-repair/hardie-board-installation");
+  $page.url.pathname.startsWith("/services/gutter-installation-repair") || $page.url.pathname.startsWith("/services/siding-painting-repair/hardie-board-services");
   $$unsubscribe_page();
   $$unsubscribe_isMobileStore();
   return ` ${!$page.error ? `${validate_component(MetaTags, "MetaTags").$$render($$result, Object.assign({}, metaTags), {}, {})}` : ``}  ${validate_component(KlasekJsonSchema, "KlasekJsonSchema").$$render($$result, {}, {}, {})}  ${``} ${slots.default ? slots.default({}) : ``}`;

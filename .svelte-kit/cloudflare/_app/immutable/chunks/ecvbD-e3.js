@@ -1,1 +1,0 @@
-const s="https://www.klasekpainting.com",a="(708) 267-0682",e="https://www.google.com/maps/place/Klasek+Painting/@38.346351,-100.9156525,5z/data=!4m5!3m4!1s0x0:0xc7bf3515e03f4afe!8m2!3d38.346351!4d-100.9156525?shorturl=1",t=`${s}/public/klasek-painting.png`,o=17e3;export{o as a,a as d,e as g,t as p,s};

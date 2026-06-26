@@ -2,7 +2,7 @@ import { a as createCityMetaTags } from "../../../../../../../chunks/metaTagHelp
 const load = () => {
   const pageMetaTags = createCityMetaTags(
     "Exterior House Painters in Oak Brook, IL",
-    "Klasek Painting provides expert house painting, brick repair, and siding restoration in Oak Brook, IL. With 25+ years of experience, we ensure exceptional, long-lasting results."
+    "Klasek Painting provides expert house painting, brick repair, and siding restoration in Oak Brook, IL. With 30+ years of experience, we ensure exceptional, long-lasting results."
   );
   return {
     pageMetaTags

@@ -116,7 +116,7 @@ const serviceRoutes = {
   },
   "hardie-installation": {
     text: "Hardie Board Services",
-    href: "/services/siding-painting-repair/hardie-board-installation"
+    href: "/services/siding-painting-repair/hardie-board-services"
   },
   // Gutter services
   gutters: {
@@ -171,6 +171,7 @@ const routes = {
   contact: { text: "Contact Us", href: "/contact-us" },
   about: { text: "About", href: "/about-us" },
   services: { text: "Services", href: "/services" },
+  careers: { text: "Careers", href: "/careers" },
   ...aboutUsRoutes,
   ...serviceRoutes,
   ...legalRoutes

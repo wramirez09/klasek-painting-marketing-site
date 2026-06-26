@@ -146,8 +146,7 @@ const options = {
   templates: {
     app: ({ head, body, assets, nonce, env }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets + `/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-998511498"><\/script>
+		<!-- Google tag (gtag.js) — only loads on the production domain -->
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
@@ -155,7 +154,18 @@ const options = {
 			}
 			gtag('js', new Date());
 
-			gtag('config', 'AW-998511498');
+			if (
+				location.hostname === 'klasekpainting.com' ||
+				location.hostname.endsWith('.klasekpainting.com')
+			) {
+				var gtagScript = document.createElement('script');
+				gtagScript.async = true;
+				gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XYDTS6RQD2';
+				document.head.appendChild(gtagScript);
+
+				gtag('config', 'G-XYDTS6RQD2');
+				gtag('config', 'AW-998511498');
+			}
 		<\/script>
 		` + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover">\n		<div style="display: contents">' + body + "</div>\n	</body>\n</html>\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + '</title>\n	</head>\n	<body class="bg-secondary-dark">\n		<div id="error-container">\n			<h1>Oops! Something went wrong...</h1>\n			<p>' + status + " | " + message + `</p>
@@ -182,7 +192,7 @@ const options = {
 </style>
 `
   },
-  version_hash: "amp8ja"
+  version_hash: "19l8kqn"
 };
 async function get_hooks() {
   let handle;

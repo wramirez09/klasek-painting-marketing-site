@@ -366,9 +366,45 @@
     "file": "chunks/environment.js",
     "name": "environment"
   },
+  "_expert-historic-house-painting.js": {
+    "file": "chunks/expert-historic-house-painting.js",
+    "name": "expert-historic-house-painting",
+    "assets": [
+      "_app/immutable/assets/expert-historic-house-painting.Cizdwxvi.avif",
+      "_app/immutable/assets/expert-historic-house-painting.DuMMm2gi.avif",
+      "_app/immutable/assets/expert-historic-house-painting.BO9XXW_L.webp",
+      "_app/immutable/assets/expert-historic-house-painting.D6wwSFmt.webp",
+      "_app/immutable/assets/expert-historic-house-painting.tG6jh17i.png",
+      "_app/immutable/assets/expert-historic-house-painting.D1OAV4fi.png"
+    ]
+  },
   "_exports.js": {
     "file": "chunks/exports.js",
     "name": "exports"
+  },
+  "_exterior-brick-repair-service.js": {
+    "file": "chunks/exterior-brick-repair-service.js",
+    "name": "exterior-brick-repair-service",
+    "assets": [
+      "_app/immutable/assets/exterior-brick-repair-service.DfZItOVp.avif",
+      "_app/immutable/assets/exterior-brick-repair-service.BGOhrMLd.avif",
+      "_app/immutable/assets/exterior-brick-repair-service.CnnvmMn2.webp",
+      "_app/immutable/assets/exterior-brick-repair-service.DzUiu0HV.webp",
+      "_app/immutable/assets/exterior-brick-repair-service.BpgzJm8m.png",
+      "_app/immutable/assets/exterior-brick-repair-service.CzZzCMPE.png"
+    ]
+  },
+  "_exterior-paint-contractor.js": {
+    "file": "chunks/exterior-paint-contractor.js",
+    "name": "exterior-paint-contractor",
+    "assets": [
+      "_app/immutable/assets/exterior-paint-contractor.MFLL9Gbv.avif",
+      "_app/immutable/assets/exterior-paint-contractor.Z66NTt-7.avif",
+      "_app/immutable/assets/exterior-paint-contractor.CaWeelPn.webp",
+      "_app/immutable/assets/exterior-paint-contractor.c0U-CB2M.webp",
+      "_app/immutable/assets/exterior-paint-contractor.CeGo-X57.png",
+      "_app/immutable/assets/exterior-paint-contractor.B5feeU1y.png"
+    ]
   },
   "_galleryHelpers.js": {
     "file": "chunks/galleryHelpers.js",
@@ -453,6 +489,13 @@
       "_app/immutable/assets/klasek-before-after-gallery.CNJ981Jl.webp"
     ]
   },
+  "_klasek-painting-professional-exterior-painters.js": {
+    "file": "chunks/klasek-painting-professional-exterior-painters.js",
+    "name": "klasek-painting-professional-exterior-painters",
+    "assets": [
+      "_app/immutable/assets/klasek-painting-professional-exterior-painters.DJK4DWtY.webp"
+    ]
+  },
   "_klasek-painting-victorian-homes-1.js": {
     "file": "chunks/klasek-painting-victorian-homes-1.js",
     "name": "klasek-painting-victorian-homes-1",
@@ -465,30 +508,6 @@
     "file": "chunks/lead-safe.js",
     "name": "lead-safe",
     "assets": [
-      "_app/immutable/assets/behr.-j1QRS8p.avif",
-      "_app/immutable/assets/behr.CScbohpm.avif",
-      "_app/immutable/assets/behr.CCDWxBbV.webp",
-      "_app/immutable/assets/behr.V8ueg3bb.webp",
-      "_app/immutable/assets/behr.XIwKcBB2.png",
-      "_app/immutable/assets/behr.D9U2_d80.png",
-      "_app/immutable/assets/benjamin-moore.DE5zblrB.avif",
-      "_app/immutable/assets/benjamin-moore.BL135Apr.avif",
-      "_app/immutable/assets/benjamin-moore.igUdwZAg.webp",
-      "_app/immutable/assets/benjamin-moore.h4GdBgj1.webp",
-      "_app/immutable/assets/benjamin-moore.8CdiysSK.png",
-      "_app/immutable/assets/benjamin-moore.Cr0Jp7Rs.png",
-      "_app/immutable/assets/sherwin-williams.BzLKWvkY.avif",
-      "_app/immutable/assets/sherwin-williams.AJg0GFn1.avif",
-      "_app/immutable/assets/sherwin-williams.B5ScIiX9.webp",
-      "_app/immutable/assets/sherwin-williams.BFOCF1WJ.webp",
-      "_app/immutable/assets/sherwin-williams.D5kaYVXv.png",
-      "_app/immutable/assets/sherwin-williams.Fp6FOJpM.png",
-      "_app/immutable/assets/valspar.Dx6j2Txv.avif",
-      "_app/immutable/assets/valspar.kIrmd51k.avif",
-      "_app/immutable/assets/valspar.LxpHCF8q.webp",
-      "_app/immutable/assets/valspar.Bt2IJxS2.webp",
-      "_app/immutable/assets/valspar.BWwD1vtZ.png",
-      "_app/immutable/assets/valspar.DpWtuLTh.png",
       "_app/immutable/assets/pdca.C6YiQnq5.avif",
       "_app/immutable/assets/pdca.BuBy6XtJ.avif",
       "_app/immutable/assets/pdca.BEGsaFkb.webp",
@@ -547,6 +566,18 @@
       "_ssr2.js"
     ]
   },
+  "_stucco-and-trim-before.js": {
+    "file": "chunks/stucco-and-trim-before.js",
+    "name": "stucco-and-trim-before",
+    "assets": [
+      "_app/immutable/assets/stucco-and-trim-before.C-p5cKXp.avif",
+      "_app/immutable/assets/stucco-and-trim-before.BFw21C5e.avif",
+      "_app/immutable/assets/stucco-and-trim-before.CsY0RAZV.webp",
+      "_app/immutable/assets/stucco-and-trim-before.Zz-cMKvT.webp",
+      "_app/immutable/assets/stucco-and-trim-before.8Wimfesb.png",
+      "_app/immutable/assets/stucco-and-trim-before.CEWDkm7y.png"
+    ]
+  },
   "_utils.js": {
     "file": "chunks/utils.js",
     "name": "utils"
@@ -554,6 +585,36 @@
   "_utils2.js": {
     "file": "chunks/utils2.js",
     "name": "utils"
+  },
+  "_valspar.js": {
+    "file": "chunks/valspar.js",
+    "name": "valspar",
+    "assets": [
+      "_app/immutable/assets/behr.-j1QRS8p.avif",
+      "_app/immutable/assets/behr.CScbohpm.avif",
+      "_app/immutable/assets/behr.CCDWxBbV.webp",
+      "_app/immutable/assets/behr.V8ueg3bb.webp",
+      "_app/immutable/assets/behr.XIwKcBB2.png",
+      "_app/immutable/assets/behr.D9U2_d80.png",
+      "_app/immutable/assets/benjamin-moore.DE5zblrB.avif",
+      "_app/immutable/assets/benjamin-moore.BL135Apr.avif",
+      "_app/immutable/assets/benjamin-moore.igUdwZAg.webp",
+      "_app/immutable/assets/benjamin-moore.h4GdBgj1.webp",
+      "_app/immutable/assets/benjamin-moore.8CdiysSK.png",
+      "_app/immutable/assets/benjamin-moore.Cr0Jp7Rs.png",
+      "_app/immutable/assets/sherwin-williams.BzLKWvkY.avif",
+      "_app/immutable/assets/sherwin-williams.AJg0GFn1.avif",
+      "_app/immutable/assets/sherwin-williams.B5ScIiX9.webp",
+      "_app/immutable/assets/sherwin-williams.BFOCF1WJ.webp",
+      "_app/immutable/assets/sherwin-williams.D5kaYVXv.png",
+      "_app/immutable/assets/sherwin-williams.Fp6FOJpM.png",
+      "_app/immutable/assets/valspar.Dx6j2Txv.avif",
+      "_app/immutable/assets/valspar.kIrmd51k.avif",
+      "_app/immutable/assets/valspar.LxpHCF8q.webp",
+      "_app/immutable/assets/valspar.Bt2IJxS2.webp",
+      "_app/immutable/assets/valspar.BWwD1vtZ.png",
+      "_app/immutable/assets/valspar.DpWtuLTh.png"
+    ]
   },
   "aluminum-siding-painting-service.avif": {
     "file": "_app/immutable/assets/aluminum-siding-painting-service.BNFyozYq.avif",
@@ -1466,6 +1527,90 @@
   "hardie-board-siding-repair-service.webp": {
     "file": "_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp",
     "src": "hardie-board-siding-repair-service.webp"
+  },
+  "hardie-gray-lap-siding-home.avif": {
+    "file": "_app/immutable/assets/hardie-gray-lap-siding-home.P8mexrsm.avif",
+    "src": "hardie-gray-lap-siding-home.avif"
+  },
+  "hardie-gray-lap-siding-home.jpeg": {
+    "file": "_app/immutable/assets/hardie-gray-lap-siding-home.dD9xkuQy.jpeg",
+    "src": "hardie-gray-lap-siding-home.jpeg"
+  },
+  "hardie-gray-lap-siding-home.webp": {
+    "file": "_app/immutable/assets/hardie-gray-lap-siding-home.D7wq1rK3.webp",
+    "src": "hardie-gray-lap-siding-home.webp"
+  },
+  "hardie-home-classic.avif": {
+    "file": "_app/immutable/assets/hardie-home-classic.DOhiCp8s.avif",
+    "src": "hardie-home-classic.avif"
+  },
+  "hardie-home-classic.jpeg": {
+    "file": "_app/immutable/assets/hardie-home-classic.RZeCD6Zp.jpeg",
+    "src": "hardie-home-classic.jpeg"
+  },
+  "hardie-home-classic.webp": {
+    "file": "_app/immutable/assets/hardie-home-classic.CYmJ3q5i.webp",
+    "src": "hardie-home-classic.webp"
+  },
+  "hardie-home-gray-porch.avif": {
+    "file": "_app/immutable/assets/hardie-home-gray-porch.BdKcOmWm.avif",
+    "src": "hardie-home-gray-porch.avif"
+  },
+  "hardie-home-gray-porch.jpeg": {
+    "file": "_app/immutable/assets/hardie-home-gray-porch.DYMC5wY3.jpeg",
+    "src": "hardie-home-gray-porch.jpeg"
+  },
+  "hardie-home-gray-porch.webp": {
+    "file": "_app/immutable/assets/hardie-home-gray-porch.B7WsndoT.webp",
+    "src": "hardie-home-gray-porch.webp"
+  },
+  "hardie-home-white-trim.avif": {
+    "file": "_app/immutable/assets/hardie-home-white-trim.DiLQXexh.avif",
+    "src": "hardie-home-white-trim.avif"
+  },
+  "hardie-home-white-trim.jpeg": {
+    "file": "_app/immutable/assets/hardie-home-white-trim.b7-djh_W.jpeg",
+    "src": "hardie-home-white-trim.jpeg"
+  },
+  "hardie-home-white-trim.webp": {
+    "file": "_app/immutable/assets/hardie-home-white-trim.xhUjlgYX.webp",
+    "src": "hardie-home-white-trim.webp"
+  },
+  "hardie-lap-siding-detail.avif": {
+    "file": "_app/immutable/assets/hardie-lap-siding-detail.wXQZ2CEv.avif",
+    "src": "hardie-lap-siding-detail.avif"
+  },
+  "hardie-lap-siding-detail.jpeg": {
+    "file": "_app/immutable/assets/hardie-lap-siding-detail.7LQWEiBN.jpeg",
+    "src": "hardie-lap-siding-detail.jpeg"
+  },
+  "hardie-lap-siding-detail.webp": {
+    "file": "_app/immutable/assets/hardie-lap-siding-detail.DEksWi9o.webp",
+    "src": "hardie-lap-siding-detail.webp"
+  },
+  "hardie-suburban-home-exterior.avif": {
+    "file": "_app/immutable/assets/hardie-suburban-home-exterior.DUMzzfPd.avif",
+    "src": "hardie-suburban-home-exterior.avif"
+  },
+  "hardie-suburban-home-exterior.jpeg": {
+    "file": "_app/immutable/assets/hardie-suburban-home-exterior.BMrvEeJb.jpeg",
+    "src": "hardie-suburban-home-exterior.jpeg"
+  },
+  "hardie-suburban-home-exterior.webp": {
+    "file": "_app/immutable/assets/hardie-suburban-home-exterior.BNR2SvXF.webp",
+    "src": "hardie-suburban-home-exterior.webp"
+  },
+  "hardie-white-siding-trim.avif": {
+    "file": "_app/immutable/assets/hardie-white-siding-trim.BgIKmRfe.avif",
+    "src": "hardie-white-siding-trim.avif"
+  },
+  "hardie-white-siding-trim.jpeg": {
+    "file": "_app/immutable/assets/hardie-white-siding-trim.DKZsPwOm.jpeg",
+    "src": "hardie-white-siding-trim.jpeg"
+  },
+  "hardie-white-siding-trim.webp": {
+    "file": "_app/immutable/assets/hardie-white-siding-trim.DexLB7Xp.webp",
+    "src": "hardie-white-siding-trim.webp"
   },
   "historic-house-remodeling.avif": {
     "file": "_app/immutable/assets/historic-house-remodeling.BbWb1RV7.avif",
@@ -5802,6 +5947,7 @@
     "name": "entries/pages/(dark-nav)/about-us/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_RibbonWrapper.js",
@@ -5830,6 +5976,7 @@
     "name": "entries/pages/(dark-nav)/about-us/faqs/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/faqs/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_ColorHero.js",
@@ -5851,6 +5998,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/berwyn-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/berwyn-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -5873,6 +6021,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/burr-ridge-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/burr-ridge-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -5895,6 +6044,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/clarendon-hills-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/clarendon-hills-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -5917,6 +6067,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/downers-grove-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/downers-grove-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -5939,6 +6090,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/forest-park-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/forest-park-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -5961,6 +6113,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/hinsdale-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/hinsdale-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -5982,6 +6135,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/la-grange-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/la-grange-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6003,6 +6157,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/oak-brook-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-brook-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6024,6 +6179,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/oak-park-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-park-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6045,6 +6201,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/orland-park-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/orland-park-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6066,6 +6223,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/riverside-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/riverside-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6087,6 +6245,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/western-springs-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/western-springs-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6108,6 +6267,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/westmont-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/westmont-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6129,6 +6289,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/willow-springs-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/willow-springs-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6150,6 +6311,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/(city-pages)/willowbrook-house-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/(city-pages)/willowbrook-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_CityPageBody.js",
@@ -6171,6 +6333,7 @@
     "name": "entries/pages/(dark-nav)/about-us/service-area/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/service-area/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Map.js",
@@ -6196,6 +6359,7 @@
     "name": "entries/pages/(dark-nav)/about-us/testimonials/_page.svelte",
     "src": "src/routes/(dark-nav)/about-us/testimonials/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_5-stars.js",
@@ -6222,6 +6386,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_button.js",
@@ -6229,7 +6394,8 @@
       "_routes.js",
       "_klasek-painting-victorian-homes-1.js",
       "_klasek-before-after-gallery.js",
-      "_RibbonWrapper.js"
+      "_RibbonWrapper.js",
+      "_stucco-and-trim-before.js"
     ],
     "css": [
       "_app/immutable/assets/_page.DqtlfKLL.css"
@@ -6326,12 +6492,6 @@
       "_app/immutable/assets/stucco-repair-paint-front-of-the-house-after.BvX8jq9k.webp",
       "_app/immutable/assets/stucco-repair-paint-front-of-the-house-after.u0Q4kXtB.png",
       "_app/immutable/assets/stucco-repair-paint-front-of-the-house-after.CX0qglCz.png",
-      "_app/immutable/assets/stucco-and-trim-before.C-p5cKXp.avif",
-      "_app/immutable/assets/stucco-and-trim-before.BFw21C5e.avif",
-      "_app/immutable/assets/stucco-and-trim-before.CsY0RAZV.webp",
-      "_app/immutable/assets/stucco-and-trim-before.Zz-cMKvT.webp",
-      "_app/immutable/assets/stucco-and-trim-before.8Wimfesb.png",
-      "_app/immutable/assets/stucco-and-trim-before.CEWDkm7y.png",
       "_app/immutable/assets/stucco-and-trim-after.BtmwaWV2.avif",
       "_app/immutable/assets/stucco-and-trim-after.lmMQxCOZ.avif",
       "_app/immutable/assets/stucco-and-trim-after.l4JvZw53.webp",
@@ -6426,6 +6586,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/brick-painting/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/brick-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6459,6 +6620,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/cedar-replacement/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/cedar-replacement/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6504,6 +6666,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/cedar-shingle-and-stucco-repair/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/cedar-shingle-and-stucco-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6544,6 +6707,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/cedar-siding-repair-paint/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/cedar-siding-repair-paint/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6580,6 +6744,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/exterior-hardie-board/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/exterior-hardie-board/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6619,6 +6784,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/past-projects/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/past-projects/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6658,6 +6824,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/siding-and-stucco/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/siding-and-stucco/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6694,6 +6861,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/siding-repair/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/siding-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6727,6 +6895,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/stucco-and-cedar-siding/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/stucco-and-cedar-siding/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6764,6 +6933,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/stucco-and-trim/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/stucco-and-trim/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6794,6 +6964,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/stucco-repair/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/stucco-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6829,6 +7000,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/stucco-siding-repair-paint/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/stucco-siding-repair-paint/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6870,6 +7042,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/trim/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/trim/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6908,6 +7081,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/victorian-homes/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/victorian-homes/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6941,6 +7115,7 @@
     "name": "entries/pages/(dark-nav)/photo-gallery/white-cedar-siding/_page.svelte",
     "src": "src/routes/(dark-nav)/photo-gallery/white-cedar-siding/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_Breadcrumb.js",
@@ -6977,6 +7152,11 @@
       "_ssr.js",
       "_NavBar.js",
       "_Footer.js",
+      "_5-stars.js",
+      "_button.js",
+      "_ClickToCall.js",
+      "_routes.js",
+      "_siteData.js",
       "_stores.js"
     ]
   },
@@ -6995,6 +7175,7 @@
     "name": "entries/pages/(light-nav)/blog/_page.svelte",
     "src": "src/routes/(light-nav)/blog/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_button.js",
@@ -7019,6 +7200,7 @@
     "name": "entries/pages/(light-nav)/blog/_title_/_page.svelte",
     "src": "src/routes/(light-nav)/blog/[title]/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_stores.js",
@@ -7029,6 +7211,33 @@
     "css": [
       "_app/immutable/assets/_page.Cv6DcLUO.css"
     ]
+  },
+  "src/routes/(light-nav)/careers/+page.svelte": {
+    "file": "entries/pages/(light-nav)/careers/_page.svelte.js",
+    "name": "entries/pages/(light-nav)/careers/_page.svelte",
+    "src": "src/routes/(light-nav)/careers/+page.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_button.js",
+      "_klasek-painting-professional-exterior-painters.js"
+    ]
+  },
+  "src/routes/(light-nav)/careers/+page.ts": {
+    "file": "entries/pages/(light-nav)/careers/_page.ts.js",
+    "name": "entries/pages/(light-nav)/careers/_page.ts",
+    "src": "src/routes/(light-nav)/careers/+page.ts",
+    "isEntry": true,
+    "imports": [
+      "_metaTagHelpers.js"
+    ]
+  },
+  "src/routes/(light-nav)/careers/apply/+server.ts": {
+    "file": "entries/endpoints/(light-nav)/careers/apply/_server.ts.js",
+    "name": "entries/endpoints/(light-nav)/careers/apply/_server.ts",
+    "src": "src/routes/(light-nav)/careers/apply/+server.ts",
+    "isEntry": true
   },
   "src/routes/(light-nav)/contact-us/+page.server.ts": {
     "file": "entries/pages/(light-nav)/contact-us/_page.server.ts.js",
@@ -7044,8 +7253,11 @@
     "name": "entries/pages/(light-nav)/contact-us/_page.svelte",
     "src": "src/routes/(light-nav)/contact-us/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
+      "_GoogleProof.js",
+      "_lead-safe.js",
       "_Map.js",
       "_LocationIcon.js",
       "_ClickToCall.js",
@@ -7060,6 +7272,7 @@
     "name": "entries/pages/(light-nav)/legal/privacy-policy/_page.svelte",
     "src": "src/routes/(light-nav)/legal/privacy-policy/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_ClickToCall.js"
@@ -7082,6 +7295,7 @@
     "name": "entries/pages/(light-nav)/services/_page.svelte",
     "src": "src/routes/(light-nav)/services/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_OtherServicesSection.js",
@@ -7119,6 +7333,7 @@
     "name": "entries/pages/(light-nav)/services/brick-painting-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/brick-painting-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_OtherServicesSection.js",
@@ -7149,6 +7364,7 @@
     "name": "entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-painting/_page.svelte",
     "src": "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7178,6 +7394,7 @@
     "name": "entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7185,15 +7402,8 @@
       "_BasicTemplateSection.js",
       "_routes.js",
       "_HeadingAccent.js",
+      "_exterior-brick-repair-service.js",
       "_GalleryLinkBlock.js"
-    ],
-    "assets": [
-      "_app/immutable/assets/exterior-brick-repair-service.DfZItOVp.avif",
-      "_app/immutable/assets/exterior-brick-repair-service.BGOhrMLd.avif",
-      "_app/immutable/assets/exterior-brick-repair-service.CnnvmMn2.webp",
-      "_app/immutable/assets/exterior-brick-repair-service.DzUiu0HV.webp",
-      "_app/immutable/assets/exterior-brick-repair-service.BpgzJm8m.png",
-      "_app/immutable/assets/exterior-brick-repair-service.CzZzCMPE.png"
     ]
   },
   "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-repair/+page.ts": {
@@ -7210,6 +7420,7 @@
     "name": "entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-staining/_page.svelte",
     "src": "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-staining/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7242,6 +7453,7 @@
     "name": "entries/pages/(light-nav)/services/commercial-exterior-painting/_page.svelte",
     "src": "src/routes/(light-nav)/services/commercial-exterior-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_OtherServicesSection.js",
@@ -7275,6 +7487,7 @@
     "name": "entries/pages/(light-nav)/services/design-color-consultation/_page.svelte",
     "src": "src/routes/(light-nav)/services/design-color-consultation/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_OtherServicesSection.js",
@@ -7306,6 +7519,7 @@
     "name": "entries/pages/(light-nav)/services/exterior-home-painting/_page.svelte",
     "src": "src/routes/(light-nav)/services/exterior-home-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_OtherServicesSection.js",
@@ -7337,20 +7551,14 @@
     "name": "entries/pages/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/_page.svelte",
     "src": "src/routes/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
       "_ColumnTemplateSection.js",
+      "_exterior-paint-contractor.js",
       "_GalleryLinkBlock.js",
       "_routes.js"
-    ],
-    "assets": [
-      "_app/immutable/assets/exterior-paint-contractor.MFLL9Gbv.avif",
-      "_app/immutable/assets/exterior-paint-contractor.Z66NTt-7.avif",
-      "_app/immutable/assets/exterior-paint-contractor.CaWeelPn.webp",
-      "_app/immutable/assets/exterior-paint-contractor.c0U-CB2M.webp",
-      "_app/immutable/assets/exterior-paint-contractor.CeGo-X57.png",
-      "_app/immutable/assets/exterior-paint-contractor.B5feeU1y.png"
     ]
   },
   "src/routes/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/+page.ts": {
@@ -7367,10 +7575,12 @@
     "name": "entries/pages/(light-nav)/services/exterior-home-painting/historic-house-painting/_page.svelte",
     "src": "src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
       "_ColumnTemplateSection.js",
+      "_expert-historic-house-painting.js",
       "_GalleryLinkBlock.js",
       "_routes.js"
     ],
@@ -7380,13 +7590,7 @@
       "_app/immutable/assets/historic-house-remodeling.D5jGVKlY.webp",
       "_app/immutable/assets/historic-house-remodeling.Bmj1Rd8E.webp",
       "_app/immutable/assets/historic-house-remodeling.8bsSiXud.png",
-      "_app/immutable/assets/historic-house-remodeling.Bvl7JXil.png",
-      "_app/immutable/assets/expert-historic-house-painting.Cizdwxvi.avif",
-      "_app/immutable/assets/expert-historic-house-painting.DuMMm2gi.avif",
-      "_app/immutable/assets/expert-historic-house-painting.BO9XXW_L.webp",
-      "_app/immutable/assets/expert-historic-house-painting.D6wwSFmt.webp",
-      "_app/immutable/assets/expert-historic-house-painting.tG6jh17i.png",
-      "_app/immutable/assets/expert-historic-house-painting.D1OAV4fi.png"
+      "_app/immutable/assets/historic-house-remodeling.Bvl7JXil.png"
     ]
   },
   "src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.ts": {
@@ -7403,6 +7607,7 @@
     "name": "entries/pages/(light-nav)/services/gutter-installation-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/gutter-installation-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_GoogleProof.js",
@@ -7412,12 +7617,16 @@
       "_routes.js",
       "_orange-paint-splash.js",
       "_5-stars.js",
-      "_Google-name-logo.js",
+      "_valspar.js",
       "_lead-safe.js",
-      "_isMobileStore.js"
+      "_isMobileStore.js",
+      "_exterior-brick-repair-service.js",
+      "_expert-historic-house-painting.js",
+      "_stucco-and-trim-before.js",
+      "_exterior-paint-contractor.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.B6Nyy_2f.css"
+      "_app/immutable/assets/_page.ByJkEwOD.css"
     ],
     "assets": [
       "_app/immutable/assets/exterior-home-painting.C-Phi6Vi.avif",
@@ -7425,7 +7634,13 @@
       "_app/immutable/assets/exterior-home-painting.WX3HoXxC.webp",
       "_app/immutable/assets/exterior-home-painting.DH4vjNhU.webp",
       "_app/immutable/assets/exterior-home-painting.tcNBtJ77.png",
-      "_app/immutable/assets/exterior-home-painting.DY868983.png"
+      "_app/immutable/assets/exterior-home-painting.DY868983.png",
+      "_app/immutable/assets/stucco-painting-service.DHIFwXlo.avif",
+      "_app/immutable/assets/stucco-painting-service.BZoFp0O0.avif",
+      "_app/immutable/assets/stucco-painting-service.CNu3q_d7.webp",
+      "_app/immutable/assets/stucco-painting-service.D1diRkkl.webp",
+      "_app/immutable/assets/stucco-painting-service.DJkwqFGJ.png",
+      "_app/immutable/assets/stucco-painting-service.DJlWKVUW.png"
     ]
   },
   "src/routes/(light-nav)/services/gutter-installation-repair/+page.ts": {
@@ -7442,6 +7657,7 @@
     "name": "entries/pages/(light-nav)/services/siding-painting-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/siding-painting-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_OtherServicesSection.js",
@@ -7470,6 +7686,7 @@
     "name": "entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/_page.svelte",
     "src": "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7502,6 +7719,7 @@
     "name": "entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7535,6 +7753,7 @@
     "name": "entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-painting/_page.svelte",
     "src": "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7567,6 +7786,7 @@
     "name": "entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7598,11 +7818,66 @@
       "_metaTagHelpers.js"
     ]
   },
-  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.svelte": {
-    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.svelte.js",
-    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.svelte",
-    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.svelte",
+  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.svelte": {
+    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.svelte.js",
+    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.svelte",
+    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_FaqSection.js",
+      "_ColumnTemplateSection.js",
+      "_BasicTemplateSection.js",
+      "_routes.js",
+      "_HeadingAccent.js",
+      "_hardie-board-siding-painting-before-after-service.js",
+      "_isMobileStore.js",
+      "_GalleryLinkBlock.js"
+    ]
+  },
+  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.ts": {
+    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.ts.js",
+    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.ts",
+    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.ts",
+    "isEntry": true,
+    "imports": [
+      "_metaTagHelpers.js"
+    ]
+  },
+  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.svelte": {
+    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.svelte.js",
+    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.svelte",
+    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_ssr.js",
+      "_FaqSection.js",
+      "_ColumnTemplateSection.js",
+      "_BasicTemplateSection.js",
+      "_HeadingAccent.js",
+      "_hardie-board-siding-repair-service.js",
+      "_isMobileStore.js",
+      "_GalleryLinkBlock.js",
+      "_routes.js"
+    ]
+  },
+  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts": {
+    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.ts.js",
+    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.ts",
+    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts",
+    "isEntry": true,
+    "imports": [
+      "_metaTagHelpers.js"
+    ]
+  },
+  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.svelte": {
+    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-services/_page.svelte.js",
+    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-services/_page.svelte",
+    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.svelte",
+    "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_GoogleProof.js",
@@ -7615,55 +7890,56 @@
       "_orange-paint-splash.js",
       "_5-stars.js",
       "_Google-name-logo.js",
+      "_valspar.js",
       "_lead-safe.js",
       "_isMobileStore.js"
     ],
     "css": [
-      "_app/immutable/assets/_page.Dp6q8Ut_.css"
+      "_app/immutable/assets/_page.DEuYSAEC.css"
     ],
     "assets": [
-      "_app/immutable/assets/exterior-hardie-board-1.C9LR72Vk.avif",
-      "_app/immutable/assets/exterior-hardie-board-1.BP2Xa993.avif",
-      "_app/immutable/assets/exterior-hardie-board-1.So7ecRbF.webp",
-      "_app/immutable/assets/exterior-hardie-board-1.BL-SdGeB.webp",
-      "_app/immutable/assets/exterior-hardie-board-1.CMi3El4J.png",
-      "_app/immutable/assets/exterior-hardie-board-1.Cdn2AquH.png",
-      "_app/immutable/assets/exterior-hardie-board-2.CUrjlj4b.avif",
-      "_app/immutable/assets/exterior-hardie-board-2.BGtE0MUI.avif",
-      "_app/immutable/assets/exterior-hardie-board-2.KmAkXME3.webp",
-      "_app/immutable/assets/exterior-hardie-board-2.CB1p8ABP.webp",
-      "_app/immutable/assets/exterior-hardie-board-2.tvgOBTQq.png",
-      "_app/immutable/assets/exterior-hardie-board-2.Cg64khCH.png",
-      "_app/immutable/assets/exterior-hardie-board-3.CgpQlWKy.avif",
-      "_app/immutable/assets/exterior-hardie-board-3.B55EULWx.avif",
-      "_app/immutable/assets/exterior-hardie-board-3.Di2PlErd.webp",
-      "_app/immutable/assets/exterior-hardie-board-3.Dl6rok0V.webp",
-      "_app/immutable/assets/exterior-hardie-board-3.7nIhlrsy.png",
-      "_app/immutable/assets/exterior-hardie-board-3.D9HX3LO1.png",
-      "_app/immutable/assets/exterior-hardie-board-4.CglGMmn8.avif",
-      "_app/immutable/assets/exterior-hardie-board-4.BtbCZWl5.avif",
-      "_app/immutable/assets/exterior-hardie-board-4.BvCzUoWm.webp",
-      "_app/immutable/assets/exterior-hardie-board-4.C_VYxt8n.webp",
-      "_app/immutable/assets/exterior-hardie-board-4.BjKLVzvb.png",
-      "_app/immutable/assets/exterior-hardie-board-4.7ebTpcOU.png",
-      "_app/immutable/assets/exterior-hardie-board-5.bzXQS01H.avif",
-      "_app/immutable/assets/exterior-hardie-board-5.DhaSQpdo.avif",
-      "_app/immutable/assets/exterior-hardie-board-5.VNgpZ69a.webp",
-      "_app/immutable/assets/exterior-hardie-board-5.CfNo3AiQ.webp",
-      "_app/immutable/assets/exterior-hardie-board-5.CUtMiAZq.png",
-      "_app/immutable/assets/exterior-hardie-board-5.Cl-Z5cm-.png",
-      "_app/immutable/assets/exterior-hardie-board-6.GSsvA_cN.avif",
-      "_app/immutable/assets/exterior-hardie-board-6.U5t380xK.avif",
-      "_app/immutable/assets/exterior-hardie-board-6.CeIfvedw.webp",
-      "_app/immutable/assets/exterior-hardie-board-6.Z_dAWJo8.webp",
-      "_app/immutable/assets/exterior-hardie-board-6.CTuNZqAB.png",
-      "_app/immutable/assets/exterior-hardie-board-6.CPViXenp.png",
-      "_app/immutable/assets/exterior-hardie-board-7.B4eG7DmT.avif",
-      "_app/immutable/assets/exterior-hardie-board-7.ywt5duci.avif",
-      "_app/immutable/assets/exterior-hardie-board-7.x-sWdkv0.webp",
-      "_app/immutable/assets/exterior-hardie-board-7.DFqgsBTr.webp",
-      "_app/immutable/assets/exterior-hardie-board-7.C0AFaop5.png",
-      "_app/immutable/assets/exterior-hardie-board-7.DmXGz4tC.png",
+      "_app/immutable/assets/hardie-suburban-home-exterior.BFFJc4S_.avif",
+      "_app/immutable/assets/hardie-suburban-home-exterior.DUMzzfPd.avif",
+      "_app/immutable/assets/hardie-suburban-home-exterior.DRHGt2LW.webp",
+      "_app/immutable/assets/hardie-suburban-home-exterior.BNR2SvXF.webp",
+      "_app/immutable/assets/hardie-suburban-home-exterior.BVlG1-be.jpeg",
+      "_app/immutable/assets/hardie-suburban-home-exterior.BMrvEeJb.jpeg",
+      "_app/immutable/assets/hardie-gray-lap-siding-home.CWBc5XSr.avif",
+      "_app/immutable/assets/hardie-gray-lap-siding-home.P8mexrsm.avif",
+      "_app/immutable/assets/hardie-gray-lap-siding-home.EuQkIuzT.webp",
+      "_app/immutable/assets/hardie-gray-lap-siding-home.D7wq1rK3.webp",
+      "_app/immutable/assets/hardie-gray-lap-siding-home.DSPjcRfF.jpeg",
+      "_app/immutable/assets/hardie-gray-lap-siding-home.dD9xkuQy.jpeg",
+      "_app/immutable/assets/hardie-white-siding-trim.DVWdBgaq.avif",
+      "_app/immutable/assets/hardie-white-siding-trim.BgIKmRfe.avif",
+      "_app/immutable/assets/hardie-white-siding-trim.TZw_QsAA.webp",
+      "_app/immutable/assets/hardie-white-siding-trim.DexLB7Xp.webp",
+      "_app/immutable/assets/hardie-white-siding-trim.BnUwqzYf.jpeg",
+      "_app/immutable/assets/hardie-white-siding-trim.DKZsPwOm.jpeg",
+      "_app/immutable/assets/hardie-lap-siding-detail.BuBcsscY.avif",
+      "_app/immutable/assets/hardie-lap-siding-detail.wXQZ2CEv.avif",
+      "_app/immutable/assets/hardie-lap-siding-detail.BFva4Yiw.webp",
+      "_app/immutable/assets/hardie-lap-siding-detail.DEksWi9o.webp",
+      "_app/immutable/assets/hardie-lap-siding-detail.Cbuy7CtD.jpeg",
+      "_app/immutable/assets/hardie-lap-siding-detail.7LQWEiBN.jpeg",
+      "_app/immutable/assets/hardie-home-white-trim.BMdtpkgh.avif",
+      "_app/immutable/assets/hardie-home-white-trim.DiLQXexh.avif",
+      "_app/immutable/assets/hardie-home-white-trim.CZdxWZ7b.webp",
+      "_app/immutable/assets/hardie-home-white-trim.xhUjlgYX.webp",
+      "_app/immutable/assets/hardie-home-white-trim.5jYVy2FF.jpeg",
+      "_app/immutable/assets/hardie-home-white-trim.b7-djh_W.jpeg",
+      "_app/immutable/assets/hardie-home-gray-porch.DqmaREf7.avif",
+      "_app/immutable/assets/hardie-home-gray-porch.BdKcOmWm.avif",
+      "_app/immutable/assets/hardie-home-gray-porch.Bd_DEaPj.webp",
+      "_app/immutable/assets/hardie-home-gray-porch.B7WsndoT.webp",
+      "_app/immutable/assets/hardie-home-gray-porch.CsK5jNYf.jpeg",
+      "_app/immutable/assets/hardie-home-gray-porch.DYMC5wY3.jpeg",
+      "_app/immutable/assets/hardie-home-classic.BnXQQ0Kb.avif",
+      "_app/immutable/assets/hardie-home-classic.DOhiCp8s.avif",
+      "_app/immutable/assets/hardie-home-classic.Dk7szGOS.webp",
+      "_app/immutable/assets/hardie-home-classic.CYmJ3q5i.webp",
+      "_app/immutable/assets/hardie-home-classic.BH0DdxNT.jpeg",
+      "_app/immutable/assets/hardie-home-classic.RZeCD6Zp.jpeg",
       "_app/immutable/assets/exterior-hardie-board-8.DjWiLSyl.avif",
       "_app/immutable/assets/exterior-hardie-board-8.8q-EyMk7.avif",
       "_app/immutable/assets/exterior-hardie-board-8.BYFW84D7.webp",
@@ -7708,62 +7984,10 @@
       "_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png"
     ]
   },
-  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.ts": {
-    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.ts.js",
-    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.ts",
-    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.ts",
-    "isEntry": true,
-    "imports": [
-      "_metaTagHelpers.js"
-    ]
-  },
-  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.svelte": {
-    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.svelte.js",
-    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.svelte",
-    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.svelte",
-    "isEntry": true,
-    "imports": [
-      "_ssr.js",
-      "_FaqSection.js",
-      "_ColumnTemplateSection.js",
-      "_BasicTemplateSection.js",
-      "_routes.js",
-      "_HeadingAccent.js",
-      "_hardie-board-siding-painting-before-after-service.js",
-      "_isMobileStore.js",
-      "_GalleryLinkBlock.js"
-    ]
-  },
-  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.ts": {
-    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.ts.js",
-    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-painting/_page.ts",
-    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.ts",
-    "isEntry": true,
-    "imports": [
-      "_metaTagHelpers.js"
-    ]
-  },
-  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.svelte": {
-    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.svelte.js",
-    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.svelte",
-    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.svelte",
-    "isEntry": true,
-    "imports": [
-      "_ssr.js",
-      "_FaqSection.js",
-      "_ColumnTemplateSection.js",
-      "_BasicTemplateSection.js",
-      "_HeadingAccent.js",
-      "_hardie-board-siding-repair-service.js",
-      "_isMobileStore.js",
-      "_GalleryLinkBlock.js",
-      "_routes.js"
-    ]
-  },
-  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts": {
-    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.ts.js",
-    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-repair/_page.ts",
-    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts",
+  "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.ts": {
+    "file": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-services/_page.ts.js",
+    "name": "entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-services/_page.ts",
+    "src": "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.ts",
     "isEntry": true,
     "imports": [
       "_metaTagHelpers.js"
@@ -7774,6 +7998,7 @@
     "name": "entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/_page.svelte",
     "src": "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7807,6 +8032,7 @@
     "name": "entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7839,6 +8065,7 @@
     "name": "entries/pages/(light-nav)/services/stucco-painting-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/stucco-painting-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_OtherServicesSection.js",
@@ -7867,6 +8094,7 @@
     "name": "entries/pages/(light-nav)/services/stucco-painting-repair/stucco-painting/_page.svelte",
     "src": "src/routes/(light-nav)/services/stucco-painting-repair/stucco-painting/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7901,6 +8129,7 @@
     "name": "entries/pages/(light-nav)/services/stucco-painting-repair/stucco-repair/_page.svelte",
     "src": "src/routes/(light-nav)/services/stucco-painting-repair/stucco-repair/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_FaqSection.js",
@@ -7969,7 +8198,7 @@
       "_index2.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.DxoXQsSG.css"
+      "_app/immutable/assets/_layout.Dj3PMBR9.css"
     ],
     "assets": [
       "_app/immutable/assets/montserrat-latin-500-normal.DRFEGfly.woff2",
@@ -7985,15 +8214,18 @@
     "name": "entries/pages/_page.svelte",
     "src": "src/routes/+page.svelte",
     "isEntry": true,
+    "isDynamicEntry": true,
     "imports": [
       "_ssr.js",
       "_GoogleProof.js",
       "_button.js",
       "_routes.js",
+      "_klasek-painting-professional-exterior-painters.js",
       "_ViewOurWorkSection.js",
       "_ServiceAreaSection.js",
       "_TestimonialsSection.js",
       "_RibbonWrapper.js",
+      "_valspar.js",
       "_lead-safe.js",
       "_isMobileStore.js",
       "_NavBar.js",
@@ -8006,7 +8238,6 @@
       "_app/immutable/assets/_page.yAOv9-SH.css"
     ],
     "assets": [
-      "_app/immutable/assets/klasek-painting-professional-exterior-painters.DJK4DWtY.webp",
       "_app/immutable/assets/stucco-feature.DjbCYtpG.avif"
     ]
   },
@@ -8022,7 +8253,75 @@
     "src": "src/routes/sitemap.xml/+server.ts",
     "isEntry": true,
     "imports": [
-      "_siteData.js"
+      "_siteData.js",
+      "_data.js"
+    ],
+    "dynamicImports": [
+      "src/routes/(dark-nav)/about-us/+page.svelte",
+      "src/routes/(dark-nav)/about-us/faqs/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/berwyn-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/burr-ridge-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/clarendon-hills-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/downers-grove-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/forest-park-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/hinsdale-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/la-grange-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-brook-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-park-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/orland-park-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/riverside-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/western-springs-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/westmont-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/willow-springs-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/(city-pages)/willowbrook-house-painting/+page.svelte",
+      "src/routes/(dark-nav)/about-us/service-area/+page.svelte",
+      "src/routes/(dark-nav)/about-us/testimonials/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/brick-painting/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/cedar-replacement/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/cedar-shingle-and-stucco-repair/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/cedar-siding-repair-paint/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/exterior-hardie-board/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/past-projects/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/siding-and-stucco/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/siding-repair/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/stucco-and-cedar-siding/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/stucco-and-trim/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/stucco-repair/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/stucco-siding-repair-paint/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/trim/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/victorian-homes/+page.svelte",
+      "src/routes/(dark-nav)/photo-gallery/white-cedar-siding/+page.svelte",
+      "src/routes/(light-nav)/blog/+page.svelte",
+      "src/routes/(light-nav)/blog/[title]/+page.svelte",
+      "src/routes/(light-nav)/careers/+page.svelte",
+      "src/routes/(light-nav)/contact-us/+page.svelte",
+      "src/routes/(light-nav)/legal/privacy-policy/+page.svelte",
+      "src/routes/(light-nav)/services/+page.svelte",
+      "src/routes/(light-nav)/services/brick-painting-repair/+page.svelte",
+      "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-painting/+page.svelte",
+      "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-repair/+page.svelte",
+      "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-staining/+page.svelte",
+      "src/routes/(light-nav)/services/commercial-exterior-painting/+page.svelte",
+      "src/routes/(light-nav)/services/design-color-consultation/+page.svelte",
+      "src/routes/(light-nav)/services/exterior-home-painting/+page.svelte",
+      "src/routes/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/+page.svelte",
+      "src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.svelte",
+      "src/routes/(light-nav)/services/gutter-installation-repair/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-painting/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-repair/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/+page.svelte",
+      "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/+page.svelte",
+      "src/routes/(light-nav)/services/stucco-painting-repair/+page.svelte",
+      "src/routes/(light-nav)/services/stucco-painting-repair/stucco-painting/+page.svelte",
+      "src/routes/(light-nav)/services/stucco-painting-repair/stucco-repair/+page.svelte",
+      "src/routes/+page.svelte"
     ]
   },
   "stucco-and-cedar-siding-1.avif": {
@@ -8228,6 +8527,18 @@
   "stucco-lime-wash-before.webp": {
     "file": "_app/immutable/assets/stucco-lime-wash-before.BUO8LFLS.webp",
     "src": "stucco-lime-wash-before.webp"
+  },
+  "stucco-painting-service.avif": {
+    "file": "_app/immutable/assets/stucco-painting-service.BZoFp0O0.avif",
+    "src": "stucco-painting-service.avif"
+  },
+  "stucco-painting-service.png": {
+    "file": "_app/immutable/assets/stucco-painting-service.DJlWKVUW.png",
+    "src": "stucco-painting-service.png"
+  },
+  "stucco-painting-service.webp": {
+    "file": "_app/immutable/assets/stucco-painting-service.D1diRkkl.webp",
+    "src": "stucco-painting-service.webp"
   },
   "stucco-repair-paint-back-of-the-house-after-2.avif": {
     "file": "_app/immutable/assets/stucco-repair-paint-back-of-the-house-after-2.BeyNp_yY.avif",

@@ -5,6 +5,7 @@ import { g as galleryRoutes } from "../../../../chunks/routes.js";
 import { s as stucco, d as design } from "../../../../chunks/klasek-painting-victorian-homes-1.js";
 import { s as src } from "../../../../chunks/klasek-before-after-gallery.js";
 import { R as RibbonWrapper } from "../../../../chunks/RibbonWrapper.js";
+import { r as repairImg } from "../../../../chunks/stucco-and-trim-before.js";
 const GalleryPreviewGrid = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
   let { reverse = false } = $$props;
@@ -395,18 +396,6 @@ const stuccoRepairFrontAfter = {
     h: 454
   }
 };
-const stuccoTrimBefore = {
-  sources: {
-    avif: "/_app/immutable/assets/stucco-and-trim-before.C-p5cKXp.avif 504w, /_app/immutable/assets/stucco-and-trim-before.BFw21C5e.avif 1008w",
-    webp: "/_app/immutable/assets/stucco-and-trim-before.CsY0RAZV.webp 504w, /_app/immutable/assets/stucco-and-trim-before.Zz-cMKvT.webp 1008w",
-    png: "/_app/immutable/assets/stucco-and-trim-before.8Wimfesb.png 504w, /_app/immutable/assets/stucco-and-trim-before.CEWDkm7y.png 1008w"
-  },
-  img: {
-    src: "/_app/immutable/assets/stucco-and-trim-before.CEWDkm7y.png",
-    w: 1008,
-    h: 454
-  }
-};
 const stuccoTrimAfter = {
   sources: {
     avif: "/_app/immutable/assets/stucco-and-trim-after.BtmwaWV2.avif 504w, /_app/immutable/assets/stucco-and-trim-after.lmMQxCOZ.avif 1008w",
@@ -586,7 +575,7 @@ const beforeAfterGalleryData = [
   },
   {
     title: "Stucco & Trim",
-    before: stuccoTrimBefore,
+    before: repairImg,
     after: stuccoTrimAfter
   },
   {

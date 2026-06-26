@@ -264,8 +264,8 @@ function create_ssr_component(fn) {
   };
 }
 function add_attribute(name, value, boolean) {
-  if (value == null || boolean) return "";
-  const assignment = `="${escape(value, true)}"`;
+  if (value == null || boolean && !value) return "";
+  const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
   return ` ${name}${assignment}`;
 }
 function style_object_to_string(style_object) {

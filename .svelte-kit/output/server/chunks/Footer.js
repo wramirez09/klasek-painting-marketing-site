@@ -9,7 +9,7 @@ import { M as Map } from "./Map.js";
 import { C as ClickToCall } from "./ClickToCall.js";
 import { P as PhoneIcon } from "./PhoneIcon.js";
 import { L as LocationIcon } from "./LocationIcon.js";
-import { g as googleMapsHref } from "./siteData.js";
+import { i as googleMapsHref } from "./siteData.js";
 const src = {
   sources: {
     avif: "/_app/immutable/assets/orange-paint-splash.Bs5lhImV.avif 1368w, /_app/immutable/assets/orange-paint-splash.D-yEuqk9.avif 2736w",
@@ -66,7 +66,12 @@ const FooterSocialLinks = create_ssr_component(($$result, $$props, $$bindings, s
   })}</ul>`;
 });
 const Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-  const usefulLinks = [routes["contact"], routes["service-area"], routes["privacy"]];
+  const usefulLinks = [
+    routes["contact"],
+    routes["service-area"],
+    routes["careers"],
+    routes["privacy"]
+  ];
   let { showEmailSignup = true } = $$props;
   if ($$props.showEmailSignup === void 0 && $$bindings.showEmailSignup && showEmailSignup !== void 0) $$bindings.showEmailSignup(showEmailSignup);
   return `<footer class="flex flex-col items-center bg-secondary px-6">${showEmailSignup ? `${validate_component(EmailSignup, "EmailSignup").$$render($$result, {}, {}, {})}` : ``} ${validate_component(FooterCta, "FooterCta").$$render($$result, {}, {}, {})} <div class="w-full py-8 p-x grid lg:grid-cols-4 grid-cols-2 lg:gap-x-12 gap-y-8 xs:gap-x-4"> <div class="flex flex-col gap-6 lg:col-span-1 col-span-2 max-w-[200px] mx-auto"><a href="/">${typeof logo === "string" ? `<img${add_attribute("src", logo.img.src, 0)} alt="Klasek Painting" class="w-full h-auto" loading="lazy"${add_attribute("width", logo.img.w, 0)}${add_attribute("height", logo.img.h, 0)}>` : `<picture>${each(Object.entries(logo.sources), ([format, srcset]) => {

@@ -10,7 +10,7 @@ return {
 	assets: new Set(["favicon.png","klasek-painting.png","klasek_blog.webp","klasek_blog_what-exterior-paint-colors-look-the-best-2.webp","klasek_blog_what-exterior-paint-colors-look-the-best-3.webp","klasek_blog_what-exterior-paint-colors-look-the-best.webp","robots.txt"]),
 	mimeTypes: {".png":"image/png",".webp":"image/webp",".txt":"text/plain"},
 	_: {
-		client: {start:"_app/immutable/entry/start.CjN_6J3s.js",app:"_app/immutable/entry/app.BVxu0fr2.js",imports:["_app/immutable/entry/start.CjN_6J3s.js","_app/immutable/chunks/BZgZIqmN.js","_app/immutable/chunks/KUc_ZfUX.js","_app/immutable/chunks/DsXuwSGI.js","_app/immutable/entry/app.BVxu0fr2.js","_app/immutable/chunks/C1FmrZbK.js","_app/immutable/chunks/KUc_ZfUX.js","_app/immutable/chunks/IHki7fMi.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.Bde4EDHx.js",app:"_app/immutable/entry/app.Ctl4uaW7.js",imports:["_app/immutable/entry/start.Bde4EDHx.js","_app/immutable/chunks/DtFYjPI3.js","_app/immutable/chunks/DrOtaHMw.js","_app/immutable/chunks/zlTXQEG6.js","_app/immutable/entry/app.Ctl4uaW7.js","_app/immutable/chunks/C1FmrZbK.js","_app/immutable/chunks/DrOtaHMw.js","_app/immutable/chunks/IHki7fMi.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
@@ -79,7 +79,8 @@ return {
 			__memo(() => import('./nodes/64.js')),
 			__memo(() => import('./nodes/65.js')),
 			__memo(() => import('./nodes/66.js')),
-			__memo(() => import('./nodes/67.js'))
+			__memo(() => import('./nodes/67.js')),
+			__memo(() => import('./nodes/68.js'))
 		],
 		remotes: {
 			
@@ -247,17 +248,31 @@ return {
 				endpoint: null
 			},
 			{
+				id: "/(light-nav)/careers",
+				pattern: /^\/careers\/?$/,
+				params: [],
+				page: { layouts: [0,3,], errors: [1,,], leaf: 42 },
+				endpoint: null
+			},
+			{
+				id: "/(light-nav)/careers/apply",
+				pattern: /^\/careers\/apply\/?$/,
+				params: [],
+				page: null,
+				endpoint: __memo(() => import('./entries/endpoints/(light-nav)/careers/apply/_server.ts.js'))
+			},
+			{
 				id: "/(light-nav)/contact-us",
 				pattern: /^\/contact-us\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 42 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 43 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/legal/privacy-policy",
 				pattern: /^\/legal\/privacy-policy\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 43 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 44 },
 				endpoint: null
 			},
 			{
@@ -376,117 +391,110 @@ return {
 				id: "/(light-nav)/services",
 				pattern: /^\/services\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 44 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 45 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/brick-painting-repair",
 				pattern: /^\/services\/brick-painting-repair\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 45 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 46 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/brick-painting-repair/exterior-brick-painting",
 				pattern: /^\/services\/brick-painting-repair\/exterior-brick-painting\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 46 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 47 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/brick-painting-repair/exterior-brick-repair",
 				pattern: /^\/services\/brick-painting-repair\/exterior-brick-repair\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 47 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 48 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/brick-painting-repair/exterior-brick-staining",
 				pattern: /^\/services\/brick-painting-repair\/exterior-brick-staining\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 48 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 49 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/commercial-exterior-painting",
 				pattern: /^\/services\/commercial-exterior-painting\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 49 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 50 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/design-color-consultation",
 				pattern: /^\/services\/design-color-consultation\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 50 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 51 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/exterior-home-painting",
 				pattern: /^\/services\/exterior-home-painting\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 51 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 52 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/exterior-home-painting/exterior-paint-contractor",
 				pattern: /^\/services\/exterior-home-painting\/exterior-paint-contractor\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 52 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 53 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/exterior-home-painting/historic-house-painting",
 				pattern: /^\/services\/exterior-home-painting\/historic-house-painting\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 53 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 54 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/gutter-installation-repair",
 				pattern: /^\/services\/gutter-installation-repair\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 54 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 55 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/siding-painting-repair",
 				pattern: /^\/services\/siding-painting-repair\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 55 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 56 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/siding-painting-repair/aluminum-siding-painting",
 				pattern: /^\/services\/siding-painting-repair\/aluminum-siding-painting\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 56 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 57 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/siding-painting-repair/aluminum-siding-repair",
 				pattern: /^\/services\/siding-painting-repair\/aluminum-siding-repair\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 57 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 58 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/siding-painting-repair/cedar-siding-painting",
 				pattern: /^\/services\/siding-painting-repair\/cedar-siding-painting\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 58 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 59 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/siding-painting-repair/cedar-siding-repair",
 				pattern: /^\/services\/siding-painting-repair\/cedar-siding-repair\/?$/,
-				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 59 },
-				endpoint: null
-			},
-			{
-				id: "/(light-nav)/services/siding-painting-repair/hardie-board-installation",
-				pattern: /^\/services\/siding-painting-repair\/hardie-board-installation\/?$/,
 				params: [],
 				page: { layouts: [0,3,], errors: [1,,], leaf: 60 },
 				endpoint: null
@@ -506,38 +514,45 @@ return {
 				endpoint: null
 			},
 			{
+				id: "/(light-nav)/services/siding-painting-repair/hardie-board-services",
+				pattern: /^\/services\/siding-painting-repair\/hardie-board-services\/?$/,
+				params: [],
+				page: { layouts: [0,3,], errors: [1,,], leaf: 63 },
+				endpoint: null
+			},
+			{
 				id: "/(light-nav)/services/siding-painting-repair/vinyl-siding-painting",
 				pattern: /^\/services\/siding-painting-repair\/vinyl-siding-painting\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 63 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 64 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/siding-painting-repair/vinyl-siding-repair",
 				pattern: /^\/services\/siding-painting-repair\/vinyl-siding-repair\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 64 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 65 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/stucco-painting-repair",
 				pattern: /^\/services\/stucco-painting-repair\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 65 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 66 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/stucco-painting-repair/stucco-painting",
 				pattern: /^\/services\/stucco-painting-repair\/stucco-painting\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 66 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 67 },
 				endpoint: null
 			},
 			{
 				id: "/(light-nav)/services/stucco-painting-repair/stucco-repair",
 				pattern: /^\/services\/stucco-painting-repair\/stucco-repair\/?$/,
 				params: [],
-				page: { layouts: [0,3,], errors: [1,,], leaf: 67 },
+				page: { layouts: [0,3,], errors: [1,,], leaf: 68 },
 				endpoint: null
 			},
 			{

@@ -4,7 +4,7 @@ import { C as ColumnTemplateSection } from "../../../../../../chunks/ColumnTempl
 import { B as BasicTemplateSection } from "../../../../../../chunks/BasicTemplateSection.js";
 import { r as routes, g as galleryRoutes } from "../../../../../../chunks/routes.js";
 import { H as HeadingAccent } from "../../../../../../chunks/HeadingAccent.js";
-import { s as src } from "../../../../../../chunks/hardie-board-siding-painting-before-after-service.js";
+import { g as galleryBeforeAfter } from "../../../../../../chunks/hardie-board-siding-painting-before-after-service.js";
 import { i as isMobileStore } from "../../../../../../chunks/isMobileStore.js";
 import { G as GalleryLinkBlock } from "../../../../../../chunks/GalleryLinkBlock.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -54,9 +54,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     {}
   )} ${validate_component(ColumnTemplateSection, "ColumnTemplateSection").$$render($$result, { class: "lg:pt-12 pt-4" }, {}, {
     "right-column": () => {
-      return `<div slot="right-column">${typeof src === "string" ? `<img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", src.img.src, 0)} alt="Hardie board siding project before and after by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}>` : `<picture>${each(Object.entries(src.sources), ([format, srcset]) => {
+      return `<div slot="right-column">${typeof galleryBeforeAfter === "string" ? `<img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", galleryBeforeAfter.img.src, 0)} alt="Hardie board siding project before and after by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", galleryBeforeAfter.img.w, 0)}${add_attribute("height", galleryBeforeAfter.img.h, 0)}>` : `<picture>${each(Object.entries(galleryBeforeAfter.sources), ([format, srcset]) => {
         return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", src.img.src, 0)} alt="Hardie board siding project before and after by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}></picture>`}</div>`;
+      })} <img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", galleryBeforeAfter.img.src, 0)} alt="Hardie board siding project before and after by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", galleryBeforeAfter.img.w, 0)}${add_attribute("height", galleryBeforeAfter.img.h, 0)}></picture>`}</div>`;
     },
     "left-column": () => {
       return `<div slot="left-column" data-svelte-h="svelte-b730sy"><h2>All About Painting Exterior Hardie Board Siding</h2> <p>Hardie Board is a heavy type of fiberboard made from mechanical pulp. It&#39;s also called Hardie

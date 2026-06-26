@@ -1,5 +1,6 @@
 <script lang="ts">
   import ContactForm from "$lib/contact-us/ContactForm.svelte";
+  import FormTrustSignals from "$lib/contact-us/FormTrustSignals.svelte";
   import Map from "$lib/common/other/Map.svelte";
   import LocationIcon from "$images/icons/LocationIcon.svelte";
   import ClickToCall from "$lib/common/other/ClickToCall.svelte";
@@ -36,6 +37,8 @@
           variant="link"
         />!
       </p>
+
+      <FormTrustSignals class="lg:mt-2" />
 
       <div
         class="bg-white lg:mt-0 mt-2 lg:p-0 p-2 pt-0 rounded-lg lg:shadow-none shadow-subtle"

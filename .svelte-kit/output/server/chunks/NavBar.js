@@ -634,6 +634,14 @@ const NavLinks = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     },
     {},
     {}
+  )}  ${validate_component(NavItem, "NavItem").$$render(
+    $$result,
+    {
+      data: routes["careers"],
+      class: "xl:block lg:hidden block"
+    },
+    {},
+    {}
   )}`;
 });
 const logo$1 = {

@@ -7,9 +7,8 @@
   import { page } from "$app/stores";
   import KlasekJsonSchema from "$lib/common/seo/KlasekJsonSchema.svelte";
   import { isMobileStore } from "$lib/stores/isMobileStore";
-  import ClickToCall from "$lib/common/other/ClickToCall.svelte";
+  import StickyCallBar from "$lib/common/components/StickyCallBar.svelte";
   import { scale } from "svelte/transition";
-  import PhoneIcon from "$images/icons/PhoneIcon.svelte";
 
   export let data: PageData;
 
@@ -59,16 +58,10 @@
 <!-- JSON-LD structured data (SEO schema) -->
 <KlasekJsonSchema />
 
-<!-- Mobile click to call -->
+<!-- Sticky mobile call bar -->
 {#if showClickToCall && !hasOwnMobileCta}
-  <div
-    transition:scale={{ duration: 200 }}
-    class="z-[100] fixed bottom-2 left-1/2 -translate-x-1/2 lg:hidden"
-  >
-    <ClickToCall variant="outline" class="bg-secondary text-white gap-2">
-      <PhoneIcon class="size-4" />
-      Call for a Free Estimate
-    </ClickToCall>
+  <div transition:scale={{ duration: 200 }}>
+    <StickyCallBar />
   </div>
 {/if}
 

@@ -1,20 +1,9 @@
 import { c as create_ssr_component, v as validate_component, a as add_attribute, e as each } from "../../../../../../chunks/ssr.js";
 import { S as SubServiceHero, F as FaqSection } from "../../../../../../chunks/FaqSection.js";
 import { C as ColumnTemplateSection } from "../../../../../../chunks/ColumnTemplateSection.js";
+import { c as cleaningImg } from "../../../../../../chunks/exterior-paint-contractor.js";
 import { G as GalleryLinkBlock } from "../../../../../../chunks/GalleryLinkBlock.js";
 import { g as galleryRoutes } from "../../../../../../chunks/routes.js";
-const src = {
-  sources: {
-    avif: "/_app/immutable/assets/exterior-paint-contractor.MFLL9Gbv.avif 341w, /_app/immutable/assets/exterior-paint-contractor.Z66NTt-7.avif 682w",
-    webp: "/_app/immutable/assets/exterior-paint-contractor.CaWeelPn.webp 341w, /_app/immutable/assets/exterior-paint-contractor.c0U-CB2M.webp 682w",
-    png: "/_app/immutable/assets/exterior-paint-contractor.CeGo-X57.png 341w, /_app/immutable/assets/exterior-paint-contractor.B5feeU1y.png 682w"
-  },
-  img: {
-    src: "/_app/immutable/assets/exterior-paint-contractor.B5feeU1y.png",
-    w: 682,
-    h: 443
-  }
-};
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const faqData = [
     {
@@ -73,9 +62,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       )}</div>`;
     },
     "left-column": () => {
-      return `<div slot="left-column" class="order-last">${typeof src === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src.img.src, 0)} alt=""${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}>` : `<picture>${each(Object.entries(src.sources), ([format, srcset]) => {
+      return `<div slot="left-column" class="order-last">${typeof cleaningImg === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", cleaningImg.img.src, 0)} alt=""${add_attribute("width", cleaningImg.img.w, 0)}${add_attribute("height", cleaningImg.img.h, 0)}>` : `<picture>${each(Object.entries(cleaningImg.sources), ([format, srcset]) => {
         return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src.img.src, 0)} alt=""${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}></picture>`}</div>`;
+      })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", cleaningImg.img.src, 0)} alt=""${add_attribute("width", cleaningImg.img.w, 0)}${add_attribute("height", cleaningImg.img.h, 0)}></picture>`}</div>`;
     }
   })} ${validate_component(FaqSection, "FaqSection").$$render($$result, { faqData }, {}, {})}`;
 });

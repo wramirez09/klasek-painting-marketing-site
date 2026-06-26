@@ -479,8 +479,8 @@ function null_to_empty(value) {
 function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
   return new CustomEvent(type, { detail, bubbles, cancelable });
 }
-function set_current_component(component69) {
-  current_component = component69;
+function set_current_component(component70) {
+  current_component = component70;
 }
 function get_current_component() {
   if (!current_component)
@@ -491,9 +491,9 @@ function onDestroy(fn) {
   get_current_component().$$.on_destroy.push(fn);
 }
 function createEventDispatcher() {
-  const component69 = get_current_component();
+  const component70 = get_current_component();
   return (type, detail, { cancelable = false } = {}) => {
-    const callbacks = component69.$$.callbacks[type];
+    const callbacks = component70.$$.callbacks[type];
     if (callbacks) {
       const event = custom_event(
         /** @type {string} */
@@ -502,7 +502,7 @@ function createEventDispatcher() {
         { cancelable }
       );
       callbacks.slice().forEach((fn) => {
-        fn.call(component69, event);
+        fn.call(component70, event);
       });
       return !event.defaultPrevented;
     }
@@ -610,15 +610,15 @@ function each(items, fn) {
   }
   return str;
 }
-function validate_component(component69, name2) {
-  if (!component69 || !component69.$$render) {
+function validate_component(component70, name2) {
+  if (!component70 || !component70.$$render) {
     if (name2 === "svelte:component")
       name2 += " this={...}";
     throw new Error(
       `<${name2}> is not a valid SSR component. You may need to review your build config to ensure that dependencies are compiled, rather than imported as pre-compiled modules. Otherwise you may need to fix a <${name2}>.`
     );
   }
-  return component69;
+  return component70;
 }
 function create_ssr_component(fn) {
   function $$render(result, props, bindings, slots, context) {
@@ -657,9 +657,9 @@ function create_ssr_component(fn) {
   };
 }
 function add_attribute(name2, value, boolean) {
-  if (value == null || boolean)
+  if (value == null || boolean && !value)
     return "";
-  const assignment = `="${escape(value, true)}"`;
+  const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
   return ` ${name2}${assignment}`;
 }
 function style_object_to_string(style_object) {
@@ -945,7 +945,7 @@ var init_routes = __esm({
       },
       "hardie-installation": {
         text: "Hardie Board Services",
-        href: "/services/siding-painting-repair/hardie-board-installation"
+        href: "/services/siding-painting-repair/hardie-board-services"
       },
       // Gutter services
       gutters: {
@@ -1000,6 +1000,7 @@ var init_routes = __esm({
       contact: { text: "Contact Us", href: "/contact-us" },
       about: { text: "About", href: "/about-us" },
       services: { text: "Services", href: "/services" },
+      careers: { text: "Careers", href: "/careers" },
       ...aboutUsRoutes,
       ...serviceRoutes,
       ...legalRoutes
@@ -1061,6 +1062,7 @@ var init_hooks_server = __esm({
       "/exterior-painting/brick-house-painting-service-contractor": routes["brick-painting"].href,
       "/exterior-painting-contractors": routes["exterior-paint-contractor"].href,
       "/hardie-board-siding-painting": routes["hardie-painting"].href,
+      "/services/siding-painting-repair/hardie-board-installation": routes["hardie-installation"].href,
       "/aluminum-siding-painting": routes["aluminum-painting"].href,
       "/exterior-brick-painting-staining": routes["brick-painting-repair"].href,
       "/historic-house-painting": routes["historic-house-painting"].href,
@@ -1117,20 +1119,20 @@ var require_cookie = __commonJS({
       var obj = {};
       var opt = options2 || {};
       var dec = opt.decode || decode;
-      var index69 = 0;
-      while (index69 < str.length) {
-        var eqIdx = str.indexOf("=", index69);
+      var index70 = 0;
+      while (index70 < str.length) {
+        var eqIdx = str.indexOf("=", index70);
         if (eqIdx === -1) {
           break;
         }
-        var endIdx = str.indexOf(";", index69);
+        var endIdx = str.indexOf(";", index70);
         if (endIdx === -1) {
           endIdx = str.length;
         } else if (endIdx < eqIdx) {
-          index69 = str.lastIndexOf(";", eqIdx - 1) + 1;
+          index70 = str.lastIndexOf(";", eqIdx - 1) + 1;
           continue;
         }
-        var key2 = str.slice(index69, eqIdx).trim();
+        var key2 = str.slice(index70, eqIdx).trim();
         if (void 0 === obj[key2]) {
           var val = str.slice(eqIdx + 1, endIdx).trim();
           if (val.charCodeAt(0) === 34) {
@@ -1138,7 +1140,7 @@ var require_cookie = __commonJS({
           }
           obj[key2] = tryDecode(val, dec);
         }
-        index69 = endIdx + 1;
+        index70 = endIdx + 1;
       }
       return obj;
     }
@@ -1417,14 +1419,42 @@ var require_set_cookie = __commonJS({
 });
 
 // .svelte-kit/output/server/chunks/siteData.js
-var siteName, destinationPhone, googleMapsHref, publicLogoUrl, serviceAreaRadius;
+var siteName, businessName, destinationPhone, googleMapsHref, publicLogoUrl, serviceAreaRadius, establishedYear, experienceYears, businessAddress, businessGeo, openingHours, businessProfiles;
 var init_siteData = __esm({
   ".svelte-kit/output/server/chunks/siteData.js"() {
     siteName = "https://www.klasekpainting.com";
+    businessName = "Klasek Painting";
     destinationPhone = "(708) 267-0682";
     googleMapsHref = "https://www.google.com/maps/place/Klasek+Painting/@38.346351,-100.9156525,5z/data=!4m5!3m4!1s0x0:0xc7bf3515e03f4afe!8m2!3d38.346351!4d-100.9156525?shorturl=1";
     publicLogoUrl = `${siteName}/public/klasek-painting.png`;
     serviceAreaRadius = 17e3;
+    establishedYear = 1992;
+    experienceYears = `${Math.floor(((/* @__PURE__ */ new Date()).getFullYear() - establishedYear) / 5) * 5}+`;
+    businessAddress = {
+      streetAddress: "4415 S. Custer",
+      addressLocality: "Lyons",
+      addressRegion: "IL",
+      postalCode: "60534",
+      addressCountry: "US"
+    };
+    businessGeo = {
+      latitude: "41.81041",
+      longitude: "-87.839737"
+    };
+    openingHours = [
+      {
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "07:00",
+        closes: "17:00"
+      }
+    ];
+    businessProfiles = [
+      googleMapsHref,
+      "https://www.bbb.org/us/il/lyons/profile/painting-contractors/klasek-painting-decorating-0654-12010246",
+      "https://www.yelp.com/biz/klasek-painting-lyons",
+      "https://www.houzz.com/professionals/painters/klasek-painting-pfvwus-pf~790460312",
+      "https://www.angi.com/companylist/us/il/lyons/klasek-painting-and-services-reviews-386795.htm"
+    ];
   }
 });
 
@@ -1518,15 +1548,15 @@ var require_listCacheDelete = __commonJS({
     var arrayProto = Array.prototype;
     var splice = arrayProto.splice;
     function listCacheDelete(key2) {
-      var data = this.__data__, index69 = assocIndexOf(data, key2);
-      if (index69 < 0) {
+      var data = this.__data__, index70 = assocIndexOf(data, key2);
+      if (index70 < 0) {
         return false;
       }
       var lastIndex = data.length - 1;
-      if (index69 == lastIndex) {
+      if (index70 == lastIndex) {
         data.pop();
       } else {
-        splice.call(data, index69, 1);
+        splice.call(data, index70, 1);
       }
       --this.size;
       return true;
@@ -1540,8 +1570,8 @@ var require_listCacheGet = __commonJS({
   "node_modules/lodash/_listCacheGet.js"(exports, module) {
     var assocIndexOf = require_assocIndexOf();
     function listCacheGet(key2) {
-      var data = this.__data__, index69 = assocIndexOf(data, key2);
-      return index69 < 0 ? void 0 : data[index69][1];
+      var data = this.__data__, index70 = assocIndexOf(data, key2);
+      return index70 < 0 ? void 0 : data[index70][1];
     }
     module.exports = listCacheGet;
   }
@@ -1563,12 +1593,12 @@ var require_listCacheSet = __commonJS({
   "node_modules/lodash/_listCacheSet.js"(exports, module) {
     var assocIndexOf = require_assocIndexOf();
     function listCacheSet(key2, value) {
-      var data = this.__data__, index69 = assocIndexOf(data, key2);
-      if (index69 < 0) {
+      var data = this.__data__, index70 = assocIndexOf(data, key2);
+      if (index70 < 0) {
         ++this.size;
         data.push([key2, value]);
       } else {
-        data[index69][1] = value;
+        data[index70][1] = value;
       }
       return this;
     }
@@ -1585,10 +1615,10 @@ var require_ListCache = __commonJS({
     var listCacheHas = require_listCacheHas();
     var listCacheSet = require_listCacheSet();
     function ListCache(entries) {
-      var index69 = -1, length = entries == null ? 0 : entries.length;
+      var index70 = -1, length = entries == null ? 0 : entries.length;
       this.clear();
-      while (++index69 < length) {
-        var entry = entries[index69];
+      while (++index70 < length) {
+        var entry = entries[index70];
         this.set(entry[0], entry[1]);
       }
     }
@@ -1959,10 +1989,10 @@ var require_Hash = __commonJS({
     var hashHas = require_hashHas();
     var hashSet = require_hashSet();
     function Hash(entries) {
-      var index69 = -1, length = entries == null ? 0 : entries.length;
+      var index70 = -1, length = entries == null ? 0 : entries.length;
       this.clear();
-      while (++index69 < length) {
-        var entry = entries[index69];
+      while (++index70 < length) {
+        var entry = entries[index70];
         this.set(entry[0], entry[1]);
       }
     }
@@ -2074,10 +2104,10 @@ var require_MapCache = __commonJS({
     var mapCacheHas = require_mapCacheHas();
     var mapCacheSet = require_mapCacheSet();
     function MapCache(entries) {
-      var index69 = -1, length = entries == null ? 0 : entries.length;
+      var index70 = -1, length = entries == null ? 0 : entries.length;
       this.clear();
-      while (++index69 < length) {
-        var entry = entries[index69];
+      while (++index70 < length) {
+        var entry = entries[index70];
         this.set(entry[0], entry[1]);
       }
     }
@@ -2193,9 +2223,9 @@ var require_createBaseFor = __commonJS({
   "node_modules/lodash/_createBaseFor.js"(exports, module) {
     function createBaseFor(fromRight) {
       return function(object, iteratee, keysFunc) {
-        var index69 = -1, iterable = Object(object), props = keysFunc(object), length = props.length;
+        var index70 = -1, iterable = Object(object), props = keysFunc(object), length = props.length;
         while (length--) {
-          var key2 = props[fromRight ? length : ++index69];
+          var key2 = props[fromRight ? length : ++index70];
           if (iteratee(iterable[key2], key2, iterable) === false) {
             break;
           }
@@ -2275,10 +2305,10 @@ var require_cloneTypedArray = __commonJS({
 var require_copyArray = __commonJS({
   "node_modules/lodash/_copyArray.js"(exports, module) {
     function copyArray(source, array2) {
-      var index69 = -1, length = source.length;
+      var index70 = -1, length = source.length;
       array2 || (array2 = Array(length));
-      while (++index69 < length) {
-        array2[index69] = source[index69];
+      while (++index70 < length) {
+        array2[index70] = source[index70];
       }
       return array2;
     }
@@ -2619,9 +2649,9 @@ var require_copyObject = __commonJS({
     function copyObject(source, props, object, customizer) {
       var isNew = !object;
       object || (object = {});
-      var index69 = -1, length = props.length;
-      while (++index69 < length) {
-        var key2 = props[index69];
+      var index70 = -1, length = props.length;
+      while (++index70 < length) {
+        var key2 = props[index70];
         var newValue = customizer ? customizer(object[key2], source[key2], key2, object, source) : void 0;
         if (newValue === void 0) {
           newValue = source[key2];
@@ -2642,9 +2672,9 @@ var require_copyObject = __commonJS({
 var require_baseTimes = __commonJS({
   "node_modules/lodash/_baseTimes.js"(exports, module) {
     function baseTimes(n2, iteratee) {
-      var index69 = -1, result = Array(n2);
-      while (++index69 < n2) {
-        result[index69] = iteratee(index69);
+      var index70 = -1, result = Array(n2);
+      while (++index70 < n2) {
+        result[index70] = iteratee(index70);
       }
       return result;
     }
@@ -2893,14 +2923,14 @@ var require_overRest = __commonJS({
     function overRest(func, start, transform) {
       start = nativeMax(start === void 0 ? func.length - 1 : start, 0);
       return function() {
-        var args = arguments, index69 = -1, length = nativeMax(args.length - start, 0), array2 = Array(length);
-        while (++index69 < length) {
-          array2[index69] = args[start + index69];
+        var args = arguments, index70 = -1, length = nativeMax(args.length - start, 0), array2 = Array(length);
+        while (++index70 < length) {
+          array2[index70] = args[start + index70];
         }
-        index69 = -1;
+        index70 = -1;
         var otherArgs = Array(start + 1);
-        while (++index69 < start) {
-          otherArgs[index69] = args[index69];
+        while (++index70 < start) {
+          otherArgs[index70] = args[index70];
         }
         otherArgs[start] = transform(array2);
         return apply(func, this, otherArgs);
@@ -2995,13 +3025,13 @@ var require_isIterateeCall = __commonJS({
     var isArrayLike = require_isArrayLike();
     var isIndex = require_isIndex();
     var isObject = require_isObject();
-    function isIterateeCall(value, index69, object) {
+    function isIterateeCall(value, index70, object) {
       if (!isObject(object)) {
         return false;
       }
-      var type = typeof index69;
-      if (type == "number" ? isArrayLike(object) && isIndex(index69, object.length) : type == "string" && index69 in object) {
-        return eq(object[index69], value);
+      var type = typeof index70;
+      if (type == "number" ? isArrayLike(object) && isIndex(index70, object.length) : type == "string" && index70 in object) {
+        return eq(object[index70], value);
       }
       return false;
     }
@@ -3016,17 +3046,17 @@ var require_createAssigner = __commonJS({
     var isIterateeCall = require_isIterateeCall();
     function createAssigner(assigner) {
       return baseRest(function(object, sources) {
-        var index69 = -1, length = sources.length, customizer = length > 1 ? sources[length - 1] : void 0, guard = length > 2 ? sources[2] : void 0;
+        var index70 = -1, length = sources.length, customizer = length > 1 ? sources[length - 1] : void 0, guard = length > 2 ? sources[2] : void 0;
         customizer = assigner.length > 3 && typeof customizer == "function" ? (length--, customizer) : void 0;
         if (guard && isIterateeCall(sources[0], sources[1], guard)) {
           customizer = length < 3 ? void 0 : customizer;
           length = 1;
         }
         object = Object(object);
-        while (++index69 < length) {
-          var source = sources[index69];
+        while (++index70 < length) {
+          var source = sources[index70];
           if (source) {
-            assigner(object, source, index69, customizer);
+            assigner(object, source, index70, customizer);
           }
         }
         return object;
@@ -3477,12 +3507,12 @@ var init_chunk_JXBJZR5A = __esm({
 
 // node_modules/tailwind-merge/dist/bundle-mjs.mjs
 function twJoin() {
-  let index69 = 0;
+  let index70 = 0;
   let argument;
   let resolvedValue;
   let string = "";
-  while (index69 < arguments.length) {
-    if (argument = arguments[index69++]) {
+  while (index70 < arguments.length) {
+    if (argument = arguments[index70++]) {
       if (resolvedValue = toValue(argument)) {
         string && (string += " ");
         string += resolvedValue;
@@ -3697,16 +3727,16 @@ var init_bundle_mjs = __esm({
         let bracketDepth = 0;
         let modifierStart = 0;
         let postfixModifierPosition;
-        for (let index69 = 0; index69 < className.length; index69++) {
-          let currentCharacter = className[index69];
+        for (let index70 = 0; index70 < className.length; index70++) {
+          let currentCharacter = className[index70];
           if (bracketDepth === 0) {
-            if (currentCharacter === firstSeparatorCharacter && (isSeparatorSingleCharacter || className.slice(index69, index69 + separatorLength) === separator)) {
-              modifiers.push(className.slice(modifierStart, index69));
-              modifierStart = index69 + separatorLength;
+            if (currentCharacter === firstSeparatorCharacter && (isSeparatorSingleCharacter || className.slice(index70, index70 + separatorLength) === separator)) {
+              modifiers.push(className.slice(modifierStart, index70));
+              modifierStart = index70 + separatorLength;
               continue;
             }
             if (currentCharacter === "/") {
-              postfixModifierPosition = index69;
+              postfixModifierPosition = index70;
               continue;
             }
           }
@@ -3768,8 +3798,8 @@ var init_bundle_mjs = __esm({
       const classGroupsInConflict = [];
       const classNames = classList.trim().split(SPLIT_CLASSES_REGEX);
       let result = "";
-      for (let index69 = classNames.length - 1; index69 >= 0; index69 -= 1) {
-        const originalClassName = classNames[index69];
+      for (let index70 = classNames.length - 1; index70 >= 0; index70 -= 1) {
+        const originalClassName = classNames[index70];
         const {
           modifiers,
           hasImportantModifier,
@@ -6305,29 +6335,19 @@ var init_layout_svelte = __esm({
       const schema = {
         "@context": "https://schema.org",
         "@type": "HousePainter",
-        name: "Klasek Painting",
-        description: "Klasek Painting is a team of licensed and fully certified painters offering homes in Cook County top-quality painting solutions. Call for a free estimate.",
+        name: businessName,
+        description: `${businessName} is a family-owned exterior painting and siding repair specialist serving Chicago and Cook County since ${establishedYear} \u2014 ${experienceYears} years of historic-home painting, siding, brick, and stucco work. Call for a free estimate.`,
         image: publicLogoUrl,
         logo: publicLogoUrl,
         url: $page.url.origin,
         telephone: destinationPhone,
-        sameAs: ["https://www.facebook.com/peter.klasek.3/"],
-        openingHoursSpecification: [
-          {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            opens: "00:00",
-            closes: "23:59"
-          }
-        ],
+        sameAs: businessProfiles,
+        openingHoursSpecification: openingHours.map((h) => ({
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: h.dayOfWeek,
+          opens: h.opens,
+          closes: h.closes
+        })),
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Exterior Home Painting Services",
@@ -6476,18 +6496,14 @@ var init_layout_svelte = __esm({
         },
         address: {
           "@type": "PostalAddress",
-          streetAddress: "4415 S. Custer",
-          addressLocality: "Lyons",
-          addressRegion: "IL",
-          postalCode: "60534",
-          addressCountry: "US"
+          ...businessAddress
         },
         location: {
           "@type": "Place",
           geo: {
             "@type": "GeoCoordinates",
-            latitude: "27.896240",
-            longitude: "-81.863586"
+            latitude: businessGeo.latitude,
+            longitude: businessGeo.longitude
           }
         },
         areaServed: [
@@ -6495,8 +6511,8 @@ var init_layout_svelte = __esm({
             "@type": "GeoCircle",
             geoMidpoint: {
               "@type": "GeoCoordinates",
-              latitude: "41.81041",
-              longitude: "-87.839737"
+              latitude: businessGeo.latitude,
+              longitude: businessGeo.longitude
             },
             geoRadius: serviceAreaRadius
           }
@@ -6515,7 +6531,7 @@ var init_layout_svelte = __esm({
       if ($$props.data === void 0 && $$bindings.data && data !== void 0)
         $$bindings.data(data);
       metaTags = (0, import_merge.default)({}, data.baseMetaTags, $page.data.pageMetaTags);
-      $page.url.pathname.startsWith("/services/gutter-installation-repair") || $page.url.pathname.startsWith("/services/siding-painting-repair/hardie-board-installation");
+      $page.url.pathname.startsWith("/services/gutter-installation-repair") || $page.url.pathname.startsWith("/services/siding-painting-repair/hardie-board-services");
       $$unsubscribe_page();
       $$unsubscribe_isMobileStore();
       return ` ${!$page.error ? `${validate_component(MetaTags, "MetaTags").$$render($$result, Object.assign({}, metaTags), {}, {})}` : ``}  ${validate_component(KlasekJsonSchema, "KlasekJsonSchema").$$render($$result, {}, {}, {})}  ${``} ${slots.default ? slots.default({}) : ``}`;
@@ -6541,8 +6557,8 @@ var init__ = __esm({
     index = 0;
     component = async () => component_cache ??= (await Promise.resolve().then(() => (init_layout_svelte(), layout_svelte_exports))).default;
     server_id = "src/routes/+layout.server.ts";
-    imports = ["_app/immutable/nodes/0.Bo11Fb8A.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/K84N8KvY.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/DqaOeWom.js"];
-    stylesheets = ["_app/immutable/assets/0.D_MMap1k.css"];
+    imports = ["_app/immutable/nodes/0.CBX00fLR.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/VUx2r6fk.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/BCwV6E0u.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DN-RV3l_.js"];
+    stylesheets = ["_app/immutable/assets/0.CdPLfJlM.css"];
     fonts = ["_app/immutable/assets/montserrat-latin-500-normal.DRFEGfly.woff2", "_app/immutable/assets/montserrat-latin-500-normal.Dok2oTci.woff", "_app/immutable/assets/montserrat-latin-600-normal.UVxSCcoG.woff2", "_app/immutable/assets/montserrat-latin-600-normal.CdhFl4lI.woff", "_app/immutable/assets/montserrat-latin-700-normal.BdjcYUrC.woff2", "_app/immutable/assets/montserrat-latin-700-normal.BWkrl476.woff"];
   }
 });
@@ -6702,8 +6718,8 @@ var init_Icon = __esm({
       let { strokeWidth = 2 } = $$props;
       let { absoluteStrokeWidth = false } = $$props;
       let { iconNode = [] } = $$props;
-      const mergeClasses = (...classes) => classes.filter((className, index69, array2) => {
-        return Boolean(className) && array2.indexOf(className) === index69;
+      const mergeClasses = (...classes) => classes.filter((className, index70, array2) => {
+        return Boolean(className) && array2.indexOf(className) === index70;
       }).join(" ");
       if ($$props.name === void 0 && $$bindings.name && name2 !== void 0)
         $$bindings.name(name2);
@@ -7389,6 +7405,14 @@ var init_NavBar = __esm({
         },
         {},
         {}
+      )}  ${validate_component(NavItem, "NavItem").$$render(
+        $$result,
+        {
+          data: routes["careers"],
+          class: "xl:block lg:hidden block"
+        },
+        {},
+        {}
       )}`;
     });
     logo$1 = {
@@ -7638,7 +7662,7 @@ var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     index2 = 1;
     component2 = async () => component_cache2 ??= (await Promise.resolve().then(() => (init_error_svelte(), error_svelte_exports))).default;
-    imports2 = ["_app/immutable/nodes/1.Ctm8gEeI.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dn8aa3PJ.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js"];
+    imports2 = ["_app/immutable/nodes/1.C4GOhnKl.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/sJBu_XLi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/Cc_N6hKz.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js"];
     stylesheets2 = ["_app/immutable/assets/NavBar.DBFUqa5S.css", "_app/immutable/assets/1.CxTk2ocn.css"];
     fonts2 = [];
   }
@@ -7786,12 +7810,17 @@ var init_Footer = __esm({
           alt: "Yelp"
         }
       ];
-      return `<ul class="flex items-center justify-center gap-6">${each(socialLinks, ({ href, src: src27, alt }) => {
-        return `<li><a${add_attribute("href", href, 0)} target="_blank"><img class="size-6"${add_attribute("src", src27, 0)}${add_attribute("alt", alt, 0)} loading="lazy"></a> </li>`;
+      return `<ul class="flex items-center justify-center gap-6">${each(socialLinks, ({ href, src: src22, alt }) => {
+        return `<li><a${add_attribute("href", href, 0)} target="_blank"><img class="size-6"${add_attribute("src", src22, 0)}${add_attribute("alt", alt, 0)} loading="lazy"></a> </li>`;
       })}</ul>`;
     });
     Footer = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      const usefulLinks = [routes["contact"], routes["service-area"], routes["privacy"]];
+      const usefulLinks = [
+        routes["contact"],
+        routes["service-area"],
+        routes["careers"],
+        routes["privacy"]
+      ];
       let { showEmailSignup = true } = $$props;
       if ($$props.showEmailSignup === void 0 && $$bindings.showEmailSignup && showEmailSignup !== void 0)
         $$bindings.showEmailSignup(showEmailSignup);
@@ -7878,9 +7907,17 @@ var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     index3 = 2;
     component3 = async () => component_cache3 ??= (await Promise.resolve().then(() => (init_layout_svelte2(), layout_svelte_exports2))).default;
-    imports3 = ["_app/immutable/nodes/2.D1GrZXON.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dn8aa3PJ.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/CnmIg4To.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DqaOeWom.js", "_app/immutable/chunks/DnNh7yYd.js"];
+    imports3 = ["_app/immutable/nodes/2.BpEEy52_.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/sJBu_XLi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/Cc_N6hKz.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/D2B8X6cg.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DoqDkTcC.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/BCwV6E0u.js", "_app/immutable/chunks/Aohsu3D2.js"];
     stylesheets3 = ["_app/immutable/assets/NavBar.DBFUqa5S.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"];
     fonts3 = [];
+  }
+});
+
+// .svelte-kit/output/server/chunks/5-stars.js
+var stars;
+var init_stars = __esm({
+  ".svelte-kit/output/server/chunks/5-stars.js"() {
+    stars = "data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20id='Layer_1'%20data-name='Layer%201'%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2050'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20%23f6942e;%20stroke-width:%200px;%20}%20%3c/style%3e%3c/defs%3e%3cpath%20class='cls-1'%20d='m26.42,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63L1.41,22.49c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99L23.2,1.97c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3cpath%20class='cls-1'%20d='m149.72,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63-9.9-9.65c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99,6.12-12.4c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3cpath%20class='cls-1'%20d='m273.02,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63-9.9-9.65c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99,6.12-12.4c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3cpath%20class='cls-1'%20d='m88.07,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63-9.9-9.65c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99,6.12-12.4c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3cpath%20class='cls-1'%20d='m211.37,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63-9.9-9.65c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99,6.12-12.4c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3c/svg%3e";
   }
 });
 
@@ -7889,20 +7926,126 @@ var layout_svelte_exports3 = {};
 __export(layout_svelte_exports3, {
   default: () => Layout3
 });
-var Layout3;
+var globals, FooterFunnel, Object_1, Layout3;
 var init_layout_svelte3 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/_layout.svelte.js"() {
     init_ssr();
     init_NavBar();
     init_Footer();
+    init_stars();
+    init_button();
+    init_ClickToCall();
+    init_routes();
+    init_siteData();
     init_stores();
+    globals = typeof window !== "undefined" ? window : typeof globalThis !== "undefined" ? globalThis : (
+      // @ts-ignore Node typings have this
+      global
+    );
+    FooterFunnel = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { description } = $$props;
+      let { services } = $$props;
+      if ($$props.description === void 0 && $$bindings.description && description !== void 0)
+        $$bindings.description(description);
+      if ($$props.services === void 0 && $$bindings.services && services !== void 0)
+        $$bindings.services(services);
+      return `<footer class="bg-[#15133a] text-white/70 py-12 p-x"><div class="container grid sm:grid-cols-2 lg:grid-cols-4 gap-8"> <div><a href="/" class="inline-block mb-4">${typeof logo$1 === "string" ? `<img${add_attribute("src", logo$1.img.src, 0)} alt="Klasek Painting" class="h-11 w-auto" loading="lazy"${add_attribute("width", logo$1.img.w, 0)}${add_attribute("height", logo$1.img.h, 0)}>` : `<picture>${each(Object.entries(logo$1.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img${add_attribute("src", logo$1.img.src, 0)} alt="Klasek Painting" class="h-11 w-auto" loading="lazy"${add_attribute("width", logo$1.img.w, 0)}${add_attribute("height", logo$1.img.h, 0)}></picture>`}</a> <p class="text-sm leading-relaxed text-white/55">${escape(description)}</p> <div class="mt-4 flex items-center gap-2" data-svelte-h="svelte-1yp7117"><img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars"> <span class="text-xs text-white/50">5.0 on Google</span></div></div>  <div><p class="font-bold text-white text-sm uppercase tracking-wider mb-3" data-svelte-h="svelte-1tivdb7">Services</p> <ul class="space-y-2 text-sm">${each(services, ({ href, text: text2 }) => {
+        return `<li><a${add_attribute("href", href, 0)} class="hover:text-primary transition">${escape(text2)}</a></li>`;
+      })}</ul></div>  <div><p class="font-bold text-white text-sm uppercase tracking-wider mb-3" data-svelte-h="svelte-101an6r">Contact</p> <ul class="space-y-2 text-sm"><li>${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "link",
+          class: "!text-sm !no-underline !text-white/70 hover:!text-primary transition"
+        },
+        {},
+        {}
+      )}</li> <li data-svelte-h="svelte-7u2rfb"><a${add_attribute("href", googleMapsHref, 0)} target="_blank" class="hover:text-primary transition">4415 S. Custer,<br>Lyons, IL 60534</a></li></ul></div>  <div><p class="font-bold text-white text-sm uppercase tracking-wider mb-3" data-svelte-h="svelte-1j2mae3">Ready when you are</p> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "w-full"
+        },
+        {},
+        {
+          default: () => {
+            return `Get a Free Estimate`;
+          }
+        }
+      )} ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: "https://www.google.com/maps/dir/?api=1&destination=41.81041,-87.839737",
+          target: "_blank",
+          variant: "outline",
+          class: "w-full mt-3"
+        },
+        {},
+        {
+          default: () => {
+            return `Get Directions`;
+          }
+        }
+      )}</div></div>  <div class="container mt-10 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-white/40"><p>\xA9 ${escape((/* @__PURE__ */ new Date()).getFullYear())} Klasek Painting. All rights reserved.</p> <p data-svelte-h="svelte-lktaxo">Lead-Safe Certified \xB7 100% Satisfaction Guarantee</p></div></footer>`;
+    });
+    ({ Object: Object_1 } = globals);
     Layout3 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let isFunnelPage;
+      let funnelFooter;
       let $page, $$unsubscribe_page;
       $$unsubscribe_page = subscribe(page, (value) => $page = value);
-      isFunnelPage = $page.url.pathname.startsWith("/services/gutter-installation-repair") || $page.url.pathname.startsWith("/services/siding-painting-repair/hardie-board-installation");
+      const funnelFooters = {
+        "/services/gutter-installation-repair": {
+          description: "Exterior repair & seamless gutter specialists serving Chicago and Cook County for 30+ years.",
+          services: [
+            {
+              text: "Seamless installation",
+              href: "#install"
+            },
+            {
+              text: "Repair & storm damage",
+              href: "#repair"
+            },
+            {
+              text: "Cleaning & maintenance",
+              href: "#cleaning"
+            },
+            { text: "Gutter guards", href: "#faq" }
+          ]
+        },
+        "/services/siding-painting-repair/hardie-board-services": {
+          description: "Exterior painting & Hardie board siding specialists serving Chicago and Cook County for 30+ years.",
+          services: [
+            {
+              text: "Hardie board painting",
+              href: "#painting"
+            },
+            {
+              text: "Repair before painting",
+              href: "#repair"
+            },
+            {
+              text: "Trim & soffit painting",
+              href: "#trim"
+            },
+            { text: "Painting guide", href: "#guide" }
+          ]
+        },
+        "/careers": {
+          description: "Exterior painting & repair specialists serving Lyons and the western Chicago suburbs for 30+ years. Now hiring.",
+          services: [
+            { text: "Why Klasek", href: "#positions" },
+            {
+              text: "Open positions",
+              href: "#positions"
+            },
+            { text: "Apply now", href: "#apply" }
+          ]
+        }
+      };
+      funnelFooter = Object.entries(funnelFooters).find(([path]) => $page.url.pathname.startsWith(path))?.[1];
       $$unsubscribe_page();
-      return `${validate_component(NavBar, "NavBar").$$render($$result, { lightNav: true }, {}, {})} ${slots.default ? slots.default({}) : ``} ${validate_component(Footer, "Footer").$$render($$result, { showEmailSignup: !isFunnelPage }, {}, {})}`;
+      return `${validate_component(NavBar, "NavBar").$$render($$result, { lightNav: true }, {}, {})} ${slots.default ? slots.default({}) : ``} ${funnelFooter ? `${validate_component(FooterFunnel, "FooterFunnel").$$render($$result, Object_1.assign({}, funnelFooter), {}, {})}` : `${validate_component(Footer, "Footer").$$render($$result, {}, {}, {})}`}`;
     });
   }
 });
@@ -7921,17 +8064,9 @@ var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     index4 = 3;
     component4 = async () => component_cache4 ??= (await Promise.resolve().then(() => (init_layout_svelte3(), layout_svelte_exports3))).default;
-    imports4 = ["_app/immutable/nodes/3.D_Mb5ke6.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dn8aa3PJ.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/CnmIg4To.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DqaOeWom.js", "_app/immutable/chunks/DnNh7yYd.js"];
+    imports4 = ["_app/immutable/nodes/3.Dte_uX4z.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/sJBu_XLi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/Cc_N6hKz.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/D2B8X6cg.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DoqDkTcC.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/BCwV6E0u.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/D2UcJ3wG.js"];
     stylesheets4 = ["_app/immutable/assets/NavBar.DBFUqa5S.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"];
     fonts4 = [];
-  }
-});
-
-// .svelte-kit/output/server/chunks/5-stars.js
-var stars;
-var init_stars = __esm({
-  ".svelte-kit/output/server/chunks/5-stars.js"() {
-    stars = "data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20id='Layer_1'%20data-name='Layer%201'%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%2050'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20%23f6942e;%20stroke-width:%200px;%20}%20%3c/style%3e%3c/defs%3e%3cpath%20class='cls-1'%20d='m26.42,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63L1.41,22.49c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99L23.2,1.97c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3cpath%20class='cls-1'%20d='m149.72,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63-9.9-9.65c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99,6.12-12.4c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3cpath%20class='cls-1'%20d='m273.02,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63-9.9-9.65c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99,6.12-12.4c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3cpath%20class='cls-1'%20d='m88.07,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63-9.9-9.65c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99,6.12-12.4c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3cpath%20class='cls-1'%20d='m211.37,43.12l-12.23,6.43c-2.64,1.39-5.72-.85-5.21-3.79l2.34-13.63-9.9-9.65c-2.13-2.08-.96-5.7,1.99-6.13l13.68-1.99,6.12-12.4c1.32-2.67,5.13-2.67,6.45,0l6.12,12.4,13.68,1.99c2.95.43,4.12,4.05,1.99,6.13l-9.9,9.65,2.34,13.63c.5,2.94-2.58,5.17-5.21,3.79l-12.24-6.43Z'/%3e%3c/svg%3e";
   }
 });
 
@@ -7962,6 +8097,14 @@ var init_GoogleProof = __esm({
         $$bindings.textClasses(textClasses);
       return `<div class="${"flex sm:flex-row flex-col items-stretch sm:gap-6 gap-2 " + escape(classes, true)}"><div class="flex sm:flex-col sm:gap-1 gap-4 items-center justify-center flex-shrink-0" data-svelte-h="svelte-161k0s1"> <img class="w-[100px] h-[39px]"${add_attribute("src", google, 0)} alt="Google">  <img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars"></div>  <div class="${escape(borderClasses, true) + " sm:w-0.5 sm:h-16 w-full h-0.5 sm:my-auto flex-shrink-0"}" aria-hidden="true"></div>  <p class="${"lg:text-sm text-xs col-span-2 !leading-relaxed " + escape(textClasses, true)}">&quot;Klasek painting came out and did a great job. Can&#39;t thank these guys enough! Highly recommend.&quot; <br> <span class="pl-2 pt-1 block font-semibold" data-svelte-h="svelte-4ix1k4">- Nick</span></p></div>`;
     });
+  }
+});
+
+// .svelte-kit/output/server/chunks/klasek-painting-professional-exterior-painters.js
+var heroPhoto;
+var init_klasek_painting_professional_exterior_painters = __esm({
+  ".svelte-kit/output/server/chunks/klasek-painting-professional-exterior-painters.js"() {
+    heroPhoto = "/_app/immutable/assets/klasek-painting-professional-exterior-painters.DJK4DWtY.webp";
   }
 });
 
@@ -8202,10 +8345,10 @@ var init_TestimonialsSection = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/lead-safe.js
-var behr, benjaminMoore, sherwinWilliams, valspar, pdca, leadSafe;
-var init_lead_safe = __esm({
-  ".svelte-kit/output/server/chunks/lead-safe.js"() {
+// .svelte-kit/output/server/chunks/valspar.js
+var behr, benjaminMoore, sherwinWilliams, valspar;
+var init_valspar = __esm({
+  ".svelte-kit/output/server/chunks/valspar.js"() {
     behr = {
       sources: {
         avif: "/_app/immutable/assets/behr.-j1QRS8p.avif 267w, /_app/immutable/assets/behr.CScbohpm.avif 534w",
@@ -8254,6 +8397,13 @@ var init_lead_safe = __esm({
         h: 326
       }
     };
+  }
+});
+
+// .svelte-kit/output/server/chunks/lead-safe.js
+var pdca, leadSafe;
+var init_lead_safe = __esm({
+  ".svelte-kit/output/server/chunks/lead-safe.js"() {
     pdca = {
       sources: {
         avif: "/_app/immutable/assets/pdca.C6YiQnq5.avif 158w, /_app/immutable/assets/pdca.BuBy6XtJ.avif 316w",
@@ -8319,17 +8469,19 @@ var page_svelte_exports = {};
 __export(page_svelte_exports, {
   default: () => Page
 });
-var src2, HomepageHero, css$1, Marquee, TrustedBrandsSection, stuccoImg, css6, StuccoSection, ReliableServiceSection, Page;
+var HeroQuickForm, HomepageHero, css$1, Marquee, TrustedBrandsSection, stuccoImg, css6, StuccoSection, ReliableServiceSection, Page;
 var init_page_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/_page.svelte.js"() {
     init_ssr();
     init_GoogleProof();
     init_button();
     init_routes();
+    init_klasek_painting_professional_exterior_painters();
     init_ViewOurWorkSection();
     init_ServiceAreaSection();
     init_TestimonialsSection();
     init_RibbonWrapper();
+    init_valspar();
     init_lead_safe();
     init_isMobileStore();
     init_NavBar();
@@ -8337,7 +8489,27 @@ var init_page_svelte = __esm({
     init_Footer();
     init_utils22();
     init_ColumnTemplateSection();
-    src2 = "/_app/immutable/assets/klasek-painting-professional-exterior-painters.DJK4DWtY.webp";
+    HeroQuickForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let name2 = "";
+      let phone2 = "";
+      let zip = "";
+      let honeypot = "";
+      let status = "idle";
+      return ` <form${add_attribute("action", routes["contact"].href, 0)} method="GET" class="flex flex-col gap-2 rounded-lg bg-white p-4 text-secondary-dark shadow-subtle"><p class="font-semibold" data-svelte-h="svelte-izx4cd">Get your free estimate in 60 seconds</p>  <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[9999px] h-0 w-0 opacity-0"${add_attribute("value", honeypot, 0)}> <label class="sr-only" for="hero-name" data-svelte-h="svelte-182ljd0">Name</label> <input id="hero-name" name="name" type="text" placeholder="Name" autocomplete="name" class="w-full rounded-md border border-gray-300 px-3 py-2"${add_attribute("value", name2, 0)}> <div class="flex flex-col gap-2 sm:flex-row"><div class="flex-1"><label class="sr-only" for="hero-phone" data-svelte-h="svelte-1hvq77s">Phone</label> <input id="hero-phone" name="phone" type="tel" placeholder="Phone" autocomplete="tel" class="w-full rounded-md border border-gray-300 px-3 py-2"${add_attribute("value", phone2, 0)}></div> <div class="sm:w-32"><label class="sr-only" for="hero-zip" data-svelte-h="svelte-17m2x3">Zip Code</label> <input id="hero-zip" name="zip" type="text" inputmode="numeric" placeholder="Zip" autocomplete="postal-code" class="w-full rounded-md border border-gray-300 px-3 py-2"${add_attribute("value", zip, 0)}></div></div> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          type: "submit",
+          class: "w-full",
+          disabled: status === "submitting"
+        },
+        {},
+        {
+          default: () => {
+            return `${escape("Get My Free Estimate")}`;
+          }
+        }
+      )} ${``} <p class="text-xs text-gray-500" data-svelte-h="svelte-1csrcoi">No obligation. We reply within 1 business day.</p></form>`;
+    });
     HomepageHero = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const listitems = [
         "Expert Craftsmanship - Every Time",
@@ -8345,24 +8517,12 @@ var init_page_svelte = __esm({
         "Free Consultation from Design Pros",
         "Siding, Brick, & Stucco Experts"
       ];
-      return `<section class="p-x p-y hero-gradient"><div class="container grid lg:grid-cols-2 lg:gap-12 gap-6"> <div class="hidden lg:flex flex-col gap-2"><div${add_attribute("style", `background-image: url(${src2})`, 0)} class="size-full lg:rounded-lg rounded-b-lg bg-center bg-cover"></div> ${validate_component(GoogleProof, "GoogleProof").$$render($$result, {}, {}, {})}</div>  <div class="flex flex-col lg:gap-6 gap-4 text-white"><h1 class="order-1 xl:text-5xl md:text-4xl xs:text-3xl text-2xl font-semibold" data-testid="page-heading" data-svelte-h="svelte-ww5fto">Premium Exterior House\xA0Painting &amp; Design\xA0Services</h1> <p class="order-2 lg:font-semibold" data-svelte-h="svelte-im9ma6">Klasek Painting has over 30 years of experience delivering beautiful, long-lasting results
-				to homeowners in Chicago. Our mission is to be the area&#39;s most trusted exterior repair and
-				exterior painting contractor, so we are committed to providing first class service at a fair
-				price.</p> <ul class="lg:order-3 order-4 lg:text-lg lg:font-semibold flex flex-col gap-1">${each(listitems, (item) => {
+      return `<section class="p-x p-y hero-gradient"><div class="container grid lg:grid-cols-2 lg:gap-12 gap-6"> <div class="hidden lg:flex flex-col gap-2"><div${add_attribute("style", `background-image: url(${heroPhoto})`, 0)} class="size-full lg:rounded-lg rounded-b-lg bg-center bg-cover"></div> ${validate_component(GoogleProof, "GoogleProof").$$render($$result, {}, {}, {})}</div>  <div class="flex flex-col lg:gap-6 gap-4 text-white"><h1 class="order-1 xl:text-5xl md:text-4xl xs:text-3xl text-2xl font-semibold" data-testid="page-heading" data-svelte-h="svelte-1vy2bvo">Premium Exterior House\xA0Painting &amp; Design\xA0Services</h1> <p class="order-2 lg:font-semibold" data-svelte-h="svelte-a0yb97">Klasek Painting has over 30 years of experience delivering beautiful,
+        long-lasting results to homeowners in Chicago. Our mission is to be the
+        area&#39;s most trusted exterior repair and exterior painting contractor, so
+        we are committed to providing first class service at a fair price.</p> <ul class="lg:order-3 order-4 lg:text-lg lg:font-semibold flex flex-col gap-1">${each(listitems, (item) => {
         return `<li class="disc lg:[--top:12px] [--top:10px]">${escape(item)}</li>`;
-      })}</ul> ${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          class: "lg:order-4 order-3 w-fit",
-          href: routes["contact"].href
-        },
-        {},
-        {
-          default: () => {
-            return `${escape(routes["contact"].text)}`;
-          }
-        }
-      )}</div></div></section>`;
+      })}</ul> <div class="lg:order-4 order-3">${validate_component(HeroQuickForm, "HeroQuickForm").$$render($$result, {}, {}, {})}</div></div></div></section>`;
     });
     css$1 = {
       code: '.marquee-container.svelte-11dmb27.svelte-11dmb27{display:flex;width:100%;overflow-x:hidden;flex-direction:row;position:relative}.marquee-container.svelte-11dmb27:hover .marquee.svelte-11dmb27{animation-play-state:var(--pause-on-hover)}.marquee-container.svelte-11dmb27:active .marquee.svelte-11dmb27{animation-play-state:var(--pause-on-click)}.marquee.svelte-11dmb27.svelte-11dmb27{flex:0 0 auto;min-width:100%;z-index:1;display:flex;flex-direction:row;align-items:center;gap:var(--gap, 0);animation:svelte-11dmb27-scroll var(--duration) linear infinite;animation-play-state:var(--play);animation-direction:var(--direction);padding-right:var(--gap, 0)}@keyframes svelte-11dmb27-scroll{0%{transform:translateX(0%)}100%{transform:translateX(-100%)}}.initial-child-container.svelte-11dmb27.svelte-11dmb27{flex:0 0 auto;display:flex;min-width:auto;flex-direction:row}.gradient.svelte-11dmb27.svelte-11dmb27::after,.gradient.svelte-11dmb27.svelte-11dmb27::before{background:linear-gradient(\n			to right,\n			var(--gradientColor, white),\n			transparent\n		);content:"";height:100%;position:absolute;width:var(--gradientWidth, 10%);z-index:2}.gradient.svelte-11dmb27.svelte-11dmb27::before{left:0;top:0}.gradient.svelte-11dmb27.svelte-11dmb27::after{right:0;top:0;transform:rotateZ(180deg)}',
@@ -8448,10 +8608,10 @@ var init_page_svelte = __esm({
         {},
         {
           default: () => {
-            return `${each(images, ({ src: src27, alt }) => {
-              return `${typeof src27 === "string" ? `<img class="h-[100px] w-auto"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
+            return `${each(images, ({ src: src22, alt }) => {
+              return `${typeof src22 === "string" ? `<img class="h-[100px] w-auto"${add_attribute("src", src22.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}>` : `<picture>${each(Object.entries(src22.sources), ([format, srcset]) => {
                 return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-              })} <img class="h-[100px] w-auto"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}> </picture>`}`;
+              })} <img class="h-[100px] w-auto"${add_attribute("src", src22.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}> </picture>`}`;
             })}`;
           }
         }
@@ -8523,7 +8683,7 @@ var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     index5 = 4;
     component5 = async () => component_cache5 ??= (await Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports))).default;
-    imports5 = ["_app/immutable/nodes/4.BGiQRIFx.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/B_-KkxDB.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/D2PaxASM.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/tZ0ymlLq.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/Dn8aa3PJ.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/aArQPUwL.js", "_app/immutable/chunks/CnmIg4To.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/DqaOeWom.js", "_app/immutable/chunks/CMJKR-Ce.js"];
+    imports5 = ["_app/immutable/nodes/4.CgdTOd4e.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DbD_NlP-.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/y-f3Tx8a.js", "_app/immutable/chunks/LFmWHm5N.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/YtKqi3V3.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/BpGnHwBJ.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/DVvwuOlZ.js", "_app/immutable/chunks/Cc_N6hKz.js", "_app/immutable/chunks/w0vMFqT4.js", "_app/immutable/chunks/CxdZ4zBt.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/sJBu_XLi.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/BUsMTPQK.js", "_app/immutable/chunks/D2B8X6cg.js", "_app/immutable/chunks/DoqDkTcC.js", "_app/immutable/chunks/BCwV6E0u.js", "_app/immutable/chunks/DgIKfcJp.js"];
     stylesheets5 = ["_app/immutable/assets/Testimonial.DLYMjzrT.css", "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css", "_app/immutable/assets/NavBar.DBFUqa5S.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css", "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css", "_app/immutable/assets/4.yAOv9-SH.css"];
     fonts5 = [];
   }
@@ -8579,10 +8739,10 @@ var init_page_ts = __esm({
 });
 
 // .svelte-kit/output/server/chunks/klasek-before-after-gallery.js
-var src3;
+var src2;
 var init_klasek_before_after_gallery = __esm({
   ".svelte-kit/output/server/chunks/klasek-before-after-gallery.js"() {
-    src3 = "/_app/immutable/assets/klasek-before-after-gallery.CNJ981Jl.webp";
+    src2 = "/_app/immutable/assets/klasek-before-after-gallery.CNJ981Jl.webp";
   }
 });
 
@@ -8620,7 +8780,7 @@ var page_svelte_exports2 = {};
 __export(page_svelte_exports2, {
   default: () => Page2
 });
-var src4, AboutUsHero, YourReliableSubcontractorSection, PreviousProjectsSection, Page2;
+var src3, AboutUsHero, YourReliableSubcontractorSection, PreviousProjectsSection, Page2;
 var init_page_svelte2 = __esm({
   ".svelte-kit/output/server/entries/pages/(dark-nav)/about-us/_page.svelte.js"() {
     init_ssr();
@@ -8631,9 +8791,9 @@ var init_page_svelte2 = __esm({
     init_klasek_before_after_gallery();
     init_PaintingPromisesSection();
     init_TestimonialsSection();
-    src4 = "/_app/immutable/assets/about-klasek-painting.C7nfp2vF.webp";
+    src3 = "/_app/immutable/assets/about-klasek-painting.C7nfp2vF.webp";
     AboutUsHero = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<section class="p-b p-x bg-secondary-dark hero-gradient" data-svelte-h="svelte-jsg6p0"><div class="container flex flex-col items-center gap-6"><div${add_attribute("style", `background-image: url(${src4})`, 0)} class="relative lg:w-3/4 sm:w-[90%] w-full grid place-items-center lg:py-36 sm:py-24 py-16 bg-black/50 bg-blend-multiply bg-cover bg-top ribbon-bottom"><h1 data-testid="page-heading" class="lg:text-6xl text-4xl text-white font-semibold">About Us</h1></div> <div class="font-semibold"><p class="lg:text-4xl xs:text-2xl text-xl text-primary text-center mb-4 lg:w-full xs:w-4/5 mx-auto">\u201COur painting company continues to prove <br class="lg:inline hidden"> its quality work for
+      return `<section class="p-b p-x bg-secondary-dark hero-gradient" data-svelte-h="svelte-jsg6p0"><div class="container flex flex-col items-center gap-6"><div${add_attribute("style", `background-image: url(${src3})`, 0)} class="relative lg:w-3/4 sm:w-[90%] w-full grid place-items-center lg:py-36 sm:py-24 py-16 bg-black/50 bg-blend-multiply bg-cover bg-top ribbon-bottom"><h1 data-testid="page-heading" class="lg:text-6xl text-4xl text-white font-semibold">About Us</h1></div> <div class="font-semibold"><p class="lg:text-4xl xs:text-2xl text-xl text-primary text-center mb-4 lg:w-full xs:w-4/5 mx-auto">\u201COur painting company continues to prove <br class="lg:inline hidden"> its quality work for
 				residential projects.\u201D</p> <p class="w-full text-right text-white lg:text-xl text-lg">\u2014 Peter Klasek</p></div></div></section>`;
     });
     YourReliableSubcontractorSection = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -8689,7 +8849,7 @@ var init_page_svelte2 = __esm({
             return `View Our Gallery`;
           }
         }
-      )}</div>  <div${add_attribute("style", `background-image: url(${src3});`, 0)} class="bg-cover bg-center bord rounded-lg w-full lg:h-full h-[250px]"></div></div></section>`;
+      )}</div>  <div${add_attribute("style", `background-image: url(${src2});`, 0)} class="bg-cover bg-center bord rounded-lg w-full lg:h-full h-[250px]"></div></div></section>`;
     });
     Page2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(AboutUsHero, "AboutUsHero").$$render($$result, {}, {}, {})} ${validate_component(YourReliableSubcontractorSection, "YourReliableSubcontractorSection").$$render($$result, {}, {}, {})} ${validate_component(PreviousProjectsSection, "PreviousProjectsSection").$$render($$result, {}, {}, {})} ${validate_component(PaintingPromisesSection, "PaintingPromisesSection").$$render($$result, {}, {}, {})} ${validate_component(TestimonialsSection, "TestimonialsSection").$$render($$result, {}, {}, {})}`;
@@ -8715,7 +8875,7 @@ var init__6 = __esm({
     index6 = 5;
     component6 = async () => component_cache6 ??= (await Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2))).default;
     universal_id = "src/routes/(dark-nav)/about-us/+page.ts";
-    imports6 = ["_app/immutable/nodes/5.C9kcAnH1.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/B_-KkxDB.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/D2PaxASM.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/CLoLEQQ2.js"];
+    imports6 = ["_app/immutable/nodes/5.CDWcYfrM.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CpRRg9TQ.js", "_app/immutable/chunks/BpGnHwBJ.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DVvwuOlZ.js", "_app/immutable/chunks/Cc_N6hKz.js", "_app/immutable/chunks/CLoLEQQ2.js"];
     stylesheets6 = ["_app/immutable/assets/Testimonial.DLYMjzrT.css", "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css"];
     fonts6 = [];
   }
@@ -8794,10 +8954,10 @@ function flush() {
   do {
     try {
       while (flushidx < dirty_components.length) {
-        const component69 = dirty_components[flushidx];
+        const component70 = dirty_components[flushidx];
         flushidx++;
-        set_current_component(component69);
-        update(component69.$$);
+        set_current_component(component70);
+        update(component70.$$);
       }
     } catch (e3) {
       dirty_components.length = 0;
@@ -8947,7 +9107,7 @@ function arraysAreEqual(arr1, arr2) {
   if (arr1.length !== arr2.length) {
     return false;
   }
-  return arr1.every((value, index69) => value === arr2[index69]);
+  return arr1.every((value, index70) => value === arr2[index70]);
 }
 function cubicOut(t2) {
   const f = t2 - 1;
@@ -9637,7 +9797,7 @@ var init__7 = __esm({
     index7 = 6;
     component7 = async () => component_cache7 ??= (await Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3))).default;
     universal_id2 = "src/routes/(dark-nav)/about-us/faqs/+page.ts";
-    imports7 = ["_app/immutable/nodes/6.CrRq609q.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DFZMGrRu.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js"];
+    imports7 = ["_app/immutable/nodes/6.DKNzXd46.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/MpOZDDeS.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js"];
     stylesheets7 = [];
     fonts7 = [];
   }
@@ -9721,7 +9881,7 @@ var init__8 = __esm({
     index8 = 7;
     component8 = async () => component_cache8 ??= (await Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4))).default;
     universal_id3 = "src/routes/(dark-nav)/about-us/service-area/+page.ts";
-    imports8 = ["_app/immutable/nodes/7.BS8nMFf9.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/DqaOeWom.js"];
+    imports8 = ["_app/immutable/nodes/7._CM9azaS.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/BCwV6E0u.js"];
     stylesheets8 = [];
     fonts8 = [];
   }
@@ -9739,7 +9899,7 @@ var init_page_ts4 = __esm({
     load5 = () => {
       const pageMetaTags = createCityMetaTags(
         "Top Exterior House Painters in Berwyn, IL",
-        "Discover top-rated house painting services in Berwyn, Illinois with Klasek Painting. With 25+ years of experience, we offer expert exterior painting, brick restoration, siding repair, and more. Contact us for a free estimate today!"
+        "Discover top-rated house painting services in Berwyn, Illinois with Klasek Painting. With 30+ years of experience, we offer expert exterior painting, brick restoration, siding repair, and more. Contact us for a free estimate today!"
       );
       return {
         pageMetaTags
@@ -9752,12 +9912,12 @@ var init_page_ts4 = __esm({
 var require_arrayReduce = __commonJS({
   "node_modules/lodash/_arrayReduce.js"(exports, module) {
     function arrayReduce(array2, iteratee, accumulator, initAccum) {
-      var index69 = -1, length = array2 == null ? 0 : array2.length;
+      var index70 = -1, length = array2 == null ? 0 : array2.length;
       if (initAccum && length) {
-        accumulator = array2[++index69];
+        accumulator = array2[++index70];
       }
-      while (++index69 < length) {
-        accumulator = iteratee(accumulator, array2[index69], index69, array2);
+      while (++index70 < length) {
+        accumulator = iteratee(accumulator, array2[index70], index70, array2);
       }
       return accumulator;
     }
@@ -9984,9 +10144,9 @@ var require_deburrLetter = __commonJS({
 var require_arrayMap = __commonJS({
   "node_modules/lodash/_arrayMap.js"(exports, module) {
     function arrayMap(array2, iteratee) {
-      var index69 = -1, length = array2 == null ? 0 : array2.length, result = Array(length);
-      while (++index69 < length) {
-        result[index69] = iteratee(array2[index69], index69, array2);
+      var index70 = -1, length = array2 == null ? 0 : array2.length, result = Array(length);
+      while (++index70 < length) {
+        result[index70] = iteratee(array2[index70], index70, array2);
       }
       return result;
     }
@@ -10186,7 +10346,7 @@ var require_createCompounder = __commonJS({
 var require_baseSlice = __commonJS({
   "node_modules/lodash/_baseSlice.js"(exports, module) {
     function baseSlice(array2, start, end) {
-      var index69 = -1, length = array2.length;
+      var index70 = -1, length = array2.length;
       if (start < 0) {
         start = -start > length ? 0 : length + start;
       }
@@ -10197,8 +10357,8 @@ var require_baseSlice = __commonJS({
       length = start > end ? 0 : end - start >>> 0;
       start >>>= 0;
       var result = Array(length);
-      while (++index69 < length) {
-        result[index69] = array2[index69 + start];
+      while (++index70 < length) {
+        result[index70] = array2[index70 + start];
       }
       return result;
     }
@@ -10324,8 +10484,8 @@ var require_startCase = __commonJS({
   "node_modules/lodash/startCase.js"(exports, module) {
     var createCompounder = require_createCompounder();
     var upperFirst = require_upperFirst();
-    var startCase2 = createCompounder(function(result, word, index69) {
-      return result + (index69 ? " " : "") + upperFirst(word);
+    var startCase2 = createCompounder(function(result, word, index70) {
+      return result + (index70 ? " " : "") + upperFirst(word);
     });
     module.exports = startCase2;
   }
@@ -10349,11 +10509,11 @@ var init_Breadcrumb = __esm({
       let { class: classes = "" } = $$props;
       const pathname = $page.url.pathname;
       const pathArray = pathname.split("/").filter((path) => path !== "");
-      const itemListElement = pathArray.map((path, index69) => {
-        const fullPath = pathArray.slice(0, index69 + 1).join("/");
+      const itemListElement = pathArray.map((path, index70) => {
+        const fullPath = pathArray.slice(0, index70 + 1).join("/");
         return {
           "@type": "ListItem",
-          position: index69 + 1,
+          position: index70 + 1,
           name: (0, import_startCase.default)(path),
           item: `${siteName}/${fullPath}`
         };
@@ -10479,9 +10639,9 @@ var init_page_svelte5 = __esm({
 		in Berwyn, Illinois, our <a${add_attribute("href", routes["gallery"].href, 0)}>portfolio</a> and
 		<a${add_attribute("href", routes["testimonials"].href, 0)}>client reviews</a> showcase our excellence.</p> <p data-svelte-h="svelte-1d770fu">When you hire an exterior paint contractor, it&#39;s about more than just applying paint. It&#39;s about
 		professional color consultation, precise surface prep, and clear communication. Our goal is to
-		provide an exceptional experience from the initial assessment to the final reveal.</p>  <h3 data-svelte-h="svelte-a99g1g">Complete Exterior House Painting in Berwyn, Illinois</h3> <p data-svelte-h="svelte-bqzbm6">Be it refreshing your home&#39;s style or creating a new look, Klasek Painting is here to help. We
+		provide an exceptional experience from the initial assessment to the final reveal.</p>  <h3 data-svelte-h="svelte-a99g1g">Complete Exterior House Painting in Berwyn, Illinois</h3> <p data-svelte-h="svelte-1u1jtac">Be it refreshing your home&#39;s style or creating a new look, Klasek Painting is here to help. We
 		start with a <a${add_attribute("href", routes["design-consultation"].href, 0)}>comprehensive evaluation and design consultation</a> to help you visualize the transformation of your home with premium exterior house painting in Berwyn,
-		Illinois. With 25+ years in the field, we guarantee clarity on project details and competitive pricing.</p> <p data-svelte-h="svelte-150xy1u">All exterior painting begins with meticulous surface prep, whether your home is sided with
+		Illinois. With 30+ years in the field, we guarantee clarity on project details and competitive pricing.</p> <p data-svelte-h="svelte-150xy1u">All exterior painting begins with meticulous surface prep, whether your home is sided with
 		stucco, siding, or brick. Professional power washing and prep distinguish top painting companies
 		from the rest.</p> <p>To arrange a free estimate or consultation, ${validate_component(ClickToCall, "ClickToCall").$$render($$result, { class: "!font-semibold", variant: "link" }, {}, {
             default: () => {
@@ -10518,7 +10678,7 @@ var init__9 = __esm({
     index9 = 8;
     component9 = async () => component_cache9 ??= (await Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5))).default;
     universal_id4 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/berwyn-house-painting/+page.ts";
-    imports9 = ["_app/immutable/nodes/8.oxDSxkNO.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports9 = ["_app/immutable/nodes/8.aPv8d_-n.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets9 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts9 = [];
   }
@@ -10536,7 +10696,7 @@ var init_page_ts5 = __esm({
     load6 = () => {
       const pageMetaTags = createCityMetaTags(
         "Top Exterior House Painters in Burr Ridge, IL",
-        "Klasek Painting offers expert house painting, brick restoration, and siding repair services in Burr Ridge, IL. With 25+ years of experience, we ensure exceptional results."
+        "Klasek Painting offers expert house painting, brick restoration, and siding repair services in Burr Ridge, IL. With 30+ years of experience, we ensure exceptional results."
       );
       return {
         pageMetaTags
@@ -10636,7 +10796,7 @@ var init__10 = __esm({
     index10 = 9;
     component10 = async () => component_cache10 ??= (await Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6))).default;
     universal_id5 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/burr-ridge-house-painting/+page.ts";
-    imports10 = ["_app/immutable/nodes/9.5DFCoYSE.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports10 = ["_app/immutable/nodes/9.DnbnIzO9.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets10 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts10 = [];
   }
@@ -10654,7 +10814,7 @@ var init_page_ts6 = __esm({
     load7 = () => {
       const pageMetaTags = createCityMetaTags(
         "Exterior House Painters in Clarendon Hills, IL",
-        "Klasek Painting offers top-quality house painting, brick restoration, and siding repair services in Clarendon Hills, IL. With 25+ years of experience, we guarantee beautiful results."
+        "Klasek Painting offers top-quality house painting, brick restoration, and siding repair services in Clarendon Hills, IL. With 30+ years of experience, we guarantee beautiful results."
       );
       return {
         pageMetaTags
@@ -10760,7 +10920,7 @@ var init__11 = __esm({
     index11 = 10;
     component11 = async () => component_cache11 ??= (await Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7))).default;
     universal_id6 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/clarendon-hills-house-painting/+page.ts";
-    imports11 = ["_app/immutable/nodes/10.qA1PhIY3.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports11 = ["_app/immutable/nodes/10.UrYeAlgT.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets11 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts11 = [];
   }
@@ -10778,7 +10938,7 @@ var init_page_ts7 = __esm({
     load8 = () => {
       const pageMetaTags = createCityMetaTags(
         "Exterior House Painters in Downers Grove, IL",
-        "Klasek Painting provides expert house painting, brick restoration, and siding repair in Downers Grove, IL. With 25+ years of experience, we deliver stunning, long-lasting results."
+        "Klasek Painting provides expert house painting, brick restoration, and siding repair in Downers Grove, IL. With 30+ years of experience, we deliver stunning, long-lasting results."
       );
       return {
         pageMetaTags
@@ -10889,7 +11049,7 @@ var init__12 = __esm({
     index12 = 11;
     component12 = async () => component_cache12 ??= (await Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8))).default;
     universal_id7 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/downers-grove-house-painting/+page.ts";
-    imports12 = ["_app/immutable/nodes/11.BP_Bj3n6.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports12 = ["_app/immutable/nodes/11.D3GooNI7.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets12 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts12 = [];
   }
@@ -10907,7 +11067,7 @@ var init_page_ts8 = __esm({
     load9 = () => {
       const pageMetaTags = createCityMetaTags(
         "Exterior House Painters in Forest Park, IL",
-        "Klasek Painting provides expert house painting, brick restoration, and siding repair in Forest Park, IL. With 25+ years of experience, we deliver exceptional and long-lasting results."
+        "Klasek Painting provides expert house painting, brick restoration, and siding repair in Forest Park, IL. With 30+ years of experience, we deliver exceptional and long-lasting results."
       );
       return {
         pageMetaTags
@@ -11007,7 +11167,7 @@ var init__13 = __esm({
     index13 = 12;
     component13 = async () => component_cache13 ??= (await Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9))).default;
     universal_id8 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/forest-park-house-painting/+page.ts";
-    imports13 = ["_app/immutable/nodes/12.DkAi3bpJ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports13 = ["_app/immutable/nodes/12.HhP4AAno.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets13 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts13 = [];
   }
@@ -11025,7 +11185,7 @@ var init_page_ts9 = __esm({
     load10 = () => {
       const pageMetaTags = createCityMetaTags(
         "House Painters in Hinsdale, IL",
-        "Klasek Painting offers expert house painting, brick repair, and siding restoration in Hinsdale, IL. With 25+ years of experience, we provide stunning, long-lasting results."
+        "Klasek Painting offers expert house painting, brick repair, and siding restoration in Hinsdale, IL. With 30+ years of experience, we provide stunning, long-lasting results."
       );
       return {
         pageMetaTags
@@ -11124,7 +11284,7 @@ var init__14 = __esm({
     index14 = 13;
     component14 = async () => component_cache14 ??= (await Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10))).default;
     universal_id9 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/hinsdale-house-painting/+page.ts";
-    imports14 = ["_app/immutable/nodes/13.Jc6uYGRd.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports14 = ["_app/immutable/nodes/13.uv7ilGWd.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets14 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts14 = [];
   }
@@ -11142,7 +11302,7 @@ var init_page_ts10 = __esm({
     load11 = () => {
       const pageMetaTags = createCityMetaTags(
         "Exterior House Painters in La Grange, IL",
-        "Klasek Painting offers expert house painting, brick restoration, and siding repair in La Grange, IL. With 25+ years of experience, we ensure stunning and durable results."
+        "Klasek Painting offers expert house painting, brick restoration, and siding repair in La Grange, IL. With 30+ years of experience, we ensure stunning and durable results."
       );
       return {
         pageMetaTags
@@ -11239,7 +11399,7 @@ var init__15 = __esm({
     index15 = 14;
     component15 = async () => component_cache15 ??= (await Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11))).default;
     universal_id10 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/la-grange-house-painting/+page.ts";
-    imports15 = ["_app/immutable/nodes/14.BDsuOHnq.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports15 = ["_app/immutable/nodes/14.BHlzMW9J.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets15 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts15 = [];
   }
@@ -11257,7 +11417,7 @@ var init_page_ts11 = __esm({
     load12 = () => {
       const pageMetaTags = createCityMetaTags(
         "Exterior House Painters in Oak Brook, IL",
-        "Klasek Painting provides expert house painting, brick repair, and siding restoration in Oak Brook, IL. With 25+ years of experience, we ensure exceptional, long-lasting results."
+        "Klasek Painting provides expert house painting, brick repair, and siding restoration in Oak Brook, IL. With 30+ years of experience, we ensure exceptional, long-lasting results."
       );
       return {
         pageMetaTags
@@ -11345,7 +11505,7 @@ var init__16 = __esm({
     index16 = 15;
     component16 = async () => component_cache16 ??= (await Promise.resolve().then(() => (init_page_svelte12(), page_svelte_exports12))).default;
     universal_id11 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-brook-house-painting/+page.ts";
-    imports16 = ["_app/immutable/nodes/15.BouPWL9J.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports16 = ["_app/immutable/nodes/15.Dj1HsRUE.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets16 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts16 = [];
   }
@@ -11462,7 +11622,7 @@ var init__17 = __esm({
     index17 = 16;
     component17 = async () => component_cache17 ??= (await Promise.resolve().then(() => (init_page_svelte13(), page_svelte_exports13))).default;
     universal_id12 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-park-house-painting/+page.ts";
-    imports17 = ["_app/immutable/nodes/16.2F0m83DB.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports17 = ["_app/immutable/nodes/16.D4n4Ooy3.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets17 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts17 = [];
   }
@@ -11580,7 +11740,7 @@ var init__18 = __esm({
     index18 = 17;
     component18 = async () => component_cache18 ??= (await Promise.resolve().then(() => (init_page_svelte14(), page_svelte_exports14))).default;
     universal_id13 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/orland-park-house-painting/+page.ts";
-    imports18 = ["_app/immutable/nodes/17.BkQ_C85W.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports18 = ["_app/immutable/nodes/17.pdTEpsz9.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets18 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts18 = [];
   }
@@ -11702,7 +11862,7 @@ var init__19 = __esm({
     index19 = 18;
     component19 = async () => component_cache19 ??= (await Promise.resolve().then(() => (init_page_svelte15(), page_svelte_exports15))).default;
     universal_id14 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/riverside-house-painting/+page.ts";
-    imports19 = ["_app/immutable/nodes/18.DAE5hdXZ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports19 = ["_app/immutable/nodes/18.DST2Y856.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets19 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts19 = [];
   }
@@ -11720,7 +11880,7 @@ var init_page_ts15 = __esm({
     load16 = () => {
       const pageMetaTags = createCityMetaTags(
         "Exterior House Painters in Western Springs, IL",
-        "Elevate your home's exterior with Klasek Painting in Western Springs, IL. Specializing in expert painting, brick restoration, and siding repair, we bring 25+ years of craftsmanship to every project."
+        "Elevate your home's exterior with Klasek Painting in Western Springs, IL. Specializing in expert painting, brick restoration, and siding repair, we bring 30+ years of craftsmanship to every project."
       );
       return {
         pageMetaTags
@@ -11812,7 +11972,7 @@ var init__20 = __esm({
     index20 = 19;
     component20 = async () => component_cache20 ??= (await Promise.resolve().then(() => (init_page_svelte16(), page_svelte_exports16))).default;
     universal_id15 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/western-springs-house-painting/+page.ts";
-    imports20 = ["_app/immutable/nodes/19.ZLY4uxru.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports20 = ["_app/immutable/nodes/19.BPYZvIXF.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets20 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts20 = [];
   }
@@ -11830,7 +11990,7 @@ var init_page_ts16 = __esm({
     load17 = () => {
       const pageMetaTags = createCityMetaTags(
         "Exterior House Painters in Westmont, IL",
-        "Klasek Painting offers professional house painting, brick restoration, and siding repair services in Westmont, IL. With 25+ years of experience, we ensure beautiful, long-lasting results tailored to your vision."
+        "Klasek Painting offers professional house painting, brick restoration, and siding repair services in Westmont, IL. With 30+ years of experience, we ensure beautiful, long-lasting results tailored to your vision."
       );
       return {
         pageMetaTags
@@ -11929,7 +12089,7 @@ var init__21 = __esm({
     index21 = 20;
     component21 = async () => component_cache21 ??= (await Promise.resolve().then(() => (init_page_svelte17(), page_svelte_exports17))).default;
     universal_id16 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/westmont-house-painting/+page.ts";
-    imports21 = ["_app/immutable/nodes/20.COPnnZ9f.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports21 = ["_app/immutable/nodes/20.wv-o73eY.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets21 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts21 = [];
   }
@@ -11947,7 +12107,7 @@ var init_page_ts17 = __esm({
     load18 = () => {
       const pageMetaTags = createCityMetaTags(
         "Exterior House Painters in Willow Springs, IL",
-        "Klasek Painting offers expert house painting, brick restoration, and siding repair in Willow Springs, IL. With 25+ years of experience, we ensure stunning and durable results."
+        "Klasek Painting offers expert house painting, brick restoration, and siding repair in Willow Springs, IL. With 30+ years of experience, we ensure stunning and durable results."
       );
       return {
         pageMetaTags
@@ -11989,7 +12149,7 @@ var init_page_svelte18 = __esm({
 		condition. Cracks, chips, or other damage can affect the outcome of the painting. That&#39;s why
 		it&#39;s crucial to work with the best <a${add_attribute("href", routes["brick-repair"].href, 0)}>brick repair service</a> in Willow\xA0Springs,\xA0Illinois, before you begin your project.</p> <p data-svelte-h="svelte-wa62f2"><a${add_attribute("href", routes["contact"].href, 0)}>Contact Klasek Painting</a> for a free consultation. Our experienced
 		brick masons will thoroughly inspect your home, recommend necessary repairs, and provide a clear,
-		written estimate.</p> <p data-svelte-h="svelte-196jn03">With over 20 years of experience and the use of top-quality materials, you can rely on us to
+		written estimate.</p> <p data-svelte-h="svelte-1mx2euy">With over 30 years of experience and the use of top-quality materials, you can rely on us to
 		prepare your home for a beautiful and long-lasting paint or stain job.</p> <h2 data-svelte-h="svelte-twuctf">Transformative Siding Painting in Willow\xA0Springs,\xA0Illinois</h2> <p data-svelte-h="svelte-703fyy">Your home&#39;s siding is not only important for protecting it from the elements but also plays a
 		big role in its curb appeal. Our <a${add_attribute("href", routes["siding-painting-repair"].href, 0)}>siding painting services</a>
 		in Willow\xA0Springs,\xA0Illinois, are designed to revitalize your home&#39;s exterior. Whether you
@@ -12054,7 +12214,7 @@ var init__22 = __esm({
     index22 = 21;
     component22 = async () => component_cache22 ??= (await Promise.resolve().then(() => (init_page_svelte18(), page_svelte_exports18))).default;
     universal_id17 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/willow-springs-house-painting/+page.ts";
-    imports22 = ["_app/immutable/nodes/21.BjbX6J_F.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports22 = ["_app/immutable/nodes/21.CMiKjU1M.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets22 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts22 = [];
   }
@@ -12177,7 +12337,7 @@ var init__23 = __esm({
     index23 = 22;
     component23 = async () => component_cache23 ??= (await Promise.resolve().then(() => (init_page_svelte19(), page_svelte_exports19))).default;
     universal_id18 = "src/routes/(dark-nav)/about-us/service-area/(city-pages)/willowbrook-house-painting/+page.ts";
-    imports23 = ["_app/immutable/nodes/22.DYY3jC2U.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/B1MAyza-.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/Bev2196b.js"];
+    imports23 = ["_app/immutable/nodes/22.BT2u1CXN.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D7kvWfXQ.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DfFK52A7.js"];
     stylesheets23 = ["_app/immutable/assets/CityPageBody.Bh_hEQ0q.css"];
     fonts23 = [];
   }
@@ -12402,7 +12562,7 @@ var init__24 = __esm({
     index24 = 23;
     component24 = async () => component_cache24 ??= (await Promise.resolve().then(() => (init_page_svelte20(), page_svelte_exports20))).default;
     universal_id19 = "src/routes/(dark-nav)/about-us/testimonials/+page.ts";
-    imports24 = ["_app/immutable/nodes/23.Duhpj09z.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D2PaxASM.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/uD0itGRs.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CLoLEQQ2.js"];
+    imports24 = ["_app/immutable/nodes/23.B7M3Hwvy.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DVvwuOlZ.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/uD0itGRs.js", "_app/immutable/chunks/LFmWHm5N.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/CLoLEQQ2.js"];
     stylesheets24 = ["_app/immutable/assets/Testimonial.DLYMjzrT.css"];
     fonts24 = [];
   }
@@ -12438,12 +12598,31 @@ var init_klasek_painting_victorian_homes_1 = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/stucco-and-trim-before.js
+var repairImg;
+var init_stucco_and_trim_before = __esm({
+  ".svelte-kit/output/server/chunks/stucco-and-trim-before.js"() {
+    repairImg = {
+      sources: {
+        avif: "/_app/immutable/assets/stucco-and-trim-before.C-p5cKXp.avif 504w, /_app/immutable/assets/stucco-and-trim-before.BFw21C5e.avif 1008w",
+        webp: "/_app/immutable/assets/stucco-and-trim-before.CsY0RAZV.webp 504w, /_app/immutable/assets/stucco-and-trim-before.Zz-cMKvT.webp 1008w",
+        png: "/_app/immutable/assets/stucco-and-trim-before.8Wimfesb.png 504w, /_app/immutable/assets/stucco-and-trim-before.CEWDkm7y.png 1008w"
+      },
+      img: {
+        src: "/_app/immutable/assets/stucco-and-trim-before.CEWDkm7y.png",
+        w: 1008,
+        h: 454
+      }
+    };
+  }
+});
+
 // .svelte-kit/output/server/entries/pages/(dark-nav)/photo-gallery/_page.svelte.js
 var page_svelte_exports21 = {};
 __export(page_svelte_exports21, {
   default: () => Page21
 });
-var GalleryPreviewGrid, pastSmall1, pastSmall2, pastLarge, brickSmall1, brickSmall2, brickLarge, stuccoRepairPaintSmall1, stuccoRepairPaintSmall2, stuccoRepairPaintLarge, stuccoTrimSmall1, stuccoTrimSmall2, cedarReplacementSmall1, cedarReplacementSmall2, cedarReplacementLarge, hardieSmall1, hardieSmall2, hardieLarge, trimSmall1, trimSmall2, trimLarge, stuccoCedarSmall1, stuccoCedarSmall2, stuccoCedarLarge, victorianSmall2, victorianLarge, cedarSidingSmall1, cedarSidingSmall2, cedarSidingLarge, whiteCedarSmall1, whiteCedarSmall2, whiteCedarLarge, sidingRepairSmall1, sidingRepairSmall2, sidingRepairLarge, sidingStuccoSmall1, sidingStuccoSmall2, sidingStuccoLarge, cedarShingleSmall1, cedarShingleSmall2, cedarShingleLarge, stuccoRepairSmall1, stuccoRepairSmall2, stuccoRepairLarge, ourWorkGalleryData, OurWorkGallery, GalleryHero, css$12, GalleryControls, icon, css9, minMaxBuffer, Range, percent, BeforeAfterSlider, cedarSidingBefore, cedarSidingAfter, brickPaintingBackBefore, brickPaintingBackAfter, stuccoRepairBackBefore, stuccoRepairBackAfter, stuccoRepairFrontBefore, stuccoRepairFrontAfter, stuccoTrimBefore, stuccoTrimAfter, limeWashBefore, limeWashAfter, stuccoRepairBackBefore2, stuccoRepairBackAfter2, stuccoRepairFrontBefore2, stuccoRepairFrontAfter2, brickPaintingFrontBefore, brickPaintingFrontAfter, stuccoRepairFrontBefore3, stuccoRepairFrontAfter3, stuccoRepairBackBefore3, stuccoRepairBackAfter3, beforeAfterGalleryData, BeforeAfterGallery, Page21;
+var GalleryPreviewGrid, pastSmall1, pastSmall2, pastLarge, brickSmall1, brickSmall2, brickLarge, stuccoRepairPaintSmall1, stuccoRepairPaintSmall2, stuccoRepairPaintLarge, stuccoTrimSmall1, stuccoTrimSmall2, cedarReplacementSmall1, cedarReplacementSmall2, cedarReplacementLarge, hardieSmall1, hardieSmall2, hardieLarge, trimSmall1, trimSmall2, trimLarge, stuccoCedarSmall1, stuccoCedarSmall2, stuccoCedarLarge, victorianSmall2, victorianLarge, cedarSidingSmall1, cedarSidingSmall2, cedarSidingLarge, whiteCedarSmall1, whiteCedarSmall2, whiteCedarLarge, sidingRepairSmall1, sidingRepairSmall2, sidingRepairLarge, sidingStuccoSmall1, sidingStuccoSmall2, sidingStuccoLarge, cedarShingleSmall1, cedarShingleSmall2, cedarShingleLarge, stuccoRepairSmall1, stuccoRepairSmall2, stuccoRepairLarge, ourWorkGalleryData, OurWorkGallery, GalleryHero, css$12, GalleryControls, icon, css9, minMaxBuffer, Range, percent, BeforeAfterSlider, cedarSidingBefore, cedarSidingAfter, brickPaintingBackBefore, brickPaintingBackAfter, stuccoRepairBackBefore, stuccoRepairBackAfter, stuccoRepairFrontBefore, stuccoRepairFrontAfter, stuccoTrimAfter, limeWashBefore, limeWashAfter, stuccoRepairBackBefore2, stuccoRepairBackAfter2, stuccoRepairFrontBefore2, stuccoRepairFrontAfter2, brickPaintingFrontBefore, brickPaintingFrontAfter, stuccoRepairFrontBefore3, stuccoRepairFrontAfter3, stuccoRepairBackBefore3, stuccoRepairBackAfter3, beforeAfterGalleryData, BeforeAfterGallery, Page21;
 var init_page_svelte21 = __esm({
   ".svelte-kit/output/server/entries/pages/(dark-nav)/photo-gallery/_page.svelte.js"() {
     init_ssr();
@@ -12453,18 +12632,19 @@ var init_page_svelte21 = __esm({
     init_klasek_painting_victorian_homes_1();
     init_klasek_before_after_gallery();
     init_RibbonWrapper();
+    init_stucco_and_trim_before();
     GalleryPreviewGrid = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { data } = $$props;
       let { reverse = false } = $$props;
-      let { load: load65 = false } = $$props;
+      let { load: load66 = false } = $$props;
       let isInView = false;
       if ($$props.data === void 0 && $$bindings.data && data !== void 0)
         $$bindings.data(data);
       if ($$props.reverse === void 0 && $$bindings.reverse && reverse !== void 0)
         $$bindings.reverse(reverse);
-      if ($$props.load === void 0 && $$bindings.load && load65 !== void 0)
-        $$bindings.load(load65);
-      return `<li class="md:min-h-[416px] min-h-[300px] md:h-auto w-full md:max-w-none max-w-[400px] mx-auto">${load65 || isInView ? `<div class="${"w-full md:h-full h-[300px] grid md:grid-rows-[200px_200px] md:gap-4 " + escape(
+      if ($$props.load === void 0 && $$bindings.load && load66 !== void 0)
+        $$bindings.load(load66);
+      return `<li class="md:min-h-[416px] min-h-[300px] md:h-auto w-full md:max-w-none max-w-[400px] mx-auto">${load66 || isInView ? `<div class="${"w-full md:h-full h-[300px] grid md:grid-rows-[200px_200px] md:gap-4 " + escape(
         reverse ? "md:grid-cols-[3fr_2fr]" : "md:grid-cols-[2fr_3fr]",
         true
       )}"> <div${add_attribute("style", `background-image: url(${data.images.small1});`, 0)} class="${[
@@ -12674,7 +12854,7 @@ var init_page_svelte21 = __esm({
       })}</ul></section>`;
     });
     GalleryHero = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      return `<section class="lg:pt-12 py-6 lg:px-12 xs:px-4 px-2 hero-gradient" data-svelte-h="svelte-1whvmx0"><div class="container grid lg:grid-cols-2 gap-6"> <div${add_attribute("style", `background-image: url(${src3});`, 0)} class="lg:size-full rounded-lg bg-cover bg-center border-2 border-primary lg:block hidden"></div>  <div class="flex flex-col gap-4 bg-white lg:py-8 lg:px-12 xs:p-6 p-4 rounded-lg"><span class="lg:text-xl text-lg text-primary-dark font-semibold">PHOTO GALLERY</span> <h1 class="lg:text-5xl xs:text-4xl text-3xl text-secondary lg:font-normal font-semibold" data-testid="page-heading">Ready To Get Started On Your\xA0Project?</h1> <p class="leading-loose">Klasek Painting has over 30 years of experience delivering beautiful, long-lasting results
+      return `<section class="lg:pt-12 py-6 lg:px-12 xs:px-4 px-2 hero-gradient" data-svelte-h="svelte-1whvmx0"><div class="container grid lg:grid-cols-2 gap-6"> <div${add_attribute("style", `background-image: url(${src2});`, 0)} class="lg:size-full rounded-lg bg-cover bg-center border-2 border-primary lg:block hidden"></div>  <div class="flex flex-col gap-4 bg-white lg:py-8 lg:px-12 xs:p-6 p-4 rounded-lg"><span class="lg:text-xl text-lg text-primary-dark font-semibold">PHOTO GALLERY</span> <h1 class="lg:text-5xl xs:text-4xl text-3xl text-secondary lg:font-normal font-semibold" data-testid="page-heading">Ready To Get Started On Your\xA0Project?</h1> <p class="leading-loose">Klasek Painting has over 30 years of experience delivering beautiful, long-lasting results
 				to homeowners in Chicago. Our mission is to be the area&#39;s most trusted exterior repair and
 				exterior painting contractor, so we are committed to providing first class service at a fair
 				price.</p></div></div></section>`;
@@ -12845,18 +13025,6 @@ var init_page_svelte21 = __esm({
       },
       img: {
         src: "/_app/immutable/assets/stucco-repair-paint-front-of-the-house-after.CX0qglCz.png",
-        w: 1008,
-        h: 454
-      }
-    };
-    stuccoTrimBefore = {
-      sources: {
-        avif: "/_app/immutable/assets/stucco-and-trim-before.C-p5cKXp.avif 504w, /_app/immutable/assets/stucco-and-trim-before.BFw21C5e.avif 1008w",
-        webp: "/_app/immutable/assets/stucco-and-trim-before.CsY0RAZV.webp 504w, /_app/immutable/assets/stucco-and-trim-before.Zz-cMKvT.webp 1008w",
-        png: "/_app/immutable/assets/stucco-and-trim-before.8Wimfesb.png 504w, /_app/immutable/assets/stucco-and-trim-before.CEWDkm7y.png 1008w"
-      },
-      img: {
-        src: "/_app/immutable/assets/stucco-and-trim-before.CEWDkm7y.png",
         w: 1008,
         h: 454
       }
@@ -13040,7 +13208,7 @@ var init_page_svelte21 = __esm({
       },
       {
         title: "Stucco & Trim",
-        before: stuccoTrimBefore,
+        before: repairImg,
         after: stuccoTrimAfter
       },
       {
@@ -13122,7 +13290,7 @@ var init__25 = __esm({
     index25 = 24;
     component25 = async () => component_cache25 ??= (await Promise.resolve().then(() => (init_page_svelte21(), page_svelte_exports21))).default;
     universal_id20 = "src/routes/(dark-nav)/photo-gallery/+page.ts";
-    imports25 = ["_app/immutable/nodes/24.BdCAAAl_.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/sIz1Jrbw.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/DBFZJ9i3.js"];
+    imports25 = ["_app/immutable/nodes/24.bQjYsq-t.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/sIz1Jrbw.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/BoFApExT.js"];
     stylesheets25 = ["_app/immutable/assets/24.h3pv-FmW.css"];
     fonts25 = [];
   }
@@ -13509,7 +13677,7 @@ var init__26 = __esm({
     index26 = 25;
     component26 = async () => component_cache26 ??= (await Promise.resolve().then(() => (init_page_svelte22(), page_svelte_exports22))).default;
     universal_id21 = "src/routes/(dark-nav)/photo-gallery/brick-painting/+page.ts";
-    imports26 = ["_app/immutable/nodes/25.BwukwZt0.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports26 = ["_app/immutable/nodes/25.CDrM_dkz.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets26 = [];
     fonts26 = [];
   }
@@ -14090,7 +14258,7 @@ var init__27 = __esm({
     index27 = 26;
     component27 = async () => component_cache27 ??= (await Promise.resolve().then(() => (init_page_svelte23(), page_svelte_exports23))).default;
     universal_id22 = "src/routes/(dark-nav)/photo-gallery/cedar-replacement/+page.ts";
-    imports27 = ["_app/immutable/nodes/26.BNpvrqqs.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports27 = ["_app/immutable/nodes/26.kLfJDStL.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets27 = [];
     fonts27 = [];
   }
@@ -14561,7 +14729,7 @@ var init__28 = __esm({
     index28 = 27;
     component28 = async () => component_cache28 ??= (await Promise.resolve().then(() => (init_page_svelte24(), page_svelte_exports24))).default;
     universal_id23 = "src/routes/(dark-nav)/photo-gallery/cedar-shingle-and-stucco-repair/+page.ts";
-    imports28 = ["_app/immutable/nodes/27.TS2egPwg.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports28 = ["_app/immutable/nodes/27.41yQXI7l.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets28 = [];
     fonts28 = [];
   }
@@ -14936,7 +15104,7 @@ var init__29 = __esm({
     index29 = 28;
     component29 = async () => component_cache29 ??= (await Promise.resolve().then(() => (init_page_svelte25(), page_svelte_exports25))).default;
     universal_id24 = "src/routes/(dark-nav)/photo-gallery/cedar-siding-repair-paint/+page.ts";
-    imports29 = ["_app/immutable/nodes/28.BQQLYokK.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports29 = ["_app/immutable/nodes/28.K0dMnxoW.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets29 = [];
     fonts29 = [];
   }
@@ -15376,7 +15544,7 @@ var init__30 = __esm({
     index30 = 29;
     component30 = async () => component_cache30 ??= (await Promise.resolve().then(() => (init_page_svelte26(), page_svelte_exports26))).default;
     universal_id25 = "src/routes/(dark-nav)/photo-gallery/exterior-hardie-board/+page.ts";
-    imports30 = ["_app/immutable/nodes/29.CLw0yVKc.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports30 = ["_app/immutable/nodes/29.B6vbhbD4.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets30 = [];
     fonts30 = [];
   }
@@ -15813,7 +15981,7 @@ var init__31 = __esm({
     index31 = 30;
     component31 = async () => component_cache31 ??= (await Promise.resolve().then(() => (init_page_svelte27(), page_svelte_exports27))).default;
     universal_id26 = "src/routes/(dark-nav)/photo-gallery/past-projects/+page.ts";
-    imports31 = ["_app/immutable/nodes/30.CXc-Mvj6.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports31 = ["_app/immutable/nodes/30.IYzhTv9a.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets31 = [];
     fonts31 = [];
   }
@@ -16178,7 +16346,7 @@ var init__32 = __esm({
     index32 = 31;
     component32 = async () => component_cache32 ??= (await Promise.resolve().then(() => (init_page_svelte28(), page_svelte_exports28))).default;
     universal_id27 = "src/routes/(dark-nav)/photo-gallery/siding-and-stucco/+page.ts";
-    imports32 = ["_app/immutable/nodes/31.Cl9IrZoT.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports32 = ["_app/immutable/nodes/31.Y3tmzGPj.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets32 = [];
     fonts32 = [];
   }
@@ -16471,7 +16639,7 @@ var init__33 = __esm({
     index33 = 32;
     component33 = async () => component_cache33 ??= (await Promise.resolve().then(() => (init_page_svelte29(), page_svelte_exports29))).default;
     universal_id28 = "src/routes/(dark-nav)/photo-gallery/siding-repair/+page.ts";
-    imports33 = ["_app/immutable/nodes/32.D7x866qu.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports33 = ["_app/immutable/nodes/32.DV1fQxaU.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets33 = [];
     fonts33 = [];
   }
@@ -16863,7 +17031,7 @@ var init__34 = __esm({
     index34 = 33;
     component34 = async () => component_cache34 ??= (await Promise.resolve().then(() => (init_page_svelte30(), page_svelte_exports30))).default;
     universal_id29 = "src/routes/(dark-nav)/photo-gallery/stucco-and-cedar-siding/+page.ts";
-    imports34 = ["_app/immutable/nodes/33.64mM7lQ4.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports34 = ["_app/immutable/nodes/33.BXS9tv4R.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets34 = [];
     fonts34 = [];
   }
@@ -17075,7 +17243,7 @@ var init__35 = __esm({
     index35 = 34;
     component35 = async () => component_cache35 ??= (await Promise.resolve().then(() => (init_page_svelte31(), page_svelte_exports31))).default;
     universal_id30 = "src/routes/(dark-nav)/photo-gallery/stucco-and-trim/+page.ts";
-    imports35 = ["_app/immutable/nodes/34.MC0Q8VeN.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports35 = ["_app/immutable/nodes/34.DXBhZQm-.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets35 = [];
     fonts35 = [];
   }
@@ -17416,7 +17584,7 @@ var init__36 = __esm({
     index36 = 35;
     component36 = async () => component_cache36 ??= (await Promise.resolve().then(() => (init_page_svelte32(), page_svelte_exports32))).default;
     universal_id31 = "src/routes/(dark-nav)/photo-gallery/stucco-repair/+page.ts";
-    imports36 = ["_app/immutable/nodes/35.Cke57QtH.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports36 = ["_app/immutable/nodes/35.DtkXEInc.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets36 = [];
     fonts36 = [];
   }
@@ -17911,7 +18079,7 @@ var init__37 = __esm({
     index37 = 36;
     component37 = async () => component_cache37 ??= (await Promise.resolve().then(() => (init_page_svelte33(), page_svelte_exports33))).default;
     universal_id32 = "src/routes/(dark-nav)/photo-gallery/stucco-siding-repair-paint/+page.ts";
-    imports37 = ["_app/immutable/nodes/36.DUHpFIKH.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports37 = ["_app/immutable/nodes/36.Lv2ncMTE.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets37 = [];
     fonts37 = [];
   }
@@ -18324,7 +18492,7 @@ var init__38 = __esm({
     index38 = 37;
     component38 = async () => component_cache38 ??= (await Promise.resolve().then(() => (init_page_svelte34(), page_svelte_exports34))).default;
     universal_id33 = "src/routes/(dark-nav)/photo-gallery/trim/+page.ts";
-    imports38 = ["_app/immutable/nodes/37.CNCwnWPr.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports38 = ["_app/immutable/nodes/37.BETfNsCd.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets38 = [];
     fonts38 = [];
   }
@@ -18617,7 +18785,7 @@ var init__39 = __esm({
     index39 = 38;
     component39 = async () => component_cache39 ??= (await Promise.resolve().then(() => (init_page_svelte35(), page_svelte_exports35))).default;
     universal_id34 = "src/routes/(dark-nav)/photo-gallery/victorian-homes/+page.ts";
-    imports39 = ["_app/immutable/nodes/38.C7u-VtjT.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports39 = ["_app/immutable/nodes/38.CX2HVMy-.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets39 = [];
     fonts39 = [];
   }
@@ -18877,7 +19045,7 @@ var init__40 = __esm({
     index40 = 39;
     component40 = async () => component_cache40 ??= (await Promise.resolve().then(() => (init_page_svelte36(), page_svelte_exports36))).default;
     universal_id35 = "src/routes/(dark-nav)/photo-gallery/white-cedar-siding/+page.ts";
-    imports40 = ["_app/immutable/nodes/39.D0Ipk0K0.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DuxLLNSv.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DFZMGrRu.js"];
+    imports40 = ["_app/immutable/nodes/39.DvpBYfjL.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/CqEOTbKL.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/MpOZDDeS.js"];
     stylesheets40 = [];
     fonts40 = [];
   }
@@ -19184,8 +19352,8 @@ var init_data = __esm({
 var require_kebabCase = __commonJS({
   "node_modules/lodash/kebabCase.js"(exports, module) {
     var createCompounder = require_createCompounder();
-    var kebabCase2 = createCompounder(function(result, word, index69) {
-      return result + (index69 ? "-" : "") + word.toLowerCase();
+    var kebabCase2 = createCompounder(function(result, word, index70) {
+      return result + (index70 ? "-" : "") + word.toLowerCase();
     });
     module.exports = kebabCase2;
   }
@@ -19336,7 +19504,7 @@ var init__41 = __esm({
     index41 = 40;
     component41 = async () => component_cache41 ??= (await Promise.resolve().then(() => (init_page_svelte37(), page_svelte_exports37))).default;
     server_id2 = "src/routes/(light-nav)/blog/+page.server.ts";
-    imports41 = ["_app/immutable/nodes/40.C1vCJr1K.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/BmEMjPg0.js"];
+    imports41 = ["_app/immutable/nodes/40.BIZg9mxc.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/DHgukSXo.js"];
     stylesheets41 = [];
     fonts41 = [];
   }
@@ -19472,22 +19640,226 @@ var init__42 = __esm({
     index42 = 41;
     component42 = async () => component_cache42 ??= (await Promise.resolve().then(() => (init_page_svelte38(), page_svelte_exports38))).default;
     server_id3 = "src/routes/(light-nav)/blog/[title]/+page.server.ts";
-    imports42 = ["_app/immutable/nodes/41.DCz8eOf0.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/K84N8KvY.js", "_app/immutable/chunks/CAH0S1ei.js"];
+    imports42 = ["_app/immutable/nodes/41.B462IIco.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/Cc_N6hKz.js", "_app/immutable/chunks/VUx2r6fk.js", "_app/immutable/chunks/x3nRWdC9.js"];
     stylesheets42 = ["_app/immutable/assets/41.Cv6DcLUO.css"];
     fonts42 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/(light-nav)/careers/_page.ts.js
+var page_ts_exports36 = {};
+__export(page_ts_exports36, {
+  load: () => load39
+});
+var load39;
+var init_page_ts36 = __esm({
+  ".svelte-kit/output/server/entries/pages/(light-nav)/careers/_page.ts.js"() {
+    init_metaTagHelpers();
+    load39 = () => {
+      const pageMetaTags = createTitleDescription(
+        "Careers \u2014 Painter & Repair Technician",
+        "Join Klasek Painting. Now hiring an experienced painter & repair technician (1099 contractor) serving Lyons, IL and the western Chicago suburbs. $25\u2013$35/hour based on experience."
+      );
+      return {
+        pageMetaTags
+      };
+    };
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/(light-nav)/careers/_page.svelte.js
+var page_svelte_exports39 = {};
+__export(page_svelte_exports39, {
+  default: () => Page39
+});
+var inputClass, labelClass, CareersApplicationForm, Page39;
+var init_page_svelte39 = __esm({
+  ".svelte-kit/output/server/entries/pages/(light-nav)/careers/_page.svelte.js"() {
+    init_ssr();
+    init_button();
+    init_klasek_painting_professional_exterior_painters();
+    inputClass = "w-full rounded-md border border-gray-300 px-3 py-2 text-secondary-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary";
+    labelClass = "block mb-1 font-semibold text-secondary-dark text-sm";
+    CareersApplicationForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let isSubmitting;
+      const empty = {
+        name: "",
+        email: "",
+        phone: "",
+        position: "Painter & Repair Technician",
+        experience: "",
+        availability: "",
+        hasTransportation: false,
+        authorizedToWork: false,
+        message: "",
+        company: ""
+      };
+      let formData = { ...empty };
+      let submitStatus = "idle";
+      isSubmitting = submitStatus === "submitting";
+      return `<form class="w-full max-w-screen-sm mx-auto flex flex-col gap-5" novalidate>${``} ${``}  <div class="absolute -left-[9999px]" aria-hidden="true"><label for="company" data-svelte-h="svelte-53r700">Company</label> <input id="company" name="company" type="text" tabindex="-1" autocomplete="off"${add_attribute("value", formData.company, 0)}></div> <div class="grid sm:grid-cols-2 gap-5"><div><label${add_attribute("class", labelClass, 0)} for="name">Full Name *</label> <input id="name" type="text"${add_attribute("class", inputClass, 0)} required maxlength="80"${add_attribute("value", formData.name, 0)}></div> <div><label${add_attribute("class", labelClass, 0)} for="phone">Phone *</label> <input id="phone" type="tel"${add_attribute("class", inputClass, 0)} required maxlength="30"${add_attribute("value", formData.phone, 0)}></div></div> <div class="grid sm:grid-cols-2 gap-5"><div><label${add_attribute("class", labelClass, 0)} for="email">Email</label> <input id="email" type="email"${add_attribute("class", inputClass, 0)} maxlength="100"${add_attribute("value", formData.email, 0)}></div> <div><label${add_attribute("class", labelClass, 0)} for="position">Position</label> <select id="position"${add_attribute("class", inputClass, 0)}><option value="Painter &amp; Repair Technician" data-svelte-h="svelte-1wd45ia">Painter &amp; Repair Technician</option><option value="Painter" data-svelte-h="svelte-1rnw27r">Painter</option><option value="Repair / Carpentry" data-svelte-h="svelte-g6uc66">Repair / Carpentry</option><option value="Other" data-svelte-h="svelte-mbih9o">Other</option></select></div></div> <div class="grid sm:grid-cols-2 gap-5"><div><label${add_attribute("class", labelClass, 0)} for="experience">Years of Experience</label> <input id="experience" type="text"${add_attribute("class", inputClass, 0)} placeholder="e.g. 5 years" maxlength="50"${add_attribute("value", formData.experience, 0)}></div> <div><label${add_attribute("class", labelClass, 0)} for="availability">Availability</label> <input id="availability" type="text"${add_attribute("class", inputClass, 0)} placeholder="e.g. Full-time, can start immediately" maxlength="100"${add_attribute("value", formData.availability, 0)}></div></div> <div class="flex flex-col gap-3"><label class="flex items-center gap-3 text-secondary-dark"><input type="checkbox" class="size-4 accent-primary"${add_attribute("checked", formData.hasTransportation, 1)}>
+      I have reliable transportation to job sites</label> <label class="flex items-center gap-3 text-secondary-dark"><input type="checkbox" class="size-4 accent-primary"${add_attribute("checked", formData.authorizedToWork, 1)}>
+      I am legally authorized to work in the U.S.</label></div> <div><label${add_attribute("class", labelClass, 0)} for="message">Tell us about your experience</label> <textarea id="message" class="${escape(inputClass, true) + " min-h-[120px]"}" placeholder="Painting, siding, stucco, carpentry, references, etc.">${escape(formData.message || "")}</textarea></div> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          type: "submit",
+          class: "w-full sm:w-auto",
+          disabled: isSubmitting
+        },
+        {},
+        {
+          default: () => {
+            return `${escape(isSubmitting ? "Submitting\u2026" : "Submit Application")}`;
+          }
+        }
+      )}</form>`;
+    });
+    Page39 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      const benefits = [
+        {
+          title: "Competitive pay",
+          copy: "$18\u2013$35/hour based on experience and skill \u2014 paid fairly for quality work.",
+          icon: "dollar"
+        },
+        {
+          title: "Steady, seasonal work",
+          copy: "Full-time and part-time hours available throughout the busy painting season.",
+          icon: "calendar"
+        },
+        {
+          title: "Work with pros",
+          copy: "Join a tight-knit crew of experienced painters who care about doing the job right.",
+          icon: "team"
+        },
+        {
+          title: "Local routes",
+          copy: "Job sites across Lyons and the western/southwestern suburbs \u2014 no long-haul travel.",
+          icon: "pin"
+        }
+      ];
+      const duties = [
+        "Exterior painting \u2014 prep, prime, brush, roll, and spray",
+        "Surface repair on siding, stucco, brick, drywall, and wood",
+        "Carpentry repairs, caulking, patching, and trim work",
+        "Surface cleaning, sanding, masking, and protecting work areas",
+        "Communicate professionally and respectfully with homeowners on every job"
+      ];
+      const requirements = [
+        "Proven painting experience (residential exterior a plus)",
+        "Quality repairs \u2014 siding, stucco, drywall, and basic carpentry",
+        "Comfortable on ladders & scaffolding; able to lift 50+ lbs",
+        "Reliable transportation \u2014 sites vary day to day",
+        "Your own basic hand tools & a valid driver's license",
+        "Strong work ethic, attention to detail, and pride in your craft",
+        "Bilingual (English/Spanish) a plus"
+      ];
+      const details = [
+        {
+          label: "Pay",
+          value: "$18\u2013$35 / hour",
+          sub: "based on experience",
+          icon: "dollar"
+        },
+        {
+          label: "Status",
+          value: "1099 Independent Contractor",
+          sub: "you handle your own taxes & insurance",
+          icon: "check-doc"
+        },
+        {
+          label: "Schedule",
+          value: "Full-time & part-time",
+          sub: "steady seasonal work",
+          icon: "clock"
+        },
+        {
+          label: "Locations",
+          value: "Lyons & nearby suburbs",
+          sub: "western/southwestern Chicago",
+          icon: "pin"
+        }
+      ];
+      return ` <section class="hero-gradient text-white overflow-hidden relative"><div class="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div> <div class="container p-y p-x relative grid lg:grid-cols-[1fr_440px] gap-10 lg:gap-14 items-center"><div class="order-2 lg:order-1"><span class="inline-flex items-center gap-2 bg-primary text-white font-bold text-xs uppercase tracking-[0.14em] px-4 py-1.5 rounded-md mb-5" data-svelte-h="svelte-1qhm16w"><span class="size-2 rounded-full bg-white animate-pulse"></span>
+        Now Hiring \xB7 Lyons, IL &amp; suburbs</span> <h1 class="lg:text-5xl xs:text-4xl text-3xl font-bold !leading-[1.05]" data-svelte-h="svelte-fcrfl9">Build a career with <span class="text-primary">the best crew</span> in
+        the suburbs.</h1> <p class="mt-5 lg:text-lg text-base text-white/75 max-w-xl" data-svelte-h="svelte-1hbixnc">Klasek Painting has served Lyons and the western Chicago suburbs for 30+
+        years. We&#39;re growing \u2014 and looking for skilled, dependable people who
+        take real pride in their work.</p> <div class="mt-8 flex flex-wrap items-center gap-4">${validate_component(Button, "Button").$$render($$result, { href: "#positions" }, {}, {
+        default: () => {
+          return `View Open Positions`;
+        }
+      })}</div> <div class="mt-9 grid grid-cols-3 gap-4 max-w-lg" data-svelte-h="svelte-1fi0vkb"><div><div class="font-bold text-3xl text-primary">30+</div> <div class="text-sm text-white/60 leading-tight mt-1">Years in business</div></div> <div><div class="font-bold text-3xl text-primary">$18\u201335</div> <div class="text-sm text-white/60 leading-tight mt-1">Per hour, by skill</div></div> <div><div class="font-bold text-3xl text-primary">Seasonal</div> <div class="text-sm text-white/60 leading-tight mt-1">Steady work</div></div></div></div> <div class="order-1 lg:order-2" data-svelte-h="svelte-1ufz3bq"><img${add_attribute("src", heroPhoto, 0)} alt="The Klasek Painting crew at work on an exterior job" class="w-full aspect-[4/5] object-cover rounded-xl ring-4 ring-white/10 shadow-2xl" loading="eager" width="440" height="550"></div></div></section>  <section class="bg-white p-y p-x"><div class="container max-w-screen-lg flex flex-col lg:gap-6 gap-4"><div class="text-center max-w-2xl mx-auto" data-svelte-h="svelte-wqcryc"><span class="inline-block bg-primary text-white font-bold text-xs uppercase tracking-[0.14em] px-4 py-1.5 rounded-md mb-4">Why Klasek</span> <h2 class="lg:text-4xl xs:text-3xl text-2xl font-bold text-secondary-dark">More than a paycheck \u2014 a crew that has your back.</h2> <p class="mt-4 lg:text-lg text-base text-gray-600">We treat our people the way we treat our customers: with respect,
+        fairness, and high standards. Here&#39;s what you can expect.</p></div> <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">${each(benefits, (benefit) => {
+        return `<div class="rounded-2xl border border-gray-200 bg-off-white p-7"><div class="size-12 rounded-xl bg-primary/10 text-primary-dark flex items-center justify-center mb-4">${benefit.icon === "dollar" ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 5h9a3 3 0 0 1 0 6H7a3 3 0 0 0 0 6h10"></path></svg>` : `${benefit.icon === "calendar" ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>` : `${benefit.icon === "team" ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>` : `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"></path></svg>`}`}`}</div> <h3 class="font-bold text-lg text-secondary-dark">${escape(benefit.title)}</h3> <p class="mt-2 text-gray-600 text-[14.5px] leading-relaxed">${escape(benefit.copy)}</p> </div>`;
+      })}</div></div></section>  <section id="positions" class="bg-off-white p-y p-x scroll-mt-20"><div class="container max-w-screen-lg flex flex-col lg:gap-6 gap-4"><div class="text-center" data-svelte-h="svelte-1dc1q26"><h2 class="lg:text-4xl xs:text-3xl text-2xl font-bold text-secondary-dark">Open Positions</h2> <p class="mt-2 text-gray-600">One role open right now \u2014 and we&#39;d love to hear from the right person.</p></div> <div class="grid lg:grid-cols-[1fr_330px] gap-7 items-start"> <div class="rounded-2xl bg-white border border-gray-200 shadow-subtle overflow-hidden"><div class="bg-secondary-dark text-white p-7 sm:p-9 relative overflow-hidden" data-svelte-h="svelte-imfh6j"><div class="absolute -right-12 -top-12 size-44 rounded-full bg-primary/15 blur-2xl" aria-hidden="true"></div> <span class="relative inline-flex items-center gap-2 bg-primary/15 border border-primary/30 text-primary font-bold text-[11px] uppercase tracking-[0.14em] px-3 py-1.5 rounded-full">Full-time / Part-time</span> <h3 class="relative font-bold lg:text-3xl text-2xl leading-tight mt-4">Experienced Painter &amp; Repair Technician</h3> <p class="relative text-white/70 mt-2 max-w-xl leading-relaxed">A skilled, reliable painter who can also handle repairs \u2014 delivering
+            clean, detail-oriented work that meets our 100% satisfaction
+            standard while representing Klasek professionally with homeowners.</p></div> <div class="p-7 sm:p-9"><h4 class="font-bold text-lg text-secondary-dark flex items-center gap-2.5" data-svelte-h="svelte-c6wsor"><span class="w-1.5 h-5 rounded bg-primary"></span> What you&#39;ll do</h4> <div class="mt-4 grid sm:grid-cols-2 gap-x-7 gap-y-3.5">${each(duties, (duty) => {
+        return `<div class="flex items-start gap-3"><span class="flex-none mt-0.5 size-6 rounded-full bg-primary/10 text-primary-dark flex items-center justify-center" data-svelte-h="svelte-1gwbv73"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span> <p class="text-[15px] text-gray-700 leading-snug">${escape(duty)}</p> </div>`;
+      })}</div> <h4 class="font-bold text-lg text-secondary-dark flex items-center gap-2.5 mt-9" data-svelte-h="svelte-1xcko6j"><span class="w-1.5 h-5 rounded bg-primary"></span> What we&#39;re looking
+            for</h4> <div class="mt-4 grid sm:grid-cols-2 gap-x-7 gap-y-3.5">${each(requirements, (req) => {
+        return `<div class="flex items-start gap-3"><span class="flex-none mt-0.5 size-6 rounded-full bg-primary/10 text-primary-dark flex items-center justify-center" data-svelte-h="svelte-1gwbv73"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span> <p class="text-[15px] text-gray-700 leading-snug">${escape(req)}</p> </div>`;
+      })}</div> <div class="mt-9 pt-7 border-t border-gray-200 flex flex-wrap items-center gap-4">${validate_component(Button, "Button").$$render($$result, { href: "#apply" }, {}, {
+        default: () => {
+          return `Apply for This Role`;
+        }
+      })} <p class="text-sm text-gray-500" data-svelte-h="svelte-wo44px">Serious, dependable applicants only.</p></div></div></div>  <aside class="rounded-2xl bg-white border border-gray-200 shadow-subtle p-6 lg:sticky lg:top-24"><p class="font-bold text-[11px] uppercase tracking-[0.14em] text-gray-500" data-svelte-h="svelte-9gj3gv">The details</p> <dl class="mt-4 space-y-4">${each(details, (detail) => {
+        return `<div class="flex items-start gap-3"><span class="flex-none size-9 rounded-lg bg-primary/10 text-primary-dark flex items-center justify-center">${detail.icon === "dollar" ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>` : `${detail.icon === "check-doc" ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>` : `${detail.icon === "clock" ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>` : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`}`}`}</span> <div><dt class="text-xs font-bold uppercase tracking-wide text-gray-500">${escape(detail.label)}</dt> <dd class="font-bold text-secondary-dark text-[15px] leading-tight mt-0.5">${escape(detail.value)} <span class="block text-[13px] font-semibold text-gray-500">${escape(detail.sub)}</span> </dd></div> </div>`;
+      })}</dl> ${validate_component(Button, "Button").$$render($$result, { href: "#apply", class: "w-full mt-6" }, {}, {
+        default: () => {
+          return `Apply Now`;
+        }
+      })}</aside></div></div></section>  <section id="apply" class="bg-white p-y p-x scroll-mt-20"><div class="container max-w-screen-md flex flex-col lg:gap-6 gap-4"><div class="text-center" data-svelte-h="svelte-zy4pdr"><span class="inline-block bg-primary text-white font-bold text-xs uppercase tracking-[0.14em] px-4 py-1.5 rounded-md mb-4">Apply Now</span> <h2 class="lg:text-4xl xs:text-3xl text-2xl font-bold text-secondary-dark">Tell us about yourself.</h2> <p class="mt-4 lg:text-lg text-base text-gray-600">Send your name, experience, and availability \u2014 we&#39;ll be in touch. It
+        takes about two minutes.</p></div> <div class="rounded-2xl bg-off-white border border-gray-200 shadow-subtle p-7 sm:p-9">${validate_component(CareersApplicationForm, "CareersApplicationForm").$$render($$result, {}, {}, {})}</div></div></section>  <section class="bg-secondary p-y p-x"><div class="container max-w-screen-sm grid place-items-center gap-3 text-center"><p class="font-bold text-white/70 lg:text-lg text-base" data-svelte-h="svelte-1fxw71n">Ready to join the crew?</p> <h2 class="font-bold lg:text-5xl xs:text-4xl text-3xl text-primary leading-tight" data-svelte-h="svelte-1j2mn51">Apply in two minutes.</h2> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: "#apply",
+          variant: "outline",
+          class: "mt-4"
+        },
+        {},
+        {
+          default: () => {
+            return `Apply Now`;
+          }
+        }
+      )}</div></section>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/42.js
+var __exports43 = {};
+__export(__exports43, {
+  component: () => component43,
+  fonts: () => fonts43,
+  imports: () => imports43,
+  index: () => index43,
+  stylesheets: () => stylesheets43,
+  universal: () => page_ts_exports36,
+  universal_id: () => universal_id36
+});
+var index43, component_cache43, component43, universal_id36, imports43, stylesheets43, fonts43;
+var init__43 = __esm({
+  ".svelte-kit/output/server/nodes/42.js"() {
+    init_page_ts36();
+    index43 = 42;
+    component43 = async () => component_cache43 ??= (await Promise.resolve().then(() => (init_page_svelte39(), page_svelte_exports39))).default;
+    universal_id36 = "src/routes/(light-nav)/careers/+page.ts";
+    imports43 = ["_app/immutable/nodes/42.BkWeW0Hf.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/y-f3Tx8a.js"];
+    stylesheets43 = [];
+    fonts43 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/contact-us/_page.server.ts.js
 var page_server_ts_exports3 = {};
 __export(page_server_ts_exports3, {
-  load: () => load39
+  load: () => load40
 });
-var load39;
+var load40;
 var init_page_server_ts3 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/contact-us/_page.server.ts.js"() {
     init_metaTagHelpers();
-    load39 = () => {
+    load40 = () => {
       const pageMetaTags = createTitleDescription(
         "Contact Us",
         "For expert painting solutions in Cook County, contact Klasek Painting. We offer free estimates and have over 30 years of experience."
@@ -19500,21 +19872,23 @@ var init_page_server_ts3 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/contact-us/_page.svelte.js
-var page_svelte_exports39 = {};
-__export(page_svelte_exports39, {
-  default: () => Page39
+var page_svelte_exports40 = {};
+__export(page_svelte_exports40, {
+  default: () => Page40
 });
-var css11, ZOHO_FORM_ID, ContactForm, Page39;
-var init_page_svelte39 = __esm({
+var css11, ZOHO_FORM_ID, ContactForm, ShieldCheckIcon, FormTrustSignals, Page40;
+var init_page_svelte40 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/contact-us/_page.svelte.js"() {
     init_ssr();
+    init_GoogleProof();
+    init_lead_safe();
     init_Map();
     init_LocationIcon();
     init_ClickToCall();
     init_routes();
     css11 = {
       code: '.zcwf_lblLeft.svelte-a2latg{font-family:Arial, sans-serif;color:#333;max-width:800px;margin:0 auto;padding:20px}.zcwf_title.svelte-a2latg{font-size:1.5rem;font-weight:bold;margin-bottom:1.5rem;color:#1a1a1a}.zcwf_row.svelte-a2latg{margin:15px 0;clear:both}.zcwf_col_lab.svelte-a2latg{width:30%;float:left;padding-right:10px;box-sizing:border-box}.zcwf_col_fld.svelte-a2latg{width:70%;float:left}.zcwf_button.svelte-a2latg{background:#f0f0f0;border:1px solid #ccc;padding:8px 16px;border-radius:4px;cursor:pointer;font-size:14px}.formsubmit.svelte-a2latg{background:#3b82f6 !important;color:white !important;border:none !important}.formsubmit.svelte-a2latg:hover{background:#2563eb !important}.message.svelte-a2latg{padding:12px 16px;margin-bottom:16px;border-radius:4px;display:flex;align-items:center}.message.success.svelte-a2latg{background-color:#f0fdf4;border:1px solid #86efac;color:#166534}.message.error.svelte-a2latg{background-color:#fef2f2;border:1px solid #fecaca;color:#991b1b}@media(max-width: 640px){.zcwf_col_lab.svelte-a2latg,.zcwf_col_fld.svelte-a2latg{width:100%;float:none;padding-right:0}.zcwf_col_fld.svelte-a2latg{margin-top:8px}}input[type="text"].svelte-a2latg,input[type="email"].svelte-a2latg,input[type="tel"].svelte-a2latg,textarea.svelte-a2latg{width:100%;padding:8px 12px;border:1px solid #d1d5db;border-radius:4px;font-size:14px;margin-bottom:1rem}textarea.svelte-a2latg{min-height:100px;resize:vertical}button[type="submit"].svelte-a2latg:disabled{opacity:0.7;cursor:not-allowed}@media(min-width: 640px){.zcwf_row.svelte-a2latg{display:flex;flex-wrap:wrap;margin:0 -10px}.zcwf_col_lab.svelte-a2latg,.zcwf_col_fld.svelte-a2latg{padding:0 10px;width:50%}}',
-      map: '{"version":3,"file":"ContactForm.svelte","sources":["ContactForm.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { onDestroy } from \\"svelte\\";\\nimport { fade } from \\"svelte/transition\\";\\nlet formData = {\\n  \\"First Name\\": \\"\\",\\n  \\"Last Name\\": \\"\\",\\n  Email: \\"\\",\\n  Phone: \\"\\",\\n  City: \\"\\",\\n  \\"Zip Code\\": \\"\\",\\n  Description: \\"\\"\\n};\\nlet submitStatus = \\"idle\\";\\nlet submitMessage = \\"\\";\\nlet isSubmitting = false;\\nconst ZOHO_FORM_ID = \\"webform5683047000006693036\\";\\nconst ZOHO_FORM_ACTION = \\"https://crm.zoho.com/crm/WebToLeadForm\\";\\nconst ZOHO_FIELDS = {\\n  xnQsjsdp: \\"cdaf4fd904d1a76d463cfa7498f7083593f85a7ebaf6309bc04de2170f5c5221\\",\\n  xmIwtLD: \\"b63d7c69781dd958162b76c2f3ecab4ffd5b8b5d2d23c3e5ae5621f9cb4f47fc4fac4b525fe84a2d485aaabf4ef4373c\\",\\n  actionType: \\"TGVhZHM=\\",\\n  returnURL: \\"null\\",\\n  aG9uZXlwb3Q: \\"\\"\\n  // Honeypot field\\n};\\nfunction validateEmail(email) {\\n  if (!email) return true;\\n  const re = /^[^\\\\s@]+@[^\\\\s@]+\\\\.[^\\\\s@]+$/;\\n  return re.test(email);\\n}\\nfunction checkMandatory() {\\n  const requiredFields = [\\n    \\"First Name\\",\\n    \\"Last Name\\",\\n    \\"Phone\\",\\n    \\"Zip Code\\"\\n  ];\\n  for (const field of requiredFields) {\\n    if (!formData[field]?.trim()) {\\n      submitStatus = \\"error\\";\\n      submitMessage = `${field} is required`;\\n      return false;\\n    }\\n  }\\n  if (!validateEmail(formData.Email)) {\\n    submitStatus = \\"error\\";\\n    submitMessage = \\"Please enter a valid email address\\";\\n    return false;\\n  }\\n  return true;\\n}\\nasync function handleSubmit(event) {\\n  event.preventDefault();\\n  if (!checkMandatory() || isSubmitting) return;\\n  isSubmitting = true;\\n  submitStatus = \\"submitting\\";\\n  try {\\n    const params = new URLSearchParams();\\n    Object.entries(ZOHO_FIELDS).forEach(([key, value]) => {\\n      params.append(key, value);\\n    });\\n    Object.entries(formData).forEach(([key, value]) => {\\n      if (value) params.append(key, value);\\n    });\\n    const response = await fetch(ZOHO_FORM_ACTION, {\\n      method: \\"POST\\",\\n      body: params,\\n      headers: {\\n        \\"Content-Type\\": \\"application/x-www-form-urlencoded\\"\\n      }\\n    });\\n    const responseText = await response.text();\\n    if (response.ok || response.redirected || responseText.includes(\\"Thank you\\") || responseText.includes(\\"success\\")) {\\n      submitStatus = \\"success\\";\\n      submitMessage = \\"Thank you for your inquiry! We will contact you shortly.\\";\\n      formData = {\\n        \\"First Name\\": \\"\\",\\n        \\"Last Name\\": \\"\\",\\n        Email: \\"\\",\\n        Phone: \\"\\",\\n        City: \\"\\",\\n        \\"Zip Code\\": \\"\\",\\n        Description: \\"\\"\\n      };\\n      const timer = setTimeout(() => {\\n        submitStatus = \\"idle\\";\\n      }, 5e3);\\n      onDestroy(() => clearTimeout(timer));\\n    } else {\\n      throw new Error(\\"Failed to submit form\\");\\n    }\\n  } catch (error) {\\n    console.error(\\"Form submission error:\\", error);\\n    submitStatus = \\"error\\";\\n    submitMessage = \\"An error occurred while submitting the form. Please try again.\\";\\n  } finally {\\n    isSubmitting = false;\\n  }\\n}\\n<\/script>\\n\\n<!-- Zoho WebToLead Form -->\\n<div\\n  id=\\"crmWebToEntityForm\\"\\n  class=\\"zcwf_lblLeft crmWebToEntityForm\\"\\n  style=\\"background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;\\"\\n>\\n  <!-- Success/Error Messages -->\\n  {#if submitStatus === \\"success\\"}\\n    <div\\n      class=\\"message success\\"\\n      in:fade={{ duration: 200 }}\\n      role=\\"alert\\"\\n      style=\\"background-color: #F5FAF5; color: #132C14; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #A9D3AB; display: flex; align-items: center;\\"\\n    >\\n      <div\\n        style=\\"background-color: #12AA67; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;\\"\\n      >\\n        <div\\n          style=\\"width: 5px; height: 10px; border-right: 2px solid white; border-bottom: 2px solid white; transform: rotate(45deg) translate(-1px, -1px);\\"\\n        ></div>\\n      </div>\\n      <span>{submitMessage}</span>\\n    </div>\\n  {/if}\\n\\n  {#if submitStatus === \\"error\\"}\\n    <div\\n      class=\\"message error\\"\\n      in:fade={{ duration: 200 }}\\n      role=\\"alert\\"\\n      style=\\"background-color: #FDF4F5; color: #7F1D1D; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #F8B4B4; display: flex; align-items: center;\\"\\n    >\\n      <div\\n        style=\\"background-color: #DC2626; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;\\"\\n      >\\n        <div\\n          style=\\"color: white; font-weight: bold; font-size: 14px; margin-top: -2px;\\"\\n        >\\n          !\\n        </div>\\n      </div>\\n      <span>{submitMessage}</span>\\n    </div>\\n  {/if}\\n\\n  <div\\n    class=\\"zcwf_title\\"\\n    style=\\"font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;\\"\\n  >\\n    Contact Us\\n  </div>\\n\\n  <form\\n    id={ZOHO_FORM_ID}\\n    name=\\"WebToLeads{ZOHO_FORM_ID}\\"\\n    on:submit|preventDefault={handleSubmit}\\n  >\\n    <!-- Hidden Zoho Fields -->\\n    <input type=\\"hidden\\" name=\\"xnQsjsdp\\" value={ZOHO_FIELDS.xnQsjsdp} />\\n    <input type=\\"hidden\\" name=\\"xmIwtLD\\" value={ZOHO_FIELDS.xmIwtLD} />\\n    <input type=\\"hidden\\" name=\\"actionType\\" value={ZOHO_FIELDS.actionType} />\\n    <input type=\\"hidden\\" name=\\"returnURL\\" value={ZOHO_FIELDS.returnURL} />\\n    <input type=\\"hidden\\" name=\\"aG9uZXlwb3Q\\" value=\\"\\" />\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"First_Name\\" style=\\"font-size: 14px;\\"\\n          >First Name <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"First_Name\\"\\n          name=\\"First Name\\"\\n          bind:value={formData[\\"First Name\\"]}\\n          maxlength=\\"40\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Last_Name\\" style=\\"font-size: 14px;\\"\\n          >Last Name <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"Last_Name\\"\\n          name=\\"Last Name\\"\\n          bind:value={formData[\\"Last Name\\"]}\\n          maxlength=\\"80\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Email\\" style=\\"font-size: 14px;\\">Email</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"email\\"\\n          id=\\"Email\\"\\n          name=\\"Email\\"\\n          bind:value={formData.Email}\\n          maxlength=\\"100\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Phone\\" style=\\"font-size: 14px;\\"\\n          >Phone <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"tel\\"\\n          id=\\"Phone\\"\\n          name=\\"Phone\\"\\n          bind:value={formData.Phone}\\n          maxlength=\\"30\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"City\\" style=\\"font-size: 14px;\\">Address</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"City\\"\\n          name=\\"City\\"\\n          bind:value={formData.City}\\n          maxlength=\\"100\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Zip_Code\\" style=\\"font-size: 14px;\\"\\n          >Zip Code <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"Zip_Code\\"\\n          name=\\"Zip Code\\"\\n          bind:value={formData[\\"Zip Code\\"]}\\n          maxlength=\\"30\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Description\\" style=\\"font-size: 14px;\\">Job Details</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <textarea\\n          id=\\"Description\\"\\n          name=\\"Description\\"\\n          bind:value={formData.Description}\\n          style=\\"width: 100%; min-height: 100px; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        ></textarea>\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 25px 0 15px 0; text-align: right;\\">\\n      <button\\n        type=\\"reset\\"\\n        class=\\"zcwf_button\\"\\n        style=\\"background: #F3F4F6; border: 1px solid #D1D5DB; color: #374151; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;\\"\\n      >\\n        Reset\\n      </button>\\n      <button\\n        type=\\"submit\\"\\n        class=\\"formsubmit zcwf_button\\"\\n        style=\\"background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;\\"\\n        disabled={isSubmitting}\\n      >\\n        {isSubmitting ? \\"Submitting...\\" : \\"Submit\\"}\\n      </button>\\n    </div>\\n  </form>\\n</div>\\n\\n<!-- Zoho WebToLead Success Message Container -->\\n<div id=\\"wf_splash\\" class=\\"wf_customMessageBox\\" style=\\"display: none;\\">\\n  <div class=\\"wf_customCircle\\">\\n    <div class=\\"wf_customCheckMark\\"></div>\\n  </div>\\n  <span id=\\"wf_splash_info\\"></span>\\n</div>\\n\\n<style>\\n  /* Zoho WebToLead Form Styles */\\n  .zcwf_lblLeft {\\n    font-family: Arial, sans-serif;\\n    color: #333;\\n    max-width: 800px;\\n    margin: 0 auto;\\n    padding: 20px;\\n  }\\n\\n  .zcwf_title {\\n    font-size: 1.5rem;\\n    font-weight: bold;\\n    margin-bottom: 1.5rem;\\n    color: #1a1a1a;\\n  }\\n\\n  .zcwf_row {\\n    margin: 15px 0;\\n    clear: both;\\n  }\\n\\n  .zcwf_col_lab {\\n    width: 30%;\\n    float: left;\\n    padding-right: 10px;\\n    box-sizing: border-box;\\n  }\\n\\n  .zcwf_col_fld {\\n    width: 70%;\\n    float: left;\\n  }\\n\\n  .zcwf_button {\\n    background: #f0f0f0;\\n    border: 1px solid #ccc;\\n    padding: 8px 16px;\\n    border-radius: 4px;\\n    cursor: pointer;\\n    font-size: 14px;\\n  }\\n\\n  .formsubmit {\\n    background: #3b82f6 !important;\\n    color: white !important;\\n    border: none !important;\\n  }\\n\\n  .formsubmit:hover {\\n    background: #2563eb !important;\\n  }\\n\\n  /* Success/Error Messages */\\n  .message {\\n    padding: 12px 16px;\\n    margin-bottom: 16px;\\n    border-radius: 4px;\\n    display: flex;\\n    align-items: center;\\n  }\\n\\n  .message.success {\\n    background-color: #f0fdf4;\\n    border: 1px solid #86efac;\\n    color: #166534;\\n  }\\n\\n  .message.error {\\n    background-color: #fef2f2;\\n    border: 1px solid #fecaca;\\n    color: #991b1b;\\n  }\\n\\n  /* Responsive Design */\\n  @media (max-width: 640px) {\\n    .zcwf_col_lab,\\n    .zcwf_col_fld {\\n      width: 100%;\\n      float: none;\\n      padding-right: 0;\\n    }\\n\\n    .zcwf_col_fld {\\n      margin-top: 8px;\\n    }\\n  }\\n\\n  /* Form Elements */\\n  input[type=\\"text\\"],\\n  input[type=\\"email\\"],\\n  input[type=\\"tel\\"],\\n  textarea {\\n    width: 100%;\\n    padding: 8px 12px;\\n    border: 1px solid #d1d5db;\\n    border-radius: 4px;\\n    font-size: 14px;\\n    margin-bottom: 1rem;\\n  }\\n\\n  textarea {\\n    min-height: 100px;\\n    resize: vertical;\\n  }\\n\\n  /* Buttons */\\n  button[type=\\"submit\\"]:disabled {\\n    opacity: 0.7;\\n    cursor: not-allowed;\\n  }\\n\\n  /* Responsive adjustments */\\n  @media (min-width: 640px) {\\n    .zcwf_row {\\n      display: flex;\\n      flex-wrap: wrap;\\n      margin: 0 -10px;\\n    }\\n\\n    .zcwf_col_lab,\\n    .zcwf_col_fld {\\n      padding: 0 10px;\\n      width: 50%;\\n    }\\n  }\\n</style>\\n"],"names":[],"mappings":"AAwVE,2BAAc,CACZ,WAAW,CAAE,KAAK,CAAC,CAAC,UAAU,CAC9B,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,KAAK,CAChB,MAAM,CAAE,CAAC,CAAC,IAAI,CACd,OAAO,CAAE,IACX,CAEA,yBAAY,CACV,SAAS,CAAE,MAAM,CACjB,WAAW,CAAE,IAAI,CACjB,aAAa,CAAE,MAAM,CACrB,KAAK,CAAE,OACT,CAEA,uBAAU,CACR,MAAM,CAAE,IAAI,CAAC,CAAC,CACd,KAAK,CAAE,IACT,CAEA,2BAAc,CACZ,KAAK,CAAE,GAAG,CACV,KAAK,CAAE,IAAI,CACX,aAAa,CAAE,IAAI,CACnB,UAAU,CAAE,UACd,CAEA,2BAAc,CACZ,KAAK,CAAE,GAAG,CACV,KAAK,CAAE,IACT,CAEA,0BAAa,CACX,UAAU,CAAE,OAAO,CACnB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,IAAI,CACtB,OAAO,CAAE,GAAG,CAAC,IAAI,CACjB,aAAa,CAAE,GAAG,CAClB,MAAM,CAAE,OAAO,CACf,SAAS,CAAE,IACb,CAEA,yBAAY,CACV,UAAU,CAAE,OAAO,CAAC,UAAU,CAC9B,KAAK,CAAE,KAAK,CAAC,UAAU,CACvB,MAAM,CAAE,IAAI,CAAC,UACf,CAEA,yBAAW,MAAO,CAChB,UAAU,CAAE,OAAO,CAAC,UACtB,CAGA,sBAAS,CACP,OAAO,CAAE,IAAI,CAAC,IAAI,CAClB,aAAa,CAAE,IAAI,CACnB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MACf,CAEA,QAAQ,sBAAS,CACf,gBAAgB,CAAE,OAAO,CACzB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,KAAK,CAAE,OACT,CAEA,QAAQ,oBAAO,CACb,gBAAgB,CAAE,OAAO,CACzB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,KAAK,CAAE,OACT,CAGA,MAAO,YAAY,KAAK,CAAE,CACxB,2BAAa,CACb,2BAAc,CACZ,KAAK,CAAE,IAAI,CACX,KAAK,CAAE,IAAI,CACX,aAAa,CAAE,CACjB,CAEA,2BAAc,CACZ,UAAU,CAAE,GACd,CACF,CAGA,KAAK,CAAC,IAAI,CAAC,MAAM,eAAC,CAClB,KAAK,CAAC,IAAI,CAAC,OAAO,eAAC,CACnB,KAAK,CAAC,IAAI,CAAC,KAAK,eAAC,CACjB,sBAAS,CACP,KAAK,CAAE,IAAI,CACX,OAAO,CAAE,GAAG,CAAC,IAAI,CACjB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,aAAa,CAAE,GAAG,CAClB,SAAS,CAAE,IAAI,CACf,aAAa,CAAE,IACjB,CAEA,sBAAS,CACP,UAAU,CAAE,KAAK,CACjB,MAAM,CAAE,QACV,CAGA,MAAM,CAAC,IAAI,CAAC,QAAQ,eAAC,SAAU,CAC7B,OAAO,CAAE,GAAG,CACZ,MAAM,CAAE,WACV,CAGA,MAAO,YAAY,KAAK,CAAE,CACxB,uBAAU,CACR,OAAO,CAAE,IAAI,CACb,SAAS,CAAE,IAAI,CACf,MAAM,CAAE,CAAC,CAAC,KACZ,CAEA,2BAAa,CACb,2BAAc,CACZ,OAAO,CAAE,CAAC,CAAC,IAAI,CACf,KAAK,CAAE,GACT,CACF"}'
+      map: '{"version":3,"file":"ContactForm.svelte","sources":["ContactForm.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { onDestroy } from \\"svelte\\";\\nimport { fade } from \\"svelte/transition\\";\\nlet formData = {\\n  \\"First Name\\": \\"\\",\\n  \\"Last Name\\": \\"\\",\\n  Email: \\"\\",\\n  Phone: \\"\\",\\n  City: \\"\\",\\n  \\"Zip Code\\": \\"\\",\\n  Description: \\"\\"\\n};\\nlet submitStatus = \\"idle\\";\\nlet submitMessage = \\"\\";\\nlet isSubmitting = false;\\nconst ZOHO_FORM_ID = \\"webform5683047000006693036\\";\\nconst ZOHO_FORM_ACTION = \\"https://crm.zoho.com/crm/WebToLeadForm\\";\\nconst LEAD_SOURCE_TAG = \\"Submitted via Website Contact Form\\";\\nconst ZOHO_FIELDS = {\\n  xnQsjsdp: \\"cdaf4fd904d1a76d463cfa7498f7083593f85a7ebaf6309bc04de2170f5c5221\\",\\n  xmIwtLD: \\"b63d7c69781dd958162b76c2f3ecab4ffd5b8b5d2d23c3e5ae5621f9cb4f47fc4fac4b525fe84a2d485aaabf4ef4373c\\",\\n  actionType: \\"TGVhZHM=\\",\\n  returnURL: \\"null\\",\\n  aG9uZXlwb3Q: \\"\\"\\n  // Honeypot field\\n};\\nfunction validateEmail(email) {\\n  if (!email) return true;\\n  const re = /^[^\\\\s@]+@[^\\\\s@]+\\\\.[^\\\\s@]+$/;\\n  return re.test(email);\\n}\\nfunction checkMandatory() {\\n  const requiredFields = [\\n    \\"First Name\\",\\n    \\"Phone\\",\\n    \\"Zip Code\\"\\n  ];\\n  for (const field of requiredFields) {\\n    if (!formData[field]?.trim()) {\\n      submitStatus = \\"error\\";\\n      submitMessage = `${field} is required`;\\n      return false;\\n    }\\n  }\\n  if (!validateEmail(formData.Email)) {\\n    submitStatus = \\"error\\";\\n    submitMessage = \\"Please enter a valid email address\\";\\n    return false;\\n  }\\n  return true;\\n}\\nasync function handleSubmit(event) {\\n  event.preventDefault();\\n  if (!checkMandatory() || isSubmitting) return;\\n  isSubmitting = true;\\n  submitStatus = \\"submitting\\";\\n  try {\\n    const params = new URLSearchParams();\\n    Object.entries(ZOHO_FIELDS).forEach(([key, value]) => {\\n      params.append(key, value);\\n    });\\n    Object.entries(formData).forEach(([key, value]) => {\\n      if (key === \\"Description\\") return;\\n      if (value) params.append(key, value);\\n    });\\n    const descriptionWithSource = [\\n      LEAD_SOURCE_TAG,\\n      formData.Description.trim()\\n    ].filter(Boolean).join(\\"\\\\n\\\\n\\");\\n    params.append(\\"Description\\", descriptionWithSource);\\n    const response = await fetch(ZOHO_FORM_ACTION, {\\n      method: \\"POST\\",\\n      body: params,\\n      headers: {\\n        \\"Content-Type\\": \\"application/x-www-form-urlencoded\\"\\n      }\\n    });\\n    const responseText = await response.text();\\n    if (response.ok || response.redirected || responseText.includes(\\"Thank you\\") || responseText.includes(\\"success\\")) {\\n      submitStatus = \\"success\\";\\n      submitMessage = \\"Thank you for your inquiry! We will contact you shortly.\\";\\n      formData = {\\n        \\"First Name\\": \\"\\",\\n        \\"Last Name\\": \\"\\",\\n        Email: \\"\\",\\n        Phone: \\"\\",\\n        City: \\"\\",\\n        \\"Zip Code\\": \\"\\",\\n        Description: \\"\\"\\n      };\\n      const timer = setTimeout(() => {\\n        submitStatus = \\"idle\\";\\n      }, 5e3);\\n      onDestroy(() => clearTimeout(timer));\\n    } else {\\n      throw new Error(\\"Failed to submit form\\");\\n    }\\n  } catch (error) {\\n    console.error(\\"Form submission error:\\", error);\\n    submitStatus = \\"error\\";\\n    submitMessage = \\"An error occurred while submitting the form. Please try again.\\";\\n  } finally {\\n    isSubmitting = false;\\n  }\\n}\\n<\/script>\\n\\n<!-- Zoho WebToLead Form -->\\n<div\\n  id=\\"crmWebToEntityForm\\"\\n  class=\\"zcwf_lblLeft crmWebToEntityForm\\"\\n  style=\\"background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;\\"\\n>\\n  <!-- Success/Error Messages -->\\n  {#if submitStatus === \\"success\\"}\\n    <div\\n      class=\\"message success\\"\\n      in:fade={{ duration: 200 }}\\n      role=\\"alert\\"\\n      style=\\"background-color: #F5FAF5; color: #132C14; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #A9D3AB; display: flex; align-items: center;\\"\\n    >\\n      <div\\n        style=\\"background-color: #12AA67; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;\\"\\n      >\\n        <div\\n          style=\\"width: 5px; height: 10px; border-right: 2px solid white; border-bottom: 2px solid white; transform: rotate(45deg) translate(-1px, -1px);\\"\\n        ></div>\\n      </div>\\n      <span>{submitMessage}</span>\\n    </div>\\n  {/if}\\n\\n  {#if submitStatus === \\"error\\"}\\n    <div\\n      class=\\"message error\\"\\n      in:fade={{ duration: 200 }}\\n      role=\\"alert\\"\\n      style=\\"background-color: #FDF4F5; color: #7F1D1D; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #F8B4B4; display: flex; align-items: center;\\"\\n    >\\n      <div\\n        style=\\"background-color: #DC2626; border-radius: 50%; width: 20px; height: 20px; margin-right: 10px; display: flex; align-items: center; justify-content: center;\\"\\n      >\\n        <div\\n          style=\\"color: white; font-weight: bold; font-size: 14px; margin-top: -2px;\\"\\n        >\\n          !\\n        </div>\\n      </div>\\n      <span>{submitMessage}</span>\\n    </div>\\n  {/if}\\n\\n  <div\\n    class=\\"zcwf_title\\"\\n    style=\\"font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;\\"\\n  >\\n    Contact Us\\n  </div>\\n\\n  <form\\n    id={ZOHO_FORM_ID}\\n    name=\\"WebToLeads{ZOHO_FORM_ID}\\"\\n    on:submit|preventDefault={handleSubmit}\\n  >\\n    <!-- Hidden Zoho Fields -->\\n    <input type=\\"hidden\\" name=\\"xnQsjsdp\\" value={ZOHO_FIELDS.xnQsjsdp} />\\n    <input type=\\"hidden\\" name=\\"xmIwtLD\\" value={ZOHO_FIELDS.xmIwtLD} />\\n    <input type=\\"hidden\\" name=\\"actionType\\" value={ZOHO_FIELDS.actionType} />\\n    <input type=\\"hidden\\" name=\\"returnURL\\" value={ZOHO_FIELDS.returnURL} />\\n    <input type=\\"hidden\\" name=\\"aG9uZXlwb3Q\\" value=\\"\\" />\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"First_Name\\" style=\\"font-size: 14px;\\"\\n          >First Name <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"First_Name\\"\\n          name=\\"First Name\\"\\n          bind:value={formData[\\"First Name\\"]}\\n          maxlength=\\"40\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Last_Name\\" style=\\"font-size: 14px;\\">Last Name</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"Last_Name\\"\\n          name=\\"Last Name\\"\\n          bind:value={formData[\\"Last Name\\"]}\\n          maxlength=\\"80\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Email\\" style=\\"font-size: 14px;\\">Email</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"email\\"\\n          id=\\"Email\\"\\n          name=\\"Email\\"\\n          bind:value={formData.Email}\\n          maxlength=\\"100\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Phone\\" style=\\"font-size: 14px;\\"\\n          >Phone <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"tel\\"\\n          id=\\"Phone\\"\\n          name=\\"Phone\\"\\n          bind:value={formData.Phone}\\n          maxlength=\\"30\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"City\\" style=\\"font-size: 14px;\\">Address</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"City\\"\\n          name=\\"City\\"\\n          bind:value={formData.City}\\n          maxlength=\\"100\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Zip_Code\\" style=\\"font-size: 14px;\\"\\n          >Zip Code <span style=\\"color: red;\\">*</span></label\\n        >\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <input\\n          type=\\"text\\"\\n          id=\\"Zip_Code\\"\\n          name=\\"Zip Code\\"\\n          bind:value={formData[\\"Zip Code\\"]}\\n          maxlength=\\"30\\"\\n          aria-required=\\"true\\"\\n          style=\\"width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        />\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 15px 0;\\">\\n      <div\\n        class=\\"zcwf_col_lab\\"\\n        style=\\"width: 30%; margin-right: 10px; float: left;\\"\\n      >\\n        <label for=\\"Description\\" style=\\"font-size: 14px;\\">Job Details</label>\\n      </div>\\n      <div class=\\"zcwf_col_fld\\" style=\\"float: left; width: 60%;\\">\\n        <textarea\\n          id=\\"Description\\"\\n          name=\\"Description\\"\\n          bind:value={formData.Description}\\n          style=\\"width: 100%; min-height: 100px; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;\\"\\n        ></textarea>\\n      </div>\\n      <div style=\\"clear: both;\\"></div>\\n    </div>\\n\\n    <div class=\\"zcwf_row\\" style=\\"margin: 25px 0 15px 0; text-align: right;\\">\\n      <button\\n        type=\\"reset\\"\\n        class=\\"zcwf_button\\"\\n        style=\\"background: #F3F4F6; border: 1px solid #D1D5DB; color: #374151; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;\\"\\n      >\\n        Reset\\n      </button>\\n      <button\\n        type=\\"submit\\"\\n        class=\\"formsubmit zcwf_button\\"\\n        style=\\"background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;\\"\\n        disabled={isSubmitting}\\n      >\\n        {isSubmitting ? \\"Submitting...\\" : \\"Get My Free Estimate\\"}\\n      </button>\\n    </div>\\n\\n    <p\\n      style=\\"margin: 0; text-align: right; font-size: 13px; color: #4B5563; clear: both;\\"\\n    >\\n      We reply within 1 business day \u2014 no obligation, free estimate.\\n    </p>\\n  </form>\\n</div>\\n\\n<!-- Zoho WebToLead Success Message Container -->\\n<div id=\\"wf_splash\\" class=\\"wf_customMessageBox\\" style=\\"display: none;\\">\\n  <div class=\\"wf_customCircle\\">\\n    <div class=\\"wf_customCheckMark\\"></div>\\n  </div>\\n  <span id=\\"wf_splash_info\\"></span>\\n</div>\\n\\n<style>\\n  /* Zoho WebToLead Form Styles */\\n  .zcwf_lblLeft {\\n    font-family: Arial, sans-serif;\\n    color: #333;\\n    max-width: 800px;\\n    margin: 0 auto;\\n    padding: 20px;\\n  }\\n\\n  .zcwf_title {\\n    font-size: 1.5rem;\\n    font-weight: bold;\\n    margin-bottom: 1.5rem;\\n    color: #1a1a1a;\\n  }\\n\\n  .zcwf_row {\\n    margin: 15px 0;\\n    clear: both;\\n  }\\n\\n  .zcwf_col_lab {\\n    width: 30%;\\n    float: left;\\n    padding-right: 10px;\\n    box-sizing: border-box;\\n  }\\n\\n  .zcwf_col_fld {\\n    width: 70%;\\n    float: left;\\n  }\\n\\n  .zcwf_button {\\n    background: #f0f0f0;\\n    border: 1px solid #ccc;\\n    padding: 8px 16px;\\n    border-radius: 4px;\\n    cursor: pointer;\\n    font-size: 14px;\\n  }\\n\\n  .formsubmit {\\n    background: #3b82f6 !important;\\n    color: white !important;\\n    border: none !important;\\n  }\\n\\n  .formsubmit:hover {\\n    background: #2563eb !important;\\n  }\\n\\n  /* Success/Error Messages */\\n  .message {\\n    padding: 12px 16px;\\n    margin-bottom: 16px;\\n    border-radius: 4px;\\n    display: flex;\\n    align-items: center;\\n  }\\n\\n  .message.success {\\n    background-color: #f0fdf4;\\n    border: 1px solid #86efac;\\n    color: #166534;\\n  }\\n\\n  .message.error {\\n    background-color: #fef2f2;\\n    border: 1px solid #fecaca;\\n    color: #991b1b;\\n  }\\n\\n  /* Responsive Design */\\n  @media (max-width: 640px) {\\n    .zcwf_col_lab,\\n    .zcwf_col_fld {\\n      width: 100%;\\n      float: none;\\n      padding-right: 0;\\n    }\\n\\n    .zcwf_col_fld {\\n      margin-top: 8px;\\n    }\\n  }\\n\\n  /* Form Elements */\\n  input[type=\\"text\\"],\\n  input[type=\\"email\\"],\\n  input[type=\\"tel\\"],\\n  textarea {\\n    width: 100%;\\n    padding: 8px 12px;\\n    border: 1px solid #d1d5db;\\n    border-radius: 4px;\\n    font-size: 14px;\\n    margin-bottom: 1rem;\\n  }\\n\\n  textarea {\\n    min-height: 100px;\\n    resize: vertical;\\n  }\\n\\n  /* Buttons */\\n  button[type=\\"submit\\"]:disabled {\\n    opacity: 0.7;\\n    cursor: not-allowed;\\n  }\\n\\n  /* Responsive adjustments */\\n  @media (min-width: 640px) {\\n    .zcwf_row {\\n      display: flex;\\n      flex-wrap: wrap;\\n      margin: 0 -10px;\\n    }\\n\\n    .zcwf_col_lab,\\n    .zcwf_col_fld {\\n      padding: 0 10px;\\n      width: 50%;\\n    }\\n  }\\n</style>\\n"],"names":[],"mappings":"AAiWE,2BAAc,CACZ,WAAW,CAAE,KAAK,CAAC,CAAC,UAAU,CAC9B,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,KAAK,CAChB,MAAM,CAAE,CAAC,CAAC,IAAI,CACd,OAAO,CAAE,IACX,CAEA,yBAAY,CACV,SAAS,CAAE,MAAM,CACjB,WAAW,CAAE,IAAI,CACjB,aAAa,CAAE,MAAM,CACrB,KAAK,CAAE,OACT,CAEA,uBAAU,CACR,MAAM,CAAE,IAAI,CAAC,CAAC,CACd,KAAK,CAAE,IACT,CAEA,2BAAc,CACZ,KAAK,CAAE,GAAG,CACV,KAAK,CAAE,IAAI,CACX,aAAa,CAAE,IAAI,CACnB,UAAU,CAAE,UACd,CAEA,2BAAc,CACZ,KAAK,CAAE,GAAG,CACV,KAAK,CAAE,IACT,CAEA,0BAAa,CACX,UAAU,CAAE,OAAO,CACnB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,IAAI,CACtB,OAAO,CAAE,GAAG,CAAC,IAAI,CACjB,aAAa,CAAE,GAAG,CAClB,MAAM,CAAE,OAAO,CACf,SAAS,CAAE,IACb,CAEA,yBAAY,CACV,UAAU,CAAE,OAAO,CAAC,UAAU,CAC9B,KAAK,CAAE,KAAK,CAAC,UAAU,CACvB,MAAM,CAAE,IAAI,CAAC,UACf,CAEA,yBAAW,MAAO,CAChB,UAAU,CAAE,OAAO,CAAC,UACtB,CAGA,sBAAS,CACP,OAAO,CAAE,IAAI,CAAC,IAAI,CAClB,aAAa,CAAE,IAAI,CACnB,aAAa,CAAE,GAAG,CAClB,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MACf,CAEA,QAAQ,sBAAS,CACf,gBAAgB,CAAE,OAAO,CACzB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,KAAK,CAAE,OACT,CAEA,QAAQ,oBAAO,CACb,gBAAgB,CAAE,OAAO,CACzB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,KAAK,CAAE,OACT,CAGA,MAAO,YAAY,KAAK,CAAE,CACxB,2BAAa,CACb,2BAAc,CACZ,KAAK,CAAE,IAAI,CACX,KAAK,CAAE,IAAI,CACX,aAAa,CAAE,CACjB,CAEA,2BAAc,CACZ,UAAU,CAAE,GACd,CACF,CAGA,KAAK,CAAC,IAAI,CAAC,MAAM,eAAC,CAClB,KAAK,CAAC,IAAI,CAAC,OAAO,eAAC,CACnB,KAAK,CAAC,IAAI,CAAC,KAAK,eAAC,CACjB,sBAAS,CACP,KAAK,CAAE,IAAI,CACX,OAAO,CAAE,GAAG,CAAC,IAAI,CACjB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,OAAO,CACzB,aAAa,CAAE,GAAG,CAClB,SAAS,CAAE,IAAI,CACf,aAAa,CAAE,IACjB,CAEA,sBAAS,CACP,UAAU,CAAE,KAAK,CACjB,MAAM,CAAE,QACV,CAGA,MAAM,CAAC,IAAI,CAAC,QAAQ,eAAC,SAAU,CAC7B,OAAO,CAAE,GAAG,CACZ,MAAM,CAAE,WACV,CAGA,MAAO,YAAY,KAAK,CAAE,CACxB,uBAAU,CACR,OAAO,CAAE,IAAI,CACb,SAAS,CAAE,IAAI,CACf,MAAM,CAAE,CAAC,CAAC,KACZ,CAEA,2BAAa,CACb,2BAAc,CACZ,OAAO,CAAE,CAAC,CAAC,IAAI,CACf,KAAK,CAAE,GACT,CACF"}'
     };
     ZOHO_FORM_ID = "webform5683047000006693036";
     ContactForm = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -19533,9 +19907,39 @@ var init_page_svelte39 = __esm({
         returnURL: "null"
       };
       $$result.css.add(css11);
-      return ` <div id="crmWebToEntityForm" class="zcwf_lblLeft crmWebToEntityForm svelte-a2latg" style="background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;"> ${``} ${``} <div class="zcwf_title svelte-a2latg" style="font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;" data-svelte-h="svelte-1x20wxt">Contact Us</div> <form${add_attribute("id", ZOHO_FORM_ID, 0)} name="${"WebToLeads" + escape(ZOHO_FORM_ID, true)}"> <input type="hidden" name="xnQsjsdp"${add_attribute("value", ZOHO_FIELDS.xnQsjsdp, 0)}> <input type="hidden" name="xmIwtLD"${add_attribute("value", ZOHO_FIELDS.xmIwtLD, 0)}> <input type="hidden" name="actionType"${add_attribute("value", ZOHO_FIELDS.actionType, 0)}> <input type="hidden" name="returnURL"${add_attribute("value", ZOHO_FIELDS.returnURL, 0)}> <input type="hidden" name="aG9uZXlwb3Q" value=""> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-hxujbl"><label for="First_Name" style="font-size: 14px;">First Name <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="First_Name" name="First Name" maxlength="40" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["First Name"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1i8p9rb"><label for="Last_Name" style="font-size: 14px;">Last Name <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="Last_Name" name="Last Name" maxlength="80" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["Last Name"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-h0jnqa"><label for="Email" style="font-size: 14px;">Email</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="email" id="Email" name="Email" maxlength="100" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.Email, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1y5dbks"><label for="Phone" style="font-size: 14px;">Phone <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="tel" id="Phone" name="Phone" maxlength="30" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.Phone, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1euspxd"><label for="City" style="font-size: 14px;">Address</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="City" name="City" maxlength="100" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.City, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1xbmxl5"><label for="Zip_Code" style="font-size: 14px;">Zip Code <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="Zip_Code" name="Zip Code" maxlength="30" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["Zip Code"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-l0nlrx"><label for="Description" style="font-size: 14px;">Job Details</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><textarea id="Description" name="Description" style="width: 100%; min-height: 100px; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg">${escape("")}</textarea></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 25px 0 15px 0; text-align: right;"><button type="reset" class="zcwf_button svelte-a2latg" style="background: #F3F4F6; border: 1px solid #D1D5DB; color: #374151; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;" data-svelte-h="svelte-1st9cz8">Reset</button> <button type="submit" class="formsubmit zcwf_button svelte-a2latg" style="background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;" ${""}>${escape("Submit")}</button></div></form></div>  <div id="wf_splash" class="wf_customMessageBox" style="display: none;" data-svelte-h="svelte-8ytfjg"><div class="wf_customCircle"><div class="wf_customCheckMark"></div></div> <span id="wf_splash_info"></span> </div>`;
+      return ` <div id="crmWebToEntityForm" class="zcwf_lblLeft crmWebToEntityForm svelte-a2latg" style="background-color: white; color: black; max-width: 600px; margin: 0 auto; padding: 20px;"> ${``} ${``} <div class="zcwf_title svelte-a2latg" style="font-size: 18px; font-weight: bold; margin-bottom: 20px; color: #1F2937;" data-svelte-h="svelte-1x20wxt">Contact Us</div> <form${add_attribute("id", ZOHO_FORM_ID, 0)} name="${"WebToLeads" + escape(ZOHO_FORM_ID, true)}"> <input type="hidden" name="xnQsjsdp"${add_attribute("value", ZOHO_FIELDS.xnQsjsdp, 0)}> <input type="hidden" name="xmIwtLD"${add_attribute("value", ZOHO_FIELDS.xmIwtLD, 0)}> <input type="hidden" name="actionType"${add_attribute("value", ZOHO_FIELDS.actionType, 0)}> <input type="hidden" name="returnURL"${add_attribute("value", ZOHO_FIELDS.returnURL, 0)}> <input type="hidden" name="aG9uZXlwb3Q" value=""> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-hxujbl"><label for="First_Name" style="font-size: 14px;">First Name <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="First_Name" name="First Name" maxlength="40" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["First Name"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1k2l8ib"><label for="Last_Name" style="font-size: 14px;">Last Name</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="Last_Name" name="Last Name" maxlength="80" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["Last Name"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-h0jnqa"><label for="Email" style="font-size: 14px;">Email</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="email" id="Email" name="Email" maxlength="100" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.Email, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1y5dbks"><label for="Phone" style="font-size: 14px;">Phone <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="tel" id="Phone" name="Phone" maxlength="30" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.Phone, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1euspxd"><label for="City" style="font-size: 14px;">Address</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="City" name="City" maxlength="100" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData.City, 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-1xbmxl5"><label for="Zip_Code" style="font-size: 14px;">Zip Code <span style="color: red;">*</span></label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><input type="text" id="Zip_Code" name="Zip Code" maxlength="30" aria-required="true" style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg"${add_attribute("value", formData["Zip Code"], 0)}></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 15px 0;"><div class="zcwf_col_lab svelte-a2latg" style="width: 30%; margin-right: 10px; float: left;" data-svelte-h="svelte-l0nlrx"><label for="Description" style="font-size: 14px;">Job Details</label></div> <div class="zcwf_col_fld svelte-a2latg" style="float: left; width: 60%;"><textarea id="Description" name="Description" style="width: 100%; min-height: 100px; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;" class="svelte-a2latg">${escape("")}</textarea></div> <div style="clear: both;"></div></div> <div class="zcwf_row svelte-a2latg" style="margin: 25px 0 15px 0; text-align: right;"><button type="reset" class="zcwf_button svelte-a2latg" style="background: #F3F4F6; border: 1px solid #D1D5DB; color: #374151; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;" data-svelte-h="svelte-1st9cz8">Reset</button> <button type="submit" class="formsubmit zcwf_button svelte-a2latg" style="background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;" ${""}>${escape("Get My Free Estimate")}</button></div> <p style="margin: 0; text-align: right; font-size: 13px; color: #4B5563; clear: both;" data-svelte-h="svelte-1yhtazb">We reply within 1 business day \u2014 no obligation, free estimate.</p></form></div>  <div id="wf_splash" class="wf_customMessageBox" style="display: none;" data-svelte-h="svelte-8ytfjg"><div class="wf_customCircle"><div class="wf_customCheckMark"></div></div> <span id="wf_splash_info"></span> </div>`;
     });
-    Page39 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    ShieldCheckIcon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { class: classes = "" } = $$props;
+      if ($$props.class === void 0 && $$bindings.class && classes !== void 0)
+        $$bindings.class(classes);
+      return `<svg${add_attribute("class", classes, 0)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>`;
+    });
+    FormTrustSignals = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { class: classes = "" } = $$props;
+      if ($$props.class === void 0 && $$bindings.class && classes !== void 0)
+        $$bindings.class(classes);
+      return ` <div class="${"flex flex-col gap-3 " + escape(classes, true)}">${validate_component(GoogleProof, "GoogleProof").$$render(
+        $$result,
+        {
+          class: "bg-white rounded-lg border p-3 sm:p-4"
+        },
+        {},
+        {}
+      )} <div class="flex flex-wrap items-center justify-between gap-3 rounded-lg border bg-white p-3 sm:p-4"><div class="flex items-center gap-2 text-secondary-dark">${validate_component(ShieldCheckIcon, "ShieldCheckIcon").$$render(
+        $$result,
+        {
+          class: "size-6 text-primary-dark flex-shrink-0"
+        },
+        {},
+        {}
+      )} <span class="font-semibold leading-tight" data-svelte-h="svelte-xlp79d">100% Satisfaction Guarantee</span></div> <div class="flex items-center gap-4">${typeof leadSafe === "string" ? `<img class="h-9 w-auto sm:h-10"${add_attribute("src", leadSafe.img.src, 0)} alt="EPA Lead-Safe Certified Firm" loading="lazy"${add_attribute("width", leadSafe.img.w, 0)}${add_attribute("height", leadSafe.img.h, 0)}>` : `<picture>${each(Object.entries(leadSafe.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="h-9 w-auto sm:h-10"${add_attribute("src", leadSafe.img.src, 0)} alt="EPA Lead-Safe Certified Firm" loading="lazy"${add_attribute("width", leadSafe.img.w, 0)}${add_attribute("height", leadSafe.img.h, 0)}></picture>`} ${typeof pdca === "string" ? `<img class="h-9 w-auto sm:h-10"${add_attribute("src", pdca.img.src, 0)} alt="PDCA Member" loading="lazy"${add_attribute("width", pdca.img.w, 0)}${add_attribute("height", pdca.img.h, 0)}>` : `<picture>${each(Object.entries(pdca.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="h-9 w-auto sm:h-10"${add_attribute("src", pdca.img.src, 0)} alt="PDCA Member" loading="lazy"${add_attribute("width", pdca.img.w, 0)}${add_attribute("height", pdca.img.h, 0)}></picture>`}</div></div></div>`;
+    });
+    Page40 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `<section class="bg-off-white py-8 lg:px-12 xs:px-4 px-2"><div class="container grid lg:grid-cols-2 gap-12 w-full"><div class="flex flex-col lg:gap-3 gap-2 lg:p-6 lg:rounded-lg lg:shadow-subtle lg:border lg:bg-white"><h1 class="xl:text-5xl xs:text-4xl text-3xl w-full font-semibold text-secondary-dark" data-testid="page-heading" data-svelte-h="svelte-ehwika">Sign Up for a Free\xA0Estimate</h1> <p data-svelte-h="svelte-1rl7pej">If you&#39;re considering an upgrade to the exterior of your home, contact
         the experts at Klasek Painting.</p> <p data-svelte-h="svelte-7av52f">At no cost to you, we&#39;ll view your property, assess needs, provide
         design consultation, and submit a simple, written quote.</p> <p>You can count on us for quality service, honest expectation setting, and
@@ -19548,7 +19952,7 @@ var init_page_svelte39 = __esm({
         },
         {},
         {}
-      )}!</p> <div class="bg-white lg:mt-0 mt-2 lg:p-0 p-2 pt-0 rounded-lg lg:shadow-none shadow-subtle">${validate_component(ContactForm, "ContactForm").$$render($$result, {}, {}, {})}</div></div> <div class="flex flex-col items-center lg:gap-8 gap-6"> <div class="grid grid-cols-1 grid-rows-[350px_auto] w-full">${validate_component(Map2, "Map").$$render(
+      )}!</p> ${validate_component(FormTrustSignals, "FormTrustSignals").$$render($$result, { class: "lg:mt-2" }, {}, {})} <div class="bg-white lg:mt-0 mt-2 lg:p-0 p-2 pt-0 rounded-lg lg:shadow-none shadow-subtle">${validate_component(ContactForm, "ContactForm").$$render($$result, {}, {}, {})}</div></div> <div class="flex flex-col items-center lg:gap-8 gap-6"> <div class="grid grid-cols-1 grid-rows-[350px_auto] w-full">${validate_component(Map2, "Map").$$render(
         $$result,
         {
           class: "rounded-t-sm rounded-b-none border-b-secondary-dark [&>*]:rounded-none"
@@ -19562,40 +19966,40 @@ var init_page_svelte39 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/42.js
-var __exports43 = {};
-__export(__exports43, {
-  component: () => component43,
-  fonts: () => fonts43,
-  imports: () => imports43,
-  index: () => index43,
+// .svelte-kit/output/server/nodes/43.js
+var __exports44 = {};
+__export(__exports44, {
+  component: () => component44,
+  fonts: () => fonts44,
+  imports: () => imports44,
+  index: () => index44,
   server: () => page_server_ts_exports3,
   server_id: () => server_id4,
-  stylesheets: () => stylesheets43
+  stylesheets: () => stylesheets44
 });
-var index43, component_cache43, component43, server_id4, imports43, stylesheets43, fonts43;
-var init__43 = __esm({
-  ".svelte-kit/output/server/nodes/42.js"() {
+var index44, component_cache44, component44, server_id4, imports44, stylesheets44, fonts44;
+var init__44 = __esm({
+  ".svelte-kit/output/server/nodes/43.js"() {
     init_page_server_ts3();
-    index43 = 42;
-    component43 = async () => component_cache43 ??= (await Promise.resolve().then(() => (init_page_svelte39(), page_svelte_exports39))).default;
+    index44 = 43;
+    component44 = async () => component_cache44 ??= (await Promise.resolve().then(() => (init_page_svelte40(), page_svelte_exports40))).default;
     server_id4 = "src/routes/(light-nav)/contact-us/+page.server.ts";
-    imports43 = ["_app/immutable/nodes/42.iuHRsA4K.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CAH0S1ei.js"];
-    stylesheets43 = ["_app/immutable/assets/42.d1O11VaS.css"];
-    fonts43 = [];
+    imports44 = ["_app/immutable/nodes/43.DBcdHQI3.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/CxdZ4zBt.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/x3nRWdC9.js"];
+    stylesheets44 = ["_app/immutable/assets/43.d1O11VaS.css"];
+    fonts44 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/legal/privacy-policy/_page.ts.js
-var page_ts_exports36 = {};
-__export(page_ts_exports36, {
-  load: () => load40
+var page_ts_exports37 = {};
+__export(page_ts_exports37, {
+  load: () => load41
 });
-var load40;
-var init_page_ts36 = __esm({
+var load41;
+var init_page_ts37 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/legal/privacy-policy/_page.ts.js"() {
     init_metaTagHelpers();
-    load40 = () => {
+    load41 = () => {
       const pageMetaTags = {
         robots: "noindex,nofollow",
         ...createTitleDescription(
@@ -19611,12 +20015,12 @@ var init_page_ts36 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/legal/privacy-policy/_page.svelte.js
-var page_svelte_exports40 = {};
-__export(page_svelte_exports40, {
-  default: () => Page40
+var page_svelte_exports41 = {};
+__export(page_svelte_exports41, {
+  default: () => Page41
 });
-var css12, Page40;
-var init_page_svelte40 = __esm({
+var css12, Page41;
+var init_page_svelte41 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/legal/privacy-policy/_page.svelte.js"() {
     init_ssr();
     init_ClickToCall();
@@ -19624,7 +20028,7 @@ var init_page_svelte40 = __esm({
       code: ".main-container.svelte-ga4be8>div{position:relative;z-index:10;display:flex;flex-direction:column;justify-content:center;gap:1rem\n}.main-container.svelte-ga4be8 h2{text-align:left;font-size:1.25rem;line-height:1.75rem;font-weight:600;--tw-text-opacity:1;color:hsl(var(--secondary-dark) / var(--tw-text-opacity, 1))\n}@media(min-width: 375px){.main-container.svelte-ga4be8 h2{font-size:1.5rem;line-height:2rem\n    }}@media(min-width: 640px){.main-container.svelte-ga4be8 h2{font-size:1.875rem;line-height:2.25rem\n    }}@media(min-width: 1024px){.main-container.svelte-ga4be8 h2{font-size:2.25rem;line-height:2.5rem\n    }}.main-container.svelte-ga4be8 h3{font-size:1.125rem;line-height:1.75rem;font-weight:600;--tw-text-opacity:1;color:hsl(var(--secondary-dark) / var(--tw-text-opacity, 1))\n}@media(min-width: 375px){.main-container.svelte-ga4be8 h3{font-size:1.25rem;line-height:1.75rem\n    }}@media(min-width: 1024px){.main-container.svelte-ga4be8 h3{font-size:1.5rem;line-height:2rem\n    }}.main-container.svelte-ga4be8 hr{width:4rem;border-width:1px;--tw-border-opacity:1;border-color:hsl(var(--primary) / var(--tw-border-opacity, 1))\n}.main-container.svelte-ga4be8 p{line-height:2\n}.main-container.svelte-ga4be8 a{font-weight:600;--tw-text-opacity:1;color:hsl(var(--secondary-dark) / var(--tw-text-opacity, 1));text-decoration-line:underline;text-underline-offset:2px;transition-duration:100ms\n}.main-container.svelte-ga4be8 a:hover{--tw-text-opacity:1;color:hsl(var(--primary-dark) / var(--tw-text-opacity, 1))\n}.main-container.svelte-ga4be8 strong{--tw-text-opacity:1;color:hsl(var(--secondary-dark) / var(--tw-text-opacity, 1))\n}.main-container.svelte-ga4be8 strong > a{font-weight:700\n}.main-container.svelte-ga4be8 > div > strong{font-size:1.25rem;line-height:1.75rem\n}.main-container.svelte-ga4be8 small{--tw-text-opacity:1;color:rgb(66 67 67 / var(--tw-text-opacity, 1))\n}.main-container.svelte-ga4be8 ul{display:flex;flex-direction:column;gap:1rem;padding-left:1rem;line-height:2\n}@media(min-width: 640px){.main-container.svelte-ga4be8 ul{padding-left:1.5rem\n    }}.main-container.svelte-ga4be8 ol{display:flex;list-style-type:decimal;flex-direction:column;gap:1rem;padding-left:1rem;line-height:2\n}@media(min-width: 640px){.main-container.svelte-ga4be8 ol{padding-left:1.5rem\n    }}.main-container.svelte-ga4be8 ol li::marker{font-weight:600;--tw-text-opacity:1;color:hsl(var(--primary-dark) / var(--tw-text-opacity, 1))\n}.main-container.svelte-ga4be8 ul > li{position:relative\n}.main-container.svelte-ga4be8 ul > li::before{position:absolute;top:14px;left:-1.25rem;height:0.25rem;width:0.75rem;--tw-bg-opacity:1;background-color:hsl(var(--primary-dark) / var(--tw-bg-opacity, 1));--tw-content:'';content:var(--tw-content)\n}.main-container.svelte-ga4be8 li > strong{--tw-text-opacity:1;color:hsl(var(--secondary-dark) / var(--tw-text-opacity, 1))\n}",
       map: `{"version":3,"file":"+page.svelte","sources":["+page.svelte"],"sourcesContent":["<script lang=\\"ts\\">import ClickToCall from \\"$lib/common/other/ClickToCall.svelte\\";\\n<\/script>\\n\\n<section class=\\"main-container lg:bg-gradient-to-b from-off-white to-white bg-white p-y p-x\\">\\n\\t<div class=\\"container\\">\\n\\t\\t<h1\\n\\t\\t\\tclass=\\"lg:text-5xl xs:text-4xl text-3xl font-bold text-secondary-dark\\"\\n\\t\\t\\tdata-testid=\\"page-heading\\"\\n\\t\\t>\\n\\t\\t\\tPrivacy Policy\\n\\t\\t</h1>\\n\\n\\t\\t<p>\\n\\t\\t\\tWe recognize that you may be concerned about our use and disclosure of your personal\\n\\t\\t\\tinformation. Your privacy is very important to us, and the following will inform you of the\\n\\t\\t\\tinformation that we, Klasek Painting, may collect from you, and how it is used. By using our\\n\\t\\t\\twebsite, www.klasekpainting.com, you are accepting the practices described in this policy.\\n\\t\\t</p>\\n\\n\\t\\t<h2>Information Collection</h2>\\n\\n\\t\\t<p>\\n\\t\\t\\tWe may collect non-personal information, such as a domain name and IP Address. The domain name\\n\\t\\t\\tand IP address reveals nothing personal about you other than the IP address from which you\\n\\t\\t\\thave accessed our site. We may also collect information about the type of Internet browser you\\n\\t\\t\\tare using, operating system, what brought you to our Website, as well as which of our Web\\n\\t\\t\\tpages you have accessed.\\n\\t\\t</p>\\n\\n\\t\\t<p>\\n\\t\\t\\tAdditionally, if you communicate with us regarding our Website or our services, we will\\n\\t\\t\\tcollect any information that you provide to us in any such communication.\\n\\t\\t</p>\\n\\n\\t\\t<p>\\n\\t\\t\\tWe may contact you via email in the future to tell you about specials, new products or\\n\\t\\t\\tservices, or changes to this privacy policy.\\n\\t\\t</p>\\n\\n\\t\\t<h2>Information Use</h2>\\n\\n\\t\\t<p>\\n\\t\\t\\tWe use the collected information primarily for our own internal purposes, such as providing,\\n\\t\\t\\tmaintaining, evaluating, and improving our services and Website, fulfilling requests for\\n\\t\\t\\tinformation, and providing customer support.\\n\\t\\t</p>\\n\\n\\t\\t<h2>Security</h2>\\n\\n\\t\\t<p>\\n\\t\\t\\tWe follow generally accepted industry standards to protect the information submitted to us,\\n\\t\\t\\tboth during transmission and once we receive it.\\n\\t\\t</p>\\n\\n\\t\\t<p>\\n\\t\\t\\tIf we collect sensitive information (such as credit card data), that information is encrypted\\n\\t\\t\\tand transmitted to us in a secure way. You can verify this by looking for a closed lock icon\\n\\t\\t\\tat the bottom of your web browser, or looking for \\"https\\" at the beginning of the address of\\n\\t\\t\\tthe web page.\\n\\t\\t</p>\\n\\n\\t\\t<p>\\n\\t\\t\\tWhile we use encryption to protect sensitive information transmitted online, we also protect\\n\\t\\t\\tyour information offline. Only employees who need the information to perform a specific job\\n\\t\\t\\t(for example, billing or customer service) are granted access to personally identifiable\\n\\t\\t\\tinformation. The computers/servers in which we store personally identifiable information are\\n\\t\\t\\tkept in a secure environment.\\n\\t\\t</p>\\n\\n\\t\\t<h2>Cookies</h2>\\n\\n\\t\\t<p>\\n\\t\\t\\tWe use \\"cookies\\" on this site. A cookie is a piece of data stored on a site visitor's hard\\n\\t\\t\\tdrive to help us improve your access to our site and identify repeat visitors to our site. For\\n\\t\\t\\tinstance, when we use a cookie to identify you, you would not have to log in a password more\\n\\t\\t\\tthan once, thereby saving time while on our site. Cookies can also enable us to track and\\n\\t\\t\\ttarget the interests of our users to enhance the experience on our site. Usage of a cookie is\\n\\t\\t\\tin no way linked to any personally identifiable information on our site.\\n\\t\\t</p>\\n\\n\\t\\t<h2>Sharing</h2>\\n\\n\\t\\t<p>\\n\\t\\t\\tWe will not sell or otherwise provide the information we collect to outside third parties for\\n\\t\\t\\tthe purpose of direct or indirect mass email marketing.\\n\\t\\t</p>\\n\\n\\t\\t<p>\\n\\t\\t\\tWe will disclose personal information and/or an IP address, when required by law or in the\\n\\t\\t\\tgood-faith belief that such action is necessary to:\\n\\t\\t</p>\\n\\n\\t\\t<ul>\\n\\t\\t\\t<li>\\n\\t\\t\\t\\tCooperate with the investigations of purported unlawful activities and conform to the edicts\\n\\t\\t\\t\\tof the law or comply with legal process served on our company\\n\\t\\t\\t</li>\\n\\t\\t\\t<li>Protect and defend the rights or property of our Website and related properties</li>\\n\\t\\t\\t<li>\\n\\t\\t\\t\\tIdentify persons who may be violating the law, the rights of third parties, or otherwise\\n\\t\\t\\t\\tmisusing our Website or its related properties\\n\\t\\t\\t</li>\\n\\t\\t</ul>\\n\\n\\t\\t<p>\\n\\t\\t\\tPlease keep in mind that whenever you voluntarily disclose personal information online - for\\n\\t\\t\\texample through e-mail, discussion boards, or elsewhere - that information can be collected\\n\\t\\t\\tand used by others. In short, if you post personal information online that is accessible to\\n\\t\\t\\tthe public, you may receive unsolicited messages from other parties in return.\\n\\t\\t</p>\\n\\n\\t\\t<p>\\n\\t\\t\\tUltimately, you are solely responsible for maintaining the secrecy of your personal\\n\\t\\t\\tinformation. Please be careful and responsible whenever you are online.\\n\\t\\t</p>\\n\\n\\t\\t<h2>Links</h2>\\n\\n\\t\\t<p>\\n\\t\\t\\tThis Website may contain links to other sites. Please be aware that we are not responsible for\\n\\t\\t\\tthe content or privacy practices of such other sites. We encourage our users to be aware when\\n\\t\\t\\tthey leave our site and to read the privacy statements of any other site that collects\\n\\t\\t\\tpersonally identifiable information.\\n\\t\\t</p>\\n\\n\\t\\t<h2>Surveys & Contests</h2>\\n\\n\\t\\t<p>\\n\\t\\t\\tFrom time-to-time our site may request information via surveys or contests. Participation in\\n\\t\\t\\tthese surveys or contests is completely voluntary and you may choose whether or not to\\n\\t\\t\\tparticipate and therefore disclose this information. Information requested may include contact\\n\\t\\t\\tinformation (such as name and shipping address), and demographic information (such as zip\\n\\t\\t\\tcode, age). Contact information will be used to notify the winners and award prizes. Survey\\n\\t\\t\\tinformation will be used for purposes of monitoring or improving the use and satisfaction of\\n\\t\\t\\tthis site.\\n\\t\\t</p>\\n\\n\\t\\t<h2>Consent</h2>\\n\\n\\t\\t<p>\\n\\t\\t\\tBy using this Website, you consent to the collection and use of information as specified\\n\\t\\t\\tabove. If we make changes to our Privacy Policy, we will post those changes on this page.\\n\\t\\t\\tPlease review this page frequently to remain up-to-date with the information we collect, how\\n\\t\\t\\twe use it, and under what circumstances we disclose it. You must review the new Privacy Policy\\n\\t\\t\\tcarefully to make sure you understand our practices and procedures.\\n\\t\\t</p>\\n\\n\\t\\t<strong\\n\\t\\t\\t>If you feel that we are not abiding by this privacy policy, you should contact us immediately\\n\\t\\t\\tvia telephone at <ClickToCall class=\\"!font-bold\\" variant=\\"link\\" /> or via mail Attn: Privacy Officer,\\n\\t\\t\\t4415 S. Custer, Lyons, IL 60534.</strong\\n\\t\\t>\\n\\t</div>\\n</section>\\n\\n<style lang=\\"postcss\\">/* Column container */\\n.main-container > :global(div) {\\n    position: relative;\\n    z-index: 10;\\n    display: flex;\\n    flex-direction: column;\\n    justify-content: center;\\n    gap: 1rem\\n}\\n/* h2 */\\n.main-container :global(h2) {\\n    text-align: left;\\n    font-size: 1.25rem;\\n    line-height: 1.75rem;\\n    font-weight: 600;\\n    --tw-text-opacity: 1;\\n    color: hsl(var(--secondary-dark) / var(--tw-text-opacity, 1))\\n}\\n@media (min-width: 375px) {\\n    .main-container :global(h2) {\\n        font-size: 1.5rem;\\n        line-height: 2rem\\n    }\\n}\\n@media (min-width: 640px) {\\n    .main-container :global(h2) {\\n        font-size: 1.875rem;\\n        line-height: 2.25rem\\n    }\\n}\\n@media (min-width: 1024px) {\\n    .main-container :global(h2) {\\n        font-size: 2.25rem;\\n        line-height: 2.5rem\\n    }\\n}\\n/* h3 */\\n.main-container :global(h3) {\\n    font-size: 1.125rem;\\n    line-height: 1.75rem;\\n    font-weight: 600;\\n    --tw-text-opacity: 1;\\n    color: hsl(var(--secondary-dark) / var(--tw-text-opacity, 1))\\n}\\n@media (min-width: 375px) {\\n    .main-container :global(h3) {\\n        font-size: 1.25rem;\\n        line-height: 1.75rem\\n    }\\n}\\n@media (min-width: 1024px) {\\n    .main-container :global(h3) {\\n        font-size: 1.5rem;\\n        line-height: 2rem\\n    }\\n}\\n/* hr */\\n.main-container :global(hr) {\\n    width: 4rem;\\n    border-width: 1px;\\n    --tw-border-opacity: 1;\\n    border-color: hsl(var(--primary) / var(--tw-border-opacity, 1))\\n}\\n/* h2 > span */\\n/* .main-container :global(h2 > span) {\\n    @apply ;\\n} */\\n/* h3 > span */\\n/* .main-container :global(h3 > span) {\\n    @apply ;\\n} */\\n/* p */\\n.main-container :global(p) {\\n    line-height: 2\\n}\\n/* a */\\n.main-container :global(a) {\\n    font-weight: 600;\\n    --tw-text-opacity: 1;\\n    color: hsl(var(--secondary-dark) / var(--tw-text-opacity, 1));\\n    text-decoration-line: underline;\\n    text-underline-offset: 2px;\\n    transition-duration: 100ms\\n}\\n.main-container :global(a):hover {\\n    --tw-text-opacity: 1;\\n    color: hsl(var(--primary-dark) / var(--tw-text-opacity, 1))\\n}\\n/* strong */\\n.main-container :global(strong) {\\n    --tw-text-opacity: 1;\\n    color: hsl(var(--secondary-dark) / var(--tw-text-opacity, 1))\\n}\\n/* strong > a */\\n.main-container :global(strong > a) {\\n    font-weight: 700\\n}\\n/* > div > strong */\\n.main-container :global(> div > strong) {\\n    font-size: 1.25rem;\\n    line-height: 1.75rem\\n}\\n/* small */\\n.main-container :global(small) {\\n    --tw-text-opacity: 1;\\n    color: rgb(66 67 67 / var(--tw-text-opacity, 1))\\n}\\n/* ul */\\n.main-container :global(ul) {\\n    display: flex;\\n    flex-direction: column;\\n    gap: 1rem;\\n    padding-left: 1rem;\\n    line-height: 2\\n}\\n@media (min-width: 640px) {\\n    .main-container :global(ul) {\\n        padding-left: 1.5rem\\n    }\\n}\\n/* ol */\\n.main-container :global(ol) {\\n    display: flex;\\n    list-style-type: decimal;\\n    flex-direction: column;\\n    gap: 1rem;\\n    padding-left: 1rem;\\n    line-height: 2\\n}\\n@media (min-width: 640px) {\\n    .main-container :global(ol) {\\n        padding-left: 1.5rem\\n    }\\n}\\n/* ol marker */\\n.main-container :global(ol li)::marker {\\n    font-weight: 600;\\n    --tw-text-opacity: 1;\\n    color: hsl(var(--primary-dark) / var(--tw-text-opacity, 1))\\n}\\n/* ol > li */\\n.main-container :global(ul > li) {\\n    position: relative\\n}\\n.main-container :global(ul > li)::before {\\n    position: absolute;\\n    top: 14px;\\n    left: -1.25rem;\\n    height: 0.25rem;\\n    width: 0.75rem;\\n    --tw-bg-opacity: 1;\\n    background-color: hsl(var(--primary-dark) / var(--tw-bg-opacity, 1));\\n    --tw-content: '';\\n    content: var(--tw-content)\\n}\\n/* li > strong */\\n.main-container :global(li > strong) {\\n    --tw-text-opacity: 1;\\n    color: hsl(var(--secondary-dark) / var(--tw-text-opacity, 1))\\n}\\n/* ol > li > span */\\n/* .main-container :global(ol > li > span) {\\n    @apply ;\\n} */\\n/* ul > li */\\n/* .main-container :global(ul > li) {\\n    @apply ;\\n} */\\n</style>\\n"],"names":[],"mappings":"AA4JA,6BAAe,CAAW,GAAK,CAC3B,QAAQ,CAAE,QAAQ,CAClB,OAAO,CAAE,EAAE,CACX,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,eAAe,CAAE,MAAM,CACvB,GAAG,CAAE;AACT,CAEA,6BAAe,CAAS,EAAI,CACxB,UAAU,CAAE,IAAI,CAChB,SAAS,CAAE,OAAO,CAClB,WAAW,CAAE,OAAO,CACpB,WAAW,CAAE,GAAG,CAChB,iBAAiB,CAAE,CAAC,CACpB,KAAK,CAAE,IAAI,IAAI,gBAAgB,CAAC,CAAC,CAAC,CAAC,IAAI,iBAAiB,CAAC,EAAE,CAAC;AAChE,CACA,MAAO,YAAY,KAAK,CAAE,CACtB,6BAAe,CAAS,EAAI,CACxB,SAAS,CAAE,MAAM,CACjB,WAAW,CAAE;AACrB,IAAI,CACJ,CACA,MAAO,YAAY,KAAK,CAAE,CACtB,6BAAe,CAAS,EAAI,CACxB,SAAS,CAAE,QAAQ,CACnB,WAAW,CAAE;AACrB,IAAI,CACJ,CACA,MAAO,YAAY,MAAM,CAAE,CACvB,6BAAe,CAAS,EAAI,CACxB,SAAS,CAAE,OAAO,CAClB,WAAW,CAAE;AACrB,IAAI,CACJ,CAEA,6BAAe,CAAS,EAAI,CACxB,SAAS,CAAE,QAAQ,CACnB,WAAW,CAAE,OAAO,CACpB,WAAW,CAAE,GAAG,CAChB,iBAAiB,CAAE,CAAC,CACpB,KAAK,CAAE,IAAI,IAAI,gBAAgB,CAAC,CAAC,CAAC,CAAC,IAAI,iBAAiB,CAAC,EAAE,CAAC;AAChE,CACA,MAAO,YAAY,KAAK,CAAE,CACtB,6BAAe,CAAS,EAAI,CACxB,SAAS,CAAE,OAAO,CAClB,WAAW,CAAE;AACrB,IAAI,CACJ,CACA,MAAO,YAAY,MAAM,CAAE,CACvB,6BAAe,CAAS,EAAI,CACxB,SAAS,CAAE,MAAM,CACjB,WAAW,CAAE;AACrB,IAAI,CACJ,CAEA,6BAAe,CAAS,EAAI,CACxB,KAAK,CAAE,IAAI,CACX,YAAY,CAAE,GAAG,CACjB,mBAAmB,CAAE,CAAC,CACtB,YAAY,CAAE,IAAI,IAAI,SAAS,CAAC,CAAC,CAAC,CAAC,IAAI,mBAAmB,CAAC,EAAE,CAAC;AAClE,CAUA,6BAAe,CAAS,CAAG,CACvB,WAAW,CAAE;AACjB,CAEA,6BAAe,CAAS,CAAG,CACvB,WAAW,CAAE,GAAG,CAChB,iBAAiB,CAAE,CAAC,CACpB,KAAK,CAAE,IAAI,IAAI,gBAAgB,CAAC,CAAC,CAAC,CAAC,IAAI,iBAAiB,CAAC,EAAE,CAAC,CAAC,CAC7D,oBAAoB,CAAE,SAAS,CAC/B,qBAAqB,CAAE,GAAG,CAC1B,mBAAmB,CAAE;AACzB,CACA,6BAAe,CAAS,CAAE,MAAO,CAC7B,iBAAiB,CAAE,CAAC,CACpB,KAAK,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CAAC,CAAC,IAAI,iBAAiB,CAAC,EAAE,CAAC;AAC9D,CAEA,6BAAe,CAAS,MAAQ,CAC5B,iBAAiB,CAAE,CAAC,CACpB,KAAK,CAAE,IAAI,IAAI,gBAAgB,CAAC,CAAC,CAAC,CAAC,IAAI,iBAAiB,CAAC,EAAE,CAAC;AAChE,CAEA,6BAAe,CAAS,UAAY,CAChC,WAAW,CAAE;AACjB,CAEA,6BAAe,CAAS,cAAgB,CACpC,SAAS,CAAE,OAAO,CAClB,WAAW,CAAE;AACjB,CAEA,6BAAe,CAAS,KAAO,CAC3B,iBAAiB,CAAE,CAAC,CACpB,KAAK,CAAE,IAAI,EAAE,CAAC,EAAE,CAAC,EAAE,CAAC,CAAC,CAAC,IAAI,iBAAiB,CAAC,EAAE,CAAC;AACnD,CAEA,6BAAe,CAAS,EAAI,CACxB,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,GAAG,CAAE,IAAI,CACT,YAAY,CAAE,IAAI,CAClB,WAAW,CAAE;AACjB,CACA,MAAO,YAAY,KAAK,CAAE,CACtB,6BAAe,CAAS,EAAI,CACxB,YAAY,CAAE;AACtB,IAAI,CACJ,CAEA,6BAAe,CAAS,EAAI,CACxB,OAAO,CAAE,IAAI,CACb,eAAe,CAAE,OAAO,CACxB,cAAc,CAAE,MAAM,CACtB,GAAG,CAAE,IAAI,CACT,YAAY,CAAE,IAAI,CAClB,WAAW,CAAE;AACjB,CACA,MAAO,YAAY,KAAK,CAAE,CACtB,6BAAe,CAAS,EAAI,CACxB,YAAY,CAAE;AACtB,IAAI,CACJ,CAEA,6BAAe,CAAS,KAAM,QAAS,CACnC,WAAW,CAAE,GAAG,CAChB,iBAAiB,CAAE,CAAC,CACpB,KAAK,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CAAC,CAAC,IAAI,iBAAiB,CAAC,EAAE,CAAC;AAC9D,CAEA,6BAAe,CAAS,OAAS,CAC7B,QAAQ,CAAE;AACd,CACA,6BAAe,CAAS,OAAQ,QAAS,CACrC,QAAQ,CAAE,QAAQ,CAClB,GAAG,CAAE,IAAI,CACT,IAAI,CAAE,QAAQ,CACd,MAAM,CAAE,OAAO,CACf,KAAK,CAAE,OAAO,CACd,eAAe,CAAE,CAAC,CAClB,gBAAgB,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CAAC,CAAC,IAAI,eAAe,CAAC,EAAE,CAAC,CAAC,CACpE,YAAY,CAAE,EAAE,CAChB,OAAO,CAAE,IAAI,YAAY;AAC7B,CAEA,6BAAe,CAAS,WAAa,CACjC,iBAAiB,CAAE,CAAC,CACpB,KAAK,CAAE,IAAI,IAAI,gBAAgB,CAAC,CAAC,CAAC,CAAC,IAAI,iBAAiB,CAAC,EAAE,CAAC;AAChE"}`
     };
-    Page40 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page41 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       $$result.css.add(css12);
       return `<section class="main-container lg:bg-gradient-to-b from-off-white to-white bg-white p-y p-x svelte-ga4be8"><div class="container"><h1 class="lg:text-5xl xs:text-4xl text-3xl font-bold text-secondary-dark" data-testid="page-heading" data-svelte-h="svelte-1cwr7d3">Privacy Policy</h1> <p data-svelte-h="svelte-179gsaw">We recognize that you may be concerned about our use and disclosure of your personal
 			information. Your privacy is very important to us, and the following will inform you of the
@@ -19678,40 +20082,40 @@ var init_page_svelte40 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/43.js
-var __exports44 = {};
-__export(__exports44, {
-  component: () => component44,
-  fonts: () => fonts44,
-  imports: () => imports44,
-  index: () => index44,
-  stylesheets: () => stylesheets44,
-  universal: () => page_ts_exports36,
-  universal_id: () => universal_id36
+// .svelte-kit/output/server/nodes/44.js
+var __exports45 = {};
+__export(__exports45, {
+  component: () => component45,
+  fonts: () => fonts45,
+  imports: () => imports45,
+  index: () => index45,
+  stylesheets: () => stylesheets45,
+  universal: () => page_ts_exports37,
+  universal_id: () => universal_id37
 });
-var index44, component_cache44, component44, universal_id36, imports44, stylesheets44, fonts44;
-var init__44 = __esm({
-  ".svelte-kit/output/server/nodes/43.js"() {
-    init_page_ts36();
-    index44 = 43;
-    component44 = async () => component_cache44 ??= (await Promise.resolve().then(() => (init_page_svelte40(), page_svelte_exports40))).default;
-    universal_id36 = "src/routes/(light-nav)/legal/privacy-policy/+page.ts";
-    imports44 = ["_app/immutable/nodes/43.CC6WfmeF.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/ecvbD-e3.js"];
-    stylesheets44 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts44 = [];
+var index45, component_cache45, component45, universal_id37, imports45, stylesheets45, fonts45;
+var init__45 = __esm({
+  ".svelte-kit/output/server/nodes/44.js"() {
+    init_page_ts37();
+    index45 = 44;
+    component45 = async () => component_cache45 ??= (await Promise.resolve().then(() => (init_page_svelte41(), page_svelte_exports41))).default;
+    universal_id37 = "src/routes/(light-nav)/legal/privacy-policy/+page.ts";
+    imports45 = ["_app/immutable/nodes/44.Bdf4sZBj.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DSE8WoWq.js"];
+    stylesheets45 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts45 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/_page.ts.js
-var page_ts_exports37 = {};
-__export(page_ts_exports37, {
-  load: () => load41
+var page_ts_exports38 = {};
+__export(page_ts_exports38, {
+  load: () => load42
 });
-var load41;
-var init_page_ts37 = __esm({
+var load42;
+var init_page_ts38 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/_page.ts.js"() {
     init_metaTagHelpers();
-    load41 = () => {
+    load42 = () => {
       const pageMetaTags = createTitleDescription(
         "Professional Exterior Painting Services",
         "Klasek Painting offers expert exterior painting services for homes and businesses. Transform your space with our professional painting solutions."
@@ -19896,12 +20300,12 @@ var init_BasicTemplateSection = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/_page.svelte.js
-var page_svelte_exports41 = {};
-__export(page_svelte_exports41, {
-  default: () => Page41
+var page_svelte_exports42 = {};
+__export(page_svelte_exports42, {
+  default: () => Page42
 });
-var Square_arrow_out_up_right, css15, ServiceGridCell, siding, brick, ServiceGridSection, src5, Page41;
-var init_page_svelte41 = __esm({
+var Square_arrow_out_up_right, css15, ServiceGridCell, siding, brick, ServiceGridSection, src4, Page42;
+var init_page_svelte42 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/_page.svelte.js"() {
     init_ssr();
     init_OtherServicesSection();
@@ -19939,13 +20343,13 @@ var init_page_svelte41 = __esm({
     ServiceGridCell = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { data } = $$props;
       let { isInView } = $$props;
-      let { index: index69 } = $$props;
+      let { index: index70 } = $$props;
       if ($$props.data === void 0 && $$bindings.data && data !== void 0)
         $$bindings.data(data);
       if ($$props.isInView === void 0 && $$bindings.isInView && isInView !== void 0)
         $$bindings.isInView(isInView);
-      if ($$props.index === void 0 && $$bindings.index && index69 !== void 0)
-        $$bindings.index(index69);
+      if ($$props.index === void 0 && $$bindings.index && index70 !== void 0)
+        $$bindings.index(index70);
       $$result.css.add(css15);
       return `<li class="text-white relative group overflow-clip lg:min-h-none min-h-[200px]">${isInView ? `<a${add_attribute("style", `--bg: url(${data.bg})`, 0)}${add_attribute("href", data.link.href, 0)} class="group block size-full group-hover:before:scale-105 group-hover:before:bg-primary-dark/70 before:duration-300 before:ease-out before:bg-cover before:bg-center before:bg-secondary/70 before:bg-blend-multiply before:size-full before:absolute before:content-[''] svelte-qui7i5"><span class="group-focus:ring-2 group-focus:ring-ring ring-offset-2 font-semibold lg:text-base text-lg absolute xl:bottom-6 xl:left-6 lg:bottom-3 lg:left-3 left-1/2 lg:translate-x-0 lg:translate-y-0 -translate-x-1/2 bottom-1/2 translate-y-1/2 flex items-center gap-2 group-hover:underline backdrop-blur-sm p-1 whitespace-nowrap">${escape(data.link.text)} ${validate_component(Square_arrow_out_up_right, "SquareArrowOutUpRight").$$render($$result, { class: "size-4" }, {}, {})}</span></a>` : ``} </li>`;
     });
@@ -19990,10 +20394,10 @@ var init_page_svelte41 = __esm({
               return `Get a Free Estimate Today!`;
             }
           }
-        )}</div>  <ul class="lg:absolute size-full lg:w-1/2 top-0 left-1/2 grid sm:grid-cols-2 sm:grid-rows-2">${each(serviceData, (data, index69) => {
+        )}</div>  <ul class="lg:absolute size-full lg:w-1/2 top-0 left-1/2 grid sm:grid-cols-2 sm:grid-rows-2">${each(serviceData, (data, index70) => {
           return `${validate_component(ServiceGridCell, "ServiceGridCell").$$render(
             $$result,
-            { data, index: index69, isInView },
+            { data, index: index70, isInView },
             {
               isInView: ($$value) => {
                 isInView = $$value;
@@ -20006,8 +20410,8 @@ var init_page_svelte41 = __esm({
       } while (!$$settled);
       return $$rendered;
     });
-    src5 = "/_app/immutable/assets/expert-exterior-home-painting-klasek-painting.DCHEFxVo.webp";
-    Page41 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    src4 = "/_app/immutable/assets/expert-exterior-home-painting-klasek-painting.DCHEFxVo.webp";
+    Page42 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(RootServiceHero, "RootServiceHero").$$render(
         $$result,
         {
@@ -20020,7 +20424,7 @@ var init_page_svelte41 = __esm({
               "Curb Appeal Boost"
             ],
             image: {
-              src: src5,
+              src: src4,
               alt: "House with new exterior stucco repair and paint service by Klasek Painting"
             }
           }
@@ -20043,40 +20447,40 @@ var init_page_svelte41 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/44.js
-var __exports45 = {};
-__export(__exports45, {
-  component: () => component45,
-  fonts: () => fonts45,
-  imports: () => imports45,
-  index: () => index45,
-  stylesheets: () => stylesheets45,
-  universal: () => page_ts_exports37,
-  universal_id: () => universal_id37
+// .svelte-kit/output/server/nodes/45.js
+var __exports46 = {};
+__export(__exports46, {
+  component: () => component46,
+  fonts: () => fonts46,
+  imports: () => imports46,
+  index: () => index46,
+  stylesheets: () => stylesheets46,
+  universal: () => page_ts_exports38,
+  universal_id: () => universal_id38
 });
-var index45, component_cache45, component45, universal_id37, imports45, stylesheets45, fonts45;
-var init__45 = __esm({
-  ".svelte-kit/output/server/nodes/44.js"() {
-    init_page_ts37();
-    index45 = 44;
-    component45 = async () => component_cache45 ??= (await Promise.resolve().then(() => (init_page_svelte41(), page_svelte_exports41))).default;
-    universal_id37 = "src/routes/(light-nav)/services/+page.ts";
-    imports45 = ["_app/immutable/nodes/44.BhU2QkdW.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/sIz1Jrbw.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/B_-KkxDB.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/D2PaxASM.js", "_app/immutable/chunks/Cs50DVaY.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/DxMEPzzS.js"];
-    stylesheets45 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css", "_app/immutable/assets/Testimonial.DLYMjzrT.css", "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css", "_app/immutable/assets/44.BJ-DlE7H.css"];
-    fonts45 = [];
+var index46, component_cache46, component46, universal_id38, imports46, stylesheets46, fonts46;
+var init__46 = __esm({
+  ".svelte-kit/output/server/nodes/45.js"() {
+    init_page_ts38();
+    index46 = 45;
+    component46 = async () => component_cache46 ??= (await Promise.resolve().then(() => (init_page_svelte42(), page_svelte_exports42))).default;
+    universal_id38 = "src/routes/(light-nav)/services/+page.ts";
+    imports46 = ["_app/immutable/nodes/45.8WxEswHe.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/iqJyU3xE.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/sIz1Jrbw.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/YtKqi3V3.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/BpGnHwBJ.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/DVvwuOlZ.js", "_app/immutable/chunks/Cc_N6hKz.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/CpRRg9TQ.js"];
+    stylesheets46 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css", "_app/immutable/assets/Testimonial.DLYMjzrT.css", "_app/immutable/assets/TestimonialsSection.CX1eHgZX.css", "_app/immutable/assets/45.BJ-DlE7H.css"];
+    fonts46 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/_page.ts.js
-var page_ts_exports38 = {};
-__export(page_ts_exports38, {
-  load: () => load42
+var page_ts_exports39 = {};
+__export(page_ts_exports39, {
+  load: () => load43
 });
-var load42;
-var init_page_ts38 = __esm({
+var load43;
+var init_page_ts39 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load42 = () => {
+    load43 = () => {
       const pageMetaTags = createTitleDescription(
         "Exterior Brick Painting and Repair",
         "Professional brick painting and repair services to enhance and protect your home's exterior. Serving Cook County with over 30 years of experience, call today!"
@@ -20135,12 +20539,12 @@ var init_RootServiceSection = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/_page.svelte.js
-var page_svelte_exports42 = {};
-__export(page_svelte_exports42, {
-  default: () => Page42
+var page_svelte_exports43 = {};
+__export(page_svelte_exports43, {
+  default: () => Page43
 });
-var src6, repair, Page42;
-var init_page_svelte42 = __esm({
+var src5, repair, Page43;
+var init_page_svelte43 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/_page.svelte.js"() {
     init_ssr();
     init_OtherServicesSection();
@@ -20151,9 +20555,9 @@ var init_page_svelte42 = __esm({
     init_ColumnTemplateSection();
     init_ViewOurWorkSection();
     init_CtaBannerSection();
-    src6 = "/_app/immutable/assets/brick-painting-staining-service.CXVHz8Wj.webp";
+    src5 = "/_app/immutable/assets/brick-painting-staining-service.CXVHz8Wj.webp";
     repair = "/_app/immutable/assets/exterior-brick-house-repair.DwsDgVnR.webp";
-    Page42 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page43 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const paintingStainingService = [serviceRoutes["brick-painting"], serviceRoutes["brick-staining"]];
       return `${validate_component(RootServiceHero, "RootServiceHero").$$render(
         $$result,
@@ -20167,7 +20571,7 @@ var init_page_svelte42 = __esm({
               "Long-Lasting Results"
             ],
             image: {
-              src: src6,
+              src: src5,
               alt: "New exterior brick painting project house with fresh coat of paint by Klasek Painting"
             }
           }
@@ -20204,40 +20608,40 @@ var init_page_svelte42 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/45.js
-var __exports46 = {};
-__export(__exports46, {
-  component: () => component46,
-  fonts: () => fonts46,
-  imports: () => imports46,
-  index: () => index46,
-  stylesheets: () => stylesheets46,
-  universal: () => page_ts_exports38,
-  universal_id: () => universal_id38
+// .svelte-kit/output/server/nodes/46.js
+var __exports47 = {};
+__export(__exports47, {
+  component: () => component47,
+  fonts: () => fonts47,
+  imports: () => imports47,
+  index: () => index47,
+  stylesheets: () => stylesheets47,
+  universal: () => page_ts_exports39,
+  universal_id: () => universal_id39
 });
-var index46, component_cache46, component46, universal_id38, imports46, stylesheets46, fonts46;
-var init__46 = __esm({
-  ".svelte-kit/output/server/nodes/45.js"() {
-    init_page_ts38();
-    index46 = 45;
-    component46 = async () => component_cache46 ??= (await Promise.resolve().then(() => (init_page_svelte42(), page_svelte_exports42))).default;
-    universal_id38 = "src/routes/(light-nav)/services/brick-painting-repair/+page.ts";
-    imports46 = ["_app/immutable/nodes/45.BEzGCae7.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/B4ToEHT_.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js"];
-    stylesheets46 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts46 = [];
+var index47, component_cache47, component47, universal_id39, imports47, stylesheets47, fonts47;
+var init__47 = __esm({
+  ".svelte-kit/output/server/nodes/46.js"() {
+    init_page_ts39();
+    index47 = 46;
+    component47 = async () => component_cache47 ??= (await Promise.resolve().then(() => (init_page_svelte43(), page_svelte_exports43))).default;
+    universal_id39 = "src/routes/(light-nav)/services/brick-painting-repair/+page.ts";
+    imports47 = ["_app/immutable/nodes/46.Bi0mzzvL.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/iqJyU3xE.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/ho_4w172.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/YtKqi3V3.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/CpRRg9TQ.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/LFmWHm5N.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/BUsMTPQK.js"];
+    stylesheets47 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts47 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-painting/_page.ts.js
-var page_ts_exports39 = {};
-__export(page_ts_exports39, {
-  load: () => load43
+var page_ts_exports40 = {};
+__export(page_ts_exports40, {
+  load: () => load44
 });
-var load43;
-var init_page_ts39 = __esm({
+var load44;
+var init_page_ts40 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-painting/_page.ts.js"() {
     init_metaTagHelpers();
-    load43 = () => {
+    load44 = () => {
       const pageMetaTags = createTitleDescription(
         "Exterior Brick Painting",
         "Refresh and protect your brick exterior with Klasek Painting's expert brick painting services. Durable and vibrant finishes. Contact us today for a free quote!"
@@ -20339,18 +20743,18 @@ var init_FaqSection = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-painting/_page.svelte.js
-var page_svelte_exports43 = {};
-__export(page_svelte_exports43, {
-  default: () => Page43
+var page_svelte_exports44 = {};
+__export(page_svelte_exports44, {
+  default: () => Page44
 });
-var src7, Page43;
-var init_page_svelte43 = __esm({
+var src6, Page44;
+var init_page_svelte44 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-painting/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
     init_ColumnTemplateSection();
     init_routes();
-    src7 = {
+    src6 = {
       sources: {
         avif: "/_app/immutable/assets/brick-painting-service-before-and-after.BsL7QMso.avif 321w, /_app/immutable/assets/brick-painting-service-before-and-after.CzQI3qD_.avif 641w",
         webp: "/_app/immutable/assets/brick-painting-service-before-and-after.CoZ6xnDs.webp 321w, /_app/immutable/assets/brick-painting-service-before-and-after.Br8XX9fj.webp 641w",
@@ -20362,7 +20766,7 @@ var init_page_svelte43 = __esm({
         h: 641
       }
     };
-    Page43 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page44 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "How long does exterior brick painting last?",
@@ -20407,9 +20811,9 @@ var init_page_svelte43 = __esm({
 			its lifespan.</p> <p>Ready to give your brick exterior a fresh, new look? <a${add_attribute("href", routes["contact"].href, 0)}>Contact us</a> today to schedule a consultation with our expert team.</p></div>`;
         },
         "right-column": () => {
-          return `<div slot="right-column"> ${typeof src7 === "string" ? `<img class="w-full h-auto max-w-[450px] mx-auto"${add_attribute("src", src7.img.src, 0)} alt=""${add_attribute("width", src7.img.w, 0)}${add_attribute("height", src7.img.h, 0)}>` : `<picture>${each(Object.entries(src7.sources), ([format, srcset]) => {
+          return `<div slot="right-column"> ${typeof src6 === "string" ? `<img class="w-full h-auto max-w-[450px] mx-auto"${add_attribute("src", src6.img.src, 0)} alt=""${add_attribute("width", src6.img.w, 0)}${add_attribute("height", src6.img.h, 0)}>` : `<picture>${each(Object.entries(src6.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[450px] mx-auto"${add_attribute("src", src7.img.src, 0)} alt=""${add_attribute("width", src7.img.w, 0)}${add_attribute("height", src7.img.h, 0)}></picture>`} <small data-svelte-h="svelte-3jkqpi"><strong>Before &amp; After Brick Home Transformation</strong> <p>Check out this amazing transformation from a recent job Klasek Painting did in the Chicago
+          })} <img class="w-full h-auto max-w-[450px] mx-auto"${add_attribute("src", src6.img.src, 0)} alt=""${add_attribute("width", src6.img.w, 0)}${add_attribute("height", src6.img.h, 0)}></picture>`} <small data-svelte-h="svelte-3jkqpi"><strong>Before &amp; After Brick Home Transformation</strong> <p>Check out this amazing transformation from a recent job Klasek Painting did in the Chicago
 				suburbs. As you can see there is quite a difference between the dreary old brick and the
 				beautifully modern white exterior. <a${add_attribute("href", routes["gallery"].href, 0)}>View more of our past work in our gallery.</a></p></small></div>`;
         }
@@ -20418,40 +20822,40 @@ var init_page_svelte43 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/46.js
-var __exports47 = {};
-__export(__exports47, {
-  component: () => component47,
-  fonts: () => fonts47,
-  imports: () => imports47,
-  index: () => index47,
-  stylesheets: () => stylesheets47,
-  universal: () => page_ts_exports39,
-  universal_id: () => universal_id39
+// .svelte-kit/output/server/nodes/47.js
+var __exports48 = {};
+__export(__exports48, {
+  component: () => component48,
+  fonts: () => fonts48,
+  imports: () => imports48,
+  index: () => index48,
+  stylesheets: () => stylesheets48,
+  universal: () => page_ts_exports40,
+  universal_id: () => universal_id40
 });
-var index47, component_cache47, component47, universal_id39, imports47, stylesheets47, fonts47;
-var init__47 = __esm({
-  ".svelte-kit/output/server/nodes/46.js"() {
-    init_page_ts39();
-    index47 = 46;
-    component47 = async () => component_cache47 ??= (await Promise.resolve().then(() => (init_page_svelte43(), page_svelte_exports43))).default;
-    universal_id39 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-painting/+page.ts";
-    imports47 = ["_app/immutable/nodes/46.0Z4xUFdH.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js"];
-    stylesheets47 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts47 = [];
+var index48, component_cache48, component48, universal_id40, imports48, stylesheets48, fonts48;
+var init__48 = __esm({
+  ".svelte-kit/output/server/nodes/47.js"() {
+    init_page_ts40();
+    index48 = 47;
+    component48 = async () => component_cache48 ??= (await Promise.resolve().then(() => (init_page_svelte44(), page_svelte_exports44))).default;
+    universal_id40 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-painting/+page.ts";
+    imports48 = ["_app/immutable/nodes/47.A_n1EFzp.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js"];
+    stylesheets48 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts48 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-repair/_page.ts.js
-var page_ts_exports40 = {};
-__export(page_ts_exports40, {
-  load: () => load44
+var page_ts_exports41 = {};
+__export(page_ts_exports41, {
+  load: () => load45
 });
-var load44;
-var init_page_ts40 = __esm({
+var load45;
+var init_page_ts41 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load44 = () => {
+    load45 = () => {
       const pageMetaTags = createTitleDescription(
         "Exterior Brick Repair",
         "Expert exterior brick repair services in Cook County. Restore your home's brickwork with high-quality, repairs. Affordable prices and professional results."
@@ -20459,6 +20863,25 @@ var init_page_ts40 = __esm({
       return {
         pageMetaTags
       };
+    };
+  }
+});
+
+// .svelte-kit/output/server/chunks/exterior-brick-repair-service.js
+var installDetail;
+var init_exterior_brick_repair_service = __esm({
+  ".svelte-kit/output/server/chunks/exterior-brick-repair-service.js"() {
+    installDetail = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-brick-repair-service.DfZItOVp.avif 480w, /_app/immutable/assets/exterior-brick-repair-service.BGOhrMLd.avif 960w",
+        webp: "/_app/immutable/assets/exterior-brick-repair-service.CnnvmMn2.webp 480w, /_app/immutable/assets/exterior-brick-repair-service.DzUiu0HV.webp 960w",
+        png: "/_app/immutable/assets/exterior-brick-repair-service.BpgzJm8m.png 480w, /_app/immutable/assets/exterior-brick-repair-service.CzZzCMPE.png 960w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-brick-repair-service.CzZzCMPE.png",
+        w: 960,
+        h: 546
+      }
     };
   }
 });
@@ -20480,12 +20903,12 @@ var init_GalleryLinkBlock = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-repair/_page.svelte.js
-var page_svelte_exports44 = {};
-__export(page_svelte_exports44, {
-  default: () => Page44
+var page_svelte_exports45 = {};
+__export(page_svelte_exports45, {
+  default: () => Page45
 });
-var src8, Page44;
-var init_page_svelte44 = __esm({
+var Page45;
+var init_page_svelte45 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-repair/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -20493,20 +20916,9 @@ var init_page_svelte44 = __esm({
     init_BasicTemplateSection();
     init_routes();
     init_HeadingAccent();
+    init_exterior_brick_repair_service();
     init_GalleryLinkBlock();
-    src8 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-brick-repair-service.DfZItOVp.avif 480w, /_app/immutable/assets/exterior-brick-repair-service.BGOhrMLd.avif 960w",
-        webp: "/_app/immutable/assets/exterior-brick-repair-service.CnnvmMn2.webp 480w, /_app/immutable/assets/exterior-brick-repair-service.DzUiu0HV.webp 960w",
-        png: "/_app/immutable/assets/exterior-brick-repair-service.BpgzJm8m.png 480w, /_app/immutable/assets/exterior-brick-repair-service.CzZzCMPE.png 960w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-brick-repair-service.CzZzCMPE.png",
-        w: 960,
-        h: 546
-      }
-    };
-    Page44 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page45 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "What is involved in brick repair and restoration?",
@@ -20573,9 +20985,9 @@ var init_page_svelte44 = __esm({
 			your home looks its best and is well-protected from the elements.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:order-first order-last">${typeof src8 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src8.img.src, 0)} alt="Front exterior of red brick house"${add_attribute("width", src8.img.w, 0)}${add_attribute("height", src8.img.h, 0)}>` : `<picture>${each(Object.entries(src8.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:order-first order-last">${typeof installDetail === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", installDetail.img.src, 0)} alt="Front exterior of red brick house"${add_attribute("width", installDetail.img.w, 0)}${add_attribute("height", installDetail.img.h, 0)}>` : `<picture>${each(Object.entries(installDetail.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src8.img.src, 0)} alt="Front exterior of red brick house"${add_attribute("width", src8.img.w, 0)}${add_attribute("height", src8.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", installDetail.img.src, 0)} alt="Front exterior of red brick house"${add_attribute("width", installDetail.img.w, 0)}${add_attribute("height", installDetail.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -20615,40 +21027,40 @@ var init_page_svelte44 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/47.js
-var __exports48 = {};
-__export(__exports48, {
-  component: () => component48,
-  fonts: () => fonts48,
-  imports: () => imports48,
-  index: () => index48,
-  stylesheets: () => stylesheets48,
-  universal: () => page_ts_exports40,
-  universal_id: () => universal_id40
+// .svelte-kit/output/server/nodes/48.js
+var __exports49 = {};
+__export(__exports49, {
+  component: () => component49,
+  fonts: () => fonts49,
+  imports: () => imports49,
+  index: () => index49,
+  stylesheets: () => stylesheets49,
+  universal: () => page_ts_exports41,
+  universal_id: () => universal_id41
 });
-var index48, component_cache48, component48, universal_id40, imports48, stylesheets48, fonts48;
-var init__48 = __esm({
-  ".svelte-kit/output/server/nodes/47.js"() {
-    init_page_ts40();
-    index48 = 47;
-    component48 = async () => component_cache48 ??= (await Promise.resolve().then(() => (init_page_svelte44(), page_svelte_exports44))).default;
-    universal_id40 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-repair/+page.ts";
-    imports48 = ["_app/immutable/nodes/47.Dec2iYrL.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets48 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts48 = [];
+var index49, component_cache49, component49, universal_id41, imports49, stylesheets49, fonts49;
+var init__49 = __esm({
+  ".svelte-kit/output/server/nodes/48.js"() {
+    init_page_ts41();
+    index49 = 48;
+    component49 = async () => component_cache49 ??= (await Promise.resolve().then(() => (init_page_svelte45(), page_svelte_exports45))).default;
+    universal_id41 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-repair/+page.ts";
+    imports49 = ["_app/immutable/nodes/48.CQHbXCp9.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/ChObNhj9.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets49 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts49 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-staining/_page.ts.js
-var page_ts_exports41 = {};
-__export(page_ts_exports41, {
-  load: () => load45
+var page_ts_exports42 = {};
+__export(page_ts_exports42, {
+  load: () => load46
 });
-var load45;
-var init_page_ts41 = __esm({
+var load46;
+var init_page_ts42 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-staining/_page.ts.js"() {
     init_metaTagHelpers();
-    load45 = () => {
+    load46 = () => {
       const pageMetaTags = createTitleDescription(
         "Exterior Brick Staining",
         "Professional exterior brick staining in Cook County. Refresh your home's look with high-quality, durable brick stains. Affordable pricing and expert results."
@@ -20661,12 +21073,12 @@ var init_page_ts41 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-staining/_page.svelte.js
-var page_svelte_exports45 = {};
-__export(page_svelte_exports45, {
-  default: () => Page45
+var page_svelte_exports46 = {};
+__export(page_svelte_exports46, {
+  default: () => Page46
 });
-var src9, Page45;
-var init_page_svelte45 = __esm({
+var src7, Page46;
+var init_page_svelte46 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/brick-painting-repair/exterior-brick-staining/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -20675,7 +21087,7 @@ var init_page_svelte45 = __esm({
     init_routes();
     init_HeadingAccent();
     init_GalleryLinkBlock();
-    src9 = {
+    src7 = {
       sources: {
         avif: "/_app/immutable/assets/exterior-brick-staining-service.3J0QLfda.avif 356w, /_app/immutable/assets/exterior-brick-staining-service.C4FHCkaW.avif 711w",
         webp: "/_app/immutable/assets/exterior-brick-staining-service.h-Qiemtb.webp 356w, /_app/immutable/assets/exterior-brick-staining-service.PfdG0eBC.webp 711w",
@@ -20687,7 +21099,7 @@ var init_page_svelte45 = __esm({
         h: 416
       }
     };
-    Page45 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page46 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "How does brick stain work?",
@@ -20750,9 +21162,9 @@ var init_page_svelte45 = __esm({
 			architecture, our team can tailor the staining process to suit your style.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:order-first order-last">${typeof src9 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src9.img.src, 0)} alt="Halfway complete brick staining project, white stain on brick house by Klasek Painting"${add_attribute("width", src9.img.w, 0)}${add_attribute("height", src9.img.h, 0)}>` : `<picture>${each(Object.entries(src9.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:order-first order-last">${typeof src7 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src7.img.src, 0)} alt="Halfway complete brick staining project, white stain on brick house by Klasek Painting"${add_attribute("width", src7.img.w, 0)}${add_attribute("height", src7.img.h, 0)}>` : `<picture>${each(Object.entries(src7.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src9.img.src, 0)} alt="Halfway complete brick staining project, white stain on brick house by Klasek Painting"${add_attribute("width", src9.img.w, 0)}${add_attribute("height", src9.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src7.img.src, 0)} alt="Halfway complete brick staining project, white stain on brick house by Klasek Painting"${add_attribute("width", src7.img.w, 0)}${add_attribute("height", src7.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -20796,40 +21208,40 @@ var init_page_svelte45 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/48.js
-var __exports49 = {};
-__export(__exports49, {
-  component: () => component49,
-  fonts: () => fonts49,
-  imports: () => imports49,
-  index: () => index49,
-  stylesheets: () => stylesheets49,
-  universal: () => page_ts_exports41,
-  universal_id: () => universal_id41
+// .svelte-kit/output/server/nodes/49.js
+var __exports50 = {};
+__export(__exports50, {
+  component: () => component50,
+  fonts: () => fonts50,
+  imports: () => imports50,
+  index: () => index50,
+  stylesheets: () => stylesheets50,
+  universal: () => page_ts_exports42,
+  universal_id: () => universal_id42
 });
-var index49, component_cache49, component49, universal_id41, imports49, stylesheets49, fonts49;
-var init__49 = __esm({
-  ".svelte-kit/output/server/nodes/48.js"() {
-    init_page_ts41();
-    index49 = 48;
-    component49 = async () => component_cache49 ??= (await Promise.resolve().then(() => (init_page_svelte45(), page_svelte_exports45))).default;
-    universal_id41 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-staining/+page.ts";
-    imports49 = ["_app/immutable/nodes/48.DF1_n75v.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets49 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts49 = [];
+var index50, component_cache50, component50, universal_id42, imports50, stylesheets50, fonts50;
+var init__50 = __esm({
+  ".svelte-kit/output/server/nodes/49.js"() {
+    init_page_ts42();
+    index50 = 49;
+    component50 = async () => component_cache50 ??= (await Promise.resolve().then(() => (init_page_svelte46(), page_svelte_exports46))).default;
+    universal_id42 = "src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-staining/+page.ts";
+    imports50 = ["_app/immutable/nodes/49.Cxrt6be6.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets50 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts50 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/commercial-exterior-painting/_page.ts.js
-var page_ts_exports42 = {};
-__export(page_ts_exports42, {
-  load: () => load46
+var page_ts_exports43 = {};
+__export(page_ts_exports43, {
+  load: () => load47
 });
-var load46;
-var init_page_ts42 = __esm({
+var load47;
+var init_page_ts43 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/commercial-exterior-painting/_page.ts.js"() {
     init_metaTagHelpers();
-    load46 = () => {
+    load47 = () => {
       const pageMetaTags = createTitleDescription(
         "Professional Commercial Painting Service",
         "Transform your commercial property with our expert exterior painting services. Klasek Painting ensures a flawless finish. Get a free quote now!"
@@ -20842,12 +21254,12 @@ var init_page_ts42 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/commercial-exterior-painting/_page.svelte.js
-var page_svelte_exports46 = {};
-__export(page_svelte_exports46, {
-  default: () => Page46
+var page_svelte_exports47 = {};
+__export(page_svelte_exports47, {
+  default: () => Page47
 });
-var src10, commercial, Page46;
-var init_page_svelte46 = __esm({
+var src8, commercial, Page47;
+var init_page_svelte47 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/commercial-exterior-painting/_page.svelte.js"() {
     init_ssr();
     init_OtherServicesSection();
@@ -20856,7 +21268,7 @@ var init_page_svelte46 = __esm({
     init_ViewOurWorkSection();
     init_CtaBannerSection();
     init_ColumnTemplateSection();
-    src10 = "/_app/immutable/assets/new-exteior-commercial-painting-job-klasek-painting.DnurnCnC.webp";
+    src8 = "/_app/immutable/assets/new-exteior-commercial-painting-job-klasek-painting.DnurnCnC.webp";
     commercial = {
       sources: {
         avif: "/_app/immutable/assets/exterior-commercial-painting-service.Bnz4fmGy.avif 300w, /_app/immutable/assets/exterior-commercial-painting-service.ClElnGEE.avif 600w",
@@ -20869,7 +21281,7 @@ var init_page_svelte46 = __esm({
         h: 400
       }
     };
-    Page46 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page47 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(RootServiceHero, "RootServiceHero").$$render(
         $$result,
         {
@@ -20882,7 +21294,7 @@ var init_page_svelte46 = __esm({
               "Free Design Consultation & Quote"
             ],
             image: {
-              src: src10,
+              src: src8,
               alt: "New exterior commercial painting job"
             }
           }
@@ -20906,40 +21318,40 @@ var init_page_svelte46 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/49.js
-var __exports50 = {};
-__export(__exports50, {
-  component: () => component50,
-  fonts: () => fonts50,
-  imports: () => imports50,
-  index: () => index50,
-  stylesheets: () => stylesheets50,
-  universal: () => page_ts_exports42,
-  universal_id: () => universal_id42
+// .svelte-kit/output/server/nodes/50.js
+var __exports51 = {};
+__export(__exports51, {
+  component: () => component51,
+  fonts: () => fonts51,
+  imports: () => imports51,
+  index: () => index51,
+  stylesheets: () => stylesheets51,
+  universal: () => page_ts_exports43,
+  universal_id: () => universal_id43
 });
-var index50, component_cache50, component50, universal_id42, imports50, stylesheets50, fonts50;
-var init__50 = __esm({
-  ".svelte-kit/output/server/nodes/49.js"() {
-    init_page_ts42();
-    index50 = 49;
-    component50 = async () => component_cache50 ??= (await Promise.resolve().then(() => (init_page_svelte46(), page_svelte_exports46))).default;
-    universal_id42 = "src/routes/(light-nav)/services/commercial-exterior-painting/+page.ts";
-    imports50 = ["_app/immutable/nodes/49.DVXj3Y1m.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js", "_app/immutable/chunks/CMJKR-Ce.js"];
-    stylesheets50 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts50 = [];
+var index51, component_cache51, component51, universal_id43, imports51, stylesheets51, fonts51;
+var init__51 = __esm({
+  ".svelte-kit/output/server/nodes/50.js"() {
+    init_page_ts43();
+    index51 = 50;
+    component51 = async () => component_cache51 ??= (await Promise.resolve().then(() => (init_page_svelte47(), page_svelte_exports47))).default;
+    universal_id43 = "src/routes/(light-nav)/services/commercial-exterior-painting/+page.ts";
+    imports51 = ["_app/immutable/nodes/50.qjT4WA1u.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/iqJyU3xE.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/YtKqi3V3.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/CpRRg9TQ.js", "_app/immutable/chunks/LFmWHm5N.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/BUsMTPQK.js", "_app/immutable/chunks/DgIKfcJp.js"];
+    stylesheets51 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts51 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/design-color-consultation/_page.ts.js
-var page_ts_exports43 = {};
-__export(page_ts_exports43, {
-  load: () => load47
+var page_ts_exports44 = {};
+__export(page_ts_exports44, {
+  load: () => load48
 });
-var load47;
-var init_page_ts43 = __esm({
+var load48;
+var init_page_ts44 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/design-color-consultation/_page.ts.js"() {
     init_metaTagHelpers();
-    load47 = () => {
+    load48 = () => {
       const pageMetaTags = createTitleDescription(
         "Professional Color Consultation and Design",
         "Transform your home with Klasek Painting's design and color consultation services. Expert advice on color schemes and designs to suit your style. Contact us today!"
@@ -20952,12 +21364,12 @@ var init_page_ts43 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/design-color-consultation/_page.svelte.js
-var page_svelte_exports47 = {};
-__export(page_svelte_exports47, {
-  default: () => Page47
+var page_svelte_exports48 = {};
+__export(page_svelte_exports48, {
+  default: () => Page48
 });
-var src11, design2, color, Page47;
-var init_page_svelte47 = __esm({
+var src9, design2, color, Page48;
+var init_page_svelte48 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/design-color-consultation/_page.svelte.js"() {
     init_ssr();
     init_OtherServicesSection();
@@ -20968,10 +21380,10 @@ var init_page_svelte47 = __esm({
     init_PaintingPromisesSection();
     init_ViewOurWorkSection();
     init_CtaBannerSection();
-    src11 = "/_app/immutable/assets/design-and-color-consultation-services.BRlaaiqu.webp";
+    src9 = "/_app/immutable/assets/design-and-color-consultation-services.BRlaaiqu.webp";
     design2 = "/_app/immutable/assets/design-consultation-service.CvcciXSY.webp";
     color = "/_app/immutable/assets/color-consultation-service.DC_36SEG.webp";
-    Page47 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page48 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(RootServiceHero, "RootServiceHero").$$render(
         $$result,
         {
@@ -20984,7 +21396,7 @@ var init_page_svelte47 = __esm({
               "Increase Your Home's Value with Lasting Results"
             ],
             image: {
-              src: src11,
+              src: src9,
               alt: "White house with black accents, recently completed design consultation project by Klasek Painting"
             }
           }
@@ -21060,40 +21472,40 @@ var init_page_svelte47 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/50.js
-var __exports51 = {};
-__export(__exports51, {
-  component: () => component51,
-  fonts: () => fonts51,
-  imports: () => imports51,
-  index: () => index51,
-  stylesheets: () => stylesheets51,
-  universal: () => page_ts_exports43,
-  universal_id: () => universal_id43
+// .svelte-kit/output/server/nodes/51.js
+var __exports52 = {};
+__export(__exports52, {
+  component: () => component52,
+  fonts: () => fonts52,
+  imports: () => imports52,
+  index: () => index52,
+  stylesheets: () => stylesheets52,
+  universal: () => page_ts_exports44,
+  universal_id: () => universal_id44
 });
-var index51, component_cache51, component51, universal_id43, imports51, stylesheets51, fonts51;
-var init__51 = __esm({
-  ".svelte-kit/output/server/nodes/50.js"() {
-    init_page_ts43();
-    index51 = 50;
-    component51 = async () => component_cache51 ??= (await Promise.resolve().then(() => (init_page_svelte47(), page_svelte_exports47))).default;
-    universal_id43 = "src/routes/(light-nav)/services/design-color-consultation/+page.ts";
-    imports51 = ["_app/immutable/nodes/50.YplHN_9u.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/B4ToEHT_.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js"];
-    stylesheets51 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts51 = [];
+var index52, component_cache52, component52, universal_id44, imports52, stylesheets52, fonts52;
+var init__52 = __esm({
+  ".svelte-kit/output/server/nodes/51.js"() {
+    init_page_ts44();
+    index52 = 51;
+    component52 = async () => component_cache52 ??= (await Promise.resolve().then(() => (init_page_svelte48(), page_svelte_exports48))).default;
+    universal_id44 = "src/routes/(light-nav)/services/design-color-consultation/+page.ts";
+    imports52 = ["_app/immutable/nodes/51.CAmkaaDr.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/iqJyU3xE.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/ho_4w172.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/YtKqi3V3.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/CpRRg9TQ.js", "_app/immutable/chunks/LFmWHm5N.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/BUsMTPQK.js"];
+    stylesheets52 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts52 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/_page.ts.js
-var page_ts_exports44 = {};
-__export(page_ts_exports44, {
-  load: () => load48
+var page_ts_exports45 = {};
+__export(page_ts_exports45, {
+  load: () => load49
 });
-var load48;
-var init_page_ts44 = __esm({
+var load49;
+var init_page_ts45 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/_page.ts.js"() {
     init_metaTagHelpers();
-    load48 = () => {
+    load49 = () => {
       const pageMetaTags = createTitleDescription(
         "Top Exterior House Painters",
         "Transform your house with our expert exterior painting services. Klasek Painting ensures a flawless finish. Get a free quote now!"
@@ -21106,12 +21518,12 @@ var init_page_ts44 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/_page.svelte.js
-var page_svelte_exports48 = {};
-__export(page_svelte_exports48, {
-  default: () => Page48
+var page_svelte_exports49 = {};
+__export(page_svelte_exports49, {
+  default: () => Page49
 });
-var src12, historic, exterior, Page48;
-var init_page_svelte48 = __esm({
+var src10, historic, exterior, Page49;
+var init_page_svelte49 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/_page.svelte.js"() {
     init_ssr();
     init_OtherServicesSection();
@@ -21122,10 +21534,10 @@ var init_page_svelte48 = __esm({
     init_ViewOurWorkSection();
     init_CtaBannerSection();
     init_EmailSignup();
-    src12 = "/_app/immutable/assets/exterior-home-painting.JNOrapCC.webp";
+    src10 = "/_app/immutable/assets/exterior-home-painting.JNOrapCC.webp";
     historic = "/_app/immutable/assets/historic-house-painting.CdL7seb4.webp";
     exterior = "/_app/immutable/assets/exterior-house-painting-services.q26j7Izb.webp";
-    Page48 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page49 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(RootServiceHero, "RootServiceHero").$$render(
         $$result,
         {
@@ -21137,7 +21549,7 @@ var init_page_svelte48 = __esm({
               "Quality Materials & Workmanship",
               "Free Design Consultation & Quote"
             ],
-            image: { src: src12, alt: "Exterior Home Painting" }
+            image: { src: src10, alt: "Exterior Home Painting" }
           }
         },
         {},
@@ -21173,40 +21585,40 @@ var init_page_svelte48 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/51.js
-var __exports52 = {};
-__export(__exports52, {
-  component: () => component52,
-  fonts: () => fonts52,
-  imports: () => imports52,
-  index: () => index52,
-  stylesheets: () => stylesheets52,
-  universal: () => page_ts_exports44,
-  universal_id: () => universal_id44
+// .svelte-kit/output/server/nodes/52.js
+var __exports53 = {};
+__export(__exports53, {
+  component: () => component53,
+  fonts: () => fonts53,
+  imports: () => imports53,
+  index: () => index53,
+  stylesheets: () => stylesheets53,
+  universal: () => page_ts_exports45,
+  universal_id: () => universal_id45
 });
-var index52, component_cache52, component52, universal_id44, imports52, stylesheets52, fonts52;
-var init__52 = __esm({
-  ".svelte-kit/output/server/nodes/51.js"() {
-    init_page_ts44();
-    index52 = 51;
-    component52 = async () => component_cache52 ??= (await Promise.resolve().then(() => (init_page_svelte48(), page_svelte_exports48))).default;
-    universal_id44 = "src/routes/(light-nav)/services/exterior-home-painting/+page.ts";
-    imports52 = ["_app/immutable/nodes/51.V0rGohUR.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/B4ToEHT_.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js", "_app/immutable/chunks/DkC8G5pu.js"];
-    stylesheets52 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"];
-    fonts52 = [];
+var index53, component_cache53, component53, universal_id45, imports53, stylesheets53, fonts53;
+var init__53 = __esm({
+  ".svelte-kit/output/server/nodes/52.js"() {
+    init_page_ts45();
+    index53 = 52;
+    component53 = async () => component_cache53 ??= (await Promise.resolve().then(() => (init_page_svelte49(), page_svelte_exports49))).default;
+    universal_id45 = "src/routes/(light-nav)/services/exterior-home-painting/+page.ts";
+    imports53 = ["_app/immutable/nodes/52.C2snenfj.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/iqJyU3xE.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/ho_4w172.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/YtKqi3V3.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/CpRRg9TQ.js", "_app/immutable/chunks/LFmWHm5N.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/BUsMTPQK.js", "_app/immutable/chunks/DoqDkTcC.js"];
+    stylesheets53 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css", "_app/immutable/assets/EmailSignup.CZe4dQ9e.css"];
+    fonts53 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/_page.ts.js
-var page_ts_exports45 = {};
-__export(page_ts_exports45, {
-  load: () => load49
+var page_ts_exports46 = {};
+__export(page_ts_exports46, {
+  load: () => load50
 });
-var load49;
-var init_page_ts45 = __esm({
+var load50;
+var init_page_ts46 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/_page.ts.js"() {
     init_metaTagHelpers();
-    load49 = () => {
+    load50 = () => {
       const pageMetaTags = createTitleDescription(
         "Exterior Painting Contractors",
         "Trust Klasek Painting for top-notch exterior painting services. Our experienced contractors ensure high-quality results. Request a free quote today!"
@@ -21218,20 +21630,11 @@ var init_page_ts45 = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/_page.svelte.js
-var page_svelte_exports49 = {};
-__export(page_svelte_exports49, {
-  default: () => Page49
-});
-var src13, Page49;
-var init_page_svelte49 = __esm({
-  ".svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/_page.svelte.js"() {
-    init_ssr();
-    init_FaqSection();
-    init_ColumnTemplateSection();
-    init_GalleryLinkBlock();
-    init_routes();
-    src13 = {
+// .svelte-kit/output/server/chunks/exterior-paint-contractor.js
+var cleaningImg;
+var init_exterior_paint_contractor = __esm({
+  ".svelte-kit/output/server/chunks/exterior-paint-contractor.js"() {
+    cleaningImg = {
       sources: {
         avif: "/_app/immutable/assets/exterior-paint-contractor.MFLL9Gbv.avif 341w, /_app/immutable/assets/exterior-paint-contractor.Z66NTt-7.avif 682w",
         webp: "/_app/immutable/assets/exterior-paint-contractor.CaWeelPn.webp 341w, /_app/immutable/assets/exterior-paint-contractor.c0U-CB2M.webp 682w",
@@ -21243,7 +21646,24 @@ var init_page_svelte49 = __esm({
         h: 443
       }
     };
-    Page49 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/_page.svelte.js
+var page_svelte_exports50 = {};
+__export(page_svelte_exports50, {
+  default: () => Page50
+});
+var Page50;
+var init_page_svelte50 = __esm({
+  ".svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/_page.svelte.js"() {
+    init_ssr();
+    init_FaqSection();
+    init_ColumnTemplateSection();
+    init_exterior_paint_contractor();
+    init_GalleryLinkBlock();
+    init_routes();
+    Page50 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "Can I use interior paint for exterior surfaces?",
@@ -21301,49 +21721,49 @@ var init_page_svelte49 = __esm({
           )}</div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="order-last">${typeof src13 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src13.img.src, 0)} alt=""${add_attribute("width", src13.img.w, 0)}${add_attribute("height", src13.img.h, 0)}>` : `<picture>${each(Object.entries(src13.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="order-last">${typeof cleaningImg === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", cleaningImg.img.src, 0)} alt=""${add_attribute("width", cleaningImg.img.w, 0)}${add_attribute("height", cleaningImg.img.h, 0)}>` : `<picture>${each(Object.entries(cleaningImg.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src13.img.src, 0)} alt=""${add_attribute("width", src13.img.w, 0)}${add_attribute("height", src13.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", cleaningImg.img.src, 0)} alt=""${add_attribute("width", cleaningImg.img.w, 0)}${add_attribute("height", cleaningImg.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(FaqSection, "FaqSection").$$render($$result, { faqData }, {}, {})}`;
     });
   }
 });
 
-// .svelte-kit/output/server/nodes/52.js
-var __exports53 = {};
-__export(__exports53, {
-  component: () => component53,
-  fonts: () => fonts53,
-  imports: () => imports53,
-  index: () => index53,
-  stylesheets: () => stylesheets53,
-  universal: () => page_ts_exports45,
-  universal_id: () => universal_id45
+// .svelte-kit/output/server/nodes/53.js
+var __exports54 = {};
+__export(__exports54, {
+  component: () => component54,
+  fonts: () => fonts54,
+  imports: () => imports54,
+  index: () => index54,
+  stylesheets: () => stylesheets54,
+  universal: () => page_ts_exports46,
+  universal_id: () => universal_id46
 });
-var index53, component_cache53, component53, universal_id45, imports53, stylesheets53, fonts53;
-var init__53 = __esm({
-  ".svelte-kit/output/server/nodes/52.js"() {
-    init_page_ts45();
-    index53 = 52;
-    component53 = async () => component_cache53 ??= (await Promise.resolve().then(() => (init_page_svelte49(), page_svelte_exports49))).default;
-    universal_id45 = "src/routes/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/+page.ts";
-    imports53 = ["_app/immutable/nodes/52.BN6n8yiV.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets53 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts53 = [];
+var index54, component_cache54, component54, universal_id46, imports54, stylesheets54, fonts54;
+var init__54 = __esm({
+  ".svelte-kit/output/server/nodes/53.js"() {
+    init_page_ts46();
+    index54 = 53;
+    component54 = async () => component_cache54 ??= (await Promise.resolve().then(() => (init_page_svelte50(), page_svelte_exports50))).default;
+    universal_id46 = "src/routes/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/+page.ts";
+    imports54 = ["_app/immutable/nodes/53.zuGw9m8T.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/NV-UJTbk.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets54 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts54 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/historic-house-painting/_page.ts.js
-var page_ts_exports46 = {};
-__export(page_ts_exports46, {
-  load: () => load50
+var page_ts_exports47 = {};
+__export(page_ts_exports47, {
+  load: () => load51
 });
-var load50;
-var init_page_ts46 = __esm({
+var load51;
+var init_page_ts47 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/historic-house-painting/_page.ts.js"() {
     init_metaTagHelpers();
-    load50 = () => {
+    load51 = () => {
       const pageMetaTags = createTitleDescription(
         "Historic House Painting",
         "Expert historic home painting by Klasek Painting. Specialized techniques to maintain the authenticity of your historic property. Get a free consultation now!"
@@ -21355,32 +21775,11 @@ var init_page_ts46 = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/historic-house-painting/_page.svelte.js
-var page_svelte_exports50 = {};
-__export(page_svelte_exports50, {
-  default: () => Page50
-});
-var src14, expert, Page50;
-var init_page_svelte50 = __esm({
-  ".svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/historic-house-painting/_page.svelte.js"() {
-    init_ssr();
-    init_FaqSection();
-    init_ColumnTemplateSection();
-    init_GalleryLinkBlock();
-    init_routes();
-    src14 = {
-      sources: {
-        avif: "/_app/immutable/assets/historic-house-remodeling.BYH-5Gb5.avif 299w, /_app/immutable/assets/historic-house-remodeling.BbWb1RV7.avif 598w",
-        webp: "/_app/immutable/assets/historic-house-remodeling.D5jGVKlY.webp 299w, /_app/immutable/assets/historic-house-remodeling.Bmj1Rd8E.webp 598w",
-        png: "/_app/immutable/assets/historic-house-remodeling.8bsSiXud.png 299w, /_app/immutable/assets/historic-house-remodeling.Bvl7JXil.png 598w"
-      },
-      img: {
-        src: "/_app/immutable/assets/historic-house-remodeling.Bvl7JXil.png",
-        w: 598,
-        h: 598
-      }
-    };
-    expert = {
+// .svelte-kit/output/server/chunks/expert-historic-house-painting.js
+var installGutters;
+var init_expert_historic_house_painting = __esm({
+  ".svelte-kit/output/server/chunks/expert-historic-house-painting.js"() {
+    installGutters = {
       sources: {
         avif: "/_app/immutable/assets/expert-historic-house-painting.Cizdwxvi.avif 437w, /_app/immutable/assets/expert-historic-house-painting.DuMMm2gi.avif 874w",
         webp: "/_app/immutable/assets/expert-historic-house-painting.BO9XXW_L.webp 437w, /_app/immutable/assets/expert-historic-house-painting.D6wwSFmt.webp 874w",
@@ -21392,7 +21791,36 @@ var init_page_svelte50 = __esm({
         h: 452
       }
     };
-    Page50 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/historic-house-painting/_page.svelte.js
+var page_svelte_exports51 = {};
+__export(page_svelte_exports51, {
+  default: () => Page51
+});
+var src11, Page51;
+var init_page_svelte51 = __esm({
+  ".svelte-kit/output/server/entries/pages/(light-nav)/services/exterior-home-painting/historic-house-painting/_page.svelte.js"() {
+    init_ssr();
+    init_FaqSection();
+    init_ColumnTemplateSection();
+    init_expert_historic_house_painting();
+    init_GalleryLinkBlock();
+    init_routes();
+    src11 = {
+      sources: {
+        avif: "/_app/immutable/assets/historic-house-remodeling.BYH-5Gb5.avif 299w, /_app/immutable/assets/historic-house-remodeling.BbWb1RV7.avif 598w",
+        webp: "/_app/immutable/assets/historic-house-remodeling.D5jGVKlY.webp 299w, /_app/immutable/assets/historic-house-remodeling.Bmj1Rd8E.webp 598w",
+        png: "/_app/immutable/assets/historic-house-remodeling.8bsSiXud.png 299w, /_app/immutable/assets/historic-house-remodeling.Bvl7JXil.png 598w"
+      },
+      img: {
+        src: "/_app/immutable/assets/historic-house-remodeling.Bvl7JXil.png",
+        w: 598,
+        h: 598
+      }
+    };
+    Page51 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "What are the benefits of painting an older home?",
@@ -21412,7 +21840,7 @@ var init_page_svelte50 = __esm({
         },
         {
           question: "How can our expert color consultation enhance your historic home?",
-          answer: "Not only do we provide a free written estimate, but we also offer expert color consultation. With our 20-plus years of experience painting older homes in Chicago, we know how to use color. One tip we give our customers is on combining colors. Specifically, choose either warm or cool tones. Take your time and be selective in your choice of colors; it's worth it. The right combination will make your historic home look incredible. We're here to help you in your selection."
+          answer: "Not only do we provide a free written estimate, but we also offer expert color consultation. With our 30-plus years of experience painting older homes in Chicago, we know how to use color. One tip we give our customers is on combining colors. Specifically, choose either warm or cool tones. Take your time and be selective in your choice of colors; it's worth it. The right combination will make your historic home look incredible. We're here to help you in your selection."
         },
         {
           question: "Why are bold colors expected for Chicago's heritage homes?",
@@ -21440,13 +21868,13 @@ var init_page_svelte50 = __esm({
         {}
       )} ${validate_component(ColumnTemplateSection, "ColumnTemplateSection").$$render($$result, { class: "lg:pt-12 pt-4" }, {}, {
         "right-column": () => {
-          return `<div slot="right-column">${typeof src14 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src14.img.src, 0)} alt="House remodeling project"${add_attribute("width", src14.img.w, 0)}${add_attribute("height", src14.img.h, 0)}>` : `<picture>${each(Object.entries(src14.sources), ([format, srcset]) => {
+          return `<div slot="right-column">${typeof src11 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src11.img.src, 0)} alt="House remodeling project"${add_attribute("width", src11.img.w, 0)}${add_attribute("height", src11.img.h, 0)}>` : `<picture>${each(Object.entries(src11.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src14.img.src, 0)} alt="House remodeling project"${add_attribute("width", src14.img.w, 0)}${add_attribute("height", src14.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src11.img.src, 0)} alt="House remodeling project"${add_attribute("width", src11.img.w, 0)}${add_attribute("height", src11.img.h, 0)}></picture>`}</div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" data-svelte-h="svelte-15fuh5d"><h2>Professional Historic Painting In\xA0Cook\xA0County</h2> <p>First of all, <a href="/">Klasek Painting</a> specializes in historic house painting. In fact,
-			we have over 20 years experience. Specifically, we restore older homes. And, we bring them back
+          return `<div slot="left-column" data-svelte-h="svelte-1bnrey6"><h2>Professional Historic Painting In\xA0Cook\xA0County</h2> <p>First of all, <a href="/">Klasek Painting</a> specializes in historic house painting. In fact,
+			we have over 30 years experience. Specifically, we restore older homes. And, we bring them back
 			to their former beauty. We&#39;re experts in both paint and stain finishes.</p> <p>For those reasons, we are the leading company for restoring Chicagoland exteriors.</p> <h3>Custom Painting Services For Older Homes</h3> <p>The owner, Pete Klasek, loves making older homes look new again. As a result, our painters
 			take extra care in every step of the process.</p> <p>Chicago&#39;s Klasek Painting brings out character and architectural design in homes. Our goal is
 			to increase value and curb appeal.</p></div>`;
@@ -21462,49 +21890,49 @@ var init_page_svelte50 = __esm({
 			high-quality primer to any raw surface.</p> ${validate_component(GalleryLinkBlock, "GalleryLinkBlock").$$render($$result, { data: [galleryRoutes["victorian"]] }, {}, {})}</div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof expert === "string" ? `<img class="w-full h-auto rounded-lg bord max-w-[525px] mx-auto"${add_attribute("src", expert.img.src, 0)} alt="Freshly painted house exterior snowy winter weather"${add_attribute("width", expert.img.w, 0)}${add_attribute("height", expert.img.h, 0)}>` : `<picture>${each(Object.entries(expert.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof installGutters === "string" ? `<img class="w-full h-auto rounded-lg bord max-w-[525px] mx-auto"${add_attribute("src", installGutters.img.src, 0)} alt="Freshly painted house exterior snowy winter weather"${add_attribute("width", installGutters.img.w, 0)}${add_attribute("height", installGutters.img.h, 0)}>` : `<picture>${each(Object.entries(installGutters.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto rounded-lg bord max-w-[525px] mx-auto"${add_attribute("src", expert.img.src, 0)} alt="Freshly painted house exterior snowy winter weather"${add_attribute("width", expert.img.w, 0)}${add_attribute("height", expert.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto rounded-lg bord max-w-[525px] mx-auto"${add_attribute("src", installGutters.img.src, 0)} alt="Freshly painted house exterior snowy winter weather"${add_attribute("width", installGutters.img.w, 0)}${add_attribute("height", installGutters.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(FaqSection, "FaqSection").$$render($$result, { faqData }, {}, {})}`;
     });
   }
 });
 
-// .svelte-kit/output/server/nodes/53.js
-var __exports54 = {};
-__export(__exports54, {
-  component: () => component54,
-  fonts: () => fonts54,
-  imports: () => imports54,
-  index: () => index54,
-  stylesheets: () => stylesheets54,
-  universal: () => page_ts_exports46,
-  universal_id: () => universal_id46
+// .svelte-kit/output/server/nodes/54.js
+var __exports55 = {};
+__export(__exports55, {
+  component: () => component55,
+  fonts: () => fonts55,
+  imports: () => imports55,
+  index: () => index55,
+  stylesheets: () => stylesheets55,
+  universal: () => page_ts_exports47,
+  universal_id: () => universal_id47
 });
-var index54, component_cache54, component54, universal_id46, imports54, stylesheets54, fonts54;
-var init__54 = __esm({
-  ".svelte-kit/output/server/nodes/53.js"() {
-    init_page_ts46();
-    index54 = 53;
-    component54 = async () => component_cache54 ??= (await Promise.resolve().then(() => (init_page_svelte50(), page_svelte_exports50))).default;
-    universal_id46 = "src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.ts";
-    imports54 = ["_app/immutable/nodes/53.qKX_G7uQ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets54 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts54 = [];
+var index55, component_cache55, component55, universal_id47, imports55, stylesheets55, fonts55;
+var init__55 = __esm({
+  ".svelte-kit/output/server/nodes/54.js"() {
+    init_page_ts47();
+    index55 = 54;
+    component55 = async () => component_cache55 ??= (await Promise.resolve().then(() => (init_page_svelte51(), page_svelte_exports51))).default;
+    universal_id47 = "src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.ts";
+    imports55 = ["_app/immutable/nodes/54.Dg2aijOQ.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/6YbL5hh8.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets55 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts55 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/gutter-installation-repair/_page.ts.js
-var page_ts_exports47 = {};
-__export(page_ts_exports47, {
-  load: () => load51
+var page_ts_exports48 = {};
+__export(page_ts_exports48, {
+  load: () => load52
 });
-var load51;
-var init_page_ts47 = __esm({
+var load52;
+var init_page_ts48 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/gutter-installation-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load51 = () => {
+    load52 = () => {
       const pageMetaTags = createTitleDescription(
         "Seamless Gutter Installation & Repair",
         "Seamless aluminum gutters cut on-site by Klasek\u2019s own crew \u2014 no subcontractors. Installation, repair, cleaning & maintenance across Cook County. 30+ years. Free written estimates."
@@ -21525,12 +21953,12 @@ var init_orange_paint_splash = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/gutter-installation-repair/_page.svelte.js
-var page_svelte_exports51 = {};
-__export(page_svelte_exports51, {
-  default: () => Page51
+var page_svelte_exports52 = {};
+__export(page_svelte_exports52, {
+  default: () => Page52
 });
-var heroSrc, css16, Page51;
-var init_page_svelte51 = __esm({
+var heroSrc, installTall, css16, Page52;
+var init_page_svelte52 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/gutter-installation-repair/_page.svelte.js"() {
     init_ssr();
     init_GoogleProof();
@@ -21540,9 +21968,13 @@ var init_page_svelte51 = __esm({
     init_routes();
     init_orange_paint_splash();
     init_stars();
-    init_Google_name_logo();
+    init_valspar();
     init_lead_safe();
     init_isMobileStore();
+    init_exterior_brick_repair_service();
+    init_expert_historic_house_painting();
+    init_stucco_and_trim_before();
+    init_exterior_paint_contractor();
     heroSrc = {
       sources: {
         avif: "/_app/immutable/assets/exterior-home-painting.C-Phi6Vi.avif 559w, /_app/immutable/assets/exterior-home-painting.OWFhbydj.avif 1118w",
@@ -21555,11 +21987,23 @@ var init_page_svelte51 = __esm({
         h: 606
       }
     };
-    css16 = {
-      code: ".tab.svelte-177d8eq{display:inline-flex;align-items:center;background:hsl(var(--primary-dark));color:white;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;padding:0.375rem 1.75rem 0.375rem 1rem;clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%)}.ribbon.svelte-177d8eq{display:flex;align-items:center;justify-content:center;gap:0.875rem}.flag.svelte-177d8eq{width:42px;height:17px;background:hsl(var(--primary-dark));flex:none}.flag-l.svelte-177d8eq{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%)}.flag-r.svelte-177d8eq{clip-path:polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%)}.ph.svelte-177d8eq{position:relative;background-color:#e7e8f3;background-image:repeating-linear-gradient(\n      135deg,\n      rgba(35, 32, 97, 0.06) 0 12px,\n      rgba(35, 32, 97, 0) 12px 24px\n    );border-radius:0.5rem;overflow:hidden;display:flex;align-items:center;justify-content:center}.ph.svelte-177d8eq::after{content:attr(data-ph);position:absolute;bottom:10px;left:10px;font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:11px;letter-spacing:0.02em;color:#5a5d7a;background:rgba(255, 255, 255, 0.85);padding:3px 8px;border-radius:5px}.ph-dark.svelte-177d8eq{background-color:#2a2770;background-image:repeating-linear-gradient(\n      135deg,\n      rgba(255, 255, 255, 0.06) 0 12px,\n      rgba(255, 255, 255, 0) 12px 24px\n    )}.ph-dark.svelte-177d8eq::after{color:#c8c9e6;background:rgba(21, 19, 58, 0.6)}",
-      map: `{"version":3,"file":"+page.svelte","sources":["+page.svelte"],"sourcesContent":["<script context=\\"module\\"><\/script>\\n<script lang=\\"ts\\">import GoogleProof from \\"$lib/common/other/GoogleProof.svelte\\";\\nimport ClickToCall from \\"$lib/common/other/ClickToCall.svelte\\";\\nimport Map from \\"$lib/common/other/Map.svelte\\";\\nimport Button from \\"$components/button/button.svelte\\";\\nimport { routes, serviceAreaRoutes } from \\"$lib/common/routing/routes\\";\\nimport heroSrc from \\"$images/services/exterior-home-painting.webp?enhanced\\";\\nimport splash from \\"$images/backgrounds/orange-paint-splash.webp\\";\\nimport stars from \\"$images/5-stars.svg\\";\\nimport google from \\"$images/logos/Google-name-logo.svg\\";\\nimport valspar from \\"$images/logos/trusted-brands/valspar.png?enhanced\\";\\nimport behr from \\"$images/logos/trusted-brands/behr.png?enhanced\\";\\nimport benjaminMoore from \\"$images/logos/trusted-brands/benjamin-moore.png?enhanced\\";\\nimport sherwinWilliams from \\"$images/logos/trusted-brands/sherwin-williams.png?enhanced\\";\\nimport leadSafe from \\"$images/logos/trusted-brands/lead-safe.png?enhanced\\";\\nimport pdca from \\"$images/logos/trusted-brands/pdca.png?enhanced\\";\\nimport { isMobileStore } from \\"$lib/stores/isMobileStore\\";\\nconst partnerLogos = [\\n  { src: valspar, alt: \\"Valspar\\", height: \\"h-7 sm:h-8\\" },\\n  { src: behr, alt: \\"Behr\\", height: \\"h-7 sm:h-8\\" },\\n  { src: benjaminMoore, alt: \\"Benjamin Moore\\", height: \\"h-8 sm:h-10\\" },\\n  { src: sherwinWilliams, alt: \\"Sherwin-Williams\\", height: \\"h-8 sm:h-10\\" },\\n  { src: leadSafe, alt: \\"Lead-Safe Certified\\", height: \\"h-9 sm:h-11\\" },\\n  { src: pdca, alt: \\"PDCA\\", height: \\"h-8 sm:h-10\\" }\\n];\\nlet openFaq = 0;\\nconst heroChecks = [\\n  \\"Installed by our own crew\\",\\n  \\"Free written estimates\\",\\n  \\"100% satisfaction guarantee\\",\\n  \\"Lead-Safe Certified\\"\\n];\\nconst installChecks = [\\n  [\\"K-style & half-round\\", \\"profiles\\"],\\n  [\\"Copper\\", \\"for historic homes\\"],\\n  [\\"Properly-sized\\", \\"downspouts\\"],\\n  [\\"Engineered\\", \\"pitch & flow\\"]\\n];\\nconst repairItems = [\\n  [\\"Leaks & seam sealing\\", \\"Re-sealed joints and patched corners.\\"],\\n  [\\"Sagging & pitch\\", \\"Re-hung and re-pitched to drain.\\"],\\n  [\\"Fascia & soffit repair\\", \\"Rotted wood replaced before re-hang.\\"],\\n  [\\"Storm damage & reattachment\\", \\"Pulled-away runs and downspouts.\\"]\\n];\\nconst problems = [\\n  {\\n    title: \\"Foundation cracks\\",\\n    body: \\"Overflow pools against the slab, freezes, and heaves \\\\u2014 opening cracks that let water into the basement.\\"\\n  },\\n  {\\n    title: \\"Fascia & soffit rot\\",\\n    body: \\"Water trapped behind a failing gutter soaks the wood it's bolted to, until the whole board needs replacing.\\"\\n  },\\n  {\\n    title: \\"Basement flooding\\",\\n    body: \\"Thousands of gallons a year dumped at the wrong spot is the #1 cause of wet basements and mold.\\"\\n  }\\n];\\nconst stats = [\\n  {\\n    stat: \\"30+\\",\\n    title: \\"Years in business\\",\\n    body: \\"Serving Cook County exteriors since 1994 \\\\u2014 we'll be here for the warranty.\\"\\n  },\\n  {\\n    stat: \\"0\\",\\n    title: \\"Subcontractors\\",\\n    body: \\"Your gutters are installed by Klasek employees we trained and stand behind.\\"\\n  },\\n  {\\n    stat: \\"$0\\",\\n    title: \\"Estimate cost\\",\\n    body: \\"Free, written, itemized \\\\u2014 so you know exactly what you're paying for.\\"\\n  },\\n  {\\n    stat: \\"100%\\",\\n    title: \\"Satisfaction guarantee\\",\\n    body: \\"We're not done until the water goes where it should and you're happy.\\"\\n  }\\n];\\nconst faqData = [\\n  {\\n    question: \\"Do you install gutter guards?\\",\\n    answer: \\"Yes \\\\u2014 we install leaf-guard and gutter-protection systems and can recommend the right one for your tree cover and roof type. Ask about guard options during your free estimate.\\"\\n  },\\n  {\\n    question: \\"What makes seamless gutters better than sectional?\\",\\n    answer: \\"Seams are where gutters leak. Because we roll each run to your exact roofline on-site, the only joints are at corners and downspouts \\\\u2014 meaning far fewer leak points and a cleaner look.\\"\\n  },\\n  {\\n    question: \\"How do I know if my gutters need to be repaired or replaced?\\",\\n    answer: \\"Sagging sections, persistent leaks, rust, or water spilling over during rain are all signs your gutters need attention. During your free estimate, we inspect the entire system and give you a straightforward recommendation \\\\u2014 repair what can be saved, and replace only what can't.\\"\\n  },\\n  {\\n    question: \\"How much does a new gutter system cost?\\",\\n    answer: \\"It depends on linear footage, profile (K-style, half-round, copper), and the number of downspouts and corners. That's exactly what your free written estimate spells out \\\\u2014 no surprises after the work starts.\\"\\n  },\\n  {\\n    question: \\"Do you replace rotted fascia and soffit too?\\",\\n    answer: \\"We do. As an exterior repair company, we can replace damaged fascia and soffit before re-hanging your gutters, so the new system mounts to solid wood \\\\u2014 not a problem waiting to come back.\\"\\n  },\\n  {\\n    question: \\"Do you replace gutters as part of an exterior painting project?\\",\\n    answer: \\"Yes. Many of our customers bundle gutter work with exterior painting or siding repair so everything is handled in one project, by one team, on one timeline.\\"\\n  },\\n  {\\n    question: \\"How soon can you come out for an estimate?\\",\\n    answer: \\"Usually within a few business days. Fill out the contact form or give us a call and we'll find a time to walk your property.\\"\\n  }\\n];\\n<\/script>\\n\\n<!-- ===================== HERO ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x\\"\\n  >\\n    <!-- left: framed photo + google review card -->\\n    <div class=\\"order-2 lg:order-1\\">\\n      <div class=\\"relative\\">\\n        {#if typeof heroSrc === 'string'}\\n\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home exterior with seamless gutters installed by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(heroSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home exterior with seamless gutters installed by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n\\t</picture>\\n{/if}\\n        <GoogleProof\\n          class=\\"bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl\\"\\n        />\\n      </div>\\n    </div>\\n\\n    <!-- right: copy -->\\n    <div class=\\"order-1 lg:order-2 max-w-xl\\">\\n      <span class=\\"tab mb-5\\">Cook County \xB7 30+ Years \xB7 Family Crew</span>\\n      <h1\\n        class=\\"text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white\\"\\n        data-testid=\\"page-heading\\"\\n      >\\n        Seamless gutters,<br class=\\"hidden sm:block\\" /> cut on-site by\\n        <span class=\\"text-primary\\">our own crew.</span>\\n      </h1>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        No subcontractors. No leaky seams. Klasek rolls custom aluminum gutters\\n        right in your driveway and installs them with the correct pitch \u2014 so\\n        water ends up in the downspout, not against your foundation.\\n      </p>\\n      <ul class=\\"mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5\\">\\n        {#each heroChecks as check}\\n          <li class=\\"flex items-center gap-2.5 text-white/90 font-semibold\\">\\n            <svg\\n              class=\\"text-primary shrink-0\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"3\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            {check}\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Get a Free Estimate\\n        </Button>\\n        <ClickToCall variant=\\"outline\\" class=\\"text-lg h-14 px-6\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRUST STRIP ===================== -->\\n<section class=\\"bg-white border-y\\">\\n  <div\\n    class=\\"container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center\\"\\n  >\\n    <span class=\\"flex items-center gap-2\\">\\n      <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n      <span class=\\"text-sm font-bold text-gray-700\\">5.0 on Google</span>\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path d=\\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\\" /></svg\\n      >\\n      Lead-Safe Certified\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path\\n          d=\\"M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\\"\\n        /></svg\\n      >\\n      100% Satisfaction Guarantee\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><circle cx=\\"12\\" cy=\\"12\\" r=\\"9\\" /><path d=\\"M12 7v5l3 2\\" /></svg\\n      >\\n      Serving Chicagoland since 1994\\n    </span>\\n  </div>\\n</section>\\n\\n<!-- ===================== PROBLEM / AGITATION ===================== -->\\n<section class=\\"bg-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11 flex flex-col items-center\\">\\n      <div class=\\"ribbon mb-4\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark\\"\\n        >\\n          The hidden cost of bad gutters\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n      <p class=\\"text-lg text-gray-600 leading-relaxed\\">\\n        When water can't drain the way it should, it finds the most expensive\\n        path instead \u2014 and the damage shows up where it's hardest to fix.\\n      </p>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-3 gap-5\\">\\n      {#each problems as problem, i}\\n        <div class=\\"rounded-xl border p-6 bg-off-white\\">\\n          <div\\n            class=\\"w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4\\"\\n          >\\n            {#if i === 0}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6\\" /></svg\\n              >\\n            {:else if i === 1}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path\\n                  d=\\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\\"\\n                /><path d=\\"M3 13h18\\" /></svg\\n              >\\n            {:else}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\\" /></svg\\n              >\\n            {/if}\\n          </div>\\n          <h3 class=\\"font-bold text-xl text-secondary-dark\\">{problem.title}</h3>\\n          <p class=\\"mt-2 text-gray-600 leading-relaxed\\">{problem.body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== INSTALLATION (HERO OFFERING) ===================== -->\\n<section\\n  id=\\"install\\"\\n  class=\\"relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden\\"\\n>\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">Our signature service</span>\\n      <h2 class=\\"text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white\\">\\n        Seamless aluminum gutters, rolled in your driveway.\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        We bring the machine to you and form each run to the exact length of\\n        your roofline \u2014 so the only seams are at the corners and downspouts.\\n        Fewer seams mean fewer leaks, and far fewer callbacks down the road.\\n      </p>\\n      <ul class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5\\">\\n        {#each installChecks as [bold, rest]}\\n          <li class=\\"flex items-start gap-3\\">\\n            <svg\\n              class=\\"mt-0.5 shrink-0 text-primary\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"2.8\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            <span class=\\"text-white/85\\">\\n              <b class=\\"text-white font-bold\\">{bold}</b>\\n              {rest}\\n            </span>\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-4\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Price My Gutters\\n        </Button>\\n        <p class=\\"text-sm text-white/55 max-w-[14rem]\\">\\n          Installed by Klasek employees \u2014 never subcontracted out.\\n        </p>\\n      </div>\\n    </div>\\n    <div class=\\"grid grid-cols-2 gap-4\\">\\n      <div\\n        class=\\"ph ph-dark aspect-[3/4] ring-2 ring-white/10\\"\\n        data-ph=\\"on-site gutter machine\\"\\n      />\\n      <div class=\\"grid grid-rows-2 gap-4\\">\\n        <div\\n          class=\\"ph ph-dark ring-2 ring-white/10\\"\\n          data-ph=\\"seamless K-style run\\"\\n        />\\n        <div class=\\"ph ph-dark ring-2 ring-white/10\\" data-ph=\\"copper detail\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== REPAIR ===================== -->\\n<section id=\\"repair\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\">\\n    <div\\n      class=\\"order-2 lg:order-1 ph aspect-[4/3]\\"\\n      data-ph=\\"REPAIR \u2014 fascia / reattachment before-after\\"\\n    />\\n    <div class=\\"order-1 lg:order-2\\">\\n      <span class=\\"tab mb-5\\">Repair &amp; storm damage</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Not ready to replace? We'll make what you have watertight again.\\n      </h2>\\n      <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n        Most gutter problems are fixable. Our crew diagnoses the real cause \u2014\\n        not just the symptom \u2014 and gives you an honest call on repair vs.\\n        replacement.\\n      </p>\\n      <div class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4\\">\\n        {#each repairItems as [title, body]}\\n          <div class=\\"flex items-start gap-3\\">\\n            <span\\n              class=\\"mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0\\"\\n              aria-hidden=\\"true\\"\\n            />\\n            <p>\\n              <b class=\\"font-bold text-secondary-dark\\">{title}</b><br />\\n              <span class=\\"text-gray-600 text-[15px]\\">{body}</span>\\n            </p>\\n          </div>\\n        {/each}\\n      </div>\\n      <Button\\n        href={routes[\\"contact\\"].href}\\n        variant=\\"secondary\\"\\n        class=\\"mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary\\"\\n      >\\n        Book a Repair Visit\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== CLEANING & MAINTENANCE ===================== -->\\n<section id=\\"cleaning\\" class=\\"bg-off-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]\\"\\n    >\\n      <div class=\\"p-8 sm:p-12\\">\\n        <span class=\\"tab mb-5\\">Easiest place to start</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n        >\\n          Gutter cleaning &amp; seasonal maintenance.\\n        </h2>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          A quick, low-commitment way to meet the crew and protect your home. We\\n          clear every run, flush the downspouts, and flag anything that needs\\n          attention \u2014 before it becomes a repair.\\n        </p>\\n        <div class=\\"mt-6 flex flex-wrap gap-3\\">\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F342} Fall leaf clear-out\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F331} Spring flush &amp; inspect\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F4CB} Free condition report\\n          </span>\\n        </div>\\n        <Button href={routes[\\"contact\\"].href} class=\\"mt-8 text-lg h-14 px-7\\">\\n          Schedule a Cleaning\\n        </Button>\\n      </div>\\n      <div\\n        class=\\"ph !rounded-none min-h-[260px]\\"\\n        data-ph=\\"CLEANING \u2014 crew clearing gutters in fall\\"\\n      />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== WHY KLASEK ===================== -->\\n<section id=\\"why\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11\\">\\n      <div\\n        class=\\"inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5\\"\\n      >\\n        <span\\n          class=\\"inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide\\"\\n        >\\n          Why Choose Klasek\\n        </span>\\n      </div>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Three decades on Chicagoland ladders. One crew, start to finish.\\n      </h2>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-2 lg:grid-cols-4 gap-5\\">\\n      {#each stats as { stat, title, body }}\\n        <div\\n          class=\\"rounded-xl border p-6 text-center hover:shadow-subtle transition\\"\\n        >\\n          <div class=\\"font-extrabold text-4xl text-primary-dark\\">{stat}</div>\\n          <h3 class=\\"mt-2 font-bold text-lg text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-2 text-gray-600 text-[15px] leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BEFORE / AFTER GALLERY ===================== -->\\n<section class=\\"bg-off-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center mb-9 flex flex-col items-center\\">\\n      <span class=\\"tab mb-4\\">Our work</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Before &amp; after, around the neighborhood.\\n      </h2>\\n    </div>\\n    <div class=\\"grid grid-cols-2 lg:grid-cols-4 gap-4\\">\\n      {#each Array.from({ length: 8 }, (_, i) => i + 1) as n}\\n        <div class=\\"ph aspect-square\\" data-ph={\`before / after 0\${n}\`} />\\n      {/each}\\n    </div>\\n    <div class=\\"mt-9 flex flex-col items-center gap-3\\">\\n      <p class=\\"flex items-center gap-2 text-sm font-bold text-gray-700\\">\\n        Review us\\n        <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n        on\\n      </p>\\n      <img class=\\"w-[92px] h-auto\\" src={google} alt=\\"Google\\" />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== SERVICE AREA ===================== -->\\n<section id=\\"area\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Areas We Serve\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center\\">\\n      <div>\\n        <h3 class=\\"font-bold text-2xl text-secondary-dark\\">\\n          Gutter service across the western Cook County suburbs.\\n        </h3>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your\\n          roofline. If your town isn't listed, call us; we likely cover it.\\n        </p>\\n        <div\\n          class=\\"mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3\\"\\n        >\\n          <svg\\n            class=\\"mt-0.5 shrink-0\\"\\n            width=\\"22\\"\\n            height=\\"22\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary-dark))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          <div>\\n            <p class=\\"font-bold text-secondary-dark\\">\\n              Klasek Painting \xB7 Lyons, IL\\n            </p>\\n            <p class=\\"text-gray-600 text-[15px]\\">\\n              4415 S. Custer, Lyons, IL 60534\\n            </p>\\n            <ClickToCall\\n              variant=\\"link\\"\\n              class=\\"!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]\\"\\n            />\\n          </div>\\n        </div>\\n        <div class=\\"mt-5 flex flex-wrap items-center gap-3\\">\\n          <Button href={routes[\\"contact\\"].href} class=\\"text-lg px-6\\">\\n            Request Estimate\\n          </Button>\\n          <ClickToCall\\n            variant=\\"secondary\\"\\n            class=\\"text-lg px-6 bg-secondary-dark hover:bg-secondary text-white\\"\\n          >\\n            Call the Crew\\n          </ClickToCall>\\n        </div>\\n      </div>\\n      <div>\\n        <ul\\n          class=\\"grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700\\"\\n        >\\n          {#each Object.values(serviceAreaRoutes) as { text, href }}\\n            <li class=\\"flex items-center gap-2\\">\\n              <span\\n                class=\\"w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0\\"\\n                aria-hidden=\\"true\\"\\n              />\\n              <a class=\\"hover:text-primary-dark hover:underline\\" {href}>\\n                {text}\\n              </a>\\n            </li>\\n          {/each}\\n        </ul>\\n        <div class=\\"mt-6 h-44 rounded-lg overflow-hidden\\">\\n          <Map lazy={true} />\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BRAND PARTNERS ===================== -->\\n<section class=\\"bg-off-white py-14 border-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-8\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <p\\n          class=\\"font-bold text-lg text-secondary-dark uppercase tracking-wide text-center\\"\\n        >\\n          Our Trusted Brand Partners\\n        </p>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div\\n      class=\\"flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7\\"\\n    >\\n      {#each partnerLogos as { src, alt, height }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FAQ ===================== -->\\n<section id=\\"faq\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container max-w-3xl\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Gutter FAQs\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"divide-y border-y\\">\\n      {#each faqData as { question, answer }, i}\\n        <div class=\\"py-5\\">\\n          <button\\n            type=\\"button\\"\\n            class=\\"flex w-full items-center justify-between gap-4 text-left\\"\\n            aria-expanded={openFaq === i}\\n            on:click={() => (openFaq = openFaq === i ? -1 : i)}\\n          >\\n            <span class=\\"font-bold text-lg text-secondary-dark\\">\\n              {question}\\n            </span>\\n            <span\\n              class=\\"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition {openFaq ===\\n              i\\n                ? 'rotate-45 bg-primary-dark text-white border-primary-dark'\\n                : 'bg-off-white text-gray-600'}\\"\\n            >\\n              <svg\\n                width=\\"14\\"\\n                height=\\"14\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.5\\"\\n                stroke-linecap=\\"round\\"><path d=\\"M12 5v14M5 12h14\\" /></svg\\n              >\\n            </span>\\n          </button>\\n          {#if openFaq === i}\\n            <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{answer}</p>\\n          {/if}\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FINAL CTA ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white p-y p-x overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <img\\n    src={splash}\\n    alt=\\"\\"\\n    aria-hidden=\\"true\\"\\n    class=\\"pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">No-pressure, no-cost</span>\\n      <h2 class=\\"text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white\\">\\n        Ready to help your property look its best?\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-md\\">\\n        Send us your details and we'll schedule a walk-through, then deliver a\\n        free written estimate for you to evaluate. Call the best.\\n      </p>\\n      <div\\n        class=\\"mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold\\"\\n      >\\n        <ClickToCall\\n          variant=\\"link\\"\\n          class=\\"!text-2xl !font-bold text-white hover:!text-primary\\"\\n        />\\n        <span class=\\"inline-flex items-center gap-2\\">\\n          <svg\\n            width=\\"18\\"\\n            height=\\"18\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          4415 S. Custer, Lyons, IL\\n        </span>\\n      </div>\\n    </div>\\n    <div class=\\"bg-white rounded-2xl shadow-2xl p-6 sm:p-7\\">\\n      <p class=\\"font-bold text-xl text-secondary-dark mb-1\\">\\n        Get a Free Estimate\\n      </p>\\n      <p class=\\"text-sm text-gray-600 mb-5\\">\\n        We'll reach out to schedule your walk-through.\\n      </p>\\n      <div class=\\"flex flex-col gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"w-full text-lg h-14\\">\\n          Request My Free Estimate\\n        </Button>\\n        <ClickToCall\\n          variant=\\"secondary\\"\\n          class=\\"w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white\\"\\n        />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== STICKY MOBILE BAR ===================== -->\\n<div\\n  class=\\"lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]\\"\\n>\\n  <div\\n    class=\\"grid grid-cols-2 gap-2 p-2.5\\"\\n    style=\\"padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));\\"\\n  >\\n    <ClickToCall\\n      variant=\\"secondary\\"\\n      class=\\"bg-secondary-dark hover:bg-secondary text-white\\"\\n    >\\n      Call\\n    </ClickToCall>\\n    <Button href={routes[\\"contact\\"].href}>Free Estimate</Button>\\n  </div>\\n</div>\\n\\n<style>\\n  /* orange right-pointing tab label (design's .tab) */\\n  .tab {\\n    display: inline-flex;\\n    align-items: center;\\n    background: hsl(var(--primary-dark));\\n    color: white;\\n    font-weight: 700;\\n    font-size: 12px;\\n    text-transform: uppercase;\\n    letter-spacing: 0.14em;\\n    padding: 0.375rem 1.75rem 0.375rem 1rem;\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* centered ribbon header with swallowtail flags (design's .ribbon) */\\n  .ribbon {\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n    gap: 0.875rem;\\n  }\\n  .flag {\\n    width: 42px;\\n    height: 17px;\\n    background: hsl(var(--primary-dark));\\n    flex: none;\\n  }\\n  .flag-l {\\n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%);\\n  }\\n  .flag-r {\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* striped photo placeholders (design's .ph) \u2014 swap for real photos */\\n  .ph {\\n    position: relative;\\n    background-color: #e7e8f3;\\n    background-image: repeating-linear-gradient(\\n      135deg,\\n      rgba(35, 32, 97, 0.06) 0 12px,\\n      rgba(35, 32, 97, 0) 12px 24px\\n    );\\n    border-radius: 0.5rem;\\n    overflow: hidden;\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n  }\\n  .ph::after {\\n    content: attr(data-ph);\\n    position: absolute;\\n    bottom: 10px;\\n    left: 10px;\\n    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;\\n    font-size: 11px;\\n    letter-spacing: 0.02em;\\n    color: #5a5d7a;\\n    background: rgba(255, 255, 255, 0.85);\\n    padding: 3px 8px;\\n    border-radius: 5px;\\n  }\\n  .ph-dark {\\n    background-color: #2a2770;\\n    background-image: repeating-linear-gradient(\\n      135deg,\\n      rgba(255, 255, 255, 0.06) 0 12px,\\n      rgba(255, 255, 255, 0) 12px 24px\\n    );\\n  }\\n  .ph-dark::after {\\n    color: #c8c9e6;\\n    background: rgba(21, 19, 58, 0.6);\\n  }\\n</style>\\n"],"names":[],"mappings":"AA0yBE,mBAAK,CACH,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,QAAQ,CAAC,OAAO,CAAC,QAAQ,CAAC,IAAI,CACvC,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,sBAAQ,CACN,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,GAAG,CAAE,QACP,CACA,oBAAM,CACJ,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,IAAI,CAAE,IACR,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,GAAG,CAC7D,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,kBAAI,CACF,QAAQ,CAAE,QAAQ,CAClB,gBAAgB,CAAE,OAAO,CACzB,gBAAgB,CAAE;AACtB,MAAM,MAAM;AACZ,MAAM,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI;AACnC,MAAM,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;AAC/B,KAAK,CACD,aAAa,CAAE,MAAM,CACrB,QAAQ,CAAE,MAAM,CAChB,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MACnB,CACA,kBAAG,OAAQ,CACT,OAAO,CAAE,KAAK,OAAO,CAAC,CACtB,QAAQ,CAAE,QAAQ,CAClB,MAAM,CAAE,IAAI,CACZ,IAAI,CAAE,IAAI,CACV,WAAW,CAAE,YAAY,CAAC,CAAC,cAAc,CAAC,CAAC,KAAK,CAAC,CAAC,SAAS,CAC3D,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,MAAM,CACtB,KAAK,CAAE,OAAO,CACd,UAAU,CAAE,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CACrC,OAAO,CAAE,GAAG,CAAC,GAAG,CAChB,aAAa,CAAE,GACjB,CACA,uBAAS,CACP,gBAAgB,CAAE,OAAO,CACzB,gBAAgB,CAAE;AACtB,MAAM,MAAM;AACZ,MAAM,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI;AACtC,MAAM,KAAK,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC;AAClC,KACE,CACA,uBAAQ,OAAQ,CACd,KAAK,CAAE,OAAO,CACd,UAAU,CAAE,KAAK,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,EAAE,CAAC,CAAC,GAAG,CAClC"}`
+    installTall = {
+      sources: {
+        avif: "/_app/immutable/assets/stucco-painting-service.DHIFwXlo.avif 419w, /_app/immutable/assets/stucco-painting-service.BZoFp0O0.avif 838w",
+        webp: "/_app/immutable/assets/stucco-painting-service.CNu3q_d7.webp 419w, /_app/immutable/assets/stucco-painting-service.D1diRkkl.webp 838w",
+        png: "/_app/immutable/assets/stucco-painting-service.DJkwqFGJ.png 419w, /_app/immutable/assets/stucco-painting-service.DJlWKVUW.png 838w"
+      },
+      img: {
+        src: "/_app/immutable/assets/stucco-painting-service.DJlWKVUW.png",
+        w: 838,
+        h: 421
+      }
     };
-    Page51 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    css16 = {
+      code: ".tab.svelte-emt4j0{display:inline-flex;align-items:center;background:hsl(var(--primary-dark));color:white;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;padding:0.375rem 1.75rem 0.375rem 1rem;clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%)}.ribbon.svelte-emt4j0{display:flex;align-items:center;justify-content:center;gap:0.875rem;width:100%;clip-path:none;background:none;padding-inline:0;line-height:normal}.flag.svelte-emt4j0{width:42px;height:17px;background:hsl(var(--primary-dark));flex:none}.flag-l.svelte-emt4j0{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%)}.flag-r.svelte-emt4j0{clip-path:polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%)}",
+      map: `{"version":3,"file":"+page.svelte","sources":["+page.svelte"],"sourcesContent":["<script context=\\"module\\"><\/script>\\n<script lang=\\"ts\\">import GoogleProof from \\"$lib/common/other/GoogleProof.svelte\\";\\nimport ClickToCall from \\"$lib/common/other/ClickToCall.svelte\\";\\nimport Map from \\"$lib/common/other/Map.svelte\\";\\nimport Button from \\"$components/button/button.svelte\\";\\nimport { routes, serviceAreaRoutes } from \\"$lib/common/routing/routes\\";\\nimport heroSrc from \\"$images/services/exterior-home-painting.webp?enhanced\\";\\nimport splash from \\"$images/backgrounds/orange-paint-splash.webp\\";\\nimport stars from \\"$images/5-stars.svg\\";\\nimport valspar from \\"$images/logos/trusted-brands/valspar.png?enhanced\\";\\nimport behr from \\"$images/logos/trusted-brands/behr.png?enhanced\\";\\nimport benjaminMoore from \\"$images/logos/trusted-brands/benjamin-moore.png?enhanced\\";\\nimport sherwinWilliams from \\"$images/logos/trusted-brands/sherwin-williams.png?enhanced\\";\\nimport leadSafe from \\"$images/logos/trusted-brands/lead-safe.png?enhanced\\";\\nimport pdca from \\"$images/logos/trusted-brands/pdca.png?enhanced\\";\\nimport { isMobileStore } from \\"$lib/stores/isMobileStore\\";\\nimport installTall from \\"$images/services/stucco-painting-service.webp?enhanced\\";\\nimport installDetail from \\"$images/services/exterior-brick-repair-service.webp?enhanced\\";\\nimport installGutters from \\"$images/services/expert-historic-house-painting.webp?enhanced\\";\\nimport repairImg from \\"$images/galleries/before-after/stucco-and-trim-before.webp?enhanced\\";\\nimport cleaningImg from \\"$images/services/exterior-paint-contractor.webp?enhanced\\";\\nconst partnerLogos = [\\n  { src: valspar, alt: \\"Valspar\\", height: \\"h-7 sm:h-8\\" },\\n  { src: behr, alt: \\"Behr\\", height: \\"h-7 sm:h-8\\" },\\n  { src: benjaminMoore, alt: \\"Benjamin Moore\\", height: \\"h-8 sm:h-10\\" },\\n  { src: sherwinWilliams, alt: \\"Sherwin-Williams\\", height: \\"h-8 sm:h-10\\" },\\n  { src: leadSafe, alt: \\"Lead-Safe Certified\\", height: \\"h-9 sm:h-11\\" },\\n  { src: pdca, alt: \\"PDCA\\", height: \\"h-8 sm:h-10\\" }\\n];\\nlet openFaq = 0;\\nconst heroChecks = [\\n  \\"Installed by our own crew\\",\\n  \\"Free written estimates\\",\\n  \\"100% satisfaction guarantee\\",\\n  \\"Lead-Safe Certified\\"\\n];\\nconst installChecks = [\\n  [\\"K-style & half-round\\", \\"profiles\\"],\\n  [\\"Copper\\", \\"for historic homes\\"],\\n  [\\"Properly-sized\\", \\"downspouts\\"],\\n  [\\"Engineered\\", \\"pitch & flow\\"]\\n];\\nconst repairItems = [\\n  [\\"Leaks & seam sealing\\", \\"Re-sealed joints and patched corners.\\"],\\n  [\\"Sagging & pitch\\", \\"Re-hung and re-pitched to drain.\\"],\\n  [\\"Fascia & soffit repair\\", \\"Rotted wood replaced before re-hang.\\"],\\n  [\\"Storm damage & reattachment\\", \\"Pulled-away runs and downspouts.\\"]\\n];\\nconst problems = [\\n  {\\n    title: \\"Foundation cracks\\",\\n    body: \\"Overflow pools against the slab, freezes, and heaves \\\\u2014 opening cracks that let water into the basement.\\"\\n  },\\n  {\\n    title: \\"Fascia & soffit rot\\",\\n    body: \\"Water trapped behind a failing gutter soaks the wood it's bolted to, until the whole board needs replacing.\\"\\n  },\\n  {\\n    title: \\"Basement flooding\\",\\n    body: \\"Thousands of gallons a year dumped at the wrong spot is the #1 cause of wet basements and mold.\\"\\n  }\\n];\\nconst stats = [\\n  {\\n    stat: \\"30+\\",\\n    title: \\"Years in business\\",\\n    body: \\"Serving Cook County exteriors since 1994 \\\\u2014 we'll be here for the warranty.\\"\\n  },\\n  {\\n    stat: \\"0\\",\\n    title: \\"Subcontractors\\",\\n    body: \\"Your gutters are installed by Klasek employees we trained and stand behind.\\"\\n  },\\n  {\\n    stat: \\"$0\\",\\n    title: \\"Estimate cost\\",\\n    body: \\"Free, written, itemized \\\\u2014 so you know exactly what you're paying for.\\"\\n  },\\n  {\\n    stat: \\"100%\\",\\n    title: \\"Satisfaction guarantee\\",\\n    body: \\"We're not done until the water goes where it should and you're happy.\\"\\n  }\\n];\\nconst faqData = [\\n  {\\n    question: \\"Do you install gutter guards?\\",\\n    answer: \\"Yes \\\\u2014 we install leaf-guard and gutter-protection systems and can recommend the right one for your tree cover and roof type. Ask about guard options during your free estimate.\\"\\n  },\\n  {\\n    question: \\"What makes seamless gutters better than sectional?\\",\\n    answer: \\"Seams are where gutters leak. Because we roll each run to your exact roofline on-site, the only joints are at corners and downspouts \\\\u2014 meaning far fewer leak points and a cleaner look.\\"\\n  },\\n  {\\n    question: \\"How do I know if my gutters need to be repaired or replaced?\\",\\n    answer: \\"Sagging sections, persistent leaks, rust, or water spilling over during rain are all signs your gutters need attention. During your free estimate, we inspect the entire system and give you a straightforward recommendation \\\\u2014 repair what can be saved, and replace only what can't.\\"\\n  },\\n  {\\n    question: \\"How much does a new gutter system cost?\\",\\n    answer: \\"It depends on linear footage, profile (K-style, half-round, copper), and the number of downspouts and corners. That's exactly what your free written estimate spells out \\\\u2014 no surprises after the work starts.\\"\\n  },\\n  {\\n    question: \\"Do you replace rotted fascia and soffit too?\\",\\n    answer: \\"We do. As an exterior repair company, we can replace damaged fascia and soffit before re-hanging your gutters, so the new system mounts to solid wood \\\\u2014 not a problem waiting to come back.\\"\\n  },\\n  {\\n    question: \\"Do you replace gutters as part of an exterior painting project?\\",\\n    answer: \\"Yes. Many of our customers bundle gutter work with exterior painting or siding repair so everything is handled in one project, by one team, on one timeline.\\"\\n  },\\n  {\\n    question: \\"How soon can you come out for an estimate?\\",\\n    answer: \\"Usually within a few business days. Fill out the contact form or give us a call and we'll find a time to walk your property.\\"\\n  }\\n];\\n<\/script>\\n\\n<!-- ===================== HERO ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x\\"\\n  >\\n    <!-- left: framed photo + google review card -->\\n    <div class=\\"order-2 lg:order-1\\">\\n      <div class=\\"relative\\">\\n        {#if typeof heroSrc === 'string'}\\n\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home exterior with seamless gutters installed by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(heroSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home exterior with seamless gutters installed by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n\\t</picture>\\n{/if}\\n        <GoogleProof\\n          class=\\"bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl\\"\\n        />\\n      </div>\\n    </div>\\n\\n    <!-- right: copy -->\\n    <div class=\\"order-1 lg:order-2 max-w-xl\\">\\n      <span class=\\"tab mb-5\\">Cook County \xB7 30+ Years \xB7 Family Crew</span>\\n      <h1\\n        class=\\"text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white\\"\\n        data-testid=\\"page-heading\\"\\n      >\\n        Seamless gutters,<br class=\\"hidden sm:block\\" /> cut on-site by\\n        <span class=\\"text-primary\\">our own crew.</span>\\n      </h1>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        No subcontractors. No leaky seams. Klasek rolls custom aluminum gutters\\n        right in your driveway and installs them with the correct pitch \u2014 so\\n        water ends up in the downspout, not against your foundation.\\n      </p>\\n      <ul class=\\"mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5\\">\\n        {#each heroChecks as check}\\n          <li class=\\"flex items-center gap-2.5 text-white/90 font-semibold\\">\\n            <svg\\n              class=\\"text-primary shrink-0\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"3\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            {check}\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Get a Free Estimate\\n        </Button>\\n        <ClickToCall variant=\\"outline\\" class=\\"text-lg h-14 px-6\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRUST STRIP ===================== -->\\n<section class=\\"bg-white border-y\\">\\n  <div\\n    class=\\"container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center\\"\\n  >\\n    <span class=\\"flex items-center gap-2\\">\\n      <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n      <span class=\\"text-sm font-bold text-gray-700\\">5.0 on Google</span>\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path d=\\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\\" /></svg\\n      >\\n      Lead-Safe Certified\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path\\n          d=\\"M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\\"\\n        /></svg\\n      >\\n      100% Satisfaction Guarantee\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><circle cx=\\"12\\" cy=\\"12\\" r=\\"9\\" /><path d=\\"M12 7v5l3 2\\" /></svg\\n      >\\n      Serving Chicagoland since 1994\\n    </span>\\n  </div>\\n</section>\\n\\n<!-- ===================== PROBLEM / AGITATION ===================== -->\\n<section class=\\"bg-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11 flex flex-col items-center\\">\\n      <div class=\\"ribbon mb-4\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark\\"\\n        >\\n          The hidden cost of bad gutters\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n      <p class=\\"text-lg text-gray-600 leading-relaxed\\">\\n        When water can't drain the way it should, it finds the most expensive\\n        path instead \u2014 and the damage shows up where it's hardest to fix.\\n      </p>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-3 gap-5\\">\\n      {#each problems as problem, i}\\n        <div class=\\"rounded-xl border p-6 bg-off-white\\">\\n          <div\\n            class=\\"w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4\\"\\n          >\\n            {#if i === 0}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6\\" /></svg\\n              >\\n            {:else if i === 1}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path\\n                  d=\\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\\"\\n                /><path d=\\"M3 13h18\\" /></svg\\n              >\\n            {:else}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\\" /></svg\\n              >\\n            {/if}\\n          </div>\\n          <h3 class=\\"font-bold text-xl text-secondary-dark\\">{problem.title}</h3>\\n          <p class=\\"mt-2 text-gray-600 leading-relaxed\\">{problem.body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== INSTALLATION (HERO OFFERING) ===================== -->\\n<section\\n  id=\\"install\\"\\n  class=\\"relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden\\"\\n>\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">Our signature service</span>\\n      <h2 class=\\"text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white\\">\\n        Seamless aluminum gutters, rolled in your driveway.\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        We bring the machine to you and form each run to the exact length of\\n        your roofline \u2014 so the only seams are at the corners and downspouts.\\n        Fewer seams mean fewer leaks, and far fewer callbacks down the road.\\n      </p>\\n      <ul class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5\\">\\n        {#each installChecks as [bold, rest]}\\n          <li class=\\"flex items-start gap-3\\">\\n            <svg\\n              class=\\"mt-0.5 shrink-0 text-primary\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"2.8\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            <span class=\\"text-white/85\\">\\n              <b class=\\"text-white font-bold\\">{bold}</b>\\n              {rest}\\n            </span>\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-4\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Price My Gutters\\n        </Button>\\n        <p class=\\"text-sm text-white/55 max-w-[14rem]\\">\\n          Installed by Klasek employees \u2014 never subcontracted out.\\n        </p>\\n      </div>\\n    </div>\\n    <div class=\\"grid grid-cols-2 gap-4\\">\\n      {#if typeof installTall === 'string'}\\n\\t<img class=\\"aspect-[3/4] w-full h-full object-cover rounded-lg ring-2 ring-white/10\\" src={installTall.img.src} alt=\\"Stone-and-stucco Cook County home with steep rooflines and deep eaves where Klasek installs seamless gutters\\" loading=\\"lazy\\" width={installTall.img.w} height={installTall.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(installTall.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"aspect-[3/4] w-full h-full object-cover rounded-lg ring-2 ring-white/10\\" src={installTall.img.src} alt=\\"Stone-and-stucco Cook County home with steep rooflines and deep eaves where Klasek installs seamless gutters\\" loading=\\"lazy\\" width={installTall.img.w} height={installTall.img.h} />\\n\\t</picture>\\n{/if}\\n      <div class=\\"grid grid-rows-2 gap-4\\">\\n        {#if typeof installDetail === 'string'}\\n\\t<img class=\\"w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10\\" src={installDetail.img.src} alt=\\"Close-up of a gabled roofline, soffit and eave where seamless gutters mount\\" loading=\\"lazy\\" width={installDetail.img.w} height={installDetail.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(installDetail.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10\\" src={installDetail.img.src} alt=\\"Close-up of a gabled roofline, soffit and eave where seamless gutters mount\\" loading=\\"lazy\\" width={installDetail.img.w} height={installDetail.img.h} />\\n\\t</picture>\\n{/if}\\n        {#if typeof installGutters === 'string'}\\n\\t<img class=\\"w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10\\" src={installGutters.img.src} alt=\\"Large suburban home with white seamless gutters and downspouts along the eaves\\" loading=\\"lazy\\" width={installGutters.img.w} height={installGutters.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(installGutters.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10\\" src={installGutters.img.src} alt=\\"Large suburban home with white seamless gutters and downspouts along the eaves\\" loading=\\"lazy\\" width={installGutters.img.w} height={installGutters.img.h} />\\n\\t</picture>\\n{/if}\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== REPAIR ===================== -->\\n<section id=\\"repair\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\">\\n    {#if typeof repairImg === 'string'}\\n\\t<img class=\\"order-2 lg:order-1 w-full aspect-[4/3] object-cover rounded-xl shadow-subtle\\" src={repairImg.img.src} alt=\\"Klasek crew on ladders repairing fascia and trim along the roofline before re-hanging gutters\\" loading=\\"lazy\\" width={repairImg.img.w} height={repairImg.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(repairImg.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"order-2 lg:order-1 w-full aspect-[4/3] object-cover rounded-xl shadow-subtle\\" src={repairImg.img.src} alt=\\"Klasek crew on ladders repairing fascia and trim along the roofline before re-hanging gutters\\" loading=\\"lazy\\" width={repairImg.img.w} height={repairImg.img.h} />\\n\\t</picture>\\n{/if}\\n    <div class=\\"order-1 lg:order-2\\">\\n      <span class=\\"tab mb-5\\">Repair &amp; storm damage</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Not ready to replace? We'll make what you have watertight again.\\n      </h2>\\n      <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n        Most gutter problems are fixable. Our crew diagnoses the real cause \u2014\\n        not just the symptom \u2014 and gives you an honest call on repair vs.\\n        replacement.\\n      </p>\\n      <div class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4\\">\\n        {#each repairItems as [title, body]}\\n          <div class=\\"flex items-start gap-3\\">\\n            <span\\n              class=\\"mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0\\"\\n              aria-hidden=\\"true\\"\\n            />\\n            <p>\\n              <b class=\\"font-bold text-secondary-dark\\">{title}</b><br />\\n              <span class=\\"text-gray-600 text-[15px]\\">{body}</span>\\n            </p>\\n          </div>\\n        {/each}\\n      </div>\\n      <Button\\n        href={routes[\\"contact\\"].href}\\n        variant=\\"secondary\\"\\n        class=\\"mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary\\"\\n      >\\n        Book a Repair Visit\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== CLEANING & MAINTENANCE ===================== -->\\n<section id=\\"cleaning\\" class=\\"bg-off-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]\\"\\n    >\\n      <div class=\\"p-8 sm:p-12\\">\\n        <span class=\\"tab mb-5\\">Easiest place to start</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n        >\\n          Gutter cleaning &amp; seasonal maintenance.\\n        </h2>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          A quick, low-commitment way to meet the crew and protect your home. We\\n          clear every run, flush the downspouts, and flag anything that needs\\n          attention \u2014 before it becomes a repair.\\n        </p>\\n        <div class=\\"mt-6 flex flex-wrap gap-3\\">\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F342} Fall leaf clear-out\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F331} Spring flush &amp; inspect\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            \u{1F4CB} Free condition report\\n          </span>\\n        </div>\\n        <Button href={routes[\\"contact\\"].href} class=\\"mt-8 text-lg h-14 px-7\\">\\n          Schedule a Cleaning\\n        </Button>\\n      </div>\\n      {#if typeof cleaningImg === 'string'}\\n\\t<img class=\\"w-full h-full min-h-[260px] object-cover\\" src={cleaningImg.img.src} alt=\\"Gray suburban home with seamless gutters and downspouts along the porch roofline\\" loading=\\"lazy\\" width={cleaningImg.img.w} height={cleaningImg.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(cleaningImg.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full min-h-[260px] object-cover\\" src={cleaningImg.img.src} alt=\\"Gray suburban home with seamless gutters and downspouts along the porch roofline\\" loading=\\"lazy\\" width={cleaningImg.img.w} height={cleaningImg.img.h} />\\n\\t</picture>\\n{/if}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== WHY KLASEK ===================== -->\\n<section id=\\"why\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11\\">\\n      <div\\n        class=\\"inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5\\"\\n      >\\n        <span\\n          class=\\"inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide\\"\\n        >\\n          Why Choose Klasek\\n        </span>\\n      </div>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Three decades on Chicagoland ladders. One crew, start to finish.\\n      </h2>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-2 lg:grid-cols-4 gap-5\\">\\n      {#each stats as { stat, title, body }}\\n        <div\\n          class=\\"rounded-xl border p-6 text-center hover:shadow-subtle transition\\"\\n        >\\n          <div class=\\"font-extrabold text-4xl text-primary-dark\\">{stat}</div>\\n          <h3 class=\\"mt-2 font-bold text-lg text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-2 text-gray-600 text-[15px] leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== SERVICE AREA ===================== -->\\n<section id=\\"area\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Areas We Serve\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center\\">\\n      <div>\\n        <h3 class=\\"font-bold text-2xl text-secondary-dark\\">\\n          Gutter service across the western Cook County suburbs.\\n        </h3>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your\\n          roofline. If your town isn't listed, call us; we likely cover it.\\n        </p>\\n        <div\\n          class=\\"mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3\\"\\n        >\\n          <svg\\n            class=\\"mt-0.5 shrink-0\\"\\n            width=\\"22\\"\\n            height=\\"22\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary-dark))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          <div>\\n            <p class=\\"font-bold text-secondary-dark\\">\\n              Klasek Painting \xB7 Lyons, IL\\n            </p>\\n            <p class=\\"text-gray-600 text-[15px]\\">\\n              4415 S. Custer, Lyons, IL 60534\\n            </p>\\n            <ClickToCall\\n              variant=\\"link\\"\\n              class=\\"!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]\\"\\n            />\\n          </div>\\n        </div>\\n        <div class=\\"mt-5 flex flex-wrap items-center gap-3\\">\\n          <Button href={routes[\\"contact\\"].href} class=\\"text-lg px-6\\">\\n            Request Estimate\\n          </Button>\\n          <ClickToCall\\n            variant=\\"secondary\\"\\n            class=\\"text-lg px-6 bg-secondary-dark hover:bg-secondary text-white\\"\\n          >\\n            Call the Crew\\n          </ClickToCall>\\n        </div>\\n      </div>\\n      <div>\\n        <ul\\n          class=\\"grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700\\"\\n        >\\n          {#each Object.values(serviceAreaRoutes) as { text, href }}\\n            <li class=\\"flex items-center gap-2\\">\\n              <span\\n                class=\\"w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0\\"\\n                aria-hidden=\\"true\\"\\n              />\\n              <a class=\\"hover:text-primary-dark hover:underline\\" {href}>\\n                {text}\\n              </a>\\n            </li>\\n          {/each}\\n        </ul>\\n        <div class=\\"mt-6 h-44 rounded-lg overflow-hidden\\">\\n          <Map lazy={true} />\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BRAND PARTNERS ===================== -->\\n<section class=\\"bg-off-white py-14 border-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-8\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <p\\n          class=\\"font-bold text-lg text-secondary-dark uppercase tracking-wide text-center\\"\\n        >\\n          Our Trusted Brand Partners\\n        </p>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div\\n      class=\\"flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7\\"\\n    >\\n      {#each partnerLogos as { src, alt, height }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FAQ ===================== -->\\n<section id=\\"faq\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container max-w-3xl\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Gutter FAQs\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"divide-y border-y\\">\\n      {#each faqData as { question, answer }, i}\\n        <div class=\\"py-5\\">\\n          <button\\n            type=\\"button\\"\\n            class=\\"flex w-full items-center justify-between gap-4 text-left\\"\\n            aria-expanded={openFaq === i}\\n            on:click={() => (openFaq = openFaq === i ? -1 : i)}\\n          >\\n            <span class=\\"font-bold text-lg text-secondary-dark\\">\\n              {question}\\n            </span>\\n            <span\\n              class=\\"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition {openFaq ===\\n              i\\n                ? 'rotate-45 bg-primary-dark text-white border-primary-dark'\\n                : 'bg-off-white text-gray-600'}\\"\\n            >\\n              <svg\\n                width=\\"14\\"\\n                height=\\"14\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.5\\"\\n                stroke-linecap=\\"round\\"><path d=\\"M12 5v14M5 12h14\\" /></svg\\n              >\\n            </span>\\n          </button>\\n          {#if openFaq === i}\\n            <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{answer}</p>\\n          {/if}\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FINAL CTA ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white p-y p-x overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <img\\n    src={splash}\\n    alt=\\"\\"\\n    aria-hidden=\\"true\\"\\n    class=\\"pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">No-pressure, no-cost</span>\\n      <h2 class=\\"text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white\\">\\n        Ready to help your property look its best?\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-md\\">\\n        Send us your details and we'll schedule a walk-through, then deliver a\\n        free written estimate for you to evaluate. Call the best.\\n      </p>\\n      <div\\n        class=\\"mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold\\"\\n      >\\n        <ClickToCall\\n          variant=\\"link\\"\\n          class=\\"!text-2xl !font-bold text-white hover:!text-primary\\"\\n        />\\n        <span class=\\"inline-flex items-center gap-2\\">\\n          <svg\\n            width=\\"18\\"\\n            height=\\"18\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          4415 S. Custer, Lyons, IL\\n        </span>\\n      </div>\\n    </div>\\n    <div class=\\"bg-white rounded-2xl shadow-2xl p-6 sm:p-7\\">\\n      <p class=\\"font-bold text-xl text-secondary-dark mb-1\\">\\n        Get a Free Estimate\\n      </p>\\n      <p class=\\"text-sm text-gray-600 mb-5\\">\\n        We'll reach out to schedule your walk-through.\\n      </p>\\n      <div class=\\"flex flex-col gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"w-full text-lg h-14\\">\\n          Request My Free Estimate\\n        </Button>\\n        <ClickToCall\\n          variant=\\"secondary\\"\\n          class=\\"w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white\\"\\n        />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== STICKY MOBILE BAR ===================== -->\\n<div\\n  class=\\"lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]\\"\\n>\\n  <div\\n    class=\\"grid grid-cols-2 gap-2 p-2.5\\"\\n    style=\\"padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));\\"\\n  >\\n    <ClickToCall\\n      variant=\\"secondary\\"\\n      class=\\"bg-secondary-dark hover:bg-secondary text-white\\"\\n    >\\n      Call\\n    </ClickToCall>\\n    <Button href={routes[\\"contact\\"].href}>Free Estimate</Button>\\n  </div>\\n</div>\\n\\n<style>\\n  /* orange right-pointing tab label (design's .tab) */\\n  .tab {\\n    display: inline-flex;\\n    align-items: center;\\n    background: hsl(var(--primary-dark));\\n    color: white;\\n    font-weight: 700;\\n    font-size: 12px;\\n    text-transform: uppercase;\\n    letter-spacing: 0.14em;\\n    padding: 0.375rem 1.75rem 0.375rem 1rem;\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* centered ribbon header with swallowtail flags (design's .ribbon) */\\n  .ribbon {\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n    gap: 0.875rem;\\n    width: 100%;\\n    clip-path: none;\\n    background: none;\\n    padding-inline: 0;\\n    line-height: normal;\\n  }\\n  .flag {\\n    width: 42px;\\n    height: 17px;\\n    background: hsl(var(--primary-dark));\\n    flex: none;\\n  }\\n  .flag-l {\\n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%);\\n  }\\n  .flag-r {\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%);\\n  }\\n</style>\\n"],"names":[],"mappings":"AAozBE,kBAAK,CACH,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,QAAQ,CAAC,OAAO,CAAC,QAAQ,CAAC,IAAI,CACvC,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,qBAAQ,CACN,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,GAAG,CAAE,QAAQ,CACb,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,CACf,UAAU,CAAE,IAAI,CAChB,cAAc,CAAE,CAAC,CACjB,WAAW,CAAE,MACf,CACA,mBAAM,CACJ,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,IAAI,CAAE,IACR,CACA,qBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,GAAG,CAC7D,CACA,qBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E"}`
+    };
+    Page52 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
       $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
       const partnerLogos = [
@@ -21690,7 +22134,7 @@ var init_page_svelte51 = __esm({
         },
         {},
         {}
-      )}</div></div>  <div class="order-1 lg:order-2 max-w-xl"><span class="tab mb-5 svelte-177d8eq" data-svelte-h="svelte-dablmw">Cook County \xB7 30+ Years \xB7 Family Crew</span> <h1 class="text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white" data-testid="page-heading" data-svelte-h="svelte-1q17mbb">Seamless gutters,<br class="hidden sm:block"> cut on-site by
+      )}</div></div>  <div class="order-1 lg:order-2 max-w-xl"><span class="tab mb-5 svelte-emt4j0" data-svelte-h="svelte-dablmw">Cook County \xB7 30+ Years \xB7 Family Crew</span> <h1 class="text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white" data-testid="page-heading" data-svelte-h="svelte-1q17mbb">Seamless gutters,<br class="hidden sm:block"> cut on-site by
         <span class="text-primary">our own crew.</span></h1> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-gkzciq">No subcontractors. No leaky seams. Klasek rolls custom aluminum gutters
         right in your driveway and installs them with the correct pitch \u2014 so
         water ends up in the downspout, not against your foundation.</p> <ul class="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5">${each(heroChecks, (check) => {
@@ -21718,10 +22162,10 @@ var init_page_svelte51 = __esm({
       )}</div></div></div></section>  <section class="bg-white border-y" data-svelte-h="svelte-1xq72kb"><div class="container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center"><span class="flex items-center gap-2"><img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars"> <span class="text-sm font-bold text-gray-700">5.0 on Google</span></span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
       Lead-Safe Certified</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
       100% Satisfaction Guarantee</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-      Serving Chicagoland since 1994</span></div></section>  <section class="bg-white p-y p-x"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11 flex flex-col items-center" data-svelte-h="svelte-4l8rc"><div class="ribbon mb-4 svelte-177d8eq"><span class="flag flag-l svelte-177d8eq" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark">The hidden cost of bad gutters</h2> <span class="flag flag-r svelte-177d8eq" aria-hidden="true"></span></div> <p class="text-lg text-gray-600 leading-relaxed">When water can&#39;t drain the way it should, it finds the most expensive
+      Serving Chicagoland since 1994</span></div></section>  <section class="bg-white p-y p-x"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11 flex flex-col items-center" data-svelte-h="svelte-4l8rc"><div class="ribbon mb-4 svelte-emt4j0"><span class="flag flag-l svelte-emt4j0" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark">The hidden cost of bad gutters</h2> <span class="flag flag-r svelte-emt4j0" aria-hidden="true"></span></div> <p class="text-lg text-gray-600 leading-relaxed">When water can&#39;t drain the way it should, it finds the most expensive
         path instead \u2014 and the damage shows up where it&#39;s hardest to fix.</p></div> <div class="grid sm:grid-cols-3 gap-5">${each(problems, (problem, i2) => {
         return `<div class="rounded-xl border p-6 bg-off-white"><div class="w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4">${i2 === 0 ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"></path></svg>` : `${i2 === 1 ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M3 13h18"></path></svg>` : `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>`}`}</div> <h3 class="font-bold text-xl text-secondary-dark">${escape(problem.title)}</h3> <p class="mt-2 text-gray-600 leading-relaxed">${escape(problem.body)}</p> </div>`;
-      })}</div></div></section>  <section id="install" class="relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden"><div class="absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70" aria-hidden="true"></div> <div class="container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-177d8eq" data-svelte-h="svelte-1gr8jly">Our signature service</span> <h2 class="text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white" data-svelte-h="svelte-1uf05fn">Seamless aluminum gutters, rolled in your driveway.</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-16ks504">We bring the machine to you and form each run to the exact length of
+      })}</div></div></section>  <section id="install" class="relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden"><div class="absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70" aria-hidden="true"></div> <div class="container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-emt4j0" data-svelte-h="svelte-1gr8jly">Our signature service</span> <h2 class="text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white" data-svelte-h="svelte-1uf05fn">Seamless aluminum gutters, rolled in your driveway.</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-16ks504">We bring the machine to you and form each run to the exact length of
         your roofline \u2014 so the only seams are at the corners and downspouts.
         Fewer seams mean fewer leaks, and far fewer callbacks down the road.</p> <ul class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5">${each(installChecks, ([bold, rest]) => {
         return `<li class="flex items-start gap-3"><svg class="mt-0.5 shrink-0 text-primary" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> <span class="text-white/85"><b class="text-white font-bold">${escape(bold)}</b> ${escape(rest)}</span> </li>`;
@@ -21737,7 +22181,15 @@ var init_page_svelte51 = __esm({
             return `Price My Gutters`;
           }
         }
-      )} <p class="text-sm text-white/55 max-w-[14rem]" data-svelte-h="svelte-neg7e7">Installed by Klasek employees \u2014 never subcontracted out.</p></div></div> <div class="grid grid-cols-2 gap-4" data-svelte-h="svelte-1jby7a9"><div class="ph ph-dark aspect-[3/4] ring-2 ring-white/10 svelte-177d8eq" data-ph="on-site gutter machine"></div> <div class="grid grid-rows-2 gap-4"><div class="ph ph-dark ring-2 ring-white/10 svelte-177d8eq" data-ph="seamless K-style run"></div> <div class="ph ph-dark ring-2 ring-white/10 svelte-177d8eq" data-ph="copper detail"></div></div></div></div></section>  <section id="repair" class="bg-white p-y p-x scroll-mt-20"><div class="container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"><div class="order-2 lg:order-1 ph aspect-[4/3] svelte-177d8eq" data-ph="REPAIR \u2014 fascia / reattachment before-after"></div> <div class="order-1 lg:order-2"><span class="tab mb-5 svelte-177d8eq" data-svelte-h="svelte-1dmjilv">Repair &amp; storm damage</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-11udkvt">Not ready to replace? We&#39;ll make what you have watertight again.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed" data-svelte-h="svelte-5chg09">Most gutter problems are fixable. Our crew diagnoses the real cause \u2014
+      )} <p class="text-sm text-white/55 max-w-[14rem]" data-svelte-h="svelte-neg7e7">Installed by Klasek employees \u2014 never subcontracted out.</p></div></div> <div class="grid grid-cols-2 gap-4">${typeof installTall === "string" ? `<img class="aspect-[3/4] w-full h-full object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", installTall.img.src, 0)} alt="Stone-and-stucco Cook County home with steep rooflines and deep eaves where Klasek installs seamless gutters" loading="lazy"${add_attribute("width", installTall.img.w, 0)}${add_attribute("height", installTall.img.h, 0)}>` : `<picture>${each(Object.entries(installTall.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="aspect-[3/4] w-full h-full object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", installTall.img.src, 0)} alt="Stone-and-stucco Cook County home with steep rooflines and deep eaves where Klasek installs seamless gutters" loading="lazy"${add_attribute("width", installTall.img.w, 0)}${add_attribute("height", installTall.img.h, 0)}></picture>`} <div class="grid grid-rows-2 gap-4">${typeof installDetail === "string" ? `<img class="w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", installDetail.img.src, 0)} alt="Close-up of a gabled roofline, soffit and eave where seamless gutters mount" loading="lazy"${add_attribute("width", installDetail.img.w, 0)}${add_attribute("height", installDetail.img.h, 0)}>` : `<picture>${each(Object.entries(installDetail.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", installDetail.img.src, 0)} alt="Close-up of a gabled roofline, soffit and eave where seamless gutters mount" loading="lazy"${add_attribute("width", installDetail.img.w, 0)}${add_attribute("height", installDetail.img.h, 0)}></picture>`} ${typeof installGutters === "string" ? `<img class="w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", installGutters.img.src, 0)} alt="Large suburban home with white seamless gutters and downspouts along the eaves" loading="lazy"${add_attribute("width", installGutters.img.w, 0)}${add_attribute("height", installGutters.img.h, 0)}>` : `<picture>${each(Object.entries(installGutters.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="w-full h-full min-h-0 object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", installGutters.img.src, 0)} alt="Large suburban home with white seamless gutters and downspouts along the eaves" loading="lazy"${add_attribute("width", installGutters.img.w, 0)}${add_attribute("height", installGutters.img.h, 0)}></picture>`}</div></div></div></section>  <section id="repair" class="bg-white p-y p-x scroll-mt-20"><div class="container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">${typeof repairImg === "string" ? `<img class="order-2 lg:order-1 w-full aspect-[4/3] object-cover rounded-xl shadow-subtle"${add_attribute("src", repairImg.img.src, 0)} alt="Klasek crew on ladders repairing fascia and trim along the roofline before re-hanging gutters" loading="lazy"${add_attribute("width", repairImg.img.w, 0)}${add_attribute("height", repairImg.img.h, 0)}>` : `<picture>${each(Object.entries(repairImg.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="order-2 lg:order-1 w-full aspect-[4/3] object-cover rounded-xl shadow-subtle"${add_attribute("src", repairImg.img.src, 0)} alt="Klasek crew on ladders repairing fascia and trim along the roofline before re-hanging gutters" loading="lazy"${add_attribute("width", repairImg.img.w, 0)}${add_attribute("height", repairImg.img.h, 0)}></picture>`} <div class="order-1 lg:order-2"><span class="tab mb-5 svelte-emt4j0" data-svelte-h="svelte-1dmjilv">Repair &amp; storm damage</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-11udkvt">Not ready to replace? We&#39;ll make what you have watertight again.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed" data-svelte-h="svelte-5chg09">Most gutter problems are fixable. Our crew diagnoses the real cause \u2014
         not just the symptom \u2014 and gives you an honest call on repair vs.
         replacement.</p> <div class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4">${each(repairItems, ([title, body2]) => {
         return `<div class="flex items-start gap-3"><span class="mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <p><b class="font-bold text-secondary-dark">${escape(title)}</b><br> <span class="text-gray-600 text-[15px]">${escape(body2)}</span></p> </div>`;
@@ -21754,7 +22206,7 @@ var init_page_svelte51 = __esm({
             return `Book a Repair Visit`;
           }
         }
-      )}</div></div></section>  <section id="cleaning" class="bg-off-white p-y p-x scroll-mt-20"><div class="container"><div class="rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]"><div class="p-8 sm:p-12"><span class="tab mb-5 svelte-177d8eq" data-svelte-h="svelte-4ovf0j">Easiest place to start</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-ztm71e">Gutter cleaning &amp; seasonal maintenance.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-rfb8u8">A quick, low-commitment way to meet the crew and protect your home. We
+      )}</div></div></section>  <section id="cleaning" class="bg-off-white p-y p-x scroll-mt-20"><div class="container"><div class="rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]"><div class="p-8 sm:p-12"><span class="tab mb-5 svelte-emt4j0" data-svelte-h="svelte-4ovf0j">Easiest place to start</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-ztm71e">Gutter cleaning &amp; seasonal maintenance.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-rfb8u8">A quick, low-commitment way to meet the crew and protect your home. We
           clear every run, flush the downspouts, and flag anything that needs
           attention \u2014 before it becomes a repair.</p> <div class="mt-6 flex flex-wrap gap-3" data-svelte-h="svelte-16g99xs"><span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">\u{1F342} Fall leaf clear-out</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">\u{1F331} Spring flush &amp; inspect</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">\u{1F4CB} Free condition report</span></div> ${validate_component(Button, "Button").$$render(
         $$result,
@@ -21768,13 +22220,11 @@ var init_page_svelte51 = __esm({
             return `Schedule a Cleaning`;
           }
         }
-      )}</div> <div class="ph !rounded-none min-h-[260px] svelte-177d8eq" data-ph="CLEANING \u2014 crew clearing gutters in fall"></div></div></div></section>  <section id="why" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11" data-svelte-h="svelte-1fia0mq"><div class="inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5"><span class="inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide">Why Choose Klasek</span></div> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Three decades on Chicagoland ladders. One crew, start to finish.</h2></div> <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">${each(stats, ({ stat, title, body: body2 }) => {
+      )}</div> ${typeof cleaningImg === "string" ? `<img class="w-full h-full min-h-[260px] object-cover"${add_attribute("src", cleaningImg.img.src, 0)} alt="Gray suburban home with seamless gutters and downspouts along the porch roofline" loading="lazy"${add_attribute("width", cleaningImg.img.w, 0)}${add_attribute("height", cleaningImg.img.h, 0)}>` : `<picture>${each(Object.entries(cleaningImg.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="w-full h-full min-h-[260px] object-cover"${add_attribute("src", cleaningImg.img.src, 0)} alt="Gray suburban home with seamless gutters and downspouts along the porch roofline" loading="lazy"${add_attribute("width", cleaningImg.img.w, 0)}${add_attribute("height", cleaningImg.img.h, 0)}></picture>`}</div></div></section>  <section id="why" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11" data-svelte-h="svelte-1fia0mq"><div class="inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5"><span class="inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide">Why Choose Klasek</span></div> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Three decades on Chicagoland ladders. One crew, start to finish.</h2></div> <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">${each(stats, ({ stat, title, body: body2 }) => {
         return `<div class="rounded-xl border p-6 text-center hover:shadow-subtle transition"><div class="font-extrabold text-4xl text-primary-dark">${escape(stat)}</div> <h3 class="mt-2 font-bold text-lg text-secondary-dark">${escape(title)}</h3> <p class="mt-2 text-gray-600 text-[15px] leading-relaxed">${escape(body2)}</p> </div>`;
-      })}</div></div></section>  <section class="bg-off-white p-y p-x"><div class="container"><div class="text-center mb-9 flex flex-col items-center" data-svelte-h="svelte-oo9x63"><span class="tab mb-4 svelte-177d8eq">Our work</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Before &amp; after, around the neighborhood.</h2></div> <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${each(Array.from({ length: 8 }, (_2, i2) => i2 + 1), (n2) => {
-        return `<div class="ph aspect-square svelte-177d8eq"${add_attribute("data-ph", `before / after 0${n2}`, 0)}></div>`;
-      })}</div> <div class="mt-9 flex flex-col items-center gap-3" data-svelte-h="svelte-r14l7e"><p class="flex items-center gap-2 text-sm font-bold text-gray-700">Review us
-        <img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars">
-        on</p> <img class="w-[92px] h-auto"${add_attribute("src", google, 0)} alt="Google"></div></div></section>  <section id="area" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="mb-10" data-svelte-h="svelte-1jsmhnv"><div class="ribbon svelte-177d8eq"><span class="flag flag-l svelte-177d8eq" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Areas We Serve</h2> <span class="flag flag-r svelte-177d8eq" aria-hidden="true"></span></div></div> <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center"><div><h3 class="font-bold text-2xl text-secondary-dark" data-svelte-h="svelte-4u936h">Gutter service across the western Cook County suburbs.</h3> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-4vpver">Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your
+      })}</div></div></section>  <section id="area" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="mb-10" data-svelte-h="svelte-1jsmhnv"><div class="ribbon svelte-emt4j0"><span class="flag flag-l svelte-emt4j0" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Areas We Serve</h2> <span class="flag flag-r svelte-emt4j0" aria-hidden="true"></span></div></div> <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center"><div><h3 class="font-bold text-2xl text-secondary-dark" data-svelte-h="svelte-4u936h">Gutter service across the western Cook County suburbs.</h3> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-4vpver">Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your
           roofline. If your town isn&#39;t listed, call us; we likely cover it.</p> <div class="mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3"><svg class="mt-0.5 shrink-0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <div><p class="font-bold text-secondary-dark" data-svelte-h="svelte-75sjm3">Klasek Painting \xB7 Lyons, IL</p> <p class="text-gray-600 text-[15px]" data-svelte-h="svelte-1qewt9m">4415 S. Custer, Lyons, IL 60534</p> ${validate_component(ClickToCall, "ClickToCall").$$render(
         $$result,
         {
@@ -21809,16 +22259,16 @@ var init_page_svelte51 = __esm({
         }
       )}</div></div> <div><ul class="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700">${each(Object.values(serviceAreaRoutes), ({ text: text2, href }) => {
         return `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <a class="hover:text-primary-dark hover:underline"${add_attribute("href", href, 0)}>${escape(text2)}</a> </li>`;
-      })}</ul> <div class="mt-6 h-44 rounded-lg overflow-hidden">${validate_component(Map2, "Map").$$render($$result, { lazy: true }, {}, {})}</div></div></div></div></section>  <section class="bg-off-white py-14 border-y p-x"><div class="container"><div class="mb-8" data-svelte-h="svelte-1jx66ah"><div class="ribbon svelte-177d8eq"><span class="flag flag-l svelte-177d8eq" aria-hidden="true"></span> <p class="font-bold text-lg text-secondary-dark uppercase tracking-wide text-center">Our Trusted Brand Partners</p> <span class="flag flag-r svelte-177d8eq" aria-hidden="true"></span></div></div> <div class="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7">${each(partnerLogos, ({ src: src27, alt, height }) => {
-        return `${typeof src27 === "string" ? `<img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-177d8eq"}"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
+      })}</ul> <div class="mt-6 h-44 rounded-lg overflow-hidden">${validate_component(Map2, "Map").$$render($$result, { lazy: true }, {}, {})}</div></div></div></div></section>  <section class="bg-off-white py-14 border-y p-x"><div class="container"><div class="mb-8" data-svelte-h="svelte-1jx66ah"><div class="ribbon svelte-emt4j0"><span class="flag flag-l svelte-emt4j0" aria-hidden="true"></span> <p class="font-bold text-lg text-secondary-dark uppercase tracking-wide text-center">Our Trusted Brand Partners</p> <span class="flag flag-r svelte-emt4j0" aria-hidden="true"></span></div></div> <div class="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7">${each(partnerLogos, ({ src: src22, alt, height }) => {
+        return `${typeof src22 === "string" ? `<img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-emt4j0"}"${add_attribute("src", src22.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}>` : `<picture>${each(Object.entries(src22.sources), ([format, srcset]) => {
           return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-        })} <img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-177d8eq"}"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}> </picture>`}`;
-      })}</div></div></section>  <section id="faq" class="bg-white p-y p-x scroll-mt-20"><div class="container max-w-3xl"><div class="mb-10" data-svelte-h="svelte-127g7oy"><div class="ribbon svelte-177d8eq"><span class="flag flag-l svelte-177d8eq" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Gutter FAQs</h2> <span class="flag flag-r svelte-177d8eq" aria-hidden="true"></span></div></div> <div class="divide-y border-y">${each(faqData, ({ question, answer }, i2) => {
+        })} <img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-emt4j0"}"${add_attribute("src", src22.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}> </picture>`}`;
+      })}</div></div></section>  <section id="faq" class="bg-white p-y p-x scroll-mt-20"><div class="container max-w-3xl"><div class="mb-10" data-svelte-h="svelte-127g7oy"><div class="ribbon svelte-emt4j0"><span class="flag flag-l svelte-emt4j0" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Gutter FAQs</h2> <span class="flag flag-r svelte-emt4j0" aria-hidden="true"></span></div></div> <div class="divide-y border-y">${each(faqData, ({ question, answer }, i2) => {
         return `<div class="py-5"><button type="button" class="flex w-full items-center justify-between gap-4 text-left"${add_attribute("aria-expanded", openFaq === i2, 0)}><span class="font-bold text-lg text-secondary-dark">${escape(question)}</span> <span class="${"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition " + escape(
           openFaq === i2 ? "rotate-45 bg-primary-dark text-white border-primary-dark" : "bg-off-white text-gray-600",
           true
         )}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg> </span></button> ${openFaq === i2 ? `<p class="mt-3 text-gray-600 leading-relaxed">${escape(answer)}</p>` : ``} </div>`;
-      })}</div></div></section>  <section class="relative bg-secondary-dark text-white p-y p-x overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark" aria-hidden="true"></div> <img${add_attribute("src", splash, 0)} alt="" aria-hidden="true" class="pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block"> <div class="container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-177d8eq" data-svelte-h="svelte-1k9bb3x">No-pressure, no-cost</span> <h2 class="text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white" data-svelte-h="svelte-5g88fm">Ready to help your property look its best?</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-md" data-svelte-h="svelte-jj4wmq">Send us your details and we&#39;ll schedule a walk-through, then deliver a
+      })}</div></div></section>  <section class="relative bg-secondary-dark text-white p-y p-x overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark" aria-hidden="true"></div> <img${add_attribute("src", splash, 0)} alt="" aria-hidden="true" class="pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block"> <div class="container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-emt4j0" data-svelte-h="svelte-1k9bb3x">No-pressure, no-cost</span> <h2 class="text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white" data-svelte-h="svelte-5g88fm">Ready to help your property look its best?</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-md" data-svelte-h="svelte-jj4wmq">Send us your details and we&#39;ll schedule a walk-through, then deliver a
         free written estimate for you to evaluate. Call the best.</p> <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold">${validate_component(ClickToCall, "ClickToCall").$$render(
         $$result,
         {
@@ -21869,40 +22319,40 @@ var init_page_svelte51 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/54.js
-var __exports55 = {};
-__export(__exports55, {
-  component: () => component55,
-  fonts: () => fonts55,
-  imports: () => imports55,
-  index: () => index55,
-  stylesheets: () => stylesheets55,
-  universal: () => page_ts_exports47,
-  universal_id: () => universal_id47
+// .svelte-kit/output/server/nodes/55.js
+var __exports56 = {};
+__export(__exports56, {
+  component: () => component56,
+  fonts: () => fonts56,
+  imports: () => imports56,
+  index: () => index56,
+  stylesheets: () => stylesheets56,
+  universal: () => page_ts_exports48,
+  universal_id: () => universal_id48
 });
-var index55, component_cache55, component55, universal_id47, imports55, stylesheets55, fonts55;
-var init__55 = __esm({
-  ".svelte-kit/output/server/nodes/54.js"() {
-    init_page_ts47();
-    index55 = 54;
-    component55 = async () => component_cache55 ??= (await Promise.resolve().then(() => (init_page_svelte51(), page_svelte_exports51))).default;
-    universal_id47 = "src/routes/(light-nav)/services/gutter-installation-repair/+page.ts";
-    imports55 = ["_app/immutable/nodes/54.UFhcHEhs.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/xRuhivlF.js", "_app/immutable/chunks/tZ0ymlLq.js", "_app/immutable/chunks/Wt7Ns1lL.js"];
-    stylesheets55 = ["_app/immutable/assets/54.gfoa4xwi.css"];
-    fonts55 = [];
+var index56, component_cache56, component56, universal_id48, imports56, stylesheets56, fonts56;
+var init__56 = __esm({
+  ".svelte-kit/output/server/nodes/55.js"() {
+    init_page_ts48();
+    index56 = 55;
+    component56 = async () => component_cache56 ??= (await Promise.resolve().then(() => (init_page_svelte52(), page_svelte_exports52))).default;
+    universal_id48 = "src/routes/(light-nav)/services/gutter-installation-repair/+page.ts";
+    imports56 = ["_app/immutable/nodes/55.CSgFCRQr.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/xRuhivlF.js", "_app/immutable/chunks/w0vMFqT4.js", "_app/immutable/chunks/CxdZ4zBt.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/ChObNhj9.js", "_app/immutable/chunks/6YbL5hh8.js", "_app/immutable/chunks/BoFApExT.js", "_app/immutable/chunks/NV-UJTbk.js"];
+    stylesheets56 = ["_app/immutable/assets/55.ByJkEwOD.css"];
+    fonts56 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/_page.ts.js
-var page_ts_exports48 = {};
-__export(page_ts_exports48, {
-  load: () => load52
+var page_ts_exports49 = {};
+__export(page_ts_exports49, {
+  load: () => load53
 });
-var load52;
-var init_page_ts48 = __esm({
+var load53;
+var init_page_ts49 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load52 = () => {
+    load53 = () => {
       const pageMetaTags = createTitleDescription(
         "Professional Siding Painting and Repair",
         "Enhance your home's exterior with Klasek Painting's expert siding painting and repair services. Quality finishes and reliable repairs. Contact us for a quote!"
@@ -21915,12 +22365,12 @@ var init_page_ts48 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/_page.svelte.js
-var page_svelte_exports52 = {};
-__export(page_svelte_exports52, {
-  default: () => Page52
+var page_svelte_exports53 = {};
+__export(page_svelte_exports53, {
+  default: () => Page53
 });
-var src15, Page52;
-var init_page_svelte52 = __esm({
+var src12, Page53;
+var init_page_svelte53 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/_page.svelte.js"() {
     init_ssr();
     init_OtherServicesSection();
@@ -21930,8 +22380,8 @@ var init_page_svelte52 = __esm({
     init_ColumnTemplateSection();
     init_ViewOurWorkSection();
     init_CtaBannerSection();
-    src15 = "/_app/immutable/assets/siding-painting-repair-services.C5psbMAx.webp";
-    Page52 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    src12 = "/_app/immutable/assets/siding-painting-repair-services.C5psbMAx.webp";
+    Page53 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const paintingServices = [
         {
           text: "Hardie Board Painting",
@@ -21984,7 +22434,7 @@ var init_page_svelte52 = __esm({
               "Quality Materials & Workmanship"
             ],
             image: {
-              src: src15,
+              src: src12,
               alt: "Exterior siding and painting repair project in progress, with ladders leaning against a freshly painted blue house"
             }
           }
@@ -22025,40 +22475,40 @@ var init_page_svelte52 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/55.js
-var __exports56 = {};
-__export(__exports56, {
-  component: () => component56,
-  fonts: () => fonts56,
-  imports: () => imports56,
-  index: () => index56,
-  stylesheets: () => stylesheets56,
-  universal: () => page_ts_exports48,
-  universal_id: () => universal_id48
+// .svelte-kit/output/server/nodes/56.js
+var __exports57 = {};
+__export(__exports57, {
+  component: () => component57,
+  fonts: () => fonts57,
+  imports: () => imports57,
+  index: () => index57,
+  stylesheets: () => stylesheets57,
+  universal: () => page_ts_exports49,
+  universal_id: () => universal_id49
 });
-var index56, component_cache56, component56, universal_id48, imports56, stylesheets56, fonts56;
-var init__56 = __esm({
-  ".svelte-kit/output/server/nodes/55.js"() {
-    init_page_ts48();
-    index56 = 55;
-    component56 = async () => component_cache56 ??= (await Promise.resolve().then(() => (init_page_svelte52(), page_svelte_exports52))).default;
-    universal_id48 = "src/routes/(light-nav)/services/siding-painting-repair/+page.ts";
-    imports56 = ["_app/immutable/nodes/55.BroZ46rx.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHf_1ObT.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/aArQPUwL.js"];
-    stylesheets56 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts56 = [];
+var index57, component_cache57, component57, universal_id49, imports57, stylesheets57, fonts57;
+var init__57 = __esm({
+  ".svelte-kit/output/server/nodes/56.js"() {
+    init_page_ts49();
+    index57 = 56;
+    component57 = async () => component_cache57 ??= (await Promise.resolve().then(() => (init_page_svelte53(), page_svelte_exports53))).default;
+    universal_id49 = "src/routes/(light-nav)/services/siding-painting-repair/+page.ts";
+    imports57 = ["_app/immutable/nodes/56.BEIG7frq.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/iqJyU3xE.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/YtKqi3V3.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/CpRRg9TQ.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/LFmWHm5N.js", "_app/immutable/chunks/CTglDDcc.js", "_app/immutable/chunks/BUsMTPQK.js"];
+    stylesheets57 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts57 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/_page.ts.js
-var page_ts_exports49 = {};
-__export(page_ts_exports49, {
-  load: () => load53
+var page_ts_exports50 = {};
+__export(page_ts_exports50, {
+  load: () => load54
 });
-var load53;
-var init_page_ts49 = __esm({
+var load54;
+var init_page_ts50 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/_page.ts.js"() {
     init_metaTagHelpers();
-    load53 = () => {
+    load54 = () => {
       const pageMetaTags = createTitleDescription(
         "Aluminum Siding Painting",
         "Trust Klasek Painting for professional aluminum siding painting. Our skilled painters ensure long-lasting and beautiful results. Get a free consultation today!"
@@ -22071,12 +22521,12 @@ var init_page_ts49 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/_page.svelte.js
-var page_svelte_exports53 = {};
-__export(page_svelte_exports53, {
-  default: () => Page53
+var page_svelte_exports54 = {};
+__export(page_svelte_exports54, {
+  default: () => Page54
 });
-var src16, Page53;
-var init_page_svelte53 = __esm({
+var src13, Page54;
+var init_page_svelte54 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -22085,7 +22535,7 @@ var init_page_svelte53 = __esm({
     init_routes();
     init_HeadingAccent();
     init_GalleryLinkBlock();
-    src16 = {
+    src13 = {
       sources: {
         avif: "/_app/immutable/assets/aluminum-siding-painting-service.DDBeBD7T.avif 321w, /_app/immutable/assets/aluminum-siding-painting-service.BNFyozYq.avif 641w",
         webp: "/_app/immutable/assets/aluminum-siding-painting-service.DureXieY.webp 321w, /_app/immutable/assets/aluminum-siding-painting-service.Cuo76oKm.webp 641w",
@@ -22097,7 +22547,7 @@ var init_page_svelte53 = __esm({
         h: 641
       }
     };
-    Page53 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page54 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "How do I know if aluminum siding painting is the right choice for my home?",
@@ -22141,9 +22591,9 @@ var init_page_svelte53 = __esm({
         {}
       )} ${validate_component(ColumnTemplateSection, "ColumnTemplateSection").$$render($$result, { class: "lg:pt-12 pt-4" }, {}, {
         "right-column": () => {
-          return `<div slot="right-column">${typeof src16 === "string" ? `<img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", src16.img.src, 0)} alt="Before and after aluminum painting project by Klasek Painting"${add_attribute("width", src16.img.w, 0)}${add_attribute("height", src16.img.h, 0)}>` : `<picture>${each(Object.entries(src16.sources), ([format, srcset]) => {
+          return `<div slot="right-column">${typeof src13 === "string" ? `<img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", src13.img.src, 0)} alt="Before and after aluminum painting project by Klasek Painting"${add_attribute("width", src13.img.w, 0)}${add_attribute("height", src13.img.h, 0)}>` : `<picture>${each(Object.entries(src13.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", src16.img.src, 0)} alt="Before and after aluminum painting project by Klasek Painting"${add_attribute("width", src16.img.w, 0)}${add_attribute("height", src16.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", src13.img.src, 0)} alt="Before and after aluminum painting project by Klasek Painting"${add_attribute("width", src13.img.w, 0)}${add_attribute("height", src13.img.h, 0)}></picture>`}</div>`;
         },
         "left-column": () => {
           return `<div slot="left-column" class="!justify-normal" data-svelte-h="svelte-o6eryj"><h2>How Painting Aluminum Siding Can Transform Your House</h2> <p>Aluminum siding looks beautiful when it&#39;s new, but once it starts to age, it can appear tired
@@ -22170,40 +22620,40 @@ var init_page_svelte53 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/56.js
-var __exports57 = {};
-__export(__exports57, {
-  component: () => component57,
-  fonts: () => fonts57,
-  imports: () => imports57,
-  index: () => index57,
-  stylesheets: () => stylesheets57,
-  universal: () => page_ts_exports49,
-  universal_id: () => universal_id49
+// .svelte-kit/output/server/nodes/57.js
+var __exports58 = {};
+__export(__exports58, {
+  component: () => component58,
+  fonts: () => fonts58,
+  imports: () => imports58,
+  index: () => index58,
+  stylesheets: () => stylesheets58,
+  universal: () => page_ts_exports50,
+  universal_id: () => universal_id50
 });
-var index57, component_cache57, component57, universal_id49, imports57, stylesheets57, fonts57;
-var init__57 = __esm({
-  ".svelte-kit/output/server/nodes/56.js"() {
-    init_page_ts49();
-    index57 = 56;
-    component57 = async () => component_cache57 ??= (await Promise.resolve().then(() => (init_page_svelte53(), page_svelte_exports53))).default;
-    universal_id49 = "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/+page.ts";
-    imports57 = ["_app/immutable/nodes/56.D13HQ1c8.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets57 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts57 = [];
+var index58, component_cache58, component58, universal_id50, imports58, stylesheets58, fonts58;
+var init__58 = __esm({
+  ".svelte-kit/output/server/nodes/57.js"() {
+    init_page_ts50();
+    index58 = 57;
+    component58 = async () => component_cache58 ??= (await Promise.resolve().then(() => (init_page_svelte54(), page_svelte_exports54))).default;
+    universal_id50 = "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/+page.ts";
+    imports58 = ["_app/immutable/nodes/57.CJH2Pj0z.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets58 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts58 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/_page.ts.js
-var page_ts_exports50 = {};
-__export(page_ts_exports50, {
-  load: () => load54
+var page_ts_exports51 = {};
+__export(page_ts_exports51, {
+  load: () => load55
 });
-var load54;
-var init_page_ts50 = __esm({
+var load55;
+var init_page_ts51 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load54 = () => {
+    load55 = () => {
       const pageMetaTags = createTitleDescription(
         "Aluminum Siding Repair",
         "Expert aluminum siding repair services in Cook County. Restore your home's exterior with high-quality repairs. Affordable prices and professional results."
@@ -22216,12 +22666,12 @@ var init_page_ts50 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/_page.svelte.js
-var page_svelte_exports54 = {};
-__export(page_svelte_exports54, {
-  default: () => Page54
+var page_svelte_exports55 = {};
+__export(page_svelte_exports55, {
+  default: () => Page55
 });
-var src17, Page54;
-var init_page_svelte54 = __esm({
+var src14, Page55;
+var init_page_svelte55 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -22231,7 +22681,7 @@ var init_page_svelte54 = __esm({
     init_HeadingAccent();
     init_isMobileStore();
     init_GalleryLinkBlock();
-    src17 = {
+    src14 = {
       sources: {
         avif: "/_app/immutable/assets/aluminum-siding-repair-service.e_F8kGC-.avif 301w, /_app/immutable/assets/aluminum-siding-repair-service.DOz1DB4e.avif 602w",
         webp: "/_app/immutable/assets/aluminum-siding-repair-service.Bk2DfLLD.webp 301w, /_app/immutable/assets/aluminum-siding-repair-service.DG3oCdfR.webp 602w",
@@ -22243,7 +22693,7 @@ var init_page_svelte54 = __esm({
         h: 429
       }
     };
-    Page54 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page55 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
       $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
       const faqData = [
@@ -22313,9 +22763,9 @@ var init_page_svelte54 = __esm({
 			repairs, ensuring your home looks its best and is well-protected from the elements.</p></div>`;
         },
         "right-column": () => {
-          return `<div slot="right-column">${typeof src17 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src17.img.src, 0)} alt="Aluminum siding house with fresh coat of paint"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src17.img.w, 0)}${add_attribute("height", src17.img.h, 0)}>` : `<picture>${each(Object.entries(src17.sources), ([format, srcset]) => {
+          return `<div slot="right-column">${typeof src14 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src14.img.src, 0)} alt="Aluminum siding house with fresh coat of paint"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src14.img.w, 0)}${add_attribute("height", src14.img.h, 0)}>` : `<picture>${each(Object.entries(src14.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src17.img.src, 0)} alt="Aluminum siding house with fresh coat of paint"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src17.img.w, 0)}${add_attribute("height", src17.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src14.img.src, 0)} alt="Aluminum siding house with fresh coat of paint"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src14.img.w, 0)}${add_attribute("height", src14.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -22348,40 +22798,40 @@ var init_page_svelte54 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/57.js
-var __exports58 = {};
-__export(__exports58, {
-  component: () => component58,
-  fonts: () => fonts58,
-  imports: () => imports58,
-  index: () => index58,
-  stylesheets: () => stylesheets58,
-  universal: () => page_ts_exports50,
-  universal_id: () => universal_id50
+// .svelte-kit/output/server/nodes/58.js
+var __exports59 = {};
+__export(__exports59, {
+  component: () => component59,
+  fonts: () => fonts59,
+  imports: () => imports59,
+  index: () => index59,
+  stylesheets: () => stylesheets59,
+  universal: () => page_ts_exports51,
+  universal_id: () => universal_id51
 });
-var index58, component_cache58, component58, universal_id50, imports58, stylesheets58, fonts58;
-var init__58 = __esm({
-  ".svelte-kit/output/server/nodes/57.js"() {
-    init_page_ts50();
-    index58 = 57;
-    component58 = async () => component_cache58 ??= (await Promise.resolve().then(() => (init_page_svelte54(), page_svelte_exports54))).default;
-    universal_id50 = "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/+page.ts";
-    imports58 = ["_app/immutable/nodes/57.BkxmkHYC.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets58 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts58 = [];
+var index59, component_cache59, component59, universal_id51, imports59, stylesheets59, fonts59;
+var init__59 = __esm({
+  ".svelte-kit/output/server/nodes/58.js"() {
+    init_page_ts51();
+    index59 = 58;
+    component59 = async () => component_cache59 ??= (await Promise.resolve().then(() => (init_page_svelte55(), page_svelte_exports55))).default;
+    universal_id51 = "src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/+page.ts";
+    imports59 = ["_app/immutable/nodes/58.D2zWL1s8.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets59 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts59 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-painting/_page.ts.js
-var page_ts_exports51 = {};
-__export(page_ts_exports51, {
-  load: () => load55
+var page_ts_exports52 = {};
+__export(page_ts_exports52, {
+  load: () => load56
 });
-var load55;
-var init_page_ts51 = __esm({
+var load56;
+var init_page_ts52 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-painting/_page.ts.js"() {
     init_metaTagHelpers();
-    load55 = () => {
+    load56 = () => {
       const pageMetaTags = createTitleDescription(
         "Cedar Siding Painting",
         "Top-notch cedar siding painting services in Cook County. Enhance your home's beauty and durability with Klasek Painting."
@@ -22394,12 +22844,12 @@ var init_page_ts51 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-painting/_page.svelte.js
-var page_svelte_exports55 = {};
-__export(page_svelte_exports55, {
-  default: () => Page55
+var page_svelte_exports56 = {};
+__export(page_svelte_exports56, {
+  default: () => Page56
 });
-var src18, Page55;
-var init_page_svelte55 = __esm({
+var src15, Page56;
+var init_page_svelte56 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-painting/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -22408,7 +22858,7 @@ var init_page_svelte55 = __esm({
     init_routes();
     init_HeadingAccent();
     init_GalleryLinkBlock();
-    src18 = {
+    src15 = {
       sources: {
         avif: "/_app/immutable/assets/cedar-siding-painting-service.DRbadkuu.avif 321w, /_app/immutable/assets/cedar-siding-painting-service.H3ONyrZ6.avif 641w",
         webp: "/_app/immutable/assets/cedar-siding-painting-service.CahAg_df.webp 321w, /_app/immutable/assets/cedar-siding-painting-service.DXhypSIf.webp 641w",
@@ -22420,7 +22870,7 @@ var init_page_svelte55 = __esm({
         h: 641
       }
     };
-    Page55 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page56 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "How do I know if aluminum siding painting is the right choice for my home?",
@@ -22464,9 +22914,9 @@ var init_page_svelte55 = __esm({
         {}
       )} ${validate_component(ColumnTemplateSection, "ColumnTemplateSection").$$render($$result, { class: "lg:pt-12 pt-4" }, {}, {
         "right-column": () => {
-          return `<div slot="right-column">${typeof src18 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src18.img.src, 0)} alt=""${add_attribute("width", src18.img.w, 0)}${add_attribute("height", src18.img.h, 0)}>` : `<picture>${each(Object.entries(src18.sources), ([format, srcset]) => {
+          return `<div slot="right-column">${typeof src15 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src15.img.src, 0)} alt=""${add_attribute("width", src15.img.w, 0)}${add_attribute("height", src15.img.h, 0)}>` : `<picture>${each(Object.entries(src15.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src18.img.src, 0)} alt=""${add_attribute("width", src18.img.w, 0)}${add_attribute("height", src18.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src15.img.src, 0)} alt=""${add_attribute("width", src15.img.w, 0)}${add_attribute("height", src15.img.h, 0)}></picture>`}</div>`;
         },
         "left-column": () => {
           return `<div slot="left-column" class="!justify-normal" data-svelte-h="svelte-1foad5v"><h2>Superior Cedar Siding Painting</h2> <p>At Klasek Painting, we offer top-tier cedar siding painting services that outshine the
@@ -22525,40 +22975,40 @@ var init_page_svelte55 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/58.js
-var __exports59 = {};
-__export(__exports59, {
-  component: () => component59,
-  fonts: () => fonts59,
-  imports: () => imports59,
-  index: () => index59,
-  stylesheets: () => stylesheets59,
-  universal: () => page_ts_exports51,
-  universal_id: () => universal_id51
+// .svelte-kit/output/server/nodes/59.js
+var __exports60 = {};
+__export(__exports60, {
+  component: () => component60,
+  fonts: () => fonts60,
+  imports: () => imports60,
+  index: () => index60,
+  stylesheets: () => stylesheets60,
+  universal: () => page_ts_exports52,
+  universal_id: () => universal_id52
 });
-var index59, component_cache59, component59, universal_id51, imports59, stylesheets59, fonts59;
-var init__59 = __esm({
-  ".svelte-kit/output/server/nodes/58.js"() {
-    init_page_ts51();
-    index59 = 58;
-    component59 = async () => component_cache59 ??= (await Promise.resolve().then(() => (init_page_svelte55(), page_svelte_exports55))).default;
-    universal_id51 = "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-painting/+page.ts";
-    imports59 = ["_app/immutable/nodes/58.B7bl3cZM.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets59 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts59 = [];
+var index60, component_cache60, component60, universal_id52, imports60, stylesheets60, fonts60;
+var init__60 = __esm({
+  ".svelte-kit/output/server/nodes/59.js"() {
+    init_page_ts52();
+    index60 = 59;
+    component60 = async () => component_cache60 ??= (await Promise.resolve().then(() => (init_page_svelte56(), page_svelte_exports56))).default;
+    universal_id52 = "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-painting/+page.ts";
+    imports60 = ["_app/immutable/nodes/59.B7RoIPtG.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets60 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts60 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-repair/_page.ts.js
-var page_ts_exports52 = {};
-__export(page_ts_exports52, {
-  load: () => load56
+var page_ts_exports53 = {};
+__export(page_ts_exports53, {
+  load: () => load57
 });
-var load56;
-var init_page_ts52 = __esm({
+var load57;
+var init_page_ts53 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load56 = () => {
+    load57 = () => {
       const pageMetaTags = createTitleDescription(
         "Cedar Siding Repair",
         "Restore the beauty of your cedar siding with Klasek Painting's expert repair services. Quality craftsmanship and durable results. Contact us for a free quote!"
@@ -22571,19 +23021,19 @@ var init_page_ts52 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-repair/_page.svelte.js
-var page_svelte_exports56 = {};
-__export(page_svelte_exports56, {
-  default: () => Page56
+var page_svelte_exports57 = {};
+__export(page_svelte_exports57, {
+  default: () => Page57
 });
-var src19, project, Page56;
-var init_page_svelte56 = __esm({
+var src16, project, Page57;
+var init_page_svelte57 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/cedar-siding-repair/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
     init_ColumnTemplateSection();
     init_routes();
     init_GalleryLinkBlock();
-    src19 = {
+    src16 = {
       sources: {
         avif: "/_app/immutable/assets/cedar-siding-repair-service.CFP9bz2e.avif 326w, /_app/immutable/assets/cedar-siding-repair-service.DM_LKVCp.avif 651w",
         webp: "/_app/immutable/assets/cedar-siding-repair-service.Cdvt7GvR.webp 326w, /_app/immutable/assets/cedar-siding-repair-service.Cpo0iv-2.webp 651w",
@@ -22607,7 +23057,7 @@ var init_page_svelte56 = __esm({
         h: 400
       }
     };
-    Page56 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page57 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "What are the benefits of cedar siding compared to other materials like fiber cement siding?",
@@ -22674,9 +23124,9 @@ var init_page_svelte56 = __esm({
 			continues to impress year after year.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:order-first order-last">${typeof src19 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src19.img.src, 0)} alt=""${add_attribute("width", src19.img.w, 0)}${add_attribute("height", src19.img.h, 0)}>` : `<picture>${each(Object.entries(src19.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:order-first order-last">${typeof src16 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src16.img.src, 0)} alt=""${add_attribute("width", src16.img.w, 0)}${add_attribute("height", src16.img.h, 0)}>` : `<picture>${each(Object.entries(src16.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src19.img.src, 0)} alt=""${add_attribute("width", src19.img.w, 0)}${add_attribute("height", src19.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src16.img.src, 0)} alt=""${add_attribute("width", src16.img.w, 0)}${add_attribute("height", src16.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(ColumnTemplateSection, "ColumnTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         "left-column": () => {
@@ -22708,683 +23158,6 @@ var init_page_svelte56 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/59.js
-var __exports60 = {};
-__export(__exports60, {
-  component: () => component60,
-  fonts: () => fonts60,
-  imports: () => imports60,
-  index: () => index60,
-  stylesheets: () => stylesheets60,
-  universal: () => page_ts_exports52,
-  universal_id: () => universal_id52
-});
-var index60, component_cache60, component60, universal_id52, imports60, stylesheets60, fonts60;
-var init__60 = __esm({
-  ".svelte-kit/output/server/nodes/59.js"() {
-    init_page_ts52();
-    index60 = 59;
-    component60 = async () => component_cache60 ??= (await Promise.resolve().then(() => (init_page_svelte56(), page_svelte_exports56))).default;
-    universal_id52 = "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-repair/+page.ts";
-    imports60 = ["_app/immutable/nodes/59.A9iuredp.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets60 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts60 = [];
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.ts.js
-var page_ts_exports53 = {};
-__export(page_ts_exports53, {
-  load: () => load57
-});
-var load57;
-var init_page_ts53 = __esm({
-  ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.ts.js"() {
-    init_metaTagHelpers();
-    load57 = () => {
-      const pageMetaTags = createTitleDescription(
-        "Hardie Board Siding Installation",
-        "Upgrade your home with expert Hardie Board fiber cement siding installation from Klasek Painting. Durable, beautiful, built for Chicago weather. Free estimates!"
-      );
-      return {
-        pageMetaTags
-      };
-    };
-  }
-});
-
-// .svelte-kit/output/server/chunks/hardie-board-siding-repair-service.js
-var src20;
-var init_hardie_board_siding_repair_service = __esm({
-  ".svelte-kit/output/server/chunks/hardie-board-siding-repair-service.js"() {
-    src20 = {
-      sources: {
-        avif: "/_app/immutable/assets/hardie-board-siding-repair-service.CwNEPP8u.avif 331w, /_app/immutable/assets/hardie-board-siding-repair-service.BIpZsb1W.avif 661w",
-        webp: "/_app/immutable/assets/hardie-board-siding-repair-service.DcBBusKa.webp 331w, /_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp 661w",
-        png: "/_app/immutable/assets/hardie-board-siding-repair-service.CEnpMnwS.png 331w, /_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png 661w"
-      },
-      img: {
-        src: "/_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png",
-        w: 661,
-        h: 434
-      }
-    };
-  }
-});
-
-// .svelte-kit/output/server/chunks/hardie-board-siding-painting-before-after-service.js
-var src21;
-var init_hardie_board_siding_painting_before_after_service = __esm({
-  ".svelte-kit/output/server/chunks/hardie-board-siding-painting-before-after-service.js"() {
-    src21 = {
-      sources: {
-        avif: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif 641w",
-        webp: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp 641w",
-        png: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png 641w"
-      },
-      img: {
-        src: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png",
-        w: 641,
-        h: 641
-      }
-    };
-  }
-});
-
-// .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.svelte.js
-var page_svelte_exports57 = {};
-__export(page_svelte_exports57, {
-  default: () => Page57
-});
-var heroSrc2, paintingTall, paintingTop, paintingBottom, trimSrc, guideFront, guideAngle, gallery8, gallery9, gallery10, gallery11, gallery12, gallery13, gallery14, css17, Page57;
-var init_page_svelte57 = __esm({
-  ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-installation/_page.svelte.js"() {
-    init_ssr();
-    init_GoogleProof();
-    init_ClickToCall();
-    init_Map();
-    init_button();
-    init_routes();
-    init_hardie_board_siding_repair_service();
-    init_hardie_board_siding_painting_before_after_service();
-    init_orange_paint_splash();
-    init_stars();
-    init_Google_name_logo();
-    init_lead_safe();
-    init_isMobileStore();
-    heroSrc2 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-1.C9LR72Vk.avif 200w, /_app/immutable/assets/exterior-hardie-board-1.BP2Xa993.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-1.So7ecRbF.webp 200w, /_app/immutable/assets/exterior-hardie-board-1.BL-SdGeB.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-1.CMi3El4J.png 200w, /_app/immutable/assets/exterior-hardie-board-1.Cdn2AquH.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-1.Cdn2AquH.png",
-        w: 400,
-        h: 224
-      }
-    };
-    paintingTall = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-2.CUrjlj4b.avif 200w, /_app/immutable/assets/exterior-hardie-board-2.BGtE0MUI.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-2.KmAkXME3.webp 200w, /_app/immutable/assets/exterior-hardie-board-2.CB1p8ABP.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-2.tvgOBTQq.png 200w, /_app/immutable/assets/exterior-hardie-board-2.Cg64khCH.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-2.Cg64khCH.png",
-        w: 400,
-        h: 224
-      }
-    };
-    paintingTop = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-3.CgpQlWKy.avif 200w, /_app/immutable/assets/exterior-hardie-board-3.B55EULWx.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-3.Di2PlErd.webp 200w, /_app/immutable/assets/exterior-hardie-board-3.Dl6rok0V.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-3.7nIhlrsy.png 200w, /_app/immutable/assets/exterior-hardie-board-3.D9HX3LO1.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-3.D9HX3LO1.png",
-        w: 400,
-        h: 224
-      }
-    };
-    paintingBottom = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-4.CglGMmn8.avif 200w, /_app/immutable/assets/exterior-hardie-board-4.BtbCZWl5.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-4.BvCzUoWm.webp 200w, /_app/immutable/assets/exterior-hardie-board-4.C_VYxt8n.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-4.BjKLVzvb.png 200w, /_app/immutable/assets/exterior-hardie-board-4.7ebTpcOU.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-4.7ebTpcOU.png",
-        w: 400,
-        h: 224
-      }
-    };
-    trimSrc = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-5.bzXQS01H.avif 200w, /_app/immutable/assets/exterior-hardie-board-5.DhaSQpdo.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-5.VNgpZ69a.webp 200w, /_app/immutable/assets/exterior-hardie-board-5.CfNo3AiQ.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-5.CUtMiAZq.png 200w, /_app/immutable/assets/exterior-hardie-board-5.Cl-Z5cm-.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-5.Cl-Z5cm-.png",
-        w: 400,
-        h: 224
-      }
-    };
-    guideFront = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-6.GSsvA_cN.avif 200w, /_app/immutable/assets/exterior-hardie-board-6.U5t380xK.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-6.CeIfvedw.webp 200w, /_app/immutable/assets/exterior-hardie-board-6.Z_dAWJo8.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-6.CTuNZqAB.png 200w, /_app/immutable/assets/exterior-hardie-board-6.CPViXenp.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-6.CPViXenp.png",
-        w: 400,
-        h: 224
-      }
-    };
-    guideAngle = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-7.B4eG7DmT.avif 200w, /_app/immutable/assets/exterior-hardie-board-7.ywt5duci.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-7.x-sWdkv0.webp 200w, /_app/immutable/assets/exterior-hardie-board-7.DFqgsBTr.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-7.C0AFaop5.png 200w, /_app/immutable/assets/exterior-hardie-board-7.DmXGz4tC.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-7.DmXGz4tC.png",
-        w: 400,
-        h: 224
-      }
-    };
-    gallery8 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-8.DjWiLSyl.avif 200w, /_app/immutable/assets/exterior-hardie-board-8.8q-EyMk7.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-8.BYFW84D7.webp 200w, /_app/immutable/assets/exterior-hardie-board-8.BJUz1RnE.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-8.CZwIuFUt.png 200w, /_app/immutable/assets/exterior-hardie-board-8.BQf6HCSw.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-8.BQf6HCSw.png",
-        w: 400,
-        h: 224
-      }
-    };
-    gallery9 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-9.0k8s2wzN.avif 200w, /_app/immutable/assets/exterior-hardie-board-9.CFzYAWAM.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-9.BVp2O2qH.webp 200w, /_app/immutable/assets/exterior-hardie-board-9.WIqvzLAy.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-9.C1K37Wnf.png 200w, /_app/immutable/assets/exterior-hardie-board-9.DnKjA59-.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-9.DnKjA59-.png",
-        w: 400,
-        h: 224
-      }
-    };
-    gallery10 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-10.BUBSUQwU.avif 200w, /_app/immutable/assets/exterior-hardie-board-10.DPsTRKiV.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-10.C9QN9pGl.webp 200w, /_app/immutable/assets/exterior-hardie-board-10.BZ01cpEN.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-10.opD691r9.png 200w, /_app/immutable/assets/exterior-hardie-board-10.EKZrvkyO.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-10.EKZrvkyO.png",
-        w: 400,
-        h: 224
-      }
-    };
-    gallery11 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-11.BiP5D8fr.avif 200w, /_app/immutable/assets/exterior-hardie-board-11.CTBspFN0.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-11.0L3xhmF3.webp 200w, /_app/immutable/assets/exterior-hardie-board-11.DaRJYDie.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-11.BZgcmoHj.png 200w, /_app/immutable/assets/exterior-hardie-board-11.D_TmP3WU.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-11.D_TmP3WU.png",
-        w: 400,
-        h: 224
-      }
-    };
-    gallery12 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-12.CqsFOu7K.avif 200w, /_app/immutable/assets/exterior-hardie-board-12.C1_Dtjm-.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-12.Cv47y8oZ.webp 200w, /_app/immutable/assets/exterior-hardie-board-12.kOBHn5Ja.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-12.oEwuljK3.png 200w, /_app/immutable/assets/exterior-hardie-board-12.B_XJH95Q.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-12.B_XJH95Q.png",
-        w: 400,
-        h: 224
-      }
-    };
-    gallery13 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-13.FkomS3tq.avif 200w, /_app/immutable/assets/exterior-hardie-board-13.DI-0djG0.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-13.D0CnvcPk.webp 200w, /_app/immutable/assets/exterior-hardie-board-13.qOcjaLnc.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-13.wKprW6aG.png 200w, /_app/immutable/assets/exterior-hardie-board-13.CeYTgYsh.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-13.CeYTgYsh.png",
-        w: 400,
-        h: 224
-      }
-    };
-    gallery14 = {
-      sources: {
-        avif: "/_app/immutable/assets/exterior-hardie-board-14.5ws0NZmJ.avif 200w, /_app/immutable/assets/exterior-hardie-board-14.SDEuRSNX.avif 400w",
-        webp: "/_app/immutable/assets/exterior-hardie-board-14.CBj7gpDN.webp 200w, /_app/immutable/assets/exterior-hardie-board-14.B5IcW8yh.webp 400w",
-        png: "/_app/immutable/assets/exterior-hardie-board-14.BIryb3Q6.png 200w, /_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png 400w"
-      },
-      img: {
-        src: "/_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png",
-        w: 400,
-        h: 224
-      }
-    };
-    css17 = {
-      code: ".tab.svelte-18ua8g5{display:inline-flex;align-items:center;background:hsl(var(--primary-dark));color:white;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;padding:0.375rem 1.75rem 0.375rem 1rem;clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%)}.ribbon.svelte-18ua8g5{display:flex;align-items:center;justify-content:center;gap:0.875rem}.flag.svelte-18ua8g5{width:42px;height:17px;background:hsl(var(--primary-dark));flex:none}.flag-l.svelte-18ua8g5{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%)}.flag-r.svelte-18ua8g5{clip-path:polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%)}",
-      map: `{"version":3,"file":"+page.svelte","sources":["+page.svelte"],"sourcesContent":["<script context=\\"module\\"><\/script>\\n<script lang=\\"ts\\">import GoogleProof from \\"$lib/common/other/GoogleProof.svelte\\";\\nimport ClickToCall from \\"$lib/common/other/ClickToCall.svelte\\";\\nimport Map from \\"$lib/common/other/Map.svelte\\";\\nimport Button from \\"$components/button/button.svelte\\";\\nimport { routes, serviceAreaRoutes } from \\"$lib/common/routing/routes\\";\\nimport heroSrc from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-1.webp?enhanced\\";\\nimport paintingTall from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-2.webp?enhanced\\";\\nimport paintingTop from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-3.webp?enhanced\\";\\nimport paintingBottom from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-4.webp?enhanced\\";\\nimport repairSrc from \\"$images/services/hardie-board-siding-repair-service.webp?enhanced\\";\\nimport trimSrc from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-5.webp?enhanced\\";\\nimport guideFront from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-6.webp?enhanced\\";\\nimport guideAngle from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-7.webp?enhanced\\";\\nimport galleryBeforeAfter from \\"$images/services/hardie-board-siding-painting-before-after-service.webp?enhanced\\";\\nimport gallery8 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-8.webp?enhanced\\";\\nimport gallery9 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-9.webp?enhanced\\";\\nimport gallery10 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-10.webp?enhanced\\";\\nimport gallery11 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-11.webp?enhanced\\";\\nimport gallery12 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-12.webp?enhanced\\";\\nimport gallery13 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-13.webp?enhanced\\";\\nimport gallery14 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-14.webp?enhanced\\";\\nimport splash from \\"$images/backgrounds/orange-paint-splash.webp\\";\\nimport stars from \\"$images/5-stars.svg\\";\\nimport google from \\"$images/logos/Google-name-logo.svg\\";\\nimport valspar from \\"$images/logos/trusted-brands/valspar.png?enhanced\\";\\nimport behr from \\"$images/logos/trusted-brands/behr.png?enhanced\\";\\nimport benjaminMoore from \\"$images/logos/trusted-brands/benjamin-moore.png?enhanced\\";\\nimport sherwinWilliams from \\"$images/logos/trusted-brands/sherwin-williams.png?enhanced\\";\\nimport leadSafe from \\"$images/logos/trusted-brands/lead-safe.png?enhanced\\";\\nimport pdca from \\"$images/logos/trusted-brands/pdca.png?enhanced\\";\\nimport { isMobileStore } from \\"$lib/stores/isMobileStore\\";\\nconst heroChecks = [\\n  \\"Painted by our own crew\\",\\n  \\"Free written estimates\\",\\n  \\"100% satisfaction guarantee\\",\\n  \\"Lead-Safe Certified\\"\\n];\\nconst paintingChecks = [\\n  [\\"Edge & bare-spot priming\\", \\"\\"],\\n  [\\"Loxon masonry primer\\", \\"by Sherwin-Williams\\"],\\n  [\\"Premium acrylic latex\\", \\"topcoat\\"],\\n  [\\"Sprayed\\", \\"for full coverage\\"]\\n];\\nconst repairItems = [\\n  [\\"Set popped nails\\", \\"Reset and spot-primed before topcoat.\\"],\\n  [\\"Caulk & seal gaps\\", \\"Joints sealed to keep moisture out.\\"],\\n  [\\"Replace damaged board\\", \\"Deteriorated sections cut out and swapped.\\"],\\n  [\\"Scrape loose paint\\", \\"Failing coats removed down to sound siding.\\"]\\n];\\nconst problems = [\\n  {\\n    title: \\"Color fades in the sun\\",\\n    body: \\"The intense Chicago heat chalks and dulls factory color over time, leaving the whole house looking tired and washed-out.\\"\\n  },\\n  {\\n    title: \\"Cheap paint peels\\",\\n    body: \\"Factory primer is thin and never covers the cut edges. Paint over it without priming and the coat flakes off within a season.\\"\\n  },\\n  {\\n    title: \\"Moisture & ground contact\\",\\n    body: \\"Hardie board wicks moisture, and boards in direct contact with the ground can deteriorate \\\\u2014 needing repair before any paint goes on.\\"\\n  }\\n];\\nconst guideCards = [\\n  {\\n    number: \\"1\\",\\n    label: \\"New board\\",\\n    title: \\"Prime the edges first.\\",\\n    body: \\"Factory primer is thin and never covers the cut edges, so an extra primer coat is a must. We use a masonry primer like Loxon by Sherwin-Williams, then top-coat in a high-quality acrylic latex exterior paint \\\\u2014 Sherwin-Williams, Benjamin Moore, or Behr. You can roll it, but spraying drives paint into every groove for full, even coverage.\\"\\n  },\\n  {\\n    number: \\"2\\",\\n    label: \\"Faded board\\",\\n    title: \\"Prep beats the fade.\\",\\n    body: 'Hardie board is \\"hardy,\\" but its color fades in our intense Chicago heat. A repaint is all about thorough prep: setting popped nails, scraping any loose or peeling paint, and caulking the gaps. The board wicks moisture well, but sections in direct ground contact can deteriorate \\\\u2014 those get repaired or replaced before painting.'\\n  },\\n  {\\n    number: \\"3\\",\\n    label: \\"Trim work\\",\\n    title: \\"The icing on the cake.\\",\\n    body: \\"Once the siding is painted, the trim is what ties it together. We sand and scrape off loose paint, caulk large cracks, and replace any dry rot. Bare wood, doors, columns, or metal get a primer coat first \\\\u2014 and we finish trim in a semi-gloss that looks sharp and stays cleaner.\\"\\n  }\\n];\\nconst stats = [\\n  {\\n    stat: \\"30+\\",\\n    title: \\"Years in business\\",\\n    body: \\"Serving Cook County exteriors since 1994 \\\\u2014 we'll be here for the warranty.\\"\\n  },\\n  {\\n    stat: \\"0\\",\\n    title: \\"Subcontractors\\",\\n    body: \\"Your siding is painted by Klasek employees we trained and stand behind \\\\u2014 led by owner Pete Klasek.\\"\\n  },\\n  {\\n    stat: \\"$0\\",\\n    title: \\"Estimate cost\\",\\n    body: \\"Free, written, itemized \\\\u2014 so you know exactly what you're paying for.\\"\\n  },\\n  {\\n    stat: \\"100%\\",\\n    title: \\"Satisfaction guarantee\\",\\n    body: \\"We're not done until the color is even, the trim is crisp, and you're happy with the finish.\\"\\n  }\\n];\\nconst galleryImages = [\\n  { src: galleryBeforeAfter, alt: \\"Hardie board painting before and after\\" },\\n  { src: gallery8, alt: \\"Painted Hardie board siding\\" },\\n  { src: gallery9, alt: \\"Hardie board home exterior\\" },\\n  { src: gallery10, alt: \\"Freshly painted fiber cement siding\\" },\\n  { src: gallery11, alt: \\"Hardie board siding detail\\" },\\n  { src: gallery12, alt: \\"Painted Hardie board home\\" },\\n  { src: gallery13, alt: \\"Hardie board exterior project\\" },\\n  { src: gallery14, alt: \\"Completed Hardie board painting project\\" }\\n];\\nconst partnerLogos = [\\n  { src: valspar, alt: \\"Valspar\\", height: \\"h-7 sm:h-8\\" },\\n  { src: behr, alt: \\"Behr\\", height: \\"h-7 sm:h-8\\" },\\n  { src: benjaminMoore, alt: \\"Benjamin Moore\\", height: \\"h-8 sm:h-10\\" },\\n  { src: sherwinWilliams, alt: \\"Sherwin-Williams\\", height: \\"h-8 sm:h-10\\" },\\n  { src: leadSafe, alt: \\"Lead-Safe Certified\\", height: \\"h-9 sm:h-11\\" },\\n  { src: pdca, alt: \\"PDCA\\", height: \\"h-8 sm:h-10\\" }\\n];\\nconst faqData = [\\n  {\\n    question: \\"What is Hardie board siding made of?\\",\\n    answer: \\"Hardie board is a fiber-cement siding made from mechanical pulp. You'll also hear it called HardiePlank, concrete siding, cement-fiber siding, or fiber cement cladding. It comes in finishes that mimic chipboard, plywood, or real wood grain.\\"\\n  },\\n  {\\n    question: \\"Do I need to prime new Hardie board before painting?\\",\\n    answer: \\"Yes. Even though new Hardie board ships with a factory primer, the coating is thin and doesn't cover the cut edges \\\\u2014 so a high-quality primer coat is essential for proper coverage. We recommend a masonry primer like Loxon by Sherwin-Williams.\\"\\n  },\\n  {\\n    question: \\"What type of paint should I use on Hardie board siding?\\",\\n    answer: \\"A high-quality acrylic latex exterior paint. Sticking with a trusted brand like Sherwin-Williams, Benjamin Moore, or Behr keeps the siding protected and helps the finish last much longer.\\"\\n  },\\n  {\\n    question: \\"Can I roll on paint when painting Hardie board?\\",\\n    answer: \\"You can roll it, but we spray. Spraying drives paint into every crack and groove of the board's texture and ensures the entire surface is covered evenly \\\\u2014 a roller tends to skip the recesses.\\"\\n  },\\n  {\\n    question: \\"How should I prepare faded Hardie board for painting?\\",\\n    answer: \\"Thorough prep is everything. That means setting any popped nails, scraping off loose or peeling paint, and caulking significant gaps. If a section in direct ground contact has deteriorated, it should be repaired or replaced before painting.\\"\\n  },\\n  {\\n    question: \\"What are the best practices for painting Hardie board trim?\\",\\n    answer: \\"Finish the trim after the siding. Sand and scrape loose paint, caulk large cracks, and replace any dry rot. Prime all bare wood or metal first, and use a semi-gloss sheen \\\\u2014 it looks best on trim and stays cleaner over time.\\"\\n  }\\n];\\nlet openFaq = 0;\\n<\/script>\\n\\n<!-- ===================== HERO ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x\\"\\n  >\\n    <!-- left: framed photo + google review card -->\\n    <div class=\\"order-2 lg:order-1\\">\\n      <div class=\\"relative\\">\\n        {#if typeof heroSrc === 'string'}\\n\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home with Hardie board siding painted by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(heroSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Home with Hardie board siding painted by Klasek Painting\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n\\t</picture>\\n{/if}\\n        <GoogleProof\\n          class=\\"bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl\\"\\n        />\\n      </div>\\n    </div>\\n\\n    <!-- right: copy -->\\n    <div class=\\"order-1 lg:order-2 max-w-xl\\">\\n      <span class=\\"tab mb-5\\">#1 Hardie Board Painters \xB7 Cook County</span>\\n      <h1\\n        class=\\"text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white\\"\\n        data-testid=\\"page-heading\\"\\n      >\\n        Hardie board siding,<br class=\\"hidden sm:block\\" /> painted to last by\\n        <span class=\\"text-primary\\">our own crew.</span>\\n      </h1>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        Fiber cement is tough \u2014 but its factory color fades under the Chicago\\n        sun, and a botched repaint peels in a season. Klasek primes the edges,\\n        preps every board, and sprays on premium acrylic latex so your siding\\n        looks new again and stays that way for years.\\n      </p>\\n      <ul class=\\"mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5\\">\\n        {#each heroChecks as check}\\n          <li class=\\"flex items-center gap-2.5 text-white/90 font-semibold\\">\\n            <svg\\n              class=\\"text-primary shrink-0\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"3\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            {check}\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Get a Free Estimate\\n        </Button>\\n        <ClickToCall variant=\\"outline\\" class=\\"text-lg h-14 px-6\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRUST STRIP ===================== -->\\n<section class=\\"bg-white border-y\\">\\n  <div\\n    class=\\"container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center\\"\\n  >\\n    <span class=\\"flex items-center gap-2\\">\\n      <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n      <span class=\\"text-sm font-bold text-gray-700\\">5.0 on Google</span>\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path d=\\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\\" /></svg\\n      >\\n      Lead-Safe Certified\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path\\n          d=\\"M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\\"\\n        /></svg\\n      >\\n      100% Satisfaction Guarantee\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><circle cx=\\"12\\" cy=\\"12\\" r=\\"9\\" /><path d=\\"M12 7v5l3 2\\" /></svg\\n      >\\n      Serving Chicagoland since 1994\\n    </span>\\n  </div>\\n</section>\\n\\n<!-- ===================== PROBLEM / AGITATION ===================== -->\\n<section class=\\"bg-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11 flex flex-col items-center\\">\\n      <div class=\\"ribbon mb-4\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark\\"\\n        >\\n          Why Hardie board needs a real paint job\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n      <p class=\\"text-lg text-gray-600 leading-relaxed\\">\\n        Fiber cement is built to last \u2014 but the finish on it isn't forever. Skip\\n        the prep, and a fresh coat peels before the next summer's out.\\n      </p>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-3 gap-5\\">\\n      {#each problems as problem, i}\\n        <div class=\\"rounded-xl border p-6 bg-off-white\\">\\n          <div\\n            class=\\"w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4\\"\\n          >\\n            {#if i === 0}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6\\" /></svg\\n              >\\n            {:else if i === 1}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path\\n                  d=\\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\\"\\n                /><path d=\\"M3 13h18\\" /></svg\\n              >\\n            {:else}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\\" /></svg\\n              >\\n            {/if}\\n          </div>\\n          <h3 class=\\"font-bold text-xl text-secondary-dark\\">{problem.title}</h3>\\n          <p class=\\"mt-2 text-gray-600 leading-relaxed\\">{problem.body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== PAINTING (HERO OFFERING) ===================== -->\\n<section\\n  id=\\"painting\\"\\n  class=\\"relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden\\"\\n>\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">Our signature service</span>\\n      <h2 class=\\"text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white\\">\\n        Primed, prepped, and sprayed \u2014 the way fiber cement should be painted.\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        A Hardie board repaint lives or dies on prep. We set popped nails,\\n        scrape loose paint, caulk the gaps, and prime the bare edges \u2014 then\\n        spray on premium acrylic latex so paint works into every groove and the\\n        whole wall cures to one even finish.\\n      </p>\\n      <ul class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5\\">\\n        {#each paintingChecks as [bold, rest]}\\n          <li class=\\"flex items-start gap-3\\">\\n            <svg\\n              class=\\"mt-0.5 shrink-0 text-primary\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"2.8\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            <span class=\\"text-white/85\\">\\n              <b class=\\"text-white font-bold\\">{bold}</b>\\n              {rest}\\n            </span>\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-4\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Price My Repaint\\n        </Button>\\n        <p class=\\"text-sm text-white/55 max-w-[14rem]\\">\\n          Painted by Klasek employees \u2014 never subcontracted out.\\n        </p>\\n      </div>\\n    </div>\\n    <div class=\\"grid grid-cols-2 gap-4\\">\\n      {#if typeof paintingTall === 'string'}\\n\\t<img class=\\"w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10\\" src={paintingTall.img.src} alt=\\"Spraying Hardie board siding\\" loading=\\"lazy\\" width={paintingTall.img.w} height={paintingTall.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingTall.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10\\" src={paintingTall.img.src} alt=\\"Spraying Hardie board siding\\" loading=\\"lazy\\" width={paintingTall.img.w} height={paintingTall.img.h} />\\n\\t</picture>\\n{/if}\\n      <div class=\\"grid grid-rows-2 gap-4\\">\\n        <div class=\\"relative rounded-lg overflow-hidden ring-2 ring-white/10\\">\\n          {#if typeof paintingTop === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingTop.img.src} alt=\\"Priming Hardie board cut edges\\" loading=\\"lazy\\" width={paintingTop.img.w} height={paintingTop.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingTop.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingTop.img.src} alt=\\"Priming Hardie board cut edges\\" loading=\\"lazy\\" width={paintingTop.img.w} height={paintingTop.img.h} />\\n\\t</picture>\\n{/if}\\n        </div>\\n        <div class=\\"relative rounded-lg overflow-hidden ring-2 ring-white/10\\">\\n          {#if typeof paintingBottom === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingBottom.img.src} alt=\\"Finished Hardie lap siding\\" loading=\\"lazy\\" width={paintingBottom.img.w} height={paintingBottom.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingBottom.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingBottom.img.src} alt=\\"Finished Hardie lap siding\\" loading=\\"lazy\\" width={paintingBottom.img.w} height={paintingBottom.img.h} />\\n\\t</picture>\\n{/if}\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== REPAIR ===================== -->\\n<section id=\\"repair\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\">\\n    {#if typeof repairSrc === 'string'}\\n\\t<img class=\\"order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg\\" src={repairSrc.img.src} alt=\\"Hardie board siding repair before painting\\" loading=\\"lazy\\" width={repairSrc.img.w} height={repairSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(repairSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg\\" src={repairSrc.img.src} alt=\\"Hardie board siding repair before painting\\" loading=\\"lazy\\" width={repairSrc.img.w} height={repairSrc.img.h} />\\n\\t</picture>\\n{/if}\\n    <div class=\\"order-1 lg:order-2\\">\\n      <span class=\\"tab mb-5\\">Repair before painting</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        We fix the failing boards first \u2014 then paint over solid siding.\\n      </h2>\\n      <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n        Painting over rotted or cracked board just hides the problem. Where\\n        siding has deteriorated \u2014 often where it meets the ground \u2014 we repair or\\n        replace the damaged section so the finish goes on solid and lasts.\\n      </p>\\n      <div class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4\\">\\n        {#each repairItems as [title, body]}\\n          <div class=\\"flex items-start gap-3\\">\\n            <span\\n              class=\\"mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0\\"\\n              aria-hidden=\\"true\\"\\n            />\\n            <p>\\n              <b class=\\"font-bold text-secondary-dark\\">{title}</b><br />\\n              <span class=\\"text-gray-600 text-[15px]\\">{body}</span>\\n            </p>\\n          </div>\\n        {/each}\\n      </div>\\n      <Button\\n        href={routes[\\"contact\\"].href}\\n        variant=\\"secondary\\"\\n        class=\\"mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary\\"\\n      >\\n        Book a Repair Visit\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRIM, FASCIA & SOFFIT ===================== -->\\n<section id=\\"trim\\" class=\\"bg-off-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]\\"\\n    >\\n      <div class=\\"p-8 sm:p-12\\">\\n        <span class=\\"tab mb-5\\">The finishing touch</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n        >\\n          Trim, fascia &amp; soffit \u2014 the detail that makes it pop.\\n        </h2>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Crisp trim is the icing on the cake. We sand and scrape loose paint,\\n          caulk the cracks, replace any dry rot, and prime every bare spot \u2014\\n          then finish in a semi-gloss that frames the house and wipes clean.\\n        </p>\\n        <div class=\\"mt-6 flex flex-wrap gap-3\\">\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Sand &amp; scrape\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Caulk &amp; prime bare wood\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Semi-gloss finish\\n          </span>\\n        </div>\\n        <Button href={routes[\\"contact\\"].href} class=\\"mt-8 text-lg h-14 px-7\\">\\n          Get a Trim Quote\\n        </Button>\\n      </div>\\n      <div class=\\"relative min-h-[260px]\\">\\n        {#if typeof trimSrc === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={trimSrc.img.src} alt=\\"Fresh trim on Hardie board siding\\" loading=\\"lazy\\" width={trimSrc.img.w} height={trimSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(trimSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={trimSrc.img.src} alt=\\"Fresh trim on Hardie board siding\\" loading=\\"lazy\\" width={trimSrc.img.w} height={trimSrc.img.h} />\\n\\t</picture>\\n{/if}\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== ALL ABOUT / KNOWLEDGE GUIDE ===================== -->\\n<section id=\\"guide\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center\\">\\n      <!-- intro copy -->\\n      <div>\\n        <span class=\\"tab mb-5\\">A quick field guide</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.07] font-extrabold text-secondary-dark\\"\\n        >\\n          All about painting exterior Hardie board siding.\\n        </h2>\\n        <p class=\\"mt-5 text-lg text-gray-600 leading-relaxed\\">\\n          Hardie board is a dense fiber-cement board made from mechanical pulp \u2014\\n          you'll also hear it called HardiePlank, cement-fiber siding, or fiber\\n          cement cladding. It's all over the Chicago suburbs in finishes that\\n          mimic coarse chipboard, plywood, or real wood grain.\\n        </p>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n          Because the siding almost always ships\\n          <b class=\\"text-secondary-dark font-bold\\">pre-primed</b> to protect it in\\n          transit, a great paint job is less about the color and more about the prep.\\n          Here's how we approach each situation.\\n        </p>\\n      </div>\\n      <!-- overlapping photos -->\\n      <div class=\\"relative h-[380px] sm:h-[440px]\\">\\n        {#if typeof guideFront === 'string'}\\n\\t<img class=\\"absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideFront.img.src} alt=\\"Hardie board home \u2014 front view\\" loading=\\"lazy\\" width={guideFront.img.w} height={guideFront.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(guideFront.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideFront.img.src} alt=\\"Hardie board home \u2014 front view\\" loading=\\"lazy\\" width={guideFront.img.w} height={guideFront.img.h} />\\n\\t</picture>\\n{/if}\\n        {#if typeof guideAngle === 'string'}\\n\\t<img class=\\"absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideAngle.img.src} alt=\\"Hardie board home \u2014 angle view\\" loading=\\"lazy\\" width={guideAngle.img.w} height={guideAngle.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(guideAngle.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideAngle.img.src} alt=\\"Hardie board home \u2014 angle view\\" loading=\\"lazy\\" width={guideAngle.img.w} height={guideAngle.img.h} />\\n\\t</picture>\\n{/if}\\n      </div>\\n    </div>\\n\\n    <!-- recommendation columns -->\\n    <div class=\\"mt-14 grid md:grid-cols-3 gap-6\\">\\n      {#each guideCards as { number, label, title, body }}\\n        <div class=\\"rounded-2xl border bg-off-white p-7\\">\\n          <span\\n            class=\\"inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-primary-dark\\"\\n          >\\n            <span\\n              class=\\"w-6 h-6 rounded-full bg-primary-dark text-white flex items-center justify-center text-[13px]\\"\\n            >\\n              {number}\\n            </span>\\n            {label}\\n          </span>\\n          <h3 class=\\"mt-4 font-bold text-xl text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n\\n    <!-- serving chicagoland note -->\\n    <div\\n      class=\\"mt-10 rounded-2xl bg-secondary-dark text-white p-7 sm:p-9 flex flex-col sm:flex-row sm:items-center gap-6 justify-between\\"\\n    >\\n      <div class=\\"max-w-2xl\\">\\n        <h3 class=\\"font-bold text-xl sm:text-2xl text-white\\">\\n          Klasek Painting, serving Chicagoland for 30+ years.\\n        </h3>\\n        <p class=\\"mt-2 text-white/75 leading-relaxed\\">\\n          Owner Pete Klasek is happy to answer any questions about your Hardie\\n          board project. We're known for high-quality work, dependable service,\\n          a satisfaction guarantee, and on-time completion \u2014 at competitive\\n          pricing.\\n        </p>\\n      </div>\\n      <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7 shrink-0\\">\\n        Contact Klasek\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== WHY KLASEK ===================== -->\\n<section id=\\"why\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11\\">\\n      <div\\n        class=\\"inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5\\"\\n      >\\n        <span\\n          class=\\"inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide\\"\\n        >\\n          Why Choose Klasek\\n        </span>\\n      </div>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Three decades on Chicagoland ladders. One crew, start to finish.\\n      </h2>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-2 lg:grid-cols-4 gap-5\\">\\n      {#each stats as { stat, title, body }}\\n        <div\\n          class=\\"rounded-xl border p-6 text-center hover:shadow-subtle transition\\"\\n        >\\n          <div class=\\"font-extrabold text-4xl text-primary-dark\\">{stat}</div>\\n          <h3 class=\\"mt-2 font-bold text-lg text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-2 text-gray-600 text-[15px] leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BEFORE / AFTER GALLERY ===================== -->\\n<section class=\\"bg-off-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center mb-9 flex flex-col items-center\\">\\n      <span class=\\"tab mb-4\\">Our work</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Before &amp; after, around the neighborhood.\\n      </h2>\\n    </div>\\n    <div class=\\"grid grid-cols-2 lg:grid-cols-4 gap-4\\">\\n      {#each galleryImages as { src, alt }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"w-full h-full aspect-square object-cover rounded-lg\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full aspect-square object-cover rounded-lg\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n    <div class=\\"mt-9 flex flex-col items-center gap-3\\">\\n      <p class=\\"flex items-center gap-2 text-sm font-bold text-gray-700\\">\\n        Review us\\n        <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n        on\\n      </p>\\n      <img class=\\"w-[92px] h-auto\\" src={google} alt=\\"Google\\" />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== SERVICE AREA ===================== -->\\n<section id=\\"area\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Areas We Serve\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center\\">\\n      <div>\\n        <h3 class=\\"font-bold text-2xl text-secondary-dark\\">\\n          Hardie board painting across the western Cook County suburbs.\\n        </h3>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your home.\\n          If your town isn't listed, call us; we likely cover it.\\n        </p>\\n        <div\\n          class=\\"mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3\\"\\n        >\\n          <svg\\n            class=\\"mt-0.5 shrink-0\\"\\n            width=\\"22\\"\\n            height=\\"22\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary-dark))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          <div>\\n            <p class=\\"font-bold text-secondary-dark\\">\\n              Klasek Painting \xB7 Lyons, IL\\n            </p>\\n            <p class=\\"text-gray-600 text-[15px]\\">\\n              4415 S. Custer, Lyons, IL 60534\\n            </p>\\n            <ClickToCall\\n              variant=\\"link\\"\\n              class=\\"!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]\\"\\n            />\\n          </div>\\n        </div>\\n        <div class=\\"mt-5 flex flex-wrap items-center gap-3\\">\\n          <Button href={routes[\\"contact\\"].href} class=\\"text-lg px-6\\">\\n            Request Estimate\\n          </Button>\\n          <ClickToCall\\n            variant=\\"secondary\\"\\n            class=\\"text-lg px-6 bg-secondary-dark hover:bg-secondary text-white\\"\\n          >\\n            Call the Crew\\n          </ClickToCall>\\n        </div>\\n      </div>\\n      <div>\\n        <ul\\n          class=\\"grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700\\"\\n        >\\n          {#each Object.values(serviceAreaRoutes) as { text, href }}\\n            <li class=\\"flex items-center gap-2\\">\\n              <span\\n                class=\\"w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0\\"\\n                aria-hidden=\\"true\\"\\n              />\\n              <a class=\\"hover:text-primary-dark hover:underline\\" {href}>\\n                {text}\\n              </a>\\n            </li>\\n          {/each}\\n        </ul>\\n        <div class=\\"mt-6 h-44 rounded-lg overflow-hidden\\">\\n          <Map lazy={true} />\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BRAND PARTNERS ===================== -->\\n<section class=\\"bg-off-white py-14 border-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-8\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <p\\n          class=\\"font-bold text-lg text-secondary-dark uppercase tracking-wide text-center\\"\\n        >\\n          Our Trusted Brand Partners\\n        </p>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div\\n      class=\\"flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7\\"\\n    >\\n      {#each partnerLogos as { src, alt, height }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FAQ ===================== -->\\n<section id=\\"faq\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container max-w-3xl\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Frequently Asked Questions\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"divide-y border-y\\">\\n      {#each faqData as { question, answer }, i}\\n        <div class=\\"py-5\\">\\n          <button\\n            type=\\"button\\"\\n            class=\\"flex w-full items-center justify-between gap-4 text-left\\"\\n            aria-expanded={openFaq === i}\\n            on:click={() => (openFaq = openFaq === i ? -1 : i)}\\n          >\\n            <span class=\\"font-bold text-lg text-secondary-dark\\">\\n              {question}\\n            </span>\\n            <span\\n              class=\\"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition {openFaq ===\\n              i\\n                ? 'rotate-45 bg-primary-dark text-white border-primary-dark'\\n                : 'bg-off-white text-gray-600'}\\"\\n            >\\n              <svg\\n                width=\\"14\\"\\n                height=\\"14\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.5\\"\\n                stroke-linecap=\\"round\\"><path d=\\"M12 5v14M5 12h14\\" /></svg\\n              >\\n            </span>\\n          </button>\\n          {#if openFaq === i}\\n            <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{answer}</p>\\n          {/if}\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FINAL CTA ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white p-y p-x overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <img\\n    src={splash}\\n    alt=\\"\\"\\n    aria-hidden=\\"true\\"\\n    class=\\"pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">No-pressure, no-cost</span>\\n      <h2 class=\\"text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white\\">\\n        Ready to help your property look its best?\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-md\\">\\n        Send us your details and we'll schedule a walk-through, then deliver a\\n        free written estimate for you to evaluate. Call the best.\\n      </p>\\n      <div\\n        class=\\"mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold\\"\\n      >\\n        <ClickToCall\\n          variant=\\"link\\"\\n          class=\\"!text-2xl !font-bold text-white hover:!text-primary\\"\\n        />\\n        <span class=\\"inline-flex items-center gap-2\\">\\n          <svg\\n            width=\\"18\\"\\n            height=\\"18\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          4415 S. Custer, Lyons, IL\\n        </span>\\n      </div>\\n    </div>\\n    <div class=\\"bg-white rounded-2xl shadow-2xl p-6 sm:p-7\\">\\n      <p class=\\"font-bold text-xl text-secondary-dark mb-1\\">\\n        Get a Free Estimate\\n      </p>\\n      <p class=\\"text-sm text-gray-600 mb-5\\">\\n        We'll reach out to schedule your walk-through.\\n      </p>\\n      <div class=\\"flex flex-col gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"w-full text-lg h-14\\">\\n          Request My Free Estimate\\n        </Button>\\n        <ClickToCall\\n          variant=\\"secondary\\"\\n          class=\\"w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white\\"\\n        />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== STICKY MOBILE BAR ===================== -->\\n<div\\n  class=\\"lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]\\"\\n>\\n  <div\\n    class=\\"grid grid-cols-2 gap-2 p-2.5\\"\\n    style=\\"padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));\\"\\n  >\\n    <ClickToCall\\n      variant=\\"secondary\\"\\n      class=\\"bg-secondary-dark hover:bg-secondary text-white\\"\\n    >\\n      Call\\n    </ClickToCall>\\n    <Button href={routes[\\"contact\\"].href}>Free Estimate</Button>\\n  </div>\\n</div>\\n\\n<style>\\n  /* orange right-pointing tab label (design's .tab) */\\n  .tab {\\n    display: inline-flex;\\n    align-items: center;\\n    background: hsl(var(--primary-dark));\\n    color: white;\\n    font-weight: 700;\\n    font-size: 12px;\\n    text-transform: uppercase;\\n    letter-spacing: 0.14em;\\n    padding: 0.375rem 1.75rem 0.375rem 1rem;\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* centered ribbon header with swallowtail flags (design's .ribbon) */\\n  .ribbon {\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n    gap: 0.875rem;\\n  }\\n  .flag {\\n    width: 42px;\\n    height: 17px;\\n    background: hsl(var(--primary-dark));\\n    flex: none;\\n  }\\n  .flag-l {\\n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%);\\n  }\\n  .flag-r {\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%);\\n  }\\n</style>\\n"],"names":[],"mappings":"AAi+BE,mBAAK,CACH,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,QAAQ,CAAC,OAAO,CAAC,QAAQ,CAAC,IAAI,CACvC,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAGA,sBAAQ,CACN,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,GAAG,CAAE,QACP,CACA,oBAAM,CACJ,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,IAAI,CAAE,IACR,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,GAAG,CAC7D,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E"}`
-    };
-    Page57 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
-      let $isMobileStore, $$unsubscribe_isMobileStore;
-      $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
-      const heroChecks = [
-        "Painted by our own crew",
-        "Free written estimates",
-        "100% satisfaction guarantee",
-        "Lead-Safe Certified"
-      ];
-      const paintingChecks = [
-        ["Edge & bare-spot priming", ""],
-        ["Loxon masonry primer", "by Sherwin-Williams"],
-        ["Premium acrylic latex", "topcoat"],
-        ["Sprayed", "for full coverage"]
-      ];
-      const repairItems = [
-        ["Set popped nails", "Reset and spot-primed before topcoat."],
-        ["Caulk & seal gaps", "Joints sealed to keep moisture out."],
-        ["Replace damaged board", "Deteriorated sections cut out and swapped."],
-        ["Scrape loose paint", "Failing coats removed down to sound siding."]
-      ];
-      const problems = [
-        {
-          title: "Color fades in the sun",
-          body: "The intense Chicago heat chalks and dulls factory color over time, leaving the whole house looking tired and washed-out."
-        },
-        {
-          title: "Cheap paint peels",
-          body: "Factory primer is thin and never covers the cut edges. Paint over it without priming and the coat flakes off within a season."
-        },
-        {
-          title: "Moisture & ground contact",
-          body: "Hardie board wicks moisture, and boards in direct contact with the ground can deteriorate \u2014 needing repair before any paint goes on."
-        }
-      ];
-      const guideCards = [
-        {
-          number: "1",
-          label: "New board",
-          title: "Prime the edges first.",
-          body: "Factory primer is thin and never covers the cut edges, so an extra primer coat is a must. We use a masonry primer like Loxon by Sherwin-Williams, then top-coat in a high-quality acrylic latex exterior paint \u2014 Sherwin-Williams, Benjamin Moore, or Behr. You can roll it, but spraying drives paint into every groove for full, even coverage."
-        },
-        {
-          number: "2",
-          label: "Faded board",
-          title: "Prep beats the fade.",
-          body: 'Hardie board is "hardy," but its color fades in our intense Chicago heat. A repaint is all about thorough prep: setting popped nails, scraping any loose or peeling paint, and caulking the gaps. The board wicks moisture well, but sections in direct ground contact can deteriorate \u2014 those get repaired or replaced before painting.'
-        },
-        {
-          number: "3",
-          label: "Trim work",
-          title: "The icing on the cake.",
-          body: "Once the siding is painted, the trim is what ties it together. We sand and scrape off loose paint, caulk large cracks, and replace any dry rot. Bare wood, doors, columns, or metal get a primer coat first \u2014 and we finish trim in a semi-gloss that looks sharp and stays cleaner."
-        }
-      ];
-      const stats = [
-        {
-          stat: "30+",
-          title: "Years in business",
-          body: "Serving Cook County exteriors since 1994 \u2014 we'll be here for the warranty."
-        },
-        {
-          stat: "0",
-          title: "Subcontractors",
-          body: "Your siding is painted by Klasek employees we trained and stand behind \u2014 led by owner Pete Klasek."
-        },
-        {
-          stat: "$0",
-          title: "Estimate cost",
-          body: "Free, written, itemized \u2014 so you know exactly what you're paying for."
-        },
-        {
-          stat: "100%",
-          title: "Satisfaction guarantee",
-          body: "We're not done until the color is even, the trim is crisp, and you're happy with the finish."
-        }
-      ];
-      const galleryImages = [
-        {
-          src: src21,
-          alt: "Hardie board painting before and after"
-        },
-        {
-          src: gallery8,
-          alt: "Painted Hardie board siding"
-        },
-        {
-          src: gallery9,
-          alt: "Hardie board home exterior"
-        },
-        {
-          src: gallery10,
-          alt: "Freshly painted fiber cement siding"
-        },
-        {
-          src: gallery11,
-          alt: "Hardie board siding detail"
-        },
-        {
-          src: gallery12,
-          alt: "Painted Hardie board home"
-        },
-        {
-          src: gallery13,
-          alt: "Hardie board exterior project"
-        },
-        {
-          src: gallery14,
-          alt: "Completed Hardie board painting project"
-        }
-      ];
-      const partnerLogos = [
-        {
-          src: valspar,
-          alt: "Valspar",
-          height: "h-7 sm:h-8"
-        },
-        {
-          src: behr,
-          alt: "Behr",
-          height: "h-7 sm:h-8"
-        },
-        {
-          src: benjaminMoore,
-          alt: "Benjamin Moore",
-          height: "h-8 sm:h-10"
-        },
-        {
-          src: sherwinWilliams,
-          alt: "Sherwin-Williams",
-          height: "h-8 sm:h-10"
-        },
-        {
-          src: leadSafe,
-          alt: "Lead-Safe Certified",
-          height: "h-9 sm:h-11"
-        },
-        {
-          src: pdca,
-          alt: "PDCA",
-          height: "h-8 sm:h-10"
-        }
-      ];
-      const faqData = [
-        {
-          question: "What is Hardie board siding made of?",
-          answer: "Hardie board is a fiber-cement siding made from mechanical pulp. You'll also hear it called HardiePlank, concrete siding, cement-fiber siding, or fiber cement cladding. It comes in finishes that mimic chipboard, plywood, or real wood grain."
-        },
-        {
-          question: "Do I need to prime new Hardie board before painting?",
-          answer: "Yes. Even though new Hardie board ships with a factory primer, the coating is thin and doesn't cover the cut edges \u2014 so a high-quality primer coat is essential for proper coverage. We recommend a masonry primer like Loxon by Sherwin-Williams."
-        },
-        {
-          question: "What type of paint should I use on Hardie board siding?",
-          answer: "A high-quality acrylic latex exterior paint. Sticking with a trusted brand like Sherwin-Williams, Benjamin Moore, or Behr keeps the siding protected and helps the finish last much longer."
-        },
-        {
-          question: "Can I roll on paint when painting Hardie board?",
-          answer: "You can roll it, but we spray. Spraying drives paint into every crack and groove of the board's texture and ensures the entire surface is covered evenly \u2014 a roller tends to skip the recesses."
-        },
-        {
-          question: "How should I prepare faded Hardie board for painting?",
-          answer: "Thorough prep is everything. That means setting any popped nails, scraping off loose or peeling paint, and caulking significant gaps. If a section in direct ground contact has deteriorated, it should be repaired or replaced before painting."
-        },
-        {
-          question: "What are the best practices for painting Hardie board trim?",
-          answer: "Finish the trim after the siding. Sand and scrape loose paint, caulk large cracks, and replace any dry rot. Prime all bare wood or metal first, and use a semi-gloss sheen \u2014 it looks best on trim and stays cleaner over time."
-        }
-      ];
-      let openFaq = 0;
-      $$result.css.add(css17);
-      $$unsubscribe_isMobileStore();
-      return ` <section class="relative bg-secondary-dark text-white overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark" aria-hidden="true"></div> <div class="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div> <div class="container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x"> <div class="order-2 lg:order-1"><div class="relative">${typeof heroSrc2 === "string" ? `<img class="w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl"${add_attribute("src", heroSrc2.img.src, 0)} alt="Home with Hardie board siding painted by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", heroSrc2.img.w, 0)}${add_attribute("height", heroSrc2.img.h, 0)}>` : `<picture>${each(Object.entries(heroSrc2.sources), ([format, srcset]) => {
-        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl"${add_attribute("src", heroSrc2.img.src, 0)} alt="Home with Hardie board siding painted by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", heroSrc2.img.w, 0)}${add_attribute("height", heroSrc2.img.h, 0)}></picture>`} ${validate_component(GoogleProof, "GoogleProof").$$render(
-        $$result,
-        {
-          class: "bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl"
-        },
-        {},
-        {}
-      )}</div></div>  <div class="order-1 lg:order-2 max-w-xl"><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-1fgrw5z">#1 Hardie Board Painters \xB7 Cook County</span> <h1 class="text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white" data-testid="page-heading" data-svelte-h="svelte-y4vxn2">Hardie board siding,<br class="hidden sm:block"> painted to last by
-        <span class="text-primary">our own crew.</span></h1> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-1j43g8k">Fiber cement is tough \u2014 but its factory color fades under the Chicago
-        sun, and a botched repaint peels in a season. Klasek primes the edges,
-        preps every board, and sprays on premium acrylic latex so your siding
-        looks new again and stays that way for years.</p> <ul class="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5">${each(heroChecks, (check) => {
-        return `<li class="flex items-center gap-2.5 text-white/90 font-semibold"><svg class="text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> ${escape(check)} </li>`;
-      })}</ul> <div class="mt-8 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          href: routes["contact"].href,
-          class: "text-lg h-14 px-7"
-        },
-        {},
-        {
-          default: () => {
-            return `Get a Free Estimate`;
-          }
-        }
-      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
-        $$result,
-        {
-          variant: "outline",
-          class: "text-lg h-14 px-6"
-        },
-        {},
-        {}
-      )}</div></div></div></section>  <section class="bg-white border-y" data-svelte-h="svelte-1xq72kb"><div class="container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center"><span class="flex items-center gap-2"><img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars"> <span class="text-sm font-bold text-gray-700">5.0 on Google</span></span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      Lead-Safe Certified</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-      100% Satisfaction Guarantee</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-      Serving Chicagoland since 1994</span></div></section>  <section class="bg-white p-y p-x"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11 flex flex-col items-center" data-svelte-h="svelte-rysvw3"><div class="ribbon mb-4 svelte-18ua8g5"><span class="flag flag-l svelte-18ua8g5" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark">Why Hardie board needs a real paint job</h2> <span class="flag flag-r svelte-18ua8g5" aria-hidden="true"></span></div> <p class="text-lg text-gray-600 leading-relaxed">Fiber cement is built to last \u2014 but the finish on it isn&#39;t forever. Skip
-        the prep, and a fresh coat peels before the next summer&#39;s out.</p></div> <div class="grid sm:grid-cols-3 gap-5">${each(problems, (problem, i2) => {
-        return `<div class="rounded-xl border p-6 bg-off-white"><div class="w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4">${i2 === 0 ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"></path></svg>` : `${i2 === 1 ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M3 13h18"></path></svg>` : `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>`}`}</div> <h3 class="font-bold text-xl text-secondary-dark">${escape(problem.title)}</h3> <p class="mt-2 text-gray-600 leading-relaxed">${escape(problem.body)}</p> </div>`;
-      })}</div></div></section>  <section id="painting" class="relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden"><div class="absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70" aria-hidden="true"></div> <div class="container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-1gr8jly">Our signature service</span> <h2 class="text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white" data-svelte-h="svelte-um7sg2">Primed, prepped, and sprayed \u2014 the way fiber cement should be painted.</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-j0bm8y">A Hardie board repaint lives or dies on prep. We set popped nails,
-        scrape loose paint, caulk the gaps, and prime the bare edges \u2014 then
-        spray on premium acrylic latex so paint works into every groove and the
-        whole wall cures to one even finish.</p> <ul class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5">${each(paintingChecks, ([bold, rest]) => {
-        return `<li class="flex items-start gap-3"><svg class="mt-0.5 shrink-0 text-primary" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> <span class="text-white/85"><b class="text-white font-bold">${escape(bold)}</b> ${escape(rest)}</span> </li>`;
-      })}</ul> <div class="mt-8 flex flex-wrap items-center gap-4">${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          href: routes["contact"].href,
-          class: "text-lg h-14 px-7"
-        },
-        {},
-        {
-          default: () => {
-            return `Price My Repaint`;
-          }
-        }
-      )} <p class="text-sm text-white/55 max-w-[14rem]" data-svelte-h="svelte-sl531a">Painted by Klasek employees \u2014 never subcontracted out.</p></div></div> <div class="grid grid-cols-2 gap-4">${typeof paintingTall === "string" ? `<img class="w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", paintingTall.img.src, 0)} alt="Spraying Hardie board siding" loading="lazy"${add_attribute("width", paintingTall.img.w, 0)}${add_attribute("height", paintingTall.img.h, 0)}>` : `<picture>${each(Object.entries(paintingTall.sources), ([format, srcset]) => {
-        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", paintingTall.img.src, 0)} alt="Spraying Hardie board siding" loading="lazy"${add_attribute("width", paintingTall.img.w, 0)}${add_attribute("height", paintingTall.img.h, 0)}></picture>`} <div class="grid grid-rows-2 gap-4"><div class="relative rounded-lg overflow-hidden ring-2 ring-white/10">${typeof paintingTop === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingTop.img.src, 0)} alt="Priming Hardie board cut edges" loading="lazy"${add_attribute("width", paintingTop.img.w, 0)}${add_attribute("height", paintingTop.img.h, 0)}>` : `<picture>${each(Object.entries(paintingTop.sources), ([format, srcset]) => {
-        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingTop.img.src, 0)} alt="Priming Hardie board cut edges" loading="lazy"${add_attribute("width", paintingTop.img.w, 0)}${add_attribute("height", paintingTop.img.h, 0)}></picture>`}</div> <div class="relative rounded-lg overflow-hidden ring-2 ring-white/10">${typeof paintingBottom === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingBottom.img.src, 0)} alt="Finished Hardie lap siding" loading="lazy"${add_attribute("width", paintingBottom.img.w, 0)}${add_attribute("height", paintingBottom.img.h, 0)}>` : `<picture>${each(Object.entries(paintingBottom.sources), ([format, srcset]) => {
-        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingBottom.img.src, 0)} alt="Finished Hardie lap siding" loading="lazy"${add_attribute("width", paintingBottom.img.w, 0)}${add_attribute("height", paintingBottom.img.h, 0)}></picture>`}</div></div></div></div></section>  <section id="repair" class="bg-white p-y p-x scroll-mt-20"><div class="container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">${typeof src20 === "string" ? `<img class="order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg"${add_attribute("src", src20.img.src, 0)} alt="Hardie board siding repair before painting" loading="lazy"${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}>` : `<picture>${each(Object.entries(src20.sources), ([format, srcset]) => {
-        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg"${add_attribute("src", src20.img.src, 0)} alt="Hardie board siding repair before painting" loading="lazy"${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}></picture>`} <div class="order-1 lg:order-2"><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-5lt5ch">Repair before painting</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-mdqthf">We fix the failing boards first \u2014 then paint over solid siding.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed" data-svelte-h="svelte-6rcql9">Painting over rotted or cracked board just hides the problem. Where
-        siding has deteriorated \u2014 often where it meets the ground \u2014 we repair or
-        replace the damaged section so the finish goes on solid and lasts.</p> <div class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4">${each(repairItems, ([title, body2]) => {
-        return `<div class="flex items-start gap-3"><span class="mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <p><b class="font-bold text-secondary-dark">${escape(title)}</b><br> <span class="text-gray-600 text-[15px]">${escape(body2)}</span></p> </div>`;
-      })}</div> ${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          href: routes["contact"].href,
-          variant: "secondary",
-          class: "mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary"
-        },
-        {},
-        {
-          default: () => {
-            return `Book a Repair Visit`;
-          }
-        }
-      )}</div></div></section>  <section id="trim" class="bg-off-white p-y p-x scroll-mt-20"><div class="container"><div class="rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]"><div class="p-8 sm:p-12"><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-gis3g8">The finishing touch</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-11hbk1j">Trim, fascia &amp; soffit \u2014 the detail that makes it pop.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-cgidqx">Crisp trim is the icing on the cake. We sand and scrape loose paint,
-          caulk the cracks, replace any dry rot, and prime every bare spot \u2014
-          then finish in a semi-gloss that frames the house and wipes clean.</p> <div class="mt-6 flex flex-wrap gap-3" data-svelte-h="svelte-wje02d"><span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Sand &amp; scrape</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Caulk &amp; prime bare wood</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Semi-gloss finish</span></div> ${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          href: routes["contact"].href,
-          class: "mt-8 text-lg h-14 px-7"
-        },
-        {},
-        {
-          default: () => {
-            return `Get a Trim Quote`;
-          }
-        }
-      )}</div> <div class="relative min-h-[260px]">${typeof trimSrc === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", trimSrc.img.src, 0)} alt="Fresh trim on Hardie board siding" loading="lazy"${add_attribute("width", trimSrc.img.w, 0)}${add_attribute("height", trimSrc.img.h, 0)}>` : `<picture>${each(Object.entries(trimSrc.sources), ([format, srcset]) => {
-        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", trimSrc.img.src, 0)} alt="Fresh trim on Hardie board siding" loading="lazy"${add_attribute("width", trimSrc.img.w, 0)}${add_attribute("height", trimSrc.img.h, 0)}></picture>`}</div></div></div></section>  <section id="guide" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center"> <div data-svelte-h="svelte-5a9gso"><span class="tab mb-5 svelte-18ua8g5">A quick field guide</span> <h2 class="text-3xl sm:text-4xl leading-[1.07] font-extrabold text-secondary-dark">All about painting exterior Hardie board siding.</h2> <p class="mt-5 text-lg text-gray-600 leading-relaxed">Hardie board is a dense fiber-cement board made from mechanical pulp \u2014
-          you&#39;ll also hear it called HardiePlank, cement-fiber siding, or fiber
-          cement cladding. It&#39;s all over the Chicago suburbs in finishes that
-          mimic coarse chipboard, plywood, or real wood grain.</p> <p class="mt-4 text-lg text-gray-600 leading-relaxed">Because the siding almost always ships
-          <b class="text-secondary-dark font-bold">pre-primed</b> to protect it in
-          transit, a great paint job is less about the color and more about the prep.
-          Here&#39;s how we approach each situation.</p></div>  <div class="relative h-[380px] sm:h-[440px]">${typeof guideFront === "string" ? `<img class="absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideFront.img.src, 0)} alt="Hardie board home \u2014 front view" loading="lazy"${add_attribute("width", guideFront.img.w, 0)}${add_attribute("height", guideFront.img.h, 0)}>` : `<picture>${each(Object.entries(guideFront.sources), ([format, srcset]) => {
-        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideFront.img.src, 0)} alt="Hardie board home \u2014 front view" loading="lazy"${add_attribute("width", guideFront.img.w, 0)}${add_attribute("height", guideFront.img.h, 0)}></picture>`} ${typeof guideAngle === "string" ? `<img class="absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideAngle.img.src, 0)} alt="Hardie board home \u2014 angle view" loading="lazy"${add_attribute("width", guideAngle.img.w, 0)}${add_attribute("height", guideAngle.img.h, 0)}>` : `<picture>${each(Object.entries(guideAngle.sources), ([format, srcset]) => {
-        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideAngle.img.src, 0)} alt="Hardie board home \u2014 angle view" loading="lazy"${add_attribute("width", guideAngle.img.w, 0)}${add_attribute("height", guideAngle.img.h, 0)}></picture>`}</div></div>  <div class="mt-14 grid md:grid-cols-3 gap-6">${each(guideCards, ({ number, label, title, body: body2 }) => {
-        return `<div class="rounded-2xl border bg-off-white p-7"><span class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-primary-dark"><span class="w-6 h-6 rounded-full bg-primary-dark text-white flex items-center justify-center text-[13px]">${escape(number)}</span> ${escape(label)}</span> <h3 class="mt-4 font-bold text-xl text-secondary-dark">${escape(title)}</h3> <p class="mt-3 text-gray-600 leading-relaxed">${escape(body2)}</p> </div>`;
-      })}</div>  <div class="mt-10 rounded-2xl bg-secondary-dark text-white p-7 sm:p-9 flex flex-col sm:flex-row sm:items-center gap-6 justify-between"><div class="max-w-2xl" data-svelte-h="svelte-15fhd0k"><h3 class="font-bold text-xl sm:text-2xl text-white">Klasek Painting, serving Chicagoland for 30+ years.</h3> <p class="mt-2 text-white/75 leading-relaxed">Owner Pete Klasek is happy to answer any questions about your Hardie
-          board project. We&#39;re known for high-quality work, dependable service,
-          a satisfaction guarantee, and on-time completion \u2014 at competitive
-          pricing.</p></div> ${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          href: routes["contact"].href,
-          class: "text-lg h-14 px-7 shrink-0"
-        },
-        {},
-        {
-          default: () => {
-            return `Contact Klasek`;
-          }
-        }
-      )}</div></div></section>  <section id="why" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11" data-svelte-h="svelte-1fia0mq"><div class="inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5"><span class="inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide">Why Choose Klasek</span></div> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Three decades on Chicagoland ladders. One crew, start to finish.</h2></div> <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">${each(stats, ({ stat, title, body: body2 }) => {
-        return `<div class="rounded-xl border p-6 text-center hover:shadow-subtle transition"><div class="font-extrabold text-4xl text-primary-dark">${escape(stat)}</div> <h3 class="mt-2 font-bold text-lg text-secondary-dark">${escape(title)}</h3> <p class="mt-2 text-gray-600 text-[15px] leading-relaxed">${escape(body2)}</p> </div>`;
-      })}</div></div></section>  <section class="bg-off-white p-y p-x"><div class="container"><div class="text-center mb-9 flex flex-col items-center" data-svelte-h="svelte-oo9x63"><span class="tab mb-4 svelte-18ua8g5">Our work</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Before &amp; after, around the neighborhood.</h2></div> <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${each(galleryImages, ({ src: src27, alt }) => {
-        return `${typeof src27 === "string" ? `<img class="w-full h-full aspect-square object-cover rounded-lg"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
-          return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-        })} <img class="w-full h-full aspect-square object-cover rounded-lg"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}> </picture>`}`;
-      })}</div> <div class="mt-9 flex flex-col items-center gap-3" data-svelte-h="svelte-r14l7e"><p class="flex items-center gap-2 text-sm font-bold text-gray-700">Review us
-        <img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars">
-        on</p> <img class="w-[92px] h-auto"${add_attribute("src", google, 0)} alt="Google"></div></div></section>  <section id="area" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="mb-10" data-svelte-h="svelte-1jsmhnv"><div class="ribbon svelte-18ua8g5"><span class="flag flag-l svelte-18ua8g5" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Areas We Serve</h2> <span class="flag flag-r svelte-18ua8g5" aria-hidden="true"></span></div></div> <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center"><div><h3 class="font-bold text-2xl text-secondary-dark" data-svelte-h="svelte-4ddwp4">Hardie board painting across the western Cook County suburbs.</h3> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-1oelp02">Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your home.
-          If your town isn&#39;t listed, call us; we likely cover it.</p> <div class="mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3"><svg class="mt-0.5 shrink-0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <div><p class="font-bold text-secondary-dark" data-svelte-h="svelte-75sjm3">Klasek Painting \xB7 Lyons, IL</p> <p class="text-gray-600 text-[15px]" data-svelte-h="svelte-1qewt9m">4415 S. Custer, Lyons, IL 60534</p> ${validate_component(ClickToCall, "ClickToCall").$$render(
-        $$result,
-        {
-          variant: "link",
-          class: "!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]"
-        },
-        {},
-        {}
-      )}</div></div> <div class="mt-5 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          href: routes["contact"].href,
-          class: "text-lg px-6"
-        },
-        {},
-        {
-          default: () => {
-            return `Request Estimate`;
-          }
-        }
-      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
-        $$result,
-        {
-          variant: "secondary",
-          class: "text-lg px-6 bg-secondary-dark hover:bg-secondary text-white"
-        },
-        {},
-        {
-          default: () => {
-            return `Call the Crew`;
-          }
-        }
-      )}</div></div> <div><ul class="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700">${each(Object.values(serviceAreaRoutes), ({ text: text2, href }) => {
-        return `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <a class="hover:text-primary-dark hover:underline"${add_attribute("href", href, 0)}>${escape(text2)}</a> </li>`;
-      })}</ul> <div class="mt-6 h-44 rounded-lg overflow-hidden">${validate_component(Map2, "Map").$$render($$result, { lazy: true }, {}, {})}</div></div></div></div></section>  <section class="bg-off-white py-14 border-y p-x"><div class="container"><div class="mb-8" data-svelte-h="svelte-1jx66ah"><div class="ribbon svelte-18ua8g5"><span class="flag flag-l svelte-18ua8g5" aria-hidden="true"></span> <p class="font-bold text-lg text-secondary-dark uppercase tracking-wide text-center">Our Trusted Brand Partners</p> <span class="flag flag-r svelte-18ua8g5" aria-hidden="true"></span></div></div> <div class="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7">${each(partnerLogos, ({ src: src27, alt, height }) => {
-        return `${typeof src27 === "string" ? `<img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-18ua8g5"}"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}>` : `<picture>${each(Object.entries(src27.sources), ([format, srcset]) => {
-          return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-        })} <img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-18ua8g5"}"${add_attribute("src", src27.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src27.img.w, 0)}${add_attribute("height", src27.img.h, 0)}> </picture>`}`;
-      })}</div></div></section>  <section id="faq" class="bg-white p-y p-x scroll-mt-20"><div class="container max-w-3xl"><div class="mb-10" data-svelte-h="svelte-1d4vlt2"><div class="ribbon svelte-18ua8g5"><span class="flag flag-l svelte-18ua8g5" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Frequently Asked Questions</h2> <span class="flag flag-r svelte-18ua8g5" aria-hidden="true"></span></div></div> <div class="divide-y border-y">${each(faqData, ({ question, answer }, i2) => {
-        return `<div class="py-5"><button type="button" class="flex w-full items-center justify-between gap-4 text-left"${add_attribute("aria-expanded", openFaq === i2, 0)}><span class="font-bold text-lg text-secondary-dark">${escape(question)}</span> <span class="${"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition " + escape(
-          openFaq === i2 ? "rotate-45 bg-primary-dark text-white border-primary-dark" : "bg-off-white text-gray-600",
-          true
-        )}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg> </span></button> ${openFaq === i2 ? `<p class="mt-3 text-gray-600 leading-relaxed">${escape(answer)}</p>` : ``} </div>`;
-      })}</div></div></section>  <section class="relative bg-secondary-dark text-white p-y p-x overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark" aria-hidden="true"></div> <img${add_attribute("src", splash, 0)} alt="" aria-hidden="true" class="pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block"> <div class="container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-18ua8g5" data-svelte-h="svelte-1k9bb3x">No-pressure, no-cost</span> <h2 class="text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white" data-svelte-h="svelte-5g88fm">Ready to help your property look its best?</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-md" data-svelte-h="svelte-jj4wmq">Send us your details and we&#39;ll schedule a walk-through, then deliver a
-        free written estimate for you to evaluate. Call the best.</p> <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold">${validate_component(ClickToCall, "ClickToCall").$$render(
-        $$result,
-        {
-          variant: "link",
-          class: "!text-2xl !font-bold text-white hover:!text-primary"
-        },
-        {},
-        {}
-      )} <span class="inline-flex items-center gap-2" data-svelte-h="svelte-1n0zcwg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          4415 S. Custer, Lyons, IL</span></div></div> <div class="bg-white rounded-2xl shadow-2xl p-6 sm:p-7"><p class="font-bold text-xl text-secondary-dark mb-1" data-svelte-h="svelte-1ue4w2h">Get a Free Estimate</p> <p class="text-sm text-gray-600 mb-5" data-svelte-h="svelte-brv2iu">We&#39;ll reach out to schedule your walk-through.</p> <div class="flex flex-col gap-3">${validate_component(Button, "Button").$$render(
-        $$result,
-        {
-          href: routes["contact"].href,
-          class: "w-full text-lg h-14"
-        },
-        {},
-        {
-          default: () => {
-            return `Request My Free Estimate`;
-          }
-        }
-      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
-        $$result,
-        {
-          variant: "secondary",
-          class: "w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white"
-        },
-        {},
-        {}
-      )}</div></div></div></section>  <div class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]"><div class="grid grid-cols-2 gap-2 p-2.5" style="padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));">${validate_component(ClickToCall, "ClickToCall").$$render(
-        $$result,
-        {
-          variant: "secondary",
-          class: "bg-secondary-dark hover:bg-secondary text-white"
-        },
-        {},
-        {
-          default: () => {
-            return `Call`;
-          }
-        }
-      )} ${validate_component(Button, "Button").$$render($$result, { href: routes["contact"].href }, {}, {
-        default: () => {
-          return `Free Estimate`;
-        }
-      })}</div> </div>`;
-    });
-  }
-});
-
 // .svelte-kit/output/server/nodes/60.js
 var __exports61 = {};
 __export(__exports61, {
@@ -23402,9 +23175,9 @@ var init__61 = __esm({
     init_page_ts53();
     index61 = 60;
     component61 = async () => component_cache61 ??= (await Promise.resolve().then(() => (init_page_svelte57(), page_svelte_exports57))).default;
-    universal_id53 = "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-installation/+page.ts";
-    imports61 = ["_app/immutable/nodes/60.C7S3blzR.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/GRGG0YDU.js", "_app/immutable/chunks/Cuz4b9uy.js", "_app/immutable/chunks/xRuhivlF.js", "_app/immutable/chunks/tZ0ymlLq.js", "_app/immutable/chunks/Wt7Ns1lL.js"];
-    stylesheets61 = ["_app/immutable/assets/60.Dp6q8Ut_.css"];
+    universal_id53 = "src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-repair/+page.ts";
+    imports61 = ["_app/immutable/nodes/60.Dg2Xnzj3.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets61 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts61 = [];
   }
 });
@@ -23426,6 +23199,25 @@ var init_page_ts54 = __esm({
       return {
         pageMetaTags
       };
+    };
+  }
+});
+
+// .svelte-kit/output/server/chunks/hardie-board-siding-painting-before-after-service.js
+var galleryBeforeAfter;
+var init_hardie_board_siding_painting_before_after_service = __esm({
+  ".svelte-kit/output/server/chunks/hardie-board-siding-painting-before-after-service.js"() {
+    galleryBeforeAfter = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.BizTE-dE.avif 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.BTOo1OJF.avif 641w",
+        webp: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.CDXg_HXU.webp 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DevvlwcJ.webp 641w",
+        png: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.ka-tEVGv.png 321w, /_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png 641w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-board-siding-painting-before-after-service.DYtCSrRM.png",
+        w: 641,
+        h: 641
+      }
     };
   }
 });
@@ -23494,9 +23286,9 @@ var init_page_svelte58 = __esm({
         {}
       )} ${validate_component(ColumnTemplateSection, "ColumnTemplateSection").$$render($$result, { class: "lg:pt-12 pt-4" }, {}, {
         "right-column": () => {
-          return `<div slot="right-column">${typeof src21 === "string" ? `<img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", src21.img.src, 0)} alt="Hardie board siding project before and after by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src21.img.w, 0)}${add_attribute("height", src21.img.h, 0)}>` : `<picture>${each(Object.entries(src21.sources), ([format, srcset]) => {
+          return `<div slot="right-column">${typeof galleryBeforeAfter === "string" ? `<img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", galleryBeforeAfter.img.src, 0)} alt="Hardie board siding project before and after by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", galleryBeforeAfter.img.w, 0)}${add_attribute("height", galleryBeforeAfter.img.h, 0)}>` : `<picture>${each(Object.entries(galleryBeforeAfter.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", src21.img.src, 0)} alt="Hardie board siding project before and after by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src21.img.w, 0)}${add_attribute("height", src21.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[550px] mx-auto"${add_attribute("src", galleryBeforeAfter.img.src, 0)} alt="Hardie board siding project before and after by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", galleryBeforeAfter.img.w, 0)}${add_attribute("height", galleryBeforeAfter.img.h, 0)}></picture>`}</div>`;
         },
         "left-column": () => {
           return `<div slot="left-column" data-svelte-h="svelte-b730sy"><h2>All About Painting Exterior Hardie Board Siding</h2> <p>Hardie Board is a heavy type of fiberboard made from mechanical pulp. It&#39;s also called Hardie
@@ -23544,7 +23336,7 @@ var init__62 = __esm({
     index62 = 61;
     component62 = async () => component_cache62 ??= (await Promise.resolve().then(() => (init_page_svelte58(), page_svelte_exports58))).default;
     universal_id54 = "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.ts";
-    imports62 = ["_app/immutable/nodes/61.BrljLS6T.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/Cuz4b9uy.js", "_app/immutable/chunks/BHMLneZA.js"];
+    imports62 = ["_app/immutable/nodes/61.CflEKu1N.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Y8pJni8e.js", "_app/immutable/chunks/Cvny-U8e.js"];
     stylesheets62 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts62 = [];
   }
@@ -23567,6 +23359,25 @@ var init_page_ts55 = __esm({
       return {
         pageMetaTags
       };
+    };
+  }
+});
+
+// .svelte-kit/output/server/chunks/hardie-board-siding-repair-service.js
+var repairSrc;
+var init_hardie_board_siding_repair_service = __esm({
+  ".svelte-kit/output/server/chunks/hardie-board-siding-repair-service.js"() {
+    repairSrc = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-board-siding-repair-service.CwNEPP8u.avif 331w, /_app/immutable/assets/hardie-board-siding-repair-service.BIpZsb1W.avif 661w",
+        webp: "/_app/immutable/assets/hardie-board-siding-repair-service.DcBBusKa.webp 331w, /_app/immutable/assets/hardie-board-siding-repair-service.Bc68Ez-u.webp 661w",
+        png: "/_app/immutable/assets/hardie-board-siding-repair-service.CEnpMnwS.png 331w, /_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png 661w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-board-siding-repair-service.BE-FbLGT.png",
+        w: 661,
+        h: 434
+      }
     };
   }
 });
@@ -23659,9 +23470,9 @@ var init_page_svelte59 = __esm({
 			curb appeal.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src20 === "string" ? `<img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", src20.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}>` : `<picture>${each(Object.entries(src20.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof repairSrc === "string" ? `<img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", repairSrc.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", repairSrc.img.w, 0)}${add_attribute("height", repairSrc.img.h, 0)}>` : `<picture>${each(Object.entries(repairSrc.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", src20.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}></picture>`}</div>`;
+          })} <img class="bord rounded-lg max-w-[500px] mx-auto w-full h-auto"${add_attribute("src", repairSrc.img.src, 0)} alt="White paint Hardie board siding"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", repairSrc.img.w, 0)}${add_attribute("height", repairSrc.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -23712,22 +23523,709 @@ var init__63 = __esm({
     index63 = 62;
     component63 = async () => component_cache63 ??= (await Promise.resolve().then(() => (init_page_svelte59(), page_svelte_exports59))).default;
     universal_id55 = "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts";
-    imports63 = ["_app/immutable/nodes/62.EDAwV6qo.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/GRGG0YDU.js", "_app/immutable/chunks/BHMLneZA.js"];
+    imports63 = ["_app/immutable/nodes/62.3FrpjhvN.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/DBI2f3KA.js", "_app/immutable/chunks/Cvny-U8e.js"];
     stylesheets63 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
     fonts63 = [];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/_page.ts.js
+// .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-services/_page.ts.js
 var page_ts_exports56 = {};
 __export(page_ts_exports56, {
   load: () => load60
 });
 var load60;
 var init_page_ts56 = __esm({
-  ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/_page.ts.js"() {
+  ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-services/_page.ts.js"() {
     init_metaTagHelpers();
     load60 = () => {
+      const pageMetaTags = createTitleDescription(
+        "Hardie Board Siding Installation",
+        "Upgrade your home with expert Hardie Board fiber cement siding installation from Klasek Painting. Durable, beautiful, built for Chicago weather. Free estimates!"
+      );
+      return {
+        pageMetaTags
+      };
+    };
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-services/_page.svelte.js
+var page_svelte_exports60 = {};
+__export(page_svelte_exports60, {
+  default: () => Page60
+});
+var css$13, phone, phoneHref, EstimateFormBand, heroSrc2, paintingTall, paintingTop, paintingBottom, trimSrc, guideFront, guideAngle, gallery8, gallery9, gallery10, gallery11, gallery12, gallery13, gallery14, css17, Page60;
+var init_page_svelte60 = __esm({
+  ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/hardie-board-services/_page.svelte.js"() {
+    init_ssr();
+    init_GoogleProof();
+    init_ClickToCall();
+    init_Map();
+    init_button();
+    init_routes();
+    init_hardie_board_siding_repair_service();
+    init_hardie_board_siding_painting_before_after_service();
+    init_orange_paint_splash();
+    init_stars();
+    init_Google_name_logo();
+    init_valspar();
+    init_lead_safe();
+    init_isMobileStore();
+    css$13 = {
+      code: ".tab.svelte-1tnem0l{display:inline-flex;align-items:center;background:hsl(var(--primary-dark));color:white;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;padding:0.375rem 1.75rem 0.375rem 1rem;clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%)}.label.svelte-1tnem0l{display:block;font-size:13px;font-weight:700;color:hsl(var(--secondary-dark));margin-bottom:0.375rem}.field.svelte-1tnem0l{width:100%;border-radius:0.375rem;border:1px solid hsl(var(--border));background:white;padding:0.75rem 1rem;font-size:15px;color:hsl(var(--secondary-dark));outline:none;transition:border-color 0.15s,\n      box-shadow 0.15s}.field.svelte-1tnem0l:focus{border-color:hsl(var(--primary));box-shadow:0 0 0 2px hsl(var(--primary) / 0.25)}",
+      map: '{"version":3,"file":"EstimateFormBand.svelte","sources":["EstimateFormBand.svelte"],"sourcesContent":["<script lang=\\"ts\\">import { onDestroy } from \\"svelte\\";\\nimport { fade } from \\"svelte/transition\\";\\nimport { submitLeadToZoho, splitName } from \\"$lib/contact-us/zoho\\";\\nexport let serviceOptions = [];\\nexport let leadSource = \\"Estimate form\\";\\nexport let heading = \\"Get your free siding estimate.\\";\\nexport let subcopy = \\"Tell us about your home and we\'ll schedule a walk-through, then deliver a free, written estimate for you to evaluate. Same crew from quote to clean-up.\\";\\nconst phone = \\"(708) 267-0682\\";\\nconst phoneHref = \\"tel:+17082670682\\";\\nlet name = \\"\\";\\nlet phoneVal = \\"\\";\\nlet email = \\"\\";\\nlet service = \\"\\";\\nlet address = \\"\\";\\nlet status = \\"idle\\";\\nlet message = \\"\\";\\nlet timer;\\nasync function handleSubmit() {\\n  if (status === \\"submitting\\") return;\\n  if (!name.trim() || !phoneVal.trim()) {\\n    status = \\"error\\";\\n    message = \\"Please enter your name and phone number.\\";\\n    return;\\n  }\\n  status = \\"submitting\\";\\n  const { firstName, lastName } = splitName(name);\\n  const description = [\\n    service && `Service interest: ${service}`,\\n    address && `Property: ${address}`,\\n    `Submitted via ${leadSource}`\\n  ].filter(Boolean).join(\\" \\\\xB7 \\");\\n  try {\\n    const ok = await submitLeadToZoho({\\n      \\"First Name\\": firstName,\\n      \\"Last Name\\": lastName || name.trim(),\\n      Email: email,\\n      Phone: phoneVal,\\n      Description: description\\n    });\\n    if (!ok) throw new Error(\\"submit failed\\");\\n    status = \\"success\\";\\n    message = \\"Thanks! We\'ll reach out to schedule your free walk-through.\\";\\n    name = phoneVal = email = service = address = \\"\\";\\n    clearTimeout(timer);\\n    timer = setTimeout(() => status = \\"idle\\", 6e3);\\n  } catch (e) {\\n    console.error(\\"Estimate form error:\\", e);\\n    status = \\"error\\";\\n    message = `Something went wrong. Please call ${phone} or try again.`;\\n  } finally {\\n    if (status === \\"submitting\\") status = \\"idle\\";\\n  }\\n}\\nonDestroy(() => clearTimeout(timer));\\n<\/script>\\n\\n<section id=\\"estimate\\" class=\\"bg-off-white py-14 sm:py-16 scroll-mt-24 p-x\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"bg-white rounded-2xl shadow-subtle border overflow-hidden grid lg:grid-cols-[1fr_1.15fr]\\"\\n    >\\n      <!-- pitch side -->\\n      <div\\n        class=\\"relative overflow-hidden bg-secondary-dark text-white p-8 sm:p-10 flex flex-col justify-center\\"\\n      >\\n        <div\\n          class=\\"absolute -bottom-16 -left-10 w-64 h-64 rounded-full bg-primary/15 blur-2xl\\"\\n          aria-hidden=\\"true\\"\\n        />\\n        <span class=\\"tab self-start mb-5\\">Free \xB7 No obligation</span>\\n        <h2\\n          class=\\"relative text-3xl sm:text-4xl leading-[1.08] font-extrabold text-white\\"\\n        >\\n          {heading}\\n        </h2>\\n        <p class=\\"relative mt-4 text-white/75 leading-relaxed max-w-sm\\">\\n          {subcopy}\\n        </p>\\n        <a\\n          href={phoneHref}\\n          class=\\"relative mt-6 inline-flex items-center gap-2.5 font-bold text-xl text-white hover:text-primary transition w-fit\\"\\n        >\\n          <svg\\n            width=\\"20\\"\\n            height=\\"20\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path\\n              d=\\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z\\"\\n            /></svg\\n          >\\n          {phone}\\n        </a>\\n      </div>\\n\\n      <!-- form side -->\\n      <div class=\\"p-7 sm:p-10\\">\\n        {#if status === \\"success\\"}\\n          <div\\n            class=\\"rounded-lg bg-[#F5FAF5] border border-[#A9D3AB] text-[#132C14] px-4 py-3 mb-5 font-semibold\\"\\n            in:fade={{ duration: 200 }}\\n            role=\\"alert\\"\\n          >\\n            {message}\\n          </div>\\n        {:else if status === \\"error\\"}\\n          <div\\n            class=\\"rounded-lg bg-[#FDF4F5] border border-[#F8B4B4] text-[#7F1D1D] px-4 py-3 mb-5 font-semibold\\"\\n            in:fade={{ duration: 200 }}\\n            role=\\"alert\\"\\n          >\\n            {message}\\n          </div>\\n        {/if}\\n\\n        <form\\n          class=\\"grid grid-cols-1 sm:grid-cols-2 gap-4\\"\\n          on:submit|preventDefault={handleSubmit}\\n        >\\n          <div>\\n            <label class=\\"label\\" for=\\"est-name\\">Name</label>\\n            <input\\n              id=\\"est-name\\"\\n              class=\\"field\\"\\n              bind:value={name}\\n              placeholder=\\"Jane Smith\\"\\n              autocomplete=\\"name\\"\\n              required\\n            />\\n          </div>\\n          <div>\\n            <label class=\\"label\\" for=\\"est-phone\\">Phone</label>\\n            <input\\n              id=\\"est-phone\\"\\n              class=\\"field\\"\\n              type=\\"tel\\"\\n              bind:value={phoneVal}\\n              placeholder=\\"(708) 555-0123\\"\\n              autocomplete=\\"tel\\"\\n              required\\n            />\\n          </div>\\n          <div class=\\"sm:col-span-2\\">\\n            <label class=\\"label\\" for=\\"est-email\\">Email</label>\\n            <input\\n              id=\\"est-email\\"\\n              class=\\"field\\"\\n              type=\\"email\\"\\n              bind:value={email}\\n              placeholder=\\"jane@email.com\\"\\n              autocomplete=\\"email\\"\\n            />\\n          </div>\\n          {#if serviceOptions.length}\\n            <div class=\\"sm:col-span-2\\">\\n              <label class=\\"label\\" for=\\"est-service\\">Service interest</label>\\n              <select id=\\"est-service\\" class=\\"field\\" bind:value={service}>\\n                <option value=\\"\\" disabled selected>Select a service\u2026</option>\\n                {#each serviceOptions as opt}\\n                  <option>{opt}</option>\\n                {/each}\\n              </select>\\n            </div>\\n          {/if}\\n          <div class=\\"sm:col-span-2\\">\\n            <label class=\\"label\\" for=\\"est-address\\">Property address</label>\\n            <input\\n              id=\\"est-address\\"\\n              class=\\"field\\"\\n              bind:value={address}\\n              placeholder=\\"Street, City, ZIP\\"\\n              autocomplete=\\"street-address\\"\\n            />\\n          </div>\\n          <button\\n            type=\\"submit\\"\\n            class=\\"sm:col-span-2 w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary hover:bg-primary-dark text-white font-bold text-lg py-4 transition disabled:opacity-70\\"\\n            disabled={status === \\"submitting\\"}\\n          >\\n            {status === \\"submitting\\" ? \\"Sending\u2026\\" : \\"Request My Free Estimate\\"}\\n          </button>\\n          <p class=\\"sm:col-span-2 text-center text-xs text-gray-500\\">\\n            By submitting you agree to be contacted about your project. We never\\n            share your info.\\n          </p>\\n        </form>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<style>\\n  .tab {\\n    display: inline-flex;\\n    align-items: center;\\n    background: hsl(var(--primary-dark));\\n    color: white;\\n    font-weight: 700;\\n    font-size: 12px;\\n    text-transform: uppercase;\\n    letter-spacing: 0.14em;\\n    padding: 0.375rem 1.75rem 0.375rem 1rem;\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%);\\n  }\\n  .label {\\n    display: block;\\n    font-size: 13px;\\n    font-weight: 700;\\n    color: hsl(var(--secondary-dark));\\n    margin-bottom: 0.375rem;\\n  }\\n  .field {\\n    width: 100%;\\n    border-radius: 0.375rem;\\n    border: 1px solid hsl(var(--border));\\n    background: white;\\n    padding: 0.75rem 1rem;\\n    font-size: 15px;\\n    color: hsl(var(--secondary-dark));\\n    outline: none;\\n    transition:\\n      border-color 0.15s,\\n      box-shadow 0.15s;\\n  }\\n  .field:focus {\\n    border-color: hsl(var(--primary));\\n    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.25);\\n  }\\n</style>\\n"],"names":[],"mappings":"AAoME,mBAAK,CACH,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,QAAQ,CAAC,OAAO,CAAC,QAAQ,CAAC,IAAI,CACvC,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CACA,qBAAO,CACL,OAAO,CAAE,KAAK,CACd,SAAS,CAAE,IAAI,CACf,WAAW,CAAE,GAAG,CAChB,KAAK,CAAE,IAAI,IAAI,gBAAgB,CAAC,CAAC,CACjC,aAAa,CAAE,QACjB,CACA,qBAAO,CACL,KAAK,CAAE,IAAI,CACX,aAAa,CAAE,QAAQ,CACvB,MAAM,CAAE,GAAG,CAAC,KAAK,CAAC,IAAI,IAAI,QAAQ,CAAC,CAAC,CACpC,UAAU,CAAE,KAAK,CACjB,OAAO,CAAE,OAAO,CAAC,IAAI,CACrB,SAAS,CAAE,IAAI,CACf,KAAK,CAAE,IAAI,IAAI,gBAAgB,CAAC,CAAC,CACjC,OAAO,CAAE,IAAI,CACb,UAAU,CACR,YAAY,CAAC,KAAK;AACxB,MAAM,UAAU,CAAC,KACf,CACA,qBAAM,MAAO,CACX,YAAY,CAAE,IAAI,IAAI,SAAS,CAAC,CAAC,CACjC,UAAU,CAAE,CAAC,CAAC,CAAC,CAAC,CAAC,CAAC,GAAG,CAAC,IAAI,IAAI,SAAS,CAAC,CAAC,CAAC,CAAC,IAAI,CACjD"}'
+    };
+    phone = "(708) 267-0682";
+    phoneHref = "tel:+17082670682";
+    EstimateFormBand = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { serviceOptions = [] } = $$props;
+      let { leadSource = "Estimate form" } = $$props;
+      let { heading = "Get your free siding estimate." } = $$props;
+      let { subcopy = "Tell us about your home and we'll schedule a walk-through, then deliver a free, written estimate for you to evaluate. Same crew from quote to clean-up." } = $$props;
+      let name2 = "";
+      let phoneVal = "";
+      let email = "";
+      let address = "";
+      let timer;
+      onDestroy(() => clearTimeout(timer));
+      if ($$props.serviceOptions === void 0 && $$bindings.serviceOptions && serviceOptions !== void 0)
+        $$bindings.serviceOptions(serviceOptions);
+      if ($$props.leadSource === void 0 && $$bindings.leadSource && leadSource !== void 0)
+        $$bindings.leadSource(leadSource);
+      if ($$props.heading === void 0 && $$bindings.heading && heading !== void 0)
+        $$bindings.heading(heading);
+      if ($$props.subcopy === void 0 && $$bindings.subcopy && subcopy !== void 0)
+        $$bindings.subcopy(subcopy);
+      $$result.css.add(css$13);
+      return `<section id="estimate" class="bg-off-white py-14 sm:py-16 scroll-mt-24 p-x"><div class="container"><div class="bg-white rounded-2xl shadow-subtle border overflow-hidden grid lg:grid-cols-[1fr_1.15fr]"> <div class="relative overflow-hidden bg-secondary-dark text-white p-8 sm:p-10 flex flex-col justify-center"><div class="absolute -bottom-16 -left-10 w-64 h-64 rounded-full bg-primary/15 blur-2xl" aria-hidden="true"></div> <span class="tab self-start mb-5 svelte-1tnem0l" data-svelte-h="svelte-1t9hfzk">Free \xB7 No obligation</span> <h2 class="relative text-3xl sm:text-4xl leading-[1.08] font-extrabold text-white">${escape(heading)}</h2> <p class="relative mt-4 text-white/75 leading-relaxed max-w-sm">${escape(subcopy)}</p> <a${add_attribute("href", phoneHref, 0)} class="relative mt-6 inline-flex items-center gap-2.5 font-bold text-xl text-white hover:text-primary transition w-fit"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> ${escape(phone)}</a></div>  <div class="p-7 sm:p-10">${`${``}`} <form class="grid grid-cols-1 sm:grid-cols-2 gap-4"><div><label class="label svelte-1tnem0l" for="est-name" data-svelte-h="svelte-rtaa0i">Name</label> <input id="est-name" class="field svelte-1tnem0l" placeholder="Jane Smith" autocomplete="name" required${add_attribute("value", name2, 0)}></div> <div><label class="label svelte-1tnem0l" for="est-phone" data-svelte-h="svelte-14n4rk6">Phone</label> <input id="est-phone" class="field svelte-1tnem0l" type="tel" placeholder="(708) 555-0123" autocomplete="tel" required${add_attribute("value", phoneVal, 0)}></div> <div class="sm:col-span-2"><label class="label svelte-1tnem0l" for="est-email" data-svelte-h="svelte-1lj22hi">Email</label> <input id="est-email" class="field svelte-1tnem0l" type="email" placeholder="jane@email.com" autocomplete="email"${add_attribute("value", email, 0)}></div> ${serviceOptions.length ? `<div class="sm:col-span-2"><label class="label svelte-1tnem0l" for="est-service" data-svelte-h="svelte-td4jfa">Service interest</label> <select id="est-service" class="field svelte-1tnem0l"><option value="" disabled selected data-svelte-h="svelte-1gwlqxr">Select a service\u2026</option>${each(serviceOptions, (opt) => {
+        return `<option${add_attribute("value", opt, 0)}>${escape(opt)}</option>`;
+      })}</select></div>` : ``} <div class="sm:col-span-2"><label class="label svelte-1tnem0l" for="est-address" data-svelte-h="svelte-1oz1ip">Property address</label> <input id="est-address" class="field svelte-1tnem0l" placeholder="Street, City, ZIP" autocomplete="street-address"${add_attribute("value", address, 0)}></div> <button type="submit" class="sm:col-span-2 w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary hover:bg-primary-dark text-white font-bold text-lg py-4 transition disabled:opacity-70" ${""}>${escape("Request My Free Estimate")}</button> <p class="sm:col-span-2 text-center text-xs text-gray-500" data-svelte-h="svelte-j3bsa2">By submitting you agree to be contacted about your project. We never
+            share your info.</p></form></div></div></div> </section>`;
+    });
+    heroSrc2 = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-suburban-home-exterior.BFFJc4S_.avif 800w, /_app/immutable/assets/hardie-suburban-home-exterior.DUMzzfPd.avif 1600w",
+        webp: "/_app/immutable/assets/hardie-suburban-home-exterior.DRHGt2LW.webp 800w, /_app/immutable/assets/hardie-suburban-home-exterior.BNR2SvXF.webp 1600w",
+        jpeg: "/_app/immutable/assets/hardie-suburban-home-exterior.BVlG1-be.jpeg 800w, /_app/immutable/assets/hardie-suburban-home-exterior.BMrvEeJb.jpeg 1600w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-suburban-home-exterior.BMrvEeJb.jpeg",
+        w: 1600,
+        h: 1049
+      }
+    };
+    paintingTall = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-gray-lap-siding-home.CWBc5XSr.avif 800w, /_app/immutable/assets/hardie-gray-lap-siding-home.P8mexrsm.avif 1600w",
+        webp: "/_app/immutable/assets/hardie-gray-lap-siding-home.EuQkIuzT.webp 800w, /_app/immutable/assets/hardie-gray-lap-siding-home.D7wq1rK3.webp 1600w",
+        jpeg: "/_app/immutable/assets/hardie-gray-lap-siding-home.DSPjcRfF.jpeg 800w, /_app/immutable/assets/hardie-gray-lap-siding-home.dD9xkuQy.jpeg 1600w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-gray-lap-siding-home.dD9xkuQy.jpeg",
+        w: 1600,
+        h: 1067
+      }
+    };
+    paintingTop = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-white-siding-trim.DVWdBgaq.avif 800w, /_app/immutable/assets/hardie-white-siding-trim.BgIKmRfe.avif 1600w",
+        webp: "/_app/immutable/assets/hardie-white-siding-trim.TZw_QsAA.webp 800w, /_app/immutable/assets/hardie-white-siding-trim.DexLB7Xp.webp 1600w",
+        jpeg: "/_app/immutable/assets/hardie-white-siding-trim.BnUwqzYf.jpeg 800w, /_app/immutable/assets/hardie-white-siding-trim.DKZsPwOm.jpeg 1600w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-white-siding-trim.DKZsPwOm.jpeg",
+        w: 1600,
+        h: 1067
+      }
+    };
+    paintingBottom = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-lap-siding-detail.BuBcsscY.avif 800w, /_app/immutable/assets/hardie-lap-siding-detail.wXQZ2CEv.avif 1600w",
+        webp: "/_app/immutable/assets/hardie-lap-siding-detail.BFva4Yiw.webp 800w, /_app/immutable/assets/hardie-lap-siding-detail.DEksWi9o.webp 1600w",
+        jpeg: "/_app/immutable/assets/hardie-lap-siding-detail.Cbuy7CtD.jpeg 800w, /_app/immutable/assets/hardie-lap-siding-detail.7LQWEiBN.jpeg 1600w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-lap-siding-detail.7LQWEiBN.jpeg",
+        w: 1600,
+        h: 1067
+      }
+    };
+    trimSrc = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-home-white-trim.BMdtpkgh.avif 800w, /_app/immutable/assets/hardie-home-white-trim.DiLQXexh.avif 1600w",
+        webp: "/_app/immutable/assets/hardie-home-white-trim.CZdxWZ7b.webp 800w, /_app/immutable/assets/hardie-home-white-trim.xhUjlgYX.webp 1600w",
+        jpeg: "/_app/immutable/assets/hardie-home-white-trim.5jYVy2FF.jpeg 800w, /_app/immutable/assets/hardie-home-white-trim.b7-djh_W.jpeg 1600w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-home-white-trim.b7-djh_W.jpeg",
+        w: 1600,
+        h: 1067
+      }
+    };
+    guideFront = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-home-gray-porch.DqmaREf7.avif 800w, /_app/immutable/assets/hardie-home-gray-porch.BdKcOmWm.avif 1600w",
+        webp: "/_app/immutable/assets/hardie-home-gray-porch.Bd_DEaPj.webp 800w, /_app/immutable/assets/hardie-home-gray-porch.B7WsndoT.webp 1600w",
+        jpeg: "/_app/immutable/assets/hardie-home-gray-porch.CsK5jNYf.jpeg 800w, /_app/immutable/assets/hardie-home-gray-porch.DYMC5wY3.jpeg 1600w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-home-gray-porch.DYMC5wY3.jpeg",
+        w: 1600,
+        h: 1042
+      }
+    };
+    guideAngle = {
+      sources: {
+        avif: "/_app/immutable/assets/hardie-home-classic.BnXQQ0Kb.avif 800w, /_app/immutable/assets/hardie-home-classic.DOhiCp8s.avif 1600w",
+        webp: "/_app/immutable/assets/hardie-home-classic.Dk7szGOS.webp 800w, /_app/immutable/assets/hardie-home-classic.CYmJ3q5i.webp 1600w",
+        jpeg: "/_app/immutable/assets/hardie-home-classic.BH0DdxNT.jpeg 800w, /_app/immutable/assets/hardie-home-classic.RZeCD6Zp.jpeg 1600w"
+      },
+      img: {
+        src: "/_app/immutable/assets/hardie-home-classic.RZeCD6Zp.jpeg",
+        w: 1600,
+        h: 1067
+      }
+    };
+    gallery8 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-8.DjWiLSyl.avif 200w, /_app/immutable/assets/exterior-hardie-board-8.8q-EyMk7.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-8.BYFW84D7.webp 200w, /_app/immutable/assets/exterior-hardie-board-8.BJUz1RnE.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-8.CZwIuFUt.png 200w, /_app/immutable/assets/exterior-hardie-board-8.BQf6HCSw.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-8.BQf6HCSw.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery9 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-9.0k8s2wzN.avif 200w, /_app/immutable/assets/exterior-hardie-board-9.CFzYAWAM.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-9.BVp2O2qH.webp 200w, /_app/immutable/assets/exterior-hardie-board-9.WIqvzLAy.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-9.C1K37Wnf.png 200w, /_app/immutable/assets/exterior-hardie-board-9.DnKjA59-.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-9.DnKjA59-.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery10 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-10.BUBSUQwU.avif 200w, /_app/immutable/assets/exterior-hardie-board-10.DPsTRKiV.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-10.C9QN9pGl.webp 200w, /_app/immutable/assets/exterior-hardie-board-10.BZ01cpEN.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-10.opD691r9.png 200w, /_app/immutable/assets/exterior-hardie-board-10.EKZrvkyO.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-10.EKZrvkyO.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery11 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-11.BiP5D8fr.avif 200w, /_app/immutable/assets/exterior-hardie-board-11.CTBspFN0.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-11.0L3xhmF3.webp 200w, /_app/immutable/assets/exterior-hardie-board-11.DaRJYDie.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-11.BZgcmoHj.png 200w, /_app/immutable/assets/exterior-hardie-board-11.D_TmP3WU.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-11.D_TmP3WU.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery12 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-12.CqsFOu7K.avif 200w, /_app/immutable/assets/exterior-hardie-board-12.C1_Dtjm-.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-12.Cv47y8oZ.webp 200w, /_app/immutable/assets/exterior-hardie-board-12.kOBHn5Ja.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-12.oEwuljK3.png 200w, /_app/immutable/assets/exterior-hardie-board-12.B_XJH95Q.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-12.B_XJH95Q.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery13 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-13.FkomS3tq.avif 200w, /_app/immutable/assets/exterior-hardie-board-13.DI-0djG0.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-13.D0CnvcPk.webp 200w, /_app/immutable/assets/exterior-hardie-board-13.qOcjaLnc.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-13.wKprW6aG.png 200w, /_app/immutable/assets/exterior-hardie-board-13.CeYTgYsh.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-13.CeYTgYsh.png",
+        w: 400,
+        h: 224
+      }
+    };
+    gallery14 = {
+      sources: {
+        avif: "/_app/immutable/assets/exterior-hardie-board-14.5ws0NZmJ.avif 200w, /_app/immutable/assets/exterior-hardie-board-14.SDEuRSNX.avif 400w",
+        webp: "/_app/immutable/assets/exterior-hardie-board-14.CBj7gpDN.webp 200w, /_app/immutable/assets/exterior-hardie-board-14.B5IcW8yh.webp 400w",
+        png: "/_app/immutable/assets/exterior-hardie-board-14.BIryb3Q6.png 200w, /_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png 400w"
+      },
+      img: {
+        src: "/_app/immutable/assets/exterior-hardie-board-14.NL-OMA7S.png",
+        w: 400,
+        h: 224
+      }
+    };
+    css17 = {
+      code: ".tab.svelte-1gd76v4{display:inline-flex;align-items:center;background:hsl(var(--primary-dark));color:white;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:0.14em;padding:0.375rem 1.75rem 0.375rem 1rem;clip-path:polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%)}.ribbon.svelte-1gd76v4{display:flex;align-items:center;justify-content:center;gap:0.875rem;width:100%;clip-path:none;background:none;padding-inline:0;line-height:normal}.flag.svelte-1gd76v4{width:42px;height:17px;background:hsl(var(--primary-dark));flex:none}.flag-l.svelte-1gd76v4{clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%)}.flag-r.svelte-1gd76v4{clip-path:polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%)}",
+      map: `{"version":3,"file":"+page.svelte","sources":["+page.svelte"],"sourcesContent":["<script context=\\"module\\"><\/script>\\n<script lang=\\"ts\\">import GoogleProof from \\"$lib/common/other/GoogleProof.svelte\\";\\nimport ClickToCall from \\"$lib/common/other/ClickToCall.svelte\\";\\nimport Map from \\"$lib/common/other/Map.svelte\\";\\nimport Button from \\"$components/button/button.svelte\\";\\nimport EstimateFormBand from \\"$lib/contact-us/EstimateFormBand.svelte\\";\\nimport { routes, serviceAreaRoutes } from \\"$lib/common/routing/routes\\";\\nimport heroSrc from \\"$images/services/hardie/hardie-suburban-home-exterior.jpg?enhanced\\";\\nimport paintingTall from \\"$images/services/hardie/hardie-gray-lap-siding-home.jpg?enhanced\\";\\nimport paintingTop from \\"$images/services/hardie/hardie-white-siding-trim.jpg?enhanced\\";\\nimport paintingBottom from \\"$images/services/hardie/hardie-lap-siding-detail.jpg?enhanced\\";\\nimport repairSrc from \\"$images/services/hardie-board-siding-repair-service.webp?enhanced\\";\\nimport trimSrc from \\"$images/services/hardie/hardie-home-white-trim.jpg?enhanced\\";\\nimport guideFront from \\"$images/services/hardie/hardie-home-gray-porch.jpg?enhanced\\";\\nimport guideAngle from \\"$images/services/hardie/hardie-home-classic.jpg?enhanced\\";\\nimport galleryBeforeAfter from \\"$images/services/hardie-board-siding-painting-before-after-service.webp?enhanced\\";\\nimport gallery8 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-8.webp?enhanced\\";\\nimport gallery9 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-9.webp?enhanced\\";\\nimport gallery10 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-10.webp?enhanced\\";\\nimport gallery11 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-11.webp?enhanced\\";\\nimport gallery12 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-12.webp?enhanced\\";\\nimport gallery13 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-13.webp?enhanced\\";\\nimport gallery14 from \\"$images/galleries/exterior-hardie-board/exterior-hardie-board-14.webp?enhanced\\";\\nimport splash from \\"$images/backgrounds/orange-paint-splash.webp\\";\\nimport stars from \\"$images/5-stars.svg\\";\\nimport google from \\"$images/logos/Google-name-logo.svg\\";\\nimport valspar from \\"$images/logos/trusted-brands/valspar.png?enhanced\\";\\nimport behr from \\"$images/logos/trusted-brands/behr.png?enhanced\\";\\nimport benjaminMoore from \\"$images/logos/trusted-brands/benjamin-moore.png?enhanced\\";\\nimport sherwinWilliams from \\"$images/logos/trusted-brands/sherwin-williams.png?enhanced\\";\\nimport leadSafe from \\"$images/logos/trusted-brands/lead-safe.png?enhanced\\";\\nimport pdca from \\"$images/logos/trusted-brands/pdca.png?enhanced\\";\\nimport { isMobileStore } from \\"$lib/stores/isMobileStore\\";\\nconst heroChecks = [\\n  \\"Painted by our own crew\\",\\n  \\"Free written estimates\\",\\n  \\"100% satisfaction guarantee\\",\\n  \\"Lead-Safe Certified\\"\\n];\\nconst paintingChecks = [\\n  [\\"Edge & bare-spot priming\\", \\"\\"],\\n  [\\"Loxon masonry primer\\", \\"by Sherwin-Williams\\"],\\n  [\\"Premium acrylic latex\\", \\"topcoat\\"],\\n  [\\"Sprayed\\", \\"for full coverage\\"]\\n];\\nconst repairItems = [\\n  [\\"Set popped nails\\", \\"Reset and spot-primed before topcoat.\\"],\\n  [\\"Caulk & seal gaps\\", \\"Joints sealed to keep moisture out.\\"],\\n  [\\"Replace damaged board\\", \\"Deteriorated sections cut out and swapped.\\"],\\n  [\\"Scrape loose paint\\", \\"Failing coats removed down to sound siding.\\"]\\n];\\nconst problems = [\\n  {\\n    title: \\"Color fades in the sun\\",\\n    body: \\"The intense Chicago heat chalks and dulls factory color over time, leaving the whole house looking tired and washed-out.\\"\\n  },\\n  {\\n    title: \\"Cheap paint peels\\",\\n    body: \\"Factory primer is thin and never covers the cut edges. Paint over it without priming and the coat flakes off within a season.\\"\\n  },\\n  {\\n    title: \\"Moisture & ground contact\\",\\n    body: \\"Hardie board wicks moisture, and boards in direct contact with the ground can deteriorate \\\\u2014 needing repair before any paint goes on.\\"\\n  }\\n];\\nconst guideCards = [\\n  {\\n    number: \\"1\\",\\n    label: \\"New board\\",\\n    title: \\"Prime the edges first.\\",\\n    body: \\"Factory primer is thin and never covers the cut edges, so an extra primer coat is a must. We use a masonry primer like Loxon by Sherwin-Williams, then top-coat in a high-quality acrylic latex exterior paint \\\\u2014 Sherwin-Williams, Benjamin Moore, or Behr. You can roll it, but spraying drives paint into every groove for full, even coverage.\\"\\n  },\\n  {\\n    number: \\"2\\",\\n    label: \\"Faded board\\",\\n    title: \\"Prep beats the fade.\\",\\n    body: 'Hardie board is \\"hardy,\\" but its color fades in our intense Chicago heat. A repaint is all about thorough prep: setting popped nails, scraping any loose or peeling paint, and caulking the gaps. The board wicks moisture well, but sections in direct ground contact can deteriorate \\\\u2014 those get repaired or replaced before painting.'\\n  },\\n  {\\n    number: \\"3\\",\\n    label: \\"Trim work\\",\\n    title: \\"The icing on the cake.\\",\\n    body: \\"Once the siding is painted, the trim is what ties it together. We sand and scrape off loose paint, caulk large cracks, and replace any dry rot. Bare wood, doors, columns, or metal get a primer coat first \\\\u2014 and we finish trim in a semi-gloss that looks sharp and stays cleaner.\\"\\n  }\\n];\\nconst stats = [\\n  {\\n    stat: \\"30+\\",\\n    title: \\"Years in business\\",\\n    body: \\"Serving Cook County exteriors since 1994 \\\\u2014 we'll be here for the warranty.\\"\\n  },\\n  {\\n    stat: \\"0\\",\\n    title: \\"Subcontractors\\",\\n    body: \\"Your siding is painted by Klasek employees we trained and stand behind \\\\u2014 led by owner Pete Klasek.\\"\\n  },\\n  {\\n    stat: \\"$0\\",\\n    title: \\"Estimate cost\\",\\n    body: \\"Free, written, itemized \\\\u2014 so you know exactly what you're paying for.\\"\\n  },\\n  {\\n    stat: \\"100%\\",\\n    title: \\"Satisfaction guarantee\\",\\n    body: \\"We're not done until the color is even, the trim is crisp, and you're happy with the finish.\\"\\n  }\\n];\\nconst galleryImages = [\\n  { src: galleryBeforeAfter, alt: \\"Hardie board painting before and after\\" },\\n  { src: gallery8, alt: \\"Painted Hardie board siding\\" },\\n  { src: gallery9, alt: \\"Hardie board home exterior\\" },\\n  { src: gallery10, alt: \\"Freshly painted fiber cement siding\\" },\\n  { src: gallery11, alt: \\"Hardie board siding detail\\" },\\n  { src: gallery12, alt: \\"Painted Hardie board home\\" },\\n  { src: gallery13, alt: \\"Hardie board exterior project\\" },\\n  { src: gallery14, alt: \\"Completed Hardie board painting project\\" }\\n];\\nconst partnerLogos = [\\n  { src: valspar, alt: \\"Valspar\\", height: \\"h-7 sm:h-8\\" },\\n  { src: behr, alt: \\"Behr\\", height: \\"h-7 sm:h-8\\" },\\n  { src: benjaminMoore, alt: \\"Benjamin Moore\\", height: \\"h-8 sm:h-10\\" },\\n  { src: sherwinWilliams, alt: \\"Sherwin-Williams\\", height: \\"h-8 sm:h-10\\" },\\n  { src: leadSafe, alt: \\"Lead-Safe Certified\\", height: \\"h-9 sm:h-11\\" },\\n  { src: pdca, alt: \\"PDCA\\", height: \\"h-8 sm:h-10\\" }\\n];\\nconst faqData = [\\n  {\\n    question: \\"What is Hardie board siding made of?\\",\\n    answer: \\"Hardie board is a fiber-cement siding made from mechanical pulp. You'll also hear it called HardiePlank, concrete siding, cement-fiber siding, or fiber cement cladding. It comes in finishes that mimic chipboard, plywood, or real wood grain.\\"\\n  },\\n  {\\n    question: \\"Do I need to prime new Hardie board before painting?\\",\\n    answer: \\"Yes. Even though new Hardie board ships with a factory primer, the coating is thin and doesn't cover the cut edges \\\\u2014 so a high-quality primer coat is essential for proper coverage. We recommend a masonry primer like Loxon by Sherwin-Williams.\\"\\n  },\\n  {\\n    question: \\"What type of paint should I use on Hardie board siding?\\",\\n    answer: \\"A high-quality acrylic latex exterior paint. Sticking with a trusted brand like Sherwin-Williams, Benjamin Moore, or Behr keeps the siding protected and helps the finish last much longer.\\"\\n  },\\n  {\\n    question: \\"Can I roll on paint when painting Hardie board?\\",\\n    answer: \\"You can roll it, but we spray. Spraying drives paint into every crack and groove of the board's texture and ensures the entire surface is covered evenly \\\\u2014 a roller tends to skip the recesses.\\"\\n  },\\n  {\\n    question: \\"How should I prepare faded Hardie board for painting?\\",\\n    answer: \\"Thorough prep is everything. That means setting any popped nails, scraping off loose or peeling paint, and caulking significant gaps. If a section in direct ground contact has deteriorated, it should be repaired or replaced before painting.\\"\\n  },\\n  {\\n    question: \\"What are the best practices for painting Hardie board trim?\\",\\n    answer: \\"Finish the trim after the siding. Sand and scrape loose paint, caulk large cracks, and replace any dry rot. Prime all bare wood or metal first, and use a semi-gloss sheen \\\\u2014 it looks best on trim and stays cleaner over time.\\"\\n  }\\n];\\nlet openFaq = 0;\\n<\/script>\\n\\n<!-- ===================== ANNOUNCEMENT BAR ===================== -->\\n<div\\n  class=\\"bg-white border-b text-center text-[13px] font-bold text-gray-700 py-2 p-x\\"\\n>\\n  <span class=\\"inline-flex items-center gap-2\\">\\n    <span class=\\"w-2 h-2 rounded-full bg-primary animate-pulse\\" aria-hidden=\\"true\\" />\\n    #1 Hardie Board Painting Company in Cook County \u2014 Book Your Free Estimate\\n  </span>\\n</div>\\n\\n<!-- ===================== HERO ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x\\"\\n  >\\n    <!-- left: framed photo + google review card -->\\n    <div class=\\"order-2 lg:order-1\\">\\n      <div class=\\"relative\\">\\n        {#if typeof heroSrc === 'string'}\\n\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Suburban home with fiber-cement lap siding and board-and-batten gables\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(heroSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl\\" src={heroSrc.img.src} alt=\\"Suburban home with fiber-cement lap siding and board-and-batten gables\\" loading={$isMobileStore ? \\"lazy\\" : \\"eager\\"} width={heroSrc.img.w} height={heroSrc.img.h} />\\n\\t</picture>\\n{/if}\\n        <GoogleProof\\n          class=\\"bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl\\"\\n        />\\n      </div>\\n    </div>\\n\\n    <!-- right: copy -->\\n    <div class=\\"order-1 lg:order-2 max-w-xl\\">\\n      <span class=\\"tab mb-5\\">#1 Hardie Board Painters \xB7 Cook County</span>\\n      <h1\\n        class=\\"text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white\\"\\n        data-testid=\\"page-heading\\"\\n      >\\n        Hardie board siding,<br class=\\"hidden sm:block\\" /> painted to last by\\n        <span class=\\"text-primary\\">our own crew.</span>\\n      </h1>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        Fiber cement is tough \u2014 but its factory color fades under the Chicago\\n        sun, and a botched repaint peels in a season. Klasek primes the edges,\\n        preps every board, and sprays on premium acrylic latex so your siding\\n        looks new again and stays that way for years.\\n      </p>\\n      <ul class=\\"mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5\\">\\n        {#each heroChecks as check}\\n          <li class=\\"flex items-center gap-2.5 text-white/90 font-semibold\\">\\n            <svg\\n              class=\\"text-primary shrink-0\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"3\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            {check}\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Get a Free Estimate\\n        </Button>\\n        <ClickToCall variant=\\"outline\\" class=\\"text-lg h-14 px-6\\" />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== ESTIMATE FORM BAND ===================== -->\\n<EstimateFormBand\\n  leadSource=\\"Hardie Board page \u2014 estimate form\\"\\n  serviceOptions={[\\n    \\"Hardie board repaint\\",\\n    \\"New / unpainted Hardie board\\",\\n    \\"Faded & weathered siding\\",\\n    \\"Trim & soffit painting\\",\\n    \\"Repair before painting\\",\\n    \\"Not sure \u2014 need advice\\",\\n  ]}\\n/>\\n\\n<!-- ===================== TRUST STRIP ===================== -->\\n<section class=\\"bg-white border-y\\">\\n  <div\\n    class=\\"container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center\\"\\n  >\\n    <span class=\\"flex items-center gap-2\\">\\n      <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n      <span class=\\"text-sm font-bold text-gray-700\\">5.0 on Google</span>\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path d=\\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\\" /></svg\\n      >\\n      Lead-Safe Certified\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><path\\n          d=\\"M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11\\"\\n        /></svg\\n      >\\n      100% Satisfaction Guarantee\\n    </span>\\n    <span class=\\"hidden sm:block w-px h-5 bg-gray-200\\" aria-hidden=\\"true\\" />\\n    <span\\n      class=\\"text-sm font-bold text-gray-700 inline-flex items-center gap-2\\"\\n    >\\n      <svg\\n        width=\\"17\\"\\n        height=\\"17\\"\\n        viewBox=\\"0 0 24 24\\"\\n        fill=\\"none\\"\\n        stroke=\\"hsl(var(--primary-dark))\\"\\n        stroke-width=\\"2.2\\"\\n        stroke-linecap=\\"round\\"\\n        stroke-linejoin=\\"round\\"\\n        ><circle cx=\\"12\\" cy=\\"12\\" r=\\"9\\" /><path d=\\"M12 7v5l3 2\\" /></svg\\n      >\\n      Serving Chicagoland since 1994\\n    </span>\\n  </div>\\n</section>\\n\\n<!-- ===================== PROBLEM / AGITATION ===================== -->\\n<section class=\\"bg-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11 flex flex-col items-center\\">\\n      <div class=\\"ribbon mb-4\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark\\"\\n        >\\n          Why Hardie board needs a real paint job\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n      <p class=\\"text-lg text-gray-600 leading-relaxed\\">\\n        Fiber cement is built to last \u2014 but the finish on it isn't forever. Skip\\n        the prep, and a fresh coat peels before the next summer's out.\\n      </p>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-3 gap-5\\">\\n      {#each problems as problem, i}\\n        <div class=\\"rounded-xl border p-6 bg-off-white\\">\\n          <div\\n            class=\\"w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4\\"\\n          >\\n            {#if i === 0}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6\\" /></svg\\n              >\\n            {:else if i === 1}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path\\n                  d=\\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\\"\\n                /><path d=\\"M3 13h18\\" /></svg\\n              >\\n            {:else}\\n              <svg\\n                width=\\"24\\"\\n                height=\\"24\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.2\\"\\n                stroke-linecap=\\"round\\"\\n                stroke-linejoin=\\"round\\"\\n                ><path d=\\"M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z\\" /></svg\\n              >\\n            {/if}\\n          </div>\\n          <h3 class=\\"font-bold text-xl text-secondary-dark\\">{problem.title}</h3>\\n          <p class=\\"mt-2 text-gray-600 leading-relaxed\\">{problem.body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== PAINTING (HERO OFFERING) ===================== -->\\n<section\\n  id=\\"painting\\"\\n  class=\\"relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden\\"\\n>\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">Our signature service</span>\\n      <h2 class=\\"text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white\\">\\n        Primed, prepped, and sprayed \u2014 the way fiber cement should be painted.\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-lg\\">\\n        A Hardie board repaint lives or dies on prep. We set popped nails,\\n        scrape loose paint, caulk the gaps, and prime the bare edges \u2014 then\\n        spray on premium acrylic latex so paint works into every groove and the\\n        whole wall cures to one even finish.\\n      </p>\\n      <ul class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5\\">\\n        {#each paintingChecks as [bold, rest]}\\n          <li class=\\"flex items-start gap-3\\">\\n            <svg\\n              class=\\"mt-0.5 shrink-0 text-primary\\"\\n              width=\\"20\\"\\n              height=\\"20\\"\\n              viewBox=\\"0 0 24 24\\"\\n              fill=\\"none\\"\\n              stroke=\\"currentColor\\"\\n              stroke-width=\\"2.8\\"\\n              stroke-linecap=\\"round\\"\\n              stroke-linejoin=\\"round\\"><path d=\\"M20 6L9 17l-5-5\\" /></svg\\n            >\\n            <span class=\\"text-white/85\\">\\n              <b class=\\"text-white font-bold\\">{bold}</b>\\n              {rest}\\n            </span>\\n          </li>\\n        {/each}\\n      </ul>\\n      <div class=\\"mt-8 flex flex-wrap items-center gap-4\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7\\">\\n          Price My Repaint\\n        </Button>\\n        <p class=\\"text-sm text-white/55 max-w-[14rem]\\">\\n          Painted by Klasek employees \u2014 never subcontracted out.\\n        </p>\\n      </div>\\n    </div>\\n    <div class=\\"grid grid-cols-2 gap-4\\">\\n      {#if typeof paintingTall === 'string'}\\n\\t<img class=\\"w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10\\" src={paintingTall.img.src} alt=\\"Gray fiber-cement lap siding on a modern home exterior\\" loading=\\"lazy\\" width={paintingTall.img.w} height={paintingTall.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingTall.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10\\" src={paintingTall.img.src} alt=\\"Gray fiber-cement lap siding on a modern home exterior\\" loading=\\"lazy\\" width={paintingTall.img.w} height={paintingTall.img.h} />\\n\\t</picture>\\n{/if}\\n      <div class=\\"grid grid-rows-2 gap-4\\">\\n        <div class=\\"relative rounded-lg overflow-hidden ring-2 ring-white/10\\">\\n          {#if typeof paintingTop === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingTop.img.src} alt=\\"Crisp white lap siding with clean window trim\\" loading=\\"lazy\\" width={paintingTop.img.w} height={paintingTop.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingTop.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingTop.img.src} alt=\\"Crisp white lap siding with clean window trim\\" loading=\\"lazy\\" width={paintingTop.img.w} height={paintingTop.img.h} />\\n\\t</picture>\\n{/if}\\n        </div>\\n        <div class=\\"relative rounded-lg overflow-hidden ring-2 ring-white/10\\">\\n          {#if typeof paintingBottom === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingBottom.img.src} alt=\\"Close-up of clean painted lap siding\\" loading=\\"lazy\\" width={paintingBottom.img.w} height={paintingBottom.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(paintingBottom.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={paintingBottom.img.src} alt=\\"Close-up of clean painted lap siding\\" loading=\\"lazy\\" width={paintingBottom.img.w} height={paintingBottom.img.h} />\\n\\t</picture>\\n{/if}\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== REPAIR ===================== -->\\n<section id=\\"repair\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center\\">\\n    {#if typeof repairSrc === 'string'}\\n\\t<img class=\\"order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg\\" src={repairSrc.img.src} alt=\\"Hardie board siding repair before painting\\" loading=\\"lazy\\" width={repairSrc.img.w} height={repairSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(repairSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg\\" src={repairSrc.img.src} alt=\\"Hardie board siding repair before painting\\" loading=\\"lazy\\" width={repairSrc.img.w} height={repairSrc.img.h} />\\n\\t</picture>\\n{/if}\\n    <div class=\\"order-1 lg:order-2\\">\\n      <span class=\\"tab mb-5\\">Repair before painting</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        We fix the failing boards first \u2014 then paint over solid siding.\\n      </h2>\\n      <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n        Painting over rotted or cracked board just hides the problem. Where\\n        siding has deteriorated \u2014 often where it meets the ground \u2014 we repair or\\n        replace the damaged section so the finish goes on solid and lasts.\\n      </p>\\n      <div class=\\"mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4\\">\\n        {#each repairItems as [title, body]}\\n          <div class=\\"flex items-start gap-3\\">\\n            <span\\n              class=\\"mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0\\"\\n              aria-hidden=\\"true\\"\\n            />\\n            <p>\\n              <b class=\\"font-bold text-secondary-dark\\">{title}</b><br />\\n              <span class=\\"text-gray-600 text-[15px]\\">{body}</span>\\n            </p>\\n          </div>\\n        {/each}\\n      </div>\\n      <Button\\n        href={routes[\\"contact\\"].href}\\n        variant=\\"secondary\\"\\n        class=\\"mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary\\"\\n      >\\n        Book a Repair Visit\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== TRIM, FASCIA & SOFFIT ===================== -->\\n<section id=\\"trim\\" class=\\"bg-off-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div\\n      class=\\"rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]\\"\\n    >\\n      <div class=\\"p-8 sm:p-12\\">\\n        <span class=\\"tab mb-5\\">The finishing touch</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n        >\\n          Trim, fascia &amp; soffit \u2014 the detail that makes it pop.\\n        </h2>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Crisp trim is the icing on the cake. We sand and scrape loose paint,\\n          caulk the cracks, replace any dry rot, and prime every bare spot \u2014\\n          then finish in a semi-gloss that frames the house and wipes clean.\\n        </p>\\n        <div class=\\"mt-6 flex flex-wrap gap-3\\">\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Sand &amp; scrape\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Caulk &amp; prime bare wood\\n          </span>\\n          <span\\n            class=\\"rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark\\"\\n          >\\n            Semi-gloss finish\\n          </span>\\n        </div>\\n        <Button href={routes[\\"contact\\"].href} class=\\"mt-8 text-lg h-14 px-7\\">\\n          Get a Trim Quote\\n        </Button>\\n      </div>\\n      <div class=\\"relative min-h-[260px]\\">\\n        {#if typeof trimSrc === 'string'}\\n\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={trimSrc.img.src} alt=\\"Two-story home with lap siding and crisp white trim and columns\\" loading=\\"lazy\\" width={trimSrc.img.w} height={trimSrc.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(trimSrc.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute inset-0 w-full h-full object-cover\\" src={trimSrc.img.src} alt=\\"Two-story home with lap siding and crisp white trim and columns\\" loading=\\"lazy\\" width={trimSrc.img.w} height={trimSrc.img.h} />\\n\\t</picture>\\n{/if}\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== ALL ABOUT / KNOWLEDGE GUIDE ===================== -->\\n<section id=\\"guide\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center\\">\\n      <!-- intro copy -->\\n      <div>\\n        <span class=\\"tab mb-5\\">A quick field guide</span>\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.07] font-extrabold text-secondary-dark\\"\\n        >\\n          All about painting exterior Hardie board siding.\\n        </h2>\\n        <p class=\\"mt-5 text-lg text-gray-600 leading-relaxed\\">\\n          Hardie board is a dense fiber-cement board made from mechanical pulp \u2014\\n          you'll also hear it called HardiePlank, cement-fiber siding, or fiber\\n          cement cladding. It's all over the Chicago suburbs in finishes that\\n          mimic coarse chipboard, plywood, or real wood grain.\\n        </p>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed\\">\\n          Because the siding almost always ships\\n          <b class=\\"text-secondary-dark font-bold\\">pre-primed</b> to protect it in\\n          transit, a great paint job is less about the color and more about the prep.\\n          Here's how we approach each situation.\\n        </p>\\n      </div>\\n      <!-- overlapping photos -->\\n      <div class=\\"relative h-[380px] sm:h-[440px]\\">\\n        {#if typeof guideFront === 'string'}\\n\\t<img class=\\"absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideFront.img.src} alt=\\"Gray lap-siding home with covered front porch\\" loading=\\"lazy\\" width={guideFront.img.w} height={guideFront.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(guideFront.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideFront.img.src} alt=\\"Gray lap-siding home with covered front porch\\" loading=\\"lazy\\" width={guideFront.img.w} height={guideFront.img.h} />\\n\\t</picture>\\n{/if}\\n        {#if typeof guideAngle === 'string'}\\n\\t<img class=\\"absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideAngle.img.src} alt=\\"Classic two-story home with fiber-cement siding and balcony\\" loading=\\"lazy\\" width={guideAngle.img.w} height={guideAngle.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(guideAngle.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl\\" src={guideAngle.img.src} alt=\\"Classic two-story home with fiber-cement siding and balcony\\" loading=\\"lazy\\" width={guideAngle.img.w} height={guideAngle.img.h} />\\n\\t</picture>\\n{/if}\\n      </div>\\n    </div>\\n\\n    <!-- recommendation columns -->\\n    <div class=\\"mt-14 grid md:grid-cols-3 gap-6\\">\\n      {#each guideCards as { number, label, title, body }}\\n        <div class=\\"rounded-2xl border bg-off-white p-7\\">\\n          <span\\n            class=\\"inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-primary-dark\\"\\n          >\\n            <span\\n              class=\\"w-6 h-6 rounded-full bg-primary-dark text-white flex items-center justify-center text-[13px]\\"\\n            >\\n              {number}\\n            </span>\\n            {label}\\n          </span>\\n          <h3 class=\\"mt-4 font-bold text-xl text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n\\n    <!-- serving chicagoland note -->\\n    <div\\n      class=\\"mt-10 rounded-2xl bg-secondary-dark text-white p-7 sm:p-9 flex flex-col sm:flex-row sm:items-center gap-6 justify-between\\"\\n    >\\n      <div class=\\"max-w-2xl\\">\\n        <h3 class=\\"font-bold text-xl sm:text-2xl text-white\\">\\n          Klasek Painting, serving Chicagoland for 30+ years.\\n        </h3>\\n        <p class=\\"mt-2 text-white/75 leading-relaxed\\">\\n          Owner Pete Klasek is happy to answer any questions about your Hardie\\n          board project. We're known for high-quality work, dependable service,\\n          a satisfaction guarantee, and on-time completion \u2014 at competitive\\n          pricing.\\n        </p>\\n      </div>\\n      <Button href={routes[\\"contact\\"].href} class=\\"text-lg h-14 px-7 shrink-0\\">\\n        Contact Klasek\\n      </Button>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== WHY KLASEK ===================== -->\\n<section id=\\"why\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center max-w-2xl mx-auto mb-11\\">\\n      <div\\n        class=\\"inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5\\"\\n      >\\n        <span\\n          class=\\"inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide\\"\\n        >\\n          Why Choose Klasek\\n        </span>\\n      </div>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Three decades on Chicagoland ladders. One crew, start to finish.\\n      </h2>\\n    </div>\\n    <div class=\\"grid sm:grid-cols-2 lg:grid-cols-4 gap-5\\">\\n      {#each stats as { stat, title, body }}\\n        <div\\n          class=\\"rounded-xl border p-6 text-center hover:shadow-subtle transition\\"\\n        >\\n          <div class=\\"font-extrabold text-4xl text-primary-dark\\">{stat}</div>\\n          <h3 class=\\"mt-2 font-bold text-lg text-secondary-dark\\">{title}</h3>\\n          <p class=\\"mt-2 text-gray-600 text-[15px] leading-relaxed\\">{body}</p>\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BEFORE / AFTER GALLERY ===================== -->\\n<section class=\\"bg-off-white p-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"text-center mb-9 flex flex-col items-center\\">\\n      <span class=\\"tab mb-4\\">Our work</span>\\n      <h2\\n        class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark\\"\\n      >\\n        Before &amp; after, around the neighborhood.\\n      </h2>\\n    </div>\\n    <div class=\\"grid grid-cols-2 lg:grid-cols-4 gap-4\\">\\n      {#each galleryImages as { src, alt }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"w-full h-full aspect-square object-cover rounded-lg\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"w-full h-full aspect-square object-cover rounded-lg\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n    <div class=\\"mt-9 flex flex-col items-center gap-3\\">\\n      <p class=\\"flex items-center gap-2 text-sm font-bold text-gray-700\\">\\n        Review us\\n        <img class=\\"w-[80px] h-[14px]\\" src={stars} alt=\\"5 stars\\" />\\n        on\\n      </p>\\n      <img class=\\"w-[92px] h-auto\\" src={google} alt=\\"Google\\" />\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== SERVICE AREA ===================== -->\\n<section id=\\"area\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Areas We Serve\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center\\">\\n      <div>\\n        <h3 class=\\"font-bold text-2xl text-secondary-dark\\">\\n          Hardie board painting across the western Cook County suburbs.\\n        </h3>\\n        <p class=\\"mt-4 text-lg text-gray-600 leading-relaxed max-w-md\\">\\n          Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your home.\\n          If your town isn't listed, call us; we likely cover it.\\n        </p>\\n        <div\\n          class=\\"mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3\\"\\n        >\\n          <svg\\n            class=\\"mt-0.5 shrink-0\\"\\n            width=\\"22\\"\\n            height=\\"22\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary-dark))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          <div>\\n            <p class=\\"font-bold text-secondary-dark\\">\\n              Klasek Painting \xB7 Lyons, IL\\n            </p>\\n            <p class=\\"text-gray-600 text-[15px]\\">\\n              4415 S. Custer, Lyons, IL 60534\\n            </p>\\n            <ClickToCall\\n              variant=\\"link\\"\\n              class=\\"!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]\\"\\n            />\\n          </div>\\n        </div>\\n        <div class=\\"mt-5 flex flex-wrap items-center gap-3\\">\\n          <Button href={routes[\\"contact\\"].href} class=\\"text-lg px-6\\">\\n            Request Estimate\\n          </Button>\\n          <ClickToCall\\n            variant=\\"secondary\\"\\n            class=\\"text-lg px-6 bg-secondary-dark hover:bg-secondary text-white\\"\\n          >\\n            Call the Crew\\n          </ClickToCall>\\n        </div>\\n      </div>\\n      <div>\\n        <ul\\n          class=\\"grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700\\"\\n        >\\n          {#each Object.values(serviceAreaRoutes) as { text, href }}\\n            <li class=\\"flex items-center gap-2\\">\\n              <span\\n                class=\\"w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0\\"\\n                aria-hidden=\\"true\\"\\n              />\\n              <a class=\\"hover:text-primary-dark hover:underline\\" {href}>\\n                {text}\\n              </a>\\n            </li>\\n          {/each}\\n        </ul>\\n        <div class=\\"mt-6 h-44 rounded-lg overflow-hidden\\">\\n          <Map lazy={true} />\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== BRAND PARTNERS ===================== -->\\n<section class=\\"bg-off-white py-14 border-y p-x\\">\\n  <div class=\\"container\\">\\n    <div class=\\"mb-8\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <p\\n          class=\\"font-bold text-lg text-secondary-dark uppercase tracking-wide text-center\\"\\n        >\\n          Our Trusted Brand Partners\\n        </p>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div\\n      class=\\"flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7\\"\\n    >\\n      {#each partnerLogos as { src, alt, height }}\\n        {#if typeof src === 'string'}\\n\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n{:else}\\n\\t<picture>\\n\\t\\t{#each Object.entries(src.sources) as [format, srcset]}\\n\\t\\t\\t<source {srcset} type={'image/' + format} />\\n\\t\\t{/each}\\n\\t\\t<img class=\\"{height} w-auto object-contain opacity-75 hover:opacity-100 transition\\" src={src.img.src} {alt} loading=\\"lazy\\" width={src.img.w} height={src.img.h} />\\n\\t</picture>\\n{/if}\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FAQ ===================== -->\\n<section id=\\"faq\\" class=\\"bg-white p-y p-x scroll-mt-20\\">\\n  <div class=\\"container max-w-3xl\\">\\n    <div class=\\"mb-10\\">\\n      <div class=\\"ribbon\\">\\n        <span class=\\"flag flag-l\\" aria-hidden=\\"true\\" />\\n        <h2\\n          class=\\"text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center\\"\\n        >\\n          Frequently Asked Questions\\n        </h2>\\n        <span class=\\"flag flag-r\\" aria-hidden=\\"true\\" />\\n      </div>\\n    </div>\\n    <div class=\\"divide-y border-y\\">\\n      {#each faqData as { question, answer }, i}\\n        <div class=\\"py-5\\">\\n          <button\\n            type=\\"button\\"\\n            class=\\"flex w-full items-center justify-between gap-4 text-left\\"\\n            aria-expanded={openFaq === i}\\n            on:click={() => (openFaq = openFaq === i ? -1 : i)}\\n          >\\n            <span class=\\"font-bold text-lg text-secondary-dark\\">\\n              {question}\\n            </span>\\n            <span\\n              class=\\"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition {openFaq ===\\n              i\\n                ? 'rotate-45 bg-primary-dark text-white border-primary-dark'\\n                : 'bg-off-white text-gray-600'}\\"\\n            >\\n              <svg\\n                width=\\"14\\"\\n                height=\\"14\\"\\n                viewBox=\\"0 0 24 24\\"\\n                fill=\\"none\\"\\n                stroke=\\"currentColor\\"\\n                stroke-width=\\"2.5\\"\\n                stroke-linecap=\\"round\\"><path d=\\"M12 5v14M5 12h14\\" /></svg\\n              >\\n            </span>\\n          </button>\\n          {#if openFaq === i}\\n            <p class=\\"mt-3 text-gray-600 leading-relaxed\\">{answer}</p>\\n          {/if}\\n        </div>\\n      {/each}\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== FINAL CTA ===================== -->\\n<section class=\\"relative bg-secondary-dark text-white p-y p-x overflow-hidden\\">\\n  <div\\n    class=\\"absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark\\"\\n    aria-hidden=\\"true\\"\\n  />\\n  <img\\n    src={splash}\\n    alt=\\"\\"\\n    aria-hidden=\\"true\\"\\n    class=\\"pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block\\"\\n  />\\n  <div\\n    class=\\"container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center\\"\\n  >\\n    <div>\\n      <span class=\\"tab mb-5\\">No-pressure, no-cost</span>\\n      <h2 class=\\"text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white\\">\\n        Ready to help your property look its best?\\n      </h2>\\n      <p class=\\"mt-5 text-lg text-white/75 leading-relaxed max-w-md\\">\\n        Send us your details and we'll schedule a walk-through, then deliver a\\n        free written estimate for you to evaluate. Call the best.\\n      </p>\\n      <div\\n        class=\\"mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold\\"\\n      >\\n        <ClickToCall\\n          variant=\\"link\\"\\n          class=\\"!text-2xl !font-bold text-white hover:!text-primary\\"\\n        />\\n        <span class=\\"inline-flex items-center gap-2\\">\\n          <svg\\n            width=\\"18\\"\\n            height=\\"18\\"\\n            viewBox=\\"0 0 24 24\\"\\n            fill=\\"none\\"\\n            stroke=\\"hsl(var(--primary))\\"\\n            stroke-width=\\"2.2\\"\\n            stroke-linecap=\\"round\\"\\n            stroke-linejoin=\\"round\\"\\n            ><path d=\\"M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z\\" /><circle\\n              cx=\\"12\\"\\n              cy=\\"10\\"\\n              r=\\"3\\"\\n            /></svg\\n          >\\n          4415 S. Custer, Lyons, IL\\n        </span>\\n      </div>\\n    </div>\\n    <div class=\\"bg-white rounded-2xl shadow-2xl p-6 sm:p-7\\">\\n      <p class=\\"font-bold text-xl text-secondary-dark mb-1\\">\\n        Get a Free Estimate\\n      </p>\\n      <p class=\\"text-sm text-gray-600 mb-5\\">\\n        We'll reach out to schedule your walk-through.\\n      </p>\\n      <div class=\\"flex flex-col gap-3\\">\\n        <Button href={routes[\\"contact\\"].href} class=\\"w-full text-lg h-14\\">\\n          Request My Free Estimate\\n        </Button>\\n        <ClickToCall\\n          variant=\\"secondary\\"\\n          class=\\"w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white\\"\\n        />\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n\\n<!-- ===================== STICKY MOBILE BAR ===================== -->\\n<div\\n  class=\\"lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]\\"\\n>\\n  <div\\n    class=\\"grid grid-cols-2 gap-2 p-2.5\\"\\n    style=\\"padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));\\"\\n  >\\n    <ClickToCall\\n      variant=\\"secondary\\"\\n      class=\\"bg-secondary-dark hover:bg-secondary text-white\\"\\n    >\\n      Call\\n    </ClickToCall>\\n    <Button href={routes[\\"contact\\"].href}>Free Estimate</Button>\\n  </div>\\n</div>\\n\\n<style>\\n  /* orange right-pointing tab label (design's .tab) */\\n  .tab {\\n    display: inline-flex;\\n    align-items: center;\\n    background: hsl(var(--primary-dark));\\n    color: white;\\n    font-weight: 700;\\n    font-size: 12px;\\n    text-transform: uppercase;\\n    letter-spacing: 0.14em;\\n    padding: 0.375rem 1.75rem 0.375rem 1rem;\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 13px) 50%, 100% 100%, 0 100%);\\n  }\\n\\n  /* centered ribbon header with swallowtail flags (design's .ribbon) */\\n  /* width/clip-path/background reset overrides the global .ribbon in app.css,\\n     which otherwise leaks \`width: fit-content\` and shrink-wraps this row to the left */\\n  .ribbon {\\n    display: flex;\\n    align-items: center;\\n    justify-content: center;\\n    gap: 0.875rem;\\n    width: 100%;\\n    clip-path: none;\\n    background: none;\\n    padding-inline: 0;\\n    line-height: normal;\\n  }\\n  .flag {\\n    width: 42px;\\n    height: 17px;\\n    background: hsl(var(--primary-dark));\\n    flex: none;\\n  }\\n  .flag-l {\\n    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 15px 50%);\\n  }\\n  .flag-r {\\n    clip-path: polygon(0 0, 100% 0, calc(100% - 15px) 50%, 100% 100%, 0 100%);\\n  }\\n</style>\\n"],"names":[],"mappings":"AAy/BE,mBAAK,CACH,OAAO,CAAE,WAAW,CACpB,WAAW,CAAE,MAAM,CACnB,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,KAAK,CAAE,KAAK,CACZ,WAAW,CAAE,GAAG,CAChB,SAAS,CAAE,IAAI,CACf,cAAc,CAAE,SAAS,CACzB,cAAc,CAAE,MAAM,CACtB,OAAO,CAAE,QAAQ,CAAC,OAAO,CAAC,QAAQ,CAAC,IAAI,CACvC,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E,CAKA,sBAAQ,CACN,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,CACnB,eAAe,CAAE,MAAM,CACvB,GAAG,CAAE,QAAQ,CACb,KAAK,CAAE,IAAI,CACX,SAAS,CAAE,IAAI,CACf,UAAU,CAAE,IAAI,CAChB,cAAc,CAAE,CAAC,CACjB,WAAW,CAAE,MACf,CACA,oBAAM,CACJ,KAAK,CAAE,IAAI,CACX,MAAM,CAAE,IAAI,CACZ,UAAU,CAAE,IAAI,IAAI,cAAc,CAAC,CAAC,CACpC,IAAI,CAAE,IACR,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC,GAAG,CAC7D,CACA,sBAAQ,CACN,SAAS,CAAE,QAAQ,CAAC,CAAC,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,KAAK,IAAI,CAAC,CAAC,CAAC,IAAI,CAAC,CAAC,GAAG,CAAC,CAAC,IAAI,CAAC,IAAI,CAAC,CAAC,CAAC,CAAC,IAAI,CAC1E"}`
+    };
+    Page60 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $isMobileStore, $$unsubscribe_isMobileStore;
+      $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
+      const heroChecks = [
+        "Painted by our own crew",
+        "Free written estimates",
+        "100% satisfaction guarantee",
+        "Lead-Safe Certified"
+      ];
+      const paintingChecks = [
+        ["Edge & bare-spot priming", ""],
+        ["Loxon masonry primer", "by Sherwin-Williams"],
+        ["Premium acrylic latex", "topcoat"],
+        ["Sprayed", "for full coverage"]
+      ];
+      const repairItems = [
+        ["Set popped nails", "Reset and spot-primed before topcoat."],
+        ["Caulk & seal gaps", "Joints sealed to keep moisture out."],
+        ["Replace damaged board", "Deteriorated sections cut out and swapped."],
+        ["Scrape loose paint", "Failing coats removed down to sound siding."]
+      ];
+      const problems = [
+        {
+          title: "Color fades in the sun",
+          body: "The intense Chicago heat chalks and dulls factory color over time, leaving the whole house looking tired and washed-out."
+        },
+        {
+          title: "Cheap paint peels",
+          body: "Factory primer is thin and never covers the cut edges. Paint over it without priming and the coat flakes off within a season."
+        },
+        {
+          title: "Moisture & ground contact",
+          body: "Hardie board wicks moisture, and boards in direct contact with the ground can deteriorate \u2014 needing repair before any paint goes on."
+        }
+      ];
+      const guideCards = [
+        {
+          number: "1",
+          label: "New board",
+          title: "Prime the edges first.",
+          body: "Factory primer is thin and never covers the cut edges, so an extra primer coat is a must. We use a masonry primer like Loxon by Sherwin-Williams, then top-coat in a high-quality acrylic latex exterior paint \u2014 Sherwin-Williams, Benjamin Moore, or Behr. You can roll it, but spraying drives paint into every groove for full, even coverage."
+        },
+        {
+          number: "2",
+          label: "Faded board",
+          title: "Prep beats the fade.",
+          body: 'Hardie board is "hardy," but its color fades in our intense Chicago heat. A repaint is all about thorough prep: setting popped nails, scraping any loose or peeling paint, and caulking the gaps. The board wicks moisture well, but sections in direct ground contact can deteriorate \u2014 those get repaired or replaced before painting.'
+        },
+        {
+          number: "3",
+          label: "Trim work",
+          title: "The icing on the cake.",
+          body: "Once the siding is painted, the trim is what ties it together. We sand and scrape off loose paint, caulk large cracks, and replace any dry rot. Bare wood, doors, columns, or metal get a primer coat first \u2014 and we finish trim in a semi-gloss that looks sharp and stays cleaner."
+        }
+      ];
+      const stats = [
+        {
+          stat: "30+",
+          title: "Years in business",
+          body: "Serving Cook County exteriors since 1994 \u2014 we'll be here for the warranty."
+        },
+        {
+          stat: "0",
+          title: "Subcontractors",
+          body: "Your siding is painted by Klasek employees we trained and stand behind \u2014 led by owner Pete Klasek."
+        },
+        {
+          stat: "$0",
+          title: "Estimate cost",
+          body: "Free, written, itemized \u2014 so you know exactly what you're paying for."
+        },
+        {
+          stat: "100%",
+          title: "Satisfaction guarantee",
+          body: "We're not done until the color is even, the trim is crisp, and you're happy with the finish."
+        }
+      ];
+      const galleryImages = [
+        {
+          src: galleryBeforeAfter,
+          alt: "Hardie board painting before and after"
+        },
+        {
+          src: gallery8,
+          alt: "Painted Hardie board siding"
+        },
+        {
+          src: gallery9,
+          alt: "Hardie board home exterior"
+        },
+        {
+          src: gallery10,
+          alt: "Freshly painted fiber cement siding"
+        },
+        {
+          src: gallery11,
+          alt: "Hardie board siding detail"
+        },
+        {
+          src: gallery12,
+          alt: "Painted Hardie board home"
+        },
+        {
+          src: gallery13,
+          alt: "Hardie board exterior project"
+        },
+        {
+          src: gallery14,
+          alt: "Completed Hardie board painting project"
+        }
+      ];
+      const partnerLogos = [
+        {
+          src: valspar,
+          alt: "Valspar",
+          height: "h-7 sm:h-8"
+        },
+        {
+          src: behr,
+          alt: "Behr",
+          height: "h-7 sm:h-8"
+        },
+        {
+          src: benjaminMoore,
+          alt: "Benjamin Moore",
+          height: "h-8 sm:h-10"
+        },
+        {
+          src: sherwinWilliams,
+          alt: "Sherwin-Williams",
+          height: "h-8 sm:h-10"
+        },
+        {
+          src: leadSafe,
+          alt: "Lead-Safe Certified",
+          height: "h-9 sm:h-11"
+        },
+        {
+          src: pdca,
+          alt: "PDCA",
+          height: "h-8 sm:h-10"
+        }
+      ];
+      const faqData = [
+        {
+          question: "What is Hardie board siding made of?",
+          answer: "Hardie board is a fiber-cement siding made from mechanical pulp. You'll also hear it called HardiePlank, concrete siding, cement-fiber siding, or fiber cement cladding. It comes in finishes that mimic chipboard, plywood, or real wood grain."
+        },
+        {
+          question: "Do I need to prime new Hardie board before painting?",
+          answer: "Yes. Even though new Hardie board ships with a factory primer, the coating is thin and doesn't cover the cut edges \u2014 so a high-quality primer coat is essential for proper coverage. We recommend a masonry primer like Loxon by Sherwin-Williams."
+        },
+        {
+          question: "What type of paint should I use on Hardie board siding?",
+          answer: "A high-quality acrylic latex exterior paint. Sticking with a trusted brand like Sherwin-Williams, Benjamin Moore, or Behr keeps the siding protected and helps the finish last much longer."
+        },
+        {
+          question: "Can I roll on paint when painting Hardie board?",
+          answer: "You can roll it, but we spray. Spraying drives paint into every crack and groove of the board's texture and ensures the entire surface is covered evenly \u2014 a roller tends to skip the recesses."
+        },
+        {
+          question: "How should I prepare faded Hardie board for painting?",
+          answer: "Thorough prep is everything. That means setting any popped nails, scraping off loose or peeling paint, and caulking significant gaps. If a section in direct ground contact has deteriorated, it should be repaired or replaced before painting."
+        },
+        {
+          question: "What are the best practices for painting Hardie board trim?",
+          answer: "Finish the trim after the siding. Sand and scrape loose paint, caulk large cracks, and replace any dry rot. Prime all bare wood or metal first, and use a semi-gloss sheen \u2014 it looks best on trim and stays cleaner over time."
+        }
+      ];
+      let openFaq = 0;
+      $$result.css.add(css17);
+      $$unsubscribe_isMobileStore();
+      return ` <div class="bg-white border-b text-center text-[13px] font-bold text-gray-700 py-2 p-x" data-svelte-h="svelte-1s8jnrs"><span class="inline-flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary animate-pulse" aria-hidden="true"></span>
+    #1 Hardie Board Painting Company in Cook County \u2014 Book Your Free Estimate</span></div>  <section class="relative bg-secondary-dark text-white overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark" aria-hidden="true"></div> <div class="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/10 blur-3xl" aria-hidden="true"></div> <div class="container relative grid lg:grid-cols-[440px_1fr] gap-10 lg:gap-14 items-center py-14 lg:py-20 p-x"> <div class="order-2 lg:order-1"><div class="relative">${typeof heroSrc2 === "string" ? `<img class="w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl"${add_attribute("src", heroSrc2.img.src, 0)} alt="Suburban home with fiber-cement lap siding and board-and-batten gables"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", heroSrc2.img.w, 0)}${add_attribute("height", heroSrc2.img.h, 0)}>` : `<picture>${each(Object.entries(heroSrc2.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="w-full h-auto aspect-[4/3] object-cover ring-4 ring-white/10 rounded-xl shadow-2xl"${add_attribute("src", heroSrc2.img.src, 0)} alt="Suburban home with fiber-cement lap siding and board-and-batten gables"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", heroSrc2.img.w, 0)}${add_attribute("height", heroSrc2.img.h, 0)}></picture>`} ${validate_component(GoogleProof, "GoogleProof").$$render(
+        $$result,
+        {
+          class: "bg-white rounded-xl border p-4 sm:absolute sm:-bottom-8 sm:-right-4 mt-4 sm:mt-0 w-full sm:w-[340px] shadow-2xl"
+        },
+        {},
+        {}
+      )}</div></div>  <div class="order-1 lg:order-2 max-w-xl"><span class="tab mb-5 svelte-1gd76v4" data-svelte-h="svelte-1fgrw5z">#1 Hardie Board Painters \xB7 Cook County</span> <h1 class="text-4xl leading-[1.05] sm:text-5xl font-extrabold text-white" data-testid="page-heading" data-svelte-h="svelte-y4vxn2">Hardie board siding,<br class="hidden sm:block"> painted to last by
+        <span class="text-primary">our own crew.</span></h1> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-1j43g8k">Fiber cement is tough \u2014 but its factory color fades under the Chicago
+        sun, and a botched repaint peels in a season. Klasek primes the edges,
+        preps every board, and sprays on premium acrylic latex so your siding
+        looks new again and stays that way for years.</p> <ul class="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2.5">${each(heroChecks, (check) => {
+        return `<li class="flex items-center gap-2.5 text-white/90 font-semibold"><svg class="text-primary shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> ${escape(check)} </li>`;
+      })}</ul> <div class="mt-8 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg h-14 px-7"
+        },
+        {},
+        {
+          default: () => {
+            return `Get a Free Estimate`;
+          }
+        }
+      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "outline",
+          class: "text-lg h-14 px-6"
+        },
+        {},
+        {}
+      )}</div></div></div></section>  ${validate_component(EstimateFormBand, "EstimateFormBand").$$render(
+        $$result,
+        {
+          leadSource: "Hardie Board page \u2014 estimate form",
+          serviceOptions: [
+            "Hardie board repaint",
+            "New / unpainted Hardie board",
+            "Faded & weathered siding",
+            "Trim & soffit painting",
+            "Repair before painting",
+            "Not sure \u2014 need advice"
+          ]
+        },
+        {},
+        {}
+      )}  <section class="bg-white border-y" data-svelte-h="svelte-1xq72kb"><div class="container py-5 p-x flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center"><span class="flex items-center gap-2"><img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars"> <span class="text-sm font-bold text-gray-700">5.0 on Google</span></span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      Lead-Safe Certified</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+      100% Satisfaction Guarantee</span> <span class="hidden sm:block w-px h-5 bg-gray-200" aria-hidden="true"></span> <span class="text-sm font-bold text-gray-700 inline-flex items-center gap-2"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+      Serving Chicagoland since 1994</span></div></section>  <section class="bg-white p-y p-x"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11 flex flex-col items-center" data-svelte-h="svelte-rysvw3"><div class="ribbon mb-4 svelte-1gd76v4"><span class="flag flag-l svelte-1gd76v4" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.1] font-extrabold text-secondary-dark">Why Hardie board needs a real paint job</h2> <span class="flag flag-r svelte-1gd76v4" aria-hidden="true"></span></div> <p class="text-lg text-gray-600 leading-relaxed">Fiber cement is built to last \u2014 but the finish on it isn&#39;t forever. Skip
+        the prep, and a fresh coat peels before the next summer&#39;s out.</p></div> <div class="grid sm:grid-cols-3 gap-5">${each(problems, (problem, i2) => {
+        return `<div class="rounded-xl border p-6 bg-off-white"><div class="w-12 h-12 rounded-lg bg-primary-light/40 text-primary-dark flex items-center justify-center mb-4">${i2 === 0 ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"></path></svg>` : `${i2 === 1 ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><path d="M3 13h18"></path></svg>` : `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>`}`}</div> <h3 class="font-bold text-xl text-secondary-dark">${escape(problem.title)}</h3> <p class="mt-2 text-gray-600 leading-relaxed">${escape(problem.body)}</p> </div>`;
+      })}</div></div></section>  <section id="painting" class="relative bg-secondary-dark text-white p-y p-x scroll-mt-20 overflow-hidden"><div class="absolute inset-0 bg-gradient-to-tr from-secondary-dark via-secondary-dark to-secondary/70" aria-hidden="true"></div> <div class="container relative grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-1gd76v4" data-svelte-h="svelte-1gr8jly">Our signature service</span> <h2 class="text-3xl sm:text-5xl leading-[1.06] font-extrabold text-white" data-svelte-h="svelte-um7sg2">Primed, prepped, and sprayed \u2014 the way fiber cement should be painted.</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-lg" data-svelte-h="svelte-j0bm8y">A Hardie board repaint lives or dies on prep. We set popped nails,
+        scrape loose paint, caulk the gaps, and prime the bare edges \u2014 then
+        spray on premium acrylic latex so paint works into every groove and the
+        whole wall cures to one even finish.</p> <ul class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-3.5">${each(paintingChecks, ([bold, rest]) => {
+        return `<li class="flex items-start gap-3"><svg class="mt-0.5 shrink-0 text-primary" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> <span class="text-white/85"><b class="text-white font-bold">${escape(bold)}</b> ${escape(rest)}</span> </li>`;
+      })}</ul> <div class="mt-8 flex flex-wrap items-center gap-4">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg h-14 px-7"
+        },
+        {},
+        {
+          default: () => {
+            return `Price My Repaint`;
+          }
+        }
+      )} <p class="text-sm text-white/55 max-w-[14rem]" data-svelte-h="svelte-sl531a">Painted by Klasek employees \u2014 never subcontracted out.</p></div></div> <div class="grid grid-cols-2 gap-4">${typeof paintingTall === "string" ? `<img class="w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", paintingTall.img.src, 0)} alt="Gray fiber-cement lap siding on a modern home exterior" loading="lazy"${add_attribute("width", paintingTall.img.w, 0)}${add_attribute("height", paintingTall.img.h, 0)}>` : `<picture>${each(Object.entries(paintingTall.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="w-full h-full aspect-[3/4] object-cover rounded-lg ring-2 ring-white/10"${add_attribute("src", paintingTall.img.src, 0)} alt="Gray fiber-cement lap siding on a modern home exterior" loading="lazy"${add_attribute("width", paintingTall.img.w, 0)}${add_attribute("height", paintingTall.img.h, 0)}></picture>`} <div class="grid grid-rows-2 gap-4"><div class="relative rounded-lg overflow-hidden ring-2 ring-white/10">${typeof paintingTop === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingTop.img.src, 0)} alt="Crisp white lap siding with clean window trim" loading="lazy"${add_attribute("width", paintingTop.img.w, 0)}${add_attribute("height", paintingTop.img.h, 0)}>` : `<picture>${each(Object.entries(paintingTop.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingTop.img.src, 0)} alt="Crisp white lap siding with clean window trim" loading="lazy"${add_attribute("width", paintingTop.img.w, 0)}${add_attribute("height", paintingTop.img.h, 0)}></picture>`}</div> <div class="relative rounded-lg overflow-hidden ring-2 ring-white/10">${typeof paintingBottom === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingBottom.img.src, 0)} alt="Close-up of clean painted lap siding" loading="lazy"${add_attribute("width", paintingBottom.img.w, 0)}${add_attribute("height", paintingBottom.img.h, 0)}>` : `<picture>${each(Object.entries(paintingBottom.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", paintingBottom.img.src, 0)} alt="Close-up of clean painted lap siding" loading="lazy"${add_attribute("width", paintingBottom.img.w, 0)}${add_attribute("height", paintingBottom.img.h, 0)}></picture>`}</div></div></div></div></section>  <section id="repair" class="bg-white p-y p-x scroll-mt-20"><div class="container grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">${typeof repairSrc === "string" ? `<img class="order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg"${add_attribute("src", repairSrc.img.src, 0)} alt="Hardie board siding repair before painting" loading="lazy"${add_attribute("width", repairSrc.img.w, 0)}${add_attribute("height", repairSrc.img.h, 0)}>` : `<picture>${each(Object.entries(repairSrc.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="order-2 lg:order-1 w-full h-auto aspect-[4/3] object-cover rounded-lg"${add_attribute("src", repairSrc.img.src, 0)} alt="Hardie board siding repair before painting" loading="lazy"${add_attribute("width", repairSrc.img.w, 0)}${add_attribute("height", repairSrc.img.h, 0)}></picture>`} <div class="order-1 lg:order-2"><span class="tab mb-5 svelte-1gd76v4" data-svelte-h="svelte-5lt5ch">Repair before painting</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-mdqthf">We fix the failing boards first \u2014 then paint over solid siding.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed" data-svelte-h="svelte-6rcql9">Painting over rotted or cracked board just hides the problem. Where
+        siding has deteriorated \u2014 often where it meets the ground \u2014 we repair or
+        replace the damaged section so the finish goes on solid and lasts.</p> <div class="mt-7 grid sm:grid-cols-2 gap-x-6 gap-y-4">${each(repairItems, ([title, body2]) => {
+        return `<div class="flex items-start gap-3"><span class="mt-1.5 w-2 h-2 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <p><b class="font-bold text-secondary-dark">${escape(title)}</b><br> <span class="text-gray-600 text-[15px]">${escape(body2)}</span></p> </div>`;
+      })}</div> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          variant: "secondary",
+          class: "mt-8 text-lg h-14 px-7 bg-secondary-dark hover:bg-secondary"
+        },
+        {},
+        {
+          default: () => {
+            return `Book a Repair Visit`;
+          }
+        }
+      )}</div></div></section>  <section id="trim" class="bg-off-white p-y p-x scroll-mt-20"><div class="container"><div class="rounded-2xl bg-white border shadow-subtle overflow-hidden grid lg:grid-cols-[1.1fr_1fr]"><div class="p-8 sm:p-12"><span class="tab mb-5 svelte-1gd76v4" data-svelte-h="svelte-gis3g8">The finishing touch</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark" data-svelte-h="svelte-11hbk1j">Trim, fascia &amp; soffit \u2014 the detail that makes it pop.</h2> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-cgidqx">Crisp trim is the icing on the cake. We sand and scrape loose paint,
+          caulk the cracks, replace any dry rot, and prime every bare spot \u2014
+          then finish in a semi-gloss that frames the house and wipes clean.</p> <div class="mt-6 flex flex-wrap gap-3" data-svelte-h="svelte-wje02d"><span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Sand &amp; scrape</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Caulk &amp; prime bare wood</span> <span class="rounded-md bg-off-white border px-4 py-2 text-sm font-bold text-secondary-dark">Semi-gloss finish</span></div> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "mt-8 text-lg h-14 px-7"
+        },
+        {},
+        {
+          default: () => {
+            return `Get a Trim Quote`;
+          }
+        }
+      )}</div> <div class="relative min-h-[260px]">${typeof trimSrc === "string" ? `<img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", trimSrc.img.src, 0)} alt="Two-story home with lap siding and crisp white trim and columns" loading="lazy"${add_attribute("width", trimSrc.img.w, 0)}${add_attribute("height", trimSrc.img.h, 0)}>` : `<picture>${each(Object.entries(trimSrc.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute inset-0 w-full h-full object-cover"${add_attribute("src", trimSrc.img.src, 0)} alt="Two-story home with lap siding and crisp white trim and columns" loading="lazy"${add_attribute("width", trimSrc.img.w, 0)}${add_attribute("height", trimSrc.img.h, 0)}></picture>`}</div></div></div></section>  <section id="guide" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="grid lg:grid-cols-[1fr_1.05fr] gap-12 lg:gap-16 items-center"> <div data-svelte-h="svelte-5a9gso"><span class="tab mb-5 svelte-1gd76v4">A quick field guide</span> <h2 class="text-3xl sm:text-4xl leading-[1.07] font-extrabold text-secondary-dark">All about painting exterior Hardie board siding.</h2> <p class="mt-5 text-lg text-gray-600 leading-relaxed">Hardie board is a dense fiber-cement board made from mechanical pulp \u2014
+          you&#39;ll also hear it called HardiePlank, cement-fiber siding, or fiber
+          cement cladding. It&#39;s all over the Chicago suburbs in finishes that
+          mimic coarse chipboard, plywood, or real wood grain.</p> <p class="mt-4 text-lg text-gray-600 leading-relaxed">Because the siding almost always ships
+          <b class="text-secondary-dark font-bold">pre-primed</b> to protect it in
+          transit, a great paint job is less about the color and more about the prep.
+          Here&#39;s how we approach each situation.</p></div>  <div class="relative h-[380px] sm:h-[440px]">${typeof guideFront === "string" ? `<img class="absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideFront.img.src, 0)} alt="Gray lap-siding home with covered front porch" loading="lazy"${add_attribute("width", guideFront.img.w, 0)}${add_attribute("height", guideFront.img.h, 0)}>` : `<picture>${each(Object.entries(guideFront.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute top-0 left-0 w-[68%] aspect-[5/4] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideFront.img.src, 0)} alt="Gray lap-siding home with covered front porch" loading="lazy"${add_attribute("width", guideFront.img.w, 0)}${add_attribute("height", guideFront.img.h, 0)}></picture>`} ${typeof guideAngle === "string" ? `<img class="absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideAngle.img.src, 0)} alt="Classic two-story home with fiber-cement siding and balcony" loading="lazy"${add_attribute("width", guideAngle.img.w, 0)}${add_attribute("height", guideAngle.img.h, 0)}>` : `<picture>${each(Object.entries(guideAngle.sources), ([format, srcset]) => {
+        return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+      })} <img class="absolute bottom-0 right-0 w-[60%] aspect-[4/3] object-cover rounded-lg ring-[6px] ring-primary-dark shadow-2xl"${add_attribute("src", guideAngle.img.src, 0)} alt="Classic two-story home with fiber-cement siding and balcony" loading="lazy"${add_attribute("width", guideAngle.img.w, 0)}${add_attribute("height", guideAngle.img.h, 0)}></picture>`}</div></div>  <div class="mt-14 grid md:grid-cols-3 gap-6">${each(guideCards, ({ number, label, title, body: body2 }) => {
+        return `<div class="rounded-2xl border bg-off-white p-7"><span class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.12em] text-primary-dark"><span class="w-6 h-6 rounded-full bg-primary-dark text-white flex items-center justify-center text-[13px]">${escape(number)}</span> ${escape(label)}</span> <h3 class="mt-4 font-bold text-xl text-secondary-dark">${escape(title)}</h3> <p class="mt-3 text-gray-600 leading-relaxed">${escape(body2)}</p> </div>`;
+      })}</div>  <div class="mt-10 rounded-2xl bg-secondary-dark text-white p-7 sm:p-9 flex flex-col sm:flex-row sm:items-center gap-6 justify-between"><div class="max-w-2xl" data-svelte-h="svelte-15fhd0k"><h3 class="font-bold text-xl sm:text-2xl text-white">Klasek Painting, serving Chicagoland for 30+ years.</h3> <p class="mt-2 text-white/75 leading-relaxed">Owner Pete Klasek is happy to answer any questions about your Hardie
+          board project. We&#39;re known for high-quality work, dependable service,
+          a satisfaction guarantee, and on-time completion \u2014 at competitive
+          pricing.</p></div> ${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg h-14 px-7 shrink-0"
+        },
+        {},
+        {
+          default: () => {
+            return `Contact Klasek`;
+          }
+        }
+      )}</div></div></section>  <section id="why" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="text-center max-w-2xl mx-auto mb-11" data-svelte-h="svelte-1fia0mq"><div class="inline-block bg-primary-dark text-white px-7 py-2.5 -skew-x-6 shadow-subtle mb-5"><span class="inline-block skew-x-6 font-extrabold text-lg sm:text-xl uppercase tracking-wide">Why Choose Klasek</span></div> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Three decades on Chicagoland ladders. One crew, start to finish.</h2></div> <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">${each(stats, ({ stat, title, body: body2 }) => {
+        return `<div class="rounded-xl border p-6 text-center hover:shadow-subtle transition"><div class="font-extrabold text-4xl text-primary-dark">${escape(stat)}</div> <h3 class="mt-2 font-bold text-lg text-secondary-dark">${escape(title)}</h3> <p class="mt-2 text-gray-600 text-[15px] leading-relaxed">${escape(body2)}</p> </div>`;
+      })}</div></div></section>  <section class="bg-off-white p-y p-x"><div class="container"><div class="text-center mb-9 flex flex-col items-center" data-svelte-h="svelte-oo9x63"><span class="tab mb-4 svelte-1gd76v4">Our work</span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark">Before &amp; after, around the neighborhood.</h2></div> <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">${each(galleryImages, ({ src: src22, alt }) => {
+        return `${typeof src22 === "string" ? `<img class="w-full h-full aspect-square object-cover rounded-lg"${add_attribute("src", src22.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}>` : `<picture>${each(Object.entries(src22.sources), ([format, srcset]) => {
+          return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+        })} <img class="w-full h-full aspect-square object-cover rounded-lg"${add_attribute("src", src22.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}> </picture>`}`;
+      })}</div> <div class="mt-9 flex flex-col items-center gap-3" data-svelte-h="svelte-r14l7e"><p class="flex items-center gap-2 text-sm font-bold text-gray-700">Review us
+        <img class="w-[80px] h-[14px]"${add_attribute("src", stars, 0)} alt="5 stars">
+        on</p> <img class="w-[92px] h-auto"${add_attribute("src", google, 0)} alt="Google"></div></div></section>  <section id="area" class="bg-white p-y p-x scroll-mt-20"><div class="container"><div class="mb-10" data-svelte-h="svelte-1jsmhnv"><div class="ribbon svelte-1gd76v4"><span class="flag flag-l svelte-1gd76v4" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Areas We Serve</h2> <span class="flag flag-r svelte-1gd76v4" aria-hidden="true"></span></div></div> <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-center"><div><h3 class="font-bold text-2xl text-secondary-dark" data-svelte-h="svelte-4ddwp4">Hardie board painting across the western Cook County suburbs.</h3> <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-md" data-svelte-h="svelte-1oelp02">Based at 4415 S. Custer in Lyons, IL \u2014 a short drive from your home.
+          If your town isn&#39;t listed, call us; we likely cover it.</p> <div class="mt-6 rounded-xl bg-off-white border p-5 flex items-start gap-3"><svg class="mt-0.5 shrink-0" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary-dark))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <div><p class="font-bold text-secondary-dark" data-svelte-h="svelte-75sjm3">Klasek Painting \xB7 Lyons, IL</p> <p class="text-gray-600 text-[15px]" data-svelte-h="svelte-1qewt9m">4415 S. Custer, Lyons, IL 60534</p> ${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "link",
+          class: "!text-primary-dark !font-bold !no-underline hover:!underline !text-[15px]"
+        },
+        {},
+        {}
+      )}</div></div> <div class="mt-5 flex flex-wrap items-center gap-3">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "text-lg px-6"
+        },
+        {},
+        {
+          default: () => {
+            return `Request Estimate`;
+          }
+        }
+      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "secondary",
+          class: "text-lg px-6 bg-secondary-dark hover:bg-secondary text-white"
+        },
+        {},
+        {
+          default: () => {
+            return `Call the Crew`;
+          }
+        }
+      )}</div></div> <div><ul class="grid grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-2.5 text-[15px] font-semibold text-gray-700">${each(Object.values(serviceAreaRoutes), ({ text: text2, href }) => {
+        return `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-primary-dark shrink-0" aria-hidden="true"></span> <a class="hover:text-primary-dark hover:underline"${add_attribute("href", href, 0)}>${escape(text2)}</a> </li>`;
+      })}</ul> <div class="mt-6 h-44 rounded-lg overflow-hidden">${validate_component(Map2, "Map").$$render($$result, { lazy: true }, {}, {})}</div></div></div></div></section>  <section class="bg-off-white py-14 border-y p-x"><div class="container"><div class="mb-8" data-svelte-h="svelte-1jx66ah"><div class="ribbon svelte-1gd76v4"><span class="flag flag-l svelte-1gd76v4" aria-hidden="true"></span> <p class="font-bold text-lg text-secondary-dark uppercase tracking-wide text-center">Our Trusted Brand Partners</p> <span class="flag flag-r svelte-1gd76v4" aria-hidden="true"></span></div></div> <div class="flex flex-wrap items-center justify-center gap-x-10 sm:gap-x-14 gap-y-7">${each(partnerLogos, ({ src: src22, alt, height }) => {
+        return `${typeof src22 === "string" ? `<img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-1gd76v4"}"${add_attribute("src", src22.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}>` : `<picture>${each(Object.entries(src22.sources), ([format, srcset]) => {
+          return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
+        })} <img class="${escape(height, true) + " w-auto object-contain opacity-75 hover:opacity-100 transition svelte-1gd76v4"}"${add_attribute("src", src22.img.src, 0)}${add_attribute("alt", alt, 0)} loading="lazy"${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}> </picture>`}`;
+      })}</div></div></section>  <section id="faq" class="bg-white p-y p-x scroll-mt-20"><div class="container max-w-3xl"><div class="mb-10" data-svelte-h="svelte-1d4vlt2"><div class="ribbon svelte-1gd76v4"><span class="flag flag-l svelte-1gd76v4" aria-hidden="true"></span> <h2 class="text-3xl sm:text-4xl leading-[1.08] font-extrabold text-secondary-dark text-center">Frequently Asked Questions</h2> <span class="flag flag-r svelte-1gd76v4" aria-hidden="true"></span></div></div> <div class="divide-y border-y">${each(faqData, ({ question, answer }, i2) => {
+        return `<div class="py-5"><button type="button" class="flex w-full items-center justify-between gap-4 text-left"${add_attribute("aria-expanded", openFaq === i2, 0)}><span class="font-bold text-lg text-secondary-dark">${escape(question)}</span> <span class="${"shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition " + escape(
+          openFaq === i2 ? "rotate-45 bg-primary-dark text-white border-primary-dark" : "bg-off-white text-gray-600",
+          true
+        )}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg> </span></button> ${openFaq === i2 ? `<p class="mt-3 text-gray-600 leading-relaxed">${escape(answer)}</p>` : ``} </div>`;
+      })}</div></div></section>  <section class="relative bg-secondary-dark text-white p-y p-x overflow-hidden"><div class="absolute inset-0 bg-gradient-to-br from-secondary/60 via-secondary-dark to-secondary-dark" aria-hidden="true"></div> <img${add_attribute("src", splash, 0)} alt="" aria-hidden="true" class="pointer-events-none select-none absolute -top-10 right-2 w-72 opacity-25 rotate-12 hidden sm:block"> <div class="container relative grid lg:grid-cols-[1fr_460px] gap-12 lg:gap-16 items-center"><div><span class="tab mb-5 svelte-1gd76v4" data-svelte-h="svelte-1k9bb3x">No-pressure, no-cost</span> <h2 class="text-4xl sm:text-5xl leading-[1.05] font-extrabold text-white" data-svelte-h="svelte-5g88fm">Ready to help your property look its best?</h2> <p class="mt-5 text-lg text-white/75 leading-relaxed max-w-md" data-svelte-h="svelte-jj4wmq">Send us your details and we&#39;ll schedule a walk-through, then deliver a
+        free written estimate for you to evaluate. Call the best.</p> <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-white/85 font-semibold">${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "link",
+          class: "!text-2xl !font-bold text-white hover:!text-primary"
+        },
+        {},
+        {}
+      )} <span class="inline-flex items-center gap-2" data-svelte-h="svelte-1n0zcwg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          4415 S. Custer, Lyons, IL</span></div></div> <div class="bg-white rounded-2xl shadow-2xl p-6 sm:p-7"><p class="font-bold text-xl text-secondary-dark mb-1" data-svelte-h="svelte-1ue4w2h">Get a Free Estimate</p> <p class="text-sm text-gray-600 mb-5" data-svelte-h="svelte-brv2iu">We&#39;ll reach out to schedule your walk-through.</p> <div class="flex flex-col gap-3">${validate_component(Button, "Button").$$render(
+        $$result,
+        {
+          href: routes["contact"].href,
+          class: "w-full text-lg h-14"
+        },
+        {},
+        {
+          default: () => {
+            return `Request My Free Estimate`;
+          }
+        }
+      )} ${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "secondary",
+          class: "w-full text-lg h-14 bg-secondary-dark hover:bg-secondary text-white"
+        },
+        {},
+        {}
+      )}</div></div></div></section>  <div class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t shadow-[0_-6px_24px_rgba(20,18,55,.14)]"><div class="grid grid-cols-2 gap-2 p-2.5" style="padding-bottom:calc(0.625rem + env(safe-area-inset-bottom));">${validate_component(ClickToCall, "ClickToCall").$$render(
+        $$result,
+        {
+          variant: "secondary",
+          class: "bg-secondary-dark hover:bg-secondary text-white"
+        },
+        {},
+        {
+          default: () => {
+            return `Call`;
+          }
+        }
+      )} ${validate_component(Button, "Button").$$render($$result, { href: routes["contact"].href }, {}, {
+        default: () => {
+          return `Free Estimate`;
+        }
+      })}</div> </div>`;
+    });
+  }
+});
+
+// .svelte-kit/output/server/nodes/63.js
+var __exports64 = {};
+__export(__exports64, {
+  component: () => component64,
+  fonts: () => fonts64,
+  imports: () => imports64,
+  index: () => index64,
+  stylesheets: () => stylesheets64,
+  universal: () => page_ts_exports56,
+  universal_id: () => universal_id56
+});
+var index64, component_cache64, component64, universal_id56, imports64, stylesheets64, fonts64;
+var init__64 = __esm({
+  ".svelte-kit/output/server/nodes/63.js"() {
+    init_page_ts56();
+    index64 = 63;
+    component64 = async () => component_cache64 ??= (await Promise.resolve().then(() => (init_page_svelte60(), page_svelte_exports60))).default;
+    universal_id56 = "src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.ts";
+    imports64 = ["_app/immutable/nodes/63.BrPWIZeL.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DbD_NlP-.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DBI2f3KA.js", "_app/immutable/chunks/Y8pJni8e.js", "_app/immutable/chunks/xRuhivlF.js", "_app/immutable/chunks/w0vMFqT4.js", "_app/immutable/chunks/CxdZ4zBt.js", "_app/immutable/chunks/CzIcYGpn.js"];
+    stylesheets64 = ["_app/immutable/assets/63.DEuYSAEC.css"];
+    fonts64 = [];
+  }
+});
+
+// .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/_page.ts.js
+var page_ts_exports57 = {};
+__export(page_ts_exports57, {
+  load: () => load61
+});
+var load61;
+var init_page_ts57 = __esm({
+  ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/_page.ts.js"() {
+    init_metaTagHelpers();
+    load61 = () => {
       const pageMetaTags = createTitleDescription(
         "Vinyl Siding Painting",
         "Expert vinyl siding painting services in Cook County. Refresh your home's exterior with high-quality, durable paint. Affordable prices and professional results."
@@ -23740,12 +24238,12 @@ var init_page_ts56 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/_page.svelte.js
-var page_svelte_exports60 = {};
-__export(page_svelte_exports60, {
-  default: () => Page60
+var page_svelte_exports61 = {};
+__export(page_svelte_exports61, {
+  default: () => Page61
 });
-var src22, Page60;
-var init_page_svelte60 = __esm({
+var src17, Page61;
+var init_page_svelte61 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -23755,7 +24253,7 @@ var init_page_svelte60 = __esm({
     init_HeadingAccent();
     init_isMobileStore();
     init_GalleryLinkBlock();
-    src22 = {
+    src17 = {
       sources: {
         avif: "/_app/immutable/assets/vinyl-painting-service.SWez0p4k.avif 376w, /_app/immutable/assets/vinyl-painting-service.C64YWON6.avif 752w",
         webp: "/_app/immutable/assets/vinyl-painting-service.BQgjJ7aP.webp 376w, /_app/immutable/assets/vinyl-painting-service.BAQVDd_S.webp 752w",
@@ -23767,7 +24265,7 @@ var init_page_svelte60 = __esm({
         h: 502
       }
     };
-    Page60 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page61 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
       $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
       const faqData = [
@@ -23826,9 +24324,9 @@ var init_page_svelte60 = __esm({
 			spacious two-story, our team has the expertise to handle it all.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src22 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src22.img.src, 0)} alt=""${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}>` : `<picture>${each(Object.entries(src22.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src17 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src17.img.src, 0)} alt=""${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src17.img.w, 0)}${add_attribute("height", src17.img.h, 0)}>` : `<picture>${each(Object.entries(src17.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src22.img.src, 0)} alt=""${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src22.img.w, 0)}${add_attribute("height", src22.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src17.img.src, 0)} alt=""${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src17.img.w, 0)}${add_attribute("height", src17.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -23883,40 +24381,40 @@ var init_page_svelte60 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/63.js
-var __exports64 = {};
-__export(__exports64, {
-  component: () => component64,
-  fonts: () => fonts64,
-  imports: () => imports64,
-  index: () => index64,
-  stylesheets: () => stylesheets64,
-  universal: () => page_ts_exports56,
-  universal_id: () => universal_id56
+// .svelte-kit/output/server/nodes/64.js
+var __exports65 = {};
+__export(__exports65, {
+  component: () => component65,
+  fonts: () => fonts65,
+  imports: () => imports65,
+  index: () => index65,
+  stylesheets: () => stylesheets65,
+  universal: () => page_ts_exports57,
+  universal_id: () => universal_id57
 });
-var index64, component_cache64, component64, universal_id56, imports64, stylesheets64, fonts64;
-var init__64 = __esm({
-  ".svelte-kit/output/server/nodes/63.js"() {
-    init_page_ts56();
-    index64 = 63;
-    component64 = async () => component_cache64 ??= (await Promise.resolve().then(() => (init_page_svelte60(), page_svelte_exports60))).default;
-    universal_id56 = "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/+page.ts";
-    imports64 = ["_app/immutable/nodes/63.DkWoDzRF.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets64 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts64 = [];
+var index65, component_cache65, component65, universal_id57, imports65, stylesheets65, fonts65;
+var init__65 = __esm({
+  ".svelte-kit/output/server/nodes/64.js"() {
+    init_page_ts57();
+    index65 = 64;
+    component65 = async () => component_cache65 ??= (await Promise.resolve().then(() => (init_page_svelte61(), page_svelte_exports61))).default;
+    universal_id57 = "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/+page.ts";
+    imports65 = ["_app/immutable/nodes/64.B1JS8Hr1.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets65 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts65 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/_page.ts.js
-var page_ts_exports57 = {};
-__export(page_ts_exports57, {
-  load: () => load61
+var page_ts_exports58 = {};
+__export(page_ts_exports58, {
+  load: () => load62
 });
-var load61;
-var init_page_ts57 = __esm({
+var load62;
+var init_page_ts58 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load61 = () => {
+    load62 = () => {
       const pageMetaTags = createTitleDescription(
         "Vinyl Siding Repair",
         "Expert vinyl siding repair services in Cook County. Restore your home's exterior with high-quality, repairs. Affordable prices and professional results."
@@ -23929,12 +24427,12 @@ var init_page_ts57 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/_page.svelte.js
-var page_svelte_exports61 = {};
-__export(page_svelte_exports61, {
-  default: () => Page61
+var page_svelte_exports62 = {};
+__export(page_svelte_exports62, {
+  default: () => Page62
 });
-var src23, Page61;
-var init_page_svelte61 = __esm({
+var src18, Page62;
+var init_page_svelte62 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -23943,7 +24441,7 @@ var init_page_svelte61 = __esm({
     init_routes();
     init_HeadingAccent();
     init_GalleryLinkBlock();
-    src23 = {
+    src18 = {
       sources: {
         avif: "/_app/immutable/assets/vinyl-siding-repair-service.BQsdArC0.avif 317w, /_app/immutable/assets/vinyl-siding-repair-service.CtUxU9ui.avif 633w",
         webp: "/_app/immutable/assets/vinyl-siding-repair-service.BH8cB_vK.webp 317w, /_app/immutable/assets/vinyl-siding-repair-service.DVn9QOnS.webp 633w",
@@ -23955,7 +24453,7 @@ var init_page_svelte61 = __esm({
         h: 418
       }
     };
-    Page61 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page62 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       const faqData = [
         {
           question: "Can vinyl siding be repaired or does it need to be replaced entirely?",
@@ -24024,9 +24522,9 @@ var init_page_svelte61 = __esm({
 			book your service now!</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:order-first order-last">${typeof src23 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src23.img.src, 0)} alt="Vinyl siding repair project by Klasek Painting"${add_attribute("width", src23.img.w, 0)}${add_attribute("height", src23.img.h, 0)}>` : `<picture>${each(Object.entries(src23.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:order-first order-last">${typeof src18 === "string" ? `<img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src18.img.src, 0)} alt="Vinyl siding repair project by Klasek Painting"${add_attribute("width", src18.img.w, 0)}${add_attribute("height", src18.img.h, 0)}>` : `<picture>${each(Object.entries(src18.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src23.img.src, 0)} alt="Vinyl siding repair project by Klasek Painting"${add_attribute("width", src23.img.w, 0)}${add_attribute("height", src23.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto bord rounded-lg max-w-[500px] mx-auto"${add_attribute("src", src18.img.src, 0)} alt="Vinyl siding repair project by Klasek Painting"${add_attribute("width", src18.img.w, 0)}${add_attribute("height", src18.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -24062,40 +24560,40 @@ var init_page_svelte61 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/64.js
-var __exports65 = {};
-__export(__exports65, {
-  component: () => component65,
-  fonts: () => fonts65,
-  imports: () => imports65,
-  index: () => index65,
-  stylesheets: () => stylesheets65,
-  universal: () => page_ts_exports57,
-  universal_id: () => universal_id57
+// .svelte-kit/output/server/nodes/65.js
+var __exports66 = {};
+__export(__exports66, {
+  component: () => component66,
+  fonts: () => fonts66,
+  imports: () => imports66,
+  index: () => index66,
+  stylesheets: () => stylesheets66,
+  universal: () => page_ts_exports58,
+  universal_id: () => universal_id58
 });
-var index65, component_cache65, component65, universal_id57, imports65, stylesheets65, fonts65;
-var init__65 = __esm({
-  ".svelte-kit/output/server/nodes/64.js"() {
-    init_page_ts57();
-    index65 = 64;
-    component65 = async () => component_cache65 ??= (await Promise.resolve().then(() => (init_page_svelte61(), page_svelte_exports61))).default;
-    universal_id57 = "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/+page.ts";
-    imports65 = ["_app/immutable/nodes/64.CkcjwudG.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets65 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts65 = [];
+var index66, component_cache66, component66, universal_id58, imports66, stylesheets66, fonts66;
+var init__66 = __esm({
+  ".svelte-kit/output/server/nodes/65.js"() {
+    init_page_ts58();
+    index66 = 65;
+    component66 = async () => component_cache66 ??= (await Promise.resolve().then(() => (init_page_svelte62(), page_svelte_exports62))).default;
+    universal_id58 = "src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/+page.ts";
+    imports66 = ["_app/immutable/nodes/65.D2mPy9Wk.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets66 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts66 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/_page.ts.js
-var page_ts_exports58 = {};
-__export(page_ts_exports58, {
-  load: () => load62
+var page_ts_exports59 = {};
+__export(page_ts_exports59, {
+  load: () => load63
 });
-var load62;
-var init_page_ts58 = __esm({
+var load63;
+var init_page_ts59 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load62 = () => {
+    load63 = () => {
       const pageMetaTags = createTitleDescription(
         "Reliable Stucco Painting and Repair Services",
         "Trust Klasek Painting for professional stucco painting and repair. Our skilled team ensures a flawless finish and long-lasting protection. Get a free quote!"
@@ -24108,12 +24606,12 @@ var init_page_ts58 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/_page.svelte.js
-var page_svelte_exports62 = {};
-__export(page_svelte_exports62, {
-  default: () => Page62
+var page_svelte_exports63 = {};
+__export(page_svelte_exports63, {
+  default: () => Page63
 });
-var src24, painting, repair2, Page62;
-var init_page_svelte62 = __esm({
+var src19, painting, repair2, Page63;
+var init_page_svelte63 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/_page.svelte.js"() {
     init_ssr();
     init_OtherServicesSection();
@@ -24121,10 +24619,10 @@ var init_page_svelte62 = __esm({
     init_routes();
     init_ServiceAreaSection();
     init_PaintingPromisesSection();
-    src24 = "/_app/immutable/assets/stucco-painting-repair-services.D5bzhR67.webp";
+    src19 = "/_app/immutable/assets/stucco-painting-repair-services.D5bzhR67.webp";
     painting = "/_app/immutable/assets/stucco-painting-service.BEgKulgW.webp";
     repair2 = "/_app/immutable/assets/stucco-repair-service.Dqv7zbqz.webp";
-    Page62 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page63 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       return `${validate_component(RootServiceHero, "RootServiceHero").$$render(
         $$result,
         {
@@ -24137,7 +24635,7 @@ var init_page_svelte62 = __esm({
               "Meticulous Surface Preparation"
             ],
             image: {
-              src: src24,
+              src: src19,
               alt: "Beautiful house with newly repair stucco and paint job done by Klasek Painting"
             }
           }
@@ -24175,40 +24673,40 @@ var init_page_svelte62 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/65.js
-var __exports66 = {};
-__export(__exports66, {
-  component: () => component66,
-  fonts: () => fonts66,
-  imports: () => imports66,
-  index: () => index66,
-  stylesheets: () => stylesheets66,
-  universal: () => page_ts_exports58,
-  universal_id: () => universal_id58
+// .svelte-kit/output/server/nodes/66.js
+var __exports67 = {};
+__export(__exports67, {
+  component: () => component67,
+  fonts: () => fonts67,
+  imports: () => imports67,
+  index: () => index67,
+  stylesheets: () => stylesheets67,
+  universal: () => page_ts_exports59,
+  universal_id: () => universal_id59
 });
-var index66, component_cache66, component66, universal_id58, imports66, stylesheets66, fonts66;
-var init__66 = __esm({
-  ".svelte-kit/output/server/nodes/65.js"() {
-    init_page_ts58();
-    index66 = 65;
-    component66 = async () => component_cache66 ??= (await Promise.resolve().then(() => (init_page_svelte62(), page_svelte_exports62))).default;
-    universal_id58 = "src/routes/(light-nav)/services/stucco-painting-repair/+page.ts";
-    imports66 = ["_app/immutable/nodes/65.BmwLip-T.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/D78W9CBg.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/Dpi67cLs.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/B4ToEHT_.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/Box2BUpB.js", "_app/immutable/chunks/Bev2196b.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/d3Ql8cvb.js", "_app/immutable/chunks/DnNh7yYd.js", "_app/immutable/chunks/DxMEPzzS.js"];
-    stylesheets66 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts66 = [];
+var index67, component_cache67, component67, universal_id59, imports67, stylesheets67, fonts67;
+var init__67 = __esm({
+  ".svelte-kit/output/server/nodes/66.js"() {
+    init_page_ts59();
+    index67 = 66;
+    component67 = async () => component_cache67 ??= (await Promise.resolve().then(() => (init_page_svelte63(), page_svelte_exports63))).default;
+    universal_id59 = "src/routes/(light-nav)/services/stucco-painting-repair/+page.ts";
+    imports67 = ["_app/immutable/nodes/66.DsENL3VA.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/iqJyU3xE.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/DhrMZ-YI.js", "_app/immutable/chunks/D2UcJ3wG.js", "_app/immutable/chunks/Bv2Voov8.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/ho_4w172.js", "_app/immutable/chunks/CLoLEQQ2.js", "_app/immutable/chunks/YtKqi3V3.js", "_app/immutable/chunks/DfFK52A7.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/t9zAFjTy.js", "_app/immutable/chunks/Aohsu3D2.js", "_app/immutable/chunks/CpRRg9TQ.js"];
+    stylesheets67 = ["_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts67 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-painting/_page.ts.js
-var page_ts_exports59 = {};
-__export(page_ts_exports59, {
-  load: () => load63
+var page_ts_exports60 = {};
+__export(page_ts_exports60, {
+  load: () => load64
 });
-var load63;
-var init_page_ts59 = __esm({
+var load64;
+var init_page_ts60 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-painting/_page.ts.js"() {
     init_metaTagHelpers();
-    load63 = () => {
+    load64 = () => {
       const pageMetaTags = createTitleDescription(
         "Stucco Painting",
         "Trusted stucco painting services in Cook County. Protect your home's exterior with high-quality, durable paint. Affordable prices and professional results."
@@ -24221,12 +24719,12 @@ var init_page_ts59 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-painting/_page.svelte.js
-var page_svelte_exports63 = {};
-__export(page_svelte_exports63, {
-  default: () => Page63
+var page_svelte_exports64 = {};
+__export(page_svelte_exports64, {
+  default: () => Page64
 });
-var src25, Page63;
-var init_page_svelte63 = __esm({
+var src20, Page64;
+var init_page_svelte64 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-painting/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -24237,7 +24735,7 @@ var init_page_svelte63 = __esm({
     init_HeadingAccent();
     init_isMobileStore();
     init_GalleryLinkBlock();
-    src25 = {
+    src20 = {
       sources: {
         avif: "/_app/immutable/assets/exterior-stucco-painting-service.C5WJG5eC.avif 285w, /_app/immutable/assets/stucco-feature.DjbCYtpG.avif 569w",
         webp: "/_app/immutable/assets/exterior-stucco-painting-service.DM0Cd0m4.webp 285w, /_app/immutable/assets/exterior-stucco-painting-service.CUeHgcoi.webp 569w",
@@ -24249,7 +24747,7 @@ var init_page_svelte63 = __esm({
         h: 455
       }
     };
-    Page63 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page64 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
       $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
       const faqData = [
@@ -24318,9 +24816,9 @@ var init_page_svelte63 = __esm({
       finish.</p> <p>Interested in revitalizing your stucco exterior? <a${add_attribute("href", routes["contact"].href, 0)}>Contact us</a> today to discuss your project with our expert painters.</p></div>`;
         },
         "left-column": () => {
-          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src25 === "string" ? `<img class="w-full h-auto max-w-[500px] bord rounded-lg"${add_attribute("src", src25.img.src, 0)} alt="White exterior stucco painting project in progress by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src25.img.w, 0)}${add_attribute("height", src25.img.h, 0)}>` : `<picture>${each(Object.entries(src25.sources), ([format, srcset]) => {
+          return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof src20 === "string" ? `<img class="w-full h-auto max-w-[500px] bord rounded-lg"${add_attribute("src", src20.img.src, 0)} alt="White exterior stucco painting project in progress by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}>` : `<picture>${each(Object.entries(src20.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] bord rounded-lg"${add_attribute("src", src25.img.src, 0)} alt="White exterior stucco painting project in progress by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src25.img.w, 0)}${add_attribute("height", src25.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] bord rounded-lg"${add_attribute("src", src20.img.src, 0)} alt="White exterior stucco painting project in progress by Klasek Painting"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src20.img.w, 0)}${add_attribute("height", src20.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -24391,40 +24889,40 @@ var init_page_svelte63 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/66.js
-var __exports67 = {};
-__export(__exports67, {
-  component: () => component67,
-  fonts: () => fonts67,
-  imports: () => imports67,
-  index: () => index67,
-  stylesheets: () => stylesheets67,
-  universal: () => page_ts_exports59,
-  universal_id: () => universal_id59
+// .svelte-kit/output/server/nodes/67.js
+var __exports68 = {};
+__export(__exports68, {
+  component: () => component68,
+  fonts: () => fonts68,
+  imports: () => imports68,
+  index: () => index68,
+  stylesheets: () => stylesheets68,
+  universal: () => page_ts_exports60,
+  universal_id: () => universal_id60
 });
-var index67, component_cache67, component67, universal_id59, imports67, stylesheets67, fonts67;
-var init__67 = __esm({
-  ".svelte-kit/output/server/nodes/66.js"() {
-    init_page_ts59();
-    index67 = 66;
-    component67 = async () => component_cache67 ??= (await Promise.resolve().then(() => (init_page_svelte63(), page_svelte_exports63))).default;
-    universal_id59 = "src/routes/(light-nav)/services/stucco-painting-repair/stucco-painting/+page.ts";
-    imports67 = ["_app/immutable/nodes/66.7LQA1lNV.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets67 = ["_app/immutable/assets/EmailSignup.CZe4dQ9e.css", "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts67 = [];
+var index68, component_cache68, component68, universal_id60, imports68, stylesheets68, fonts68;
+var init__68 = __esm({
+  ".svelte-kit/output/server/nodes/67.js"() {
+    init_page_ts60();
+    index68 = 67;
+    component68 = async () => component_cache68 ??= (await Promise.resolve().then(() => (init_page_svelte64(), page_svelte_exports64))).default;
+    universal_id60 = "src/routes/(light-nav)/services/stucco-painting-repair/stucco-painting/+page.ts";
+    imports68 = ["_app/immutable/nodes/67.BmM_h8LY.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DoqDkTcC.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets68 = ["_app/immutable/assets/EmailSignup.CZe4dQ9e.css", "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts68 = [];
   }
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-repair/_page.ts.js
-var page_ts_exports60 = {};
-__export(page_ts_exports60, {
-  load: () => load64
+var page_ts_exports61 = {};
+__export(page_ts_exports61, {
+  load: () => load65
 });
-var load64;
-var init_page_ts60 = __esm({
+var load65;
+var init_page_ts61 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-repair/_page.ts.js"() {
     init_metaTagHelpers();
-    load64 = () => {
+    load65 = () => {
       const pageMetaTags = createTitleDescription(
         "Stucco Repair",
         "Restore your stucco exterior with Klasek Painting's expert repair services. Quality craftsmanship and durable results. Contact us today for a free quote!"
@@ -24437,12 +24935,12 @@ var init_page_ts60 = __esm({
 });
 
 // .svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-repair/_page.svelte.js
-var page_svelte_exports64 = {};
-__export(page_svelte_exports64, {
-  default: () => Page64
+var page_svelte_exports65 = {};
+__export(page_svelte_exports65, {
+  default: () => Page65
 });
-var src26, Page64;
-var init_page_svelte64 = __esm({
+var src21, Page65;
+var init_page_svelte65 = __esm({
   ".svelte-kit/output/server/entries/pages/(light-nav)/services/stucco-painting-repair/stucco-repair/_page.svelte.js"() {
     init_ssr();
     init_FaqSection();
@@ -24453,7 +24951,7 @@ var init_page_svelte64 = __esm({
     init_HeadingAccent();
     init_isMobileStore();
     init_GalleryLinkBlock();
-    src26 = {
+    src21 = {
       sources: {
         avif: "/_app/immutable/assets/exterior-stucco-repair-service.DKhbR85G.avif 306w, /_app/immutable/assets/exterior-stucco-repair-service.DHjyDFgG.avif 611w",
         webp: "/_app/immutable/assets/exterior-stucco-repair-service.DXbMpyFh.webp 306w, /_app/immutable/assets/exterior-stucco-repair-service.BF7f6Lbm.webp 611w",
@@ -24465,7 +24963,7 @@ var init_page_svelte64 = __esm({
         h: 381
       }
     };
-    Page64 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+    Page65 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let $isMobileStore, $$unsubscribe_isMobileStore;
       $$unsubscribe_isMobileStore = subscribe(isMobileStore, (value) => $isMobileStore = value);
       const faqData = [
@@ -24521,9 +25019,9 @@ var init_page_svelte64 = __esm({
       functional and attractive.</p></div>`;
         },
         "right-column": () => {
-          return `<div slot="right-column">${typeof src26 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src26.img.src, 0)} alt="Pete Klasek working on a stucco repair exterior house project"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src26.img.w, 0)}${add_attribute("height", src26.img.h, 0)}>` : `<picture>${each(Object.entries(src26.sources), ([format, srcset]) => {
+          return `<div slot="right-column">${typeof src21 === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src21.img.src, 0)} alt="Pete Klasek working on a stucco repair exterior house project"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src21.img.w, 0)}${add_attribute("height", src21.img.h, 0)}>` : `<picture>${each(Object.entries(src21.sources), ([format, srcset]) => {
             return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src26.img.src, 0)} alt="Pete Klasek working on a stucco repair exterior house project"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src26.img.w, 0)}${add_attribute("height", src26.img.h, 0)}></picture>`}</div>`;
+          })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src21.img.src, 0)} alt="Pete Klasek working on a stucco repair exterior house project"${add_attribute("loading", $isMobileStore ? "lazy" : "eager", 0)}${add_attribute("width", src21.img.w, 0)}${add_attribute("height", src21.img.h, 0)}></picture>`}</div>`;
         }
       })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
         default: () => {
@@ -24568,27 +25066,27 @@ var init_page_svelte64 = __esm({
   }
 });
 
-// .svelte-kit/output/server/nodes/67.js
-var __exports68 = {};
-__export(__exports68, {
-  component: () => component68,
-  fonts: () => fonts68,
-  imports: () => imports68,
-  index: () => index68,
-  stylesheets: () => stylesheets68,
-  universal: () => page_ts_exports60,
-  universal_id: () => universal_id60
+// .svelte-kit/output/server/nodes/68.js
+var __exports69 = {};
+__export(__exports69, {
+  component: () => component69,
+  fonts: () => fonts69,
+  imports: () => imports69,
+  index: () => index69,
+  stylesheets: () => stylesheets69,
+  universal: () => page_ts_exports61,
+  universal_id: () => universal_id61
 });
-var index68, component_cache68, component68, universal_id60, imports68, stylesheets68, fonts68;
-var init__68 = __esm({
-  ".svelte-kit/output/server/nodes/67.js"() {
-    init_page_ts60();
-    index68 = 67;
-    component68 = async () => component_cache68 ??= (await Promise.resolve().then(() => (init_page_svelte64(), page_svelte_exports64))).default;
-    universal_id60 = "src/routes/(light-nav)/services/stucco-painting-repair/stucco-repair/+page.ts";
-    imports68 = ["_app/immutable/nodes/67.BWMBrvRP.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/BF1rISpH.js", "_app/immutable/chunks/DBFZJ9i3.js", "_app/immutable/chunks/JVHgtmp5.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/chunks/C3Wj5nSj.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/ecvbD-e3.js", "_app/immutable/chunks/CndC7wym.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/CuPoDCWn.js", "_app/immutable/chunks/CAH0S1ei.js", "_app/immutable/chunks/0AlyfXL7.js", "_app/immutable/chunks/xp-We38U.js", "_app/immutable/chunks/BmEMjPg0.js", "_app/immutable/chunks/Wt7Ns1lL.js", "_app/immutable/chunks/DkC8G5pu.js", "_app/immutable/chunks/CMJKR-Ce.js", "_app/immutable/chunks/C2sSNMQN.js", "_app/immutable/chunks/B8EaqeP2.js", "_app/immutable/chunks/BHMLneZA.js"];
-    stylesheets68 = ["_app/immutable/assets/EmailSignup.CZe4dQ9e.css", "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
-    fonts68 = [];
+var index69, component_cache69, component69, universal_id61, imports69, stylesheets69, fonts69;
+var init__69 = __esm({
+  ".svelte-kit/output/server/nodes/68.js"() {
+    init_page_ts61();
+    index69 = 68;
+    component69 = async () => component_cache69 ??= (await Promise.resolve().then(() => (init_page_svelte65(), page_svelte_exports65))).default;
+    universal_id61 = "src/routes/(light-nav)/services/stucco-painting-repair/stucco-repair/+page.ts";
+    imports69 = ["_app/immutable/nodes/68.B-3d_ahz.js", "_app/immutable/chunks/Bk7kNPIw.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/D6YF6ztN.js", "_app/immutable/chunks/IHki7fMi.js", "_app/immutable/chunks/DQnbBViR.js", "_app/immutable/chunks/BQkd-SLX.js", "_app/immutable/chunks/0WlNTZE4.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/chunks/BWnQx61W.js", "_app/immutable/chunks/C-3b_GTw.js", "_app/immutable/chunks/DSE8WoWq.js", "_app/immutable/chunks/8GlyhToM.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/C9GhtZ1J.js", "_app/immutable/chunks/x3nRWdC9.js", "_app/immutable/chunks/DWnTiKqi.js", "_app/immutable/chunks/DN-RV3l_.js", "_app/immutable/chunks/DHgukSXo.js", "_app/immutable/chunks/CzIcYGpn.js", "_app/immutable/chunks/DoqDkTcC.js", "_app/immutable/chunks/DgIKfcJp.js", "_app/immutable/chunks/DXOV8JLu.js", "_app/immutable/chunks/p5sDyoZH.js", "_app/immutable/chunks/Cvny-U8e.js"];
+    stylesheets69 = ["_app/immutable/assets/EmailSignup.CZe4dQ9e.css", "_app/immutable/assets/ColumnTemplateSection.BAHm8oHF.css"];
+    fonts69 = [];
   }
 });
 
@@ -24609,229 +25107,136 @@ var init_server = __esm({
   }
 });
 
-// .svelte-kit/output/server/entries/endpoints/sitemap.xml/_server.ts.js
+// .svelte-kit/output/server/entries/endpoints/(light-nav)/careers/apply/_server.ts.js
 var server_ts_exports = {};
 __export(server_ts_exports, {
+  POST: () => POST
+});
+async function getAccessToken(env) {
+  const accountsDomain = env.ZOHO_ACCOUNTS_DOMAIN ?? "https://accounts.zoho.com";
+  const params = new URLSearchParams({
+    refresh_token: env.ZOHO_REFRESH_TOKEN ?? "",
+    client_id: env.ZOHO_CLIENT_ID ?? "",
+    client_secret: env.ZOHO_CLIENT_SECRET ?? "",
+    grant_type: "refresh_token"
+  });
+  const res = await fetch(`${accountsDomain}/oauth/v2/token`, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params
+  });
+  const data = await res.json();
+  if (!res.ok || !data.access_token) {
+    throw new Error(`Zoho token exchange failed: ${data.error ?? res.status}`);
+  }
+  return data.access_token;
+}
+var POST;
+var init_server_ts = __esm({
+  ".svelte-kit/output/server/entries/endpoints/(light-nav)/careers/apply/_server.ts.js"() {
+    init_exports();
+    POST = async ({ request, platform }) => {
+      const env = platform?.env ?? {};
+      let body2;
+      try {
+        body2 = await request.json();
+      } catch {
+        throw error(400, "Invalid request body");
+      }
+      if (body2.company && body2.company.trim() !== "") {
+        return json({ success: true });
+      }
+      const required = ["name", "phone"];
+      for (const field of required) {
+        if (!String(body2[field] ?? "").trim()) {
+          throw error(400, `${field} is required`);
+        }
+      }
+      if (!env.ZOHO_CLIENT_ID || !env.ZOHO_CLIENT_SECRET || !env.ZOHO_REFRESH_TOKEN) {
+        console.error("Zoho credentials are not configured in the environment.");
+        throw error(503, "Application intake is temporarily unavailable. Please try again later.");
+      }
+      const moduleName = env.ZOHO_APPLICANTS_MODULE ?? "Applicants";
+      const apiDomain = env.ZOHO_API_DOMAIN ?? "https://www.zohoapis.com";
+      const record = {
+        Name: body2.name,
+        Email: body2.email || null,
+        Phone: body2.phone,
+        Position: body2.position || null,
+        Years_of_Experience: body2.experience || null,
+        Availability: body2.availability || null,
+        Has_Reliable_Transport: !!body2.hasTransportation,
+        Authorized_to_Work: !!body2.authorizedToWork,
+        Message: body2.message || null,
+        Lead_Source: "Careers Page"
+      };
+      try {
+        const accessToken = await getAccessToken(env);
+        const res = await fetch(`${apiDomain}/crm/v6/${encodeURIComponent(moduleName)}`, {
+          method: "POST",
+          headers: {
+            Authorization: `Zoho-oauthtoken ${accessToken}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ data: [record], trigger: ["workflow"] })
+        });
+        const result = await res.json();
+        const firstStatus = result.data?.[0]?.code;
+        if (!res.ok || firstStatus !== "SUCCESS") {
+          console.error("Zoho insert failed:", JSON.stringify(result));
+          throw error(502, "We could not submit your application. Please try again or call us.");
+        }
+        return json({ success: true });
+      } catch (e3) {
+        if (e3 instanceof Error && "status" in e3)
+          throw e3;
+        console.error("Application submission error:", e3);
+        throw error(502, "We could not submit your application. Please try again or call us.");
+      }
+    };
+  }
+});
+
+// .svelte-kit/output/server/entries/endpoints/sitemap.xml/_server.ts.js
+var server_ts_exports2 = {};
+__export(server_ts_exports2, {
   GET: () => GET2
 });
-var GET2;
-var init_server_ts = __esm({
+var pageModules, lastmod, staticPaths, blogPaths, paths, GET2;
+var init_server_ts2 = __esm({
   ".svelte-kit/output/server/entries/endpoints/sitemap.xml/_server.ts.js"() {
     init_siteData();
+    init_data();
+    pageModules = /* @__PURE__ */ Object.assign({ "/src/routes/(dark-nav)/about-us/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte2(), page_svelte_exports2)), "/src/routes/(dark-nav)/about-us/faqs/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte3(), page_svelte_exports3)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/berwyn-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte5(), page_svelte_exports5)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/burr-ridge-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte6(), page_svelte_exports6)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/clarendon-hills-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte7(), page_svelte_exports7)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/downers-grove-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte8(), page_svelte_exports8)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/forest-park-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte9(), page_svelte_exports9)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/hinsdale-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte10(), page_svelte_exports10)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/la-grange-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte11(), page_svelte_exports11)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-brook-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte12(), page_svelte_exports12)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/oak-park-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte13(), page_svelte_exports13)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/orland-park-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte14(), page_svelte_exports14)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/riverside-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte15(), page_svelte_exports15)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/western-springs-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte16(), page_svelte_exports16)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/westmont-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte17(), page_svelte_exports17)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/willow-springs-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte18(), page_svelte_exports18)), "/src/routes/(dark-nav)/about-us/service-area/(city-pages)/willowbrook-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte19(), page_svelte_exports19)), "/src/routes/(dark-nav)/about-us/service-area/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte4(), page_svelte_exports4)), "/src/routes/(dark-nav)/about-us/testimonials/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte20(), page_svelte_exports20)), "/src/routes/(dark-nav)/photo-gallery/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte21(), page_svelte_exports21)), "/src/routes/(dark-nav)/photo-gallery/brick-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte22(), page_svelte_exports22)), "/src/routes/(dark-nav)/photo-gallery/cedar-replacement/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte23(), page_svelte_exports23)), "/src/routes/(dark-nav)/photo-gallery/cedar-shingle-and-stucco-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte24(), page_svelte_exports24)), "/src/routes/(dark-nav)/photo-gallery/cedar-siding-repair-paint/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte25(), page_svelte_exports25)), "/src/routes/(dark-nav)/photo-gallery/exterior-hardie-board/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte26(), page_svelte_exports26)), "/src/routes/(dark-nav)/photo-gallery/past-projects/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte27(), page_svelte_exports27)), "/src/routes/(dark-nav)/photo-gallery/siding-and-stucco/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte28(), page_svelte_exports28)), "/src/routes/(dark-nav)/photo-gallery/siding-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte29(), page_svelte_exports29)), "/src/routes/(dark-nav)/photo-gallery/stucco-and-cedar-siding/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte30(), page_svelte_exports30)), "/src/routes/(dark-nav)/photo-gallery/stucco-and-trim/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte31(), page_svelte_exports31)), "/src/routes/(dark-nav)/photo-gallery/stucco-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte32(), page_svelte_exports32)), "/src/routes/(dark-nav)/photo-gallery/stucco-siding-repair-paint/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte33(), page_svelte_exports33)), "/src/routes/(dark-nav)/photo-gallery/trim/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte34(), page_svelte_exports34)), "/src/routes/(dark-nav)/photo-gallery/victorian-homes/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte35(), page_svelte_exports35)), "/src/routes/(dark-nav)/photo-gallery/white-cedar-siding/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte36(), page_svelte_exports36)), "/src/routes/(light-nav)/blog/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte37(), page_svelte_exports37)), "/src/routes/(light-nav)/blog/[title]/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte38(), page_svelte_exports38)), "/src/routes/(light-nav)/careers/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte39(), page_svelte_exports39)), "/src/routes/(light-nav)/contact-us/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte40(), page_svelte_exports40)), "/src/routes/(light-nav)/legal/privacy-policy/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte41(), page_svelte_exports41)), "/src/routes/(light-nav)/services/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte42(), page_svelte_exports42)), "/src/routes/(light-nav)/services/brick-painting-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte43(), page_svelte_exports43)), "/src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte44(), page_svelte_exports44)), "/src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte45(), page_svelte_exports45)), "/src/routes/(light-nav)/services/brick-painting-repair/exterior-brick-staining/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte46(), page_svelte_exports46)), "/src/routes/(light-nav)/services/commercial-exterior-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte47(), page_svelte_exports47)), "/src/routes/(light-nav)/services/design-color-consultation/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte48(), page_svelte_exports48)), "/src/routes/(light-nav)/services/exterior-home-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte49(), page_svelte_exports49)), "/src/routes/(light-nav)/services/exterior-home-painting/exterior-paint-contractor/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte50(), page_svelte_exports50)), "/src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte51(), page_svelte_exports51)), "/src/routes/(light-nav)/services/gutter-installation-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte52(), page_svelte_exports52)), "/src/routes/(light-nav)/services/siding-painting-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte53(), page_svelte_exports53)), "/src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte54(), page_svelte_exports54)), "/src/routes/(light-nav)/services/siding-painting-repair/aluminum-siding-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte55(), page_svelte_exports55)), "/src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte56(), page_svelte_exports56)), "/src/routes/(light-nav)/services/siding-painting-repair/cedar-siding-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte57(), page_svelte_exports57)), "/src/routes/(light-nav)/services/siding-painting-repair/hardie-board-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte58(), page_svelte_exports58)), "/src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte59(), page_svelte_exports59)), "/src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte60(), page_svelte_exports60)), "/src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte61(), page_svelte_exports61)), "/src/routes/(light-nav)/services/siding-painting-repair/vinyl-siding-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte62(), page_svelte_exports62)), "/src/routes/(light-nav)/services/stucco-painting-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte63(), page_svelte_exports63)), "/src/routes/(light-nav)/services/stucco-painting-repair/stucco-painting/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte64(), page_svelte_exports64)), "/src/routes/(light-nav)/services/stucco-painting-repair/stucco-repair/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte65(), page_svelte_exports65)), "/src/routes/+page.svelte": () => Promise.resolve().then(() => (init_page_svelte(), page_svelte_exports)) });
+    lastmod = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
+    staticPaths = Object.keys(pageModules).map((file) => file.replace("/src/routes", "").replace("/+page.svelte", "")).map((path) => path.replace(/\/\([^/]+\)/g, "")).map((path) => path === "" ? "/" : path).filter((path) => !path.includes("[") && !path.includes(".well-known"));
+    blogPaths = Object.keys(blogData).filter((key2) => !key2.includes(":"));
+    paths = Array.from(/* @__PURE__ */ new Set([...staticPaths, ...blogPaths])).sort(
+      (a2, b) => a2 === "/" ? -1 : b === "/" ? 1 : a2.localeCompare(b)
+    );
     GET2 = () => {
-      return new Response(
-        `
-      <?xml version="1.0" encoding="UTF-8" ?>
-      <urlset
-        xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="https://www.w3.org/1999/xhtml"
-        xmlns:mobile="https://www.google.com/schemas/sitemap-mobile/1.0"
-        xmlns:news="https://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:image="https://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
-      >
-  <url>
-    <loc>${siteName}/</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/faqs</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery</loc>
-  </url>
-  <url>
-    <loc>${siteName}/contact-us</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/exterior-home-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/stucco-painting-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/cedar-siding-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/burr-ridge-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/hinsdale-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/oak-brook-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/western-springs-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/la-grange-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/clarendon-hills-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/downers-grove-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/orland-park-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/riverside-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/oak-park-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/berwyn-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/westmont-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/willowbrook-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/willow-springs-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/forest-park-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/testimonials</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/past-projects</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/brick-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/stucco-siding-repair-paint</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/stucco-and-trim</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/cedar-replacement</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/exterior-hardie-board</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/trim</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/stucco-and-cedar-siding</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/victorian-homes</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/cedar-siding-repair-paint</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/white-cedar-siding</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/siding-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/siding-and-stucco</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/cedar-shingle-and-stucco-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/stucco-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/exterior-home-painting/historic-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/exterior-home-painting/exterior-paint-contractor</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/stucco-painting-repair/stucco-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/stucco-painting-repair/stucco-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/brick-painting-repair/exterior-brick-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/brick-painting-repair/exterior-brick-staining</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/brick-painting-repair/exterior-brick-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/cedar-siding-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/vinyl-siding-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/hardie-board-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/design-color-consultation</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/brick-painting-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/aluminum-siding-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/hardie-board-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/aluminum-siding-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/vinyl-siding-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/hardie-board-installation</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/gutter-installation-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/commercial-exterior-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/blog</loc>
-  </url>
-  <url>
-    <loc>${siteName}/blog/painting-maintenance-how-to-keep-your-home-looking-fresh</loc>
-  </url>
-  <url>
-    <loc>${siteName}/blog/diy-vs-professional-painting-when-to-hire-a-painter</loc>
-  </url>
-  <url>
-    <loc>${siteName}/blog/what-exterior-paint-colors-look-the-best</loc>
-  </url>
-      </urlset>`.trim(),
-        {
-          headers: {
-            "Content-Type": "application/xml"
-          }
+      const urls = paths.map(
+        (path) => `  <url>
+    <loc>${siteName}${path === "/" ? "/" : path}</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>`
+      ).join("\n");
+      const body2 = `<?xml version="1.0" encoding="UTF-8" ?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+>
+${urls}
+</urlset>`;
+      return new Response(body2, {
+        headers: {
+          "Content-Type": "application/xml"
         }
-      );
+      });
     };
   }
 });
@@ -25314,62 +25719,62 @@ function unflatten(parsed, revivers) {
     parsed
   );
   const hydrated = Array(values.length);
-  function hydrate(index69, standalone = false) {
-    if (index69 === UNDEFINED)
+  function hydrate(index70, standalone = false) {
+    if (index70 === UNDEFINED)
       return void 0;
-    if (index69 === NAN)
+    if (index70 === NAN)
       return NaN;
-    if (index69 === POSITIVE_INFINITY)
+    if (index70 === POSITIVE_INFINITY)
       return Infinity;
-    if (index69 === NEGATIVE_INFINITY)
+    if (index70 === NEGATIVE_INFINITY)
       return -Infinity;
-    if (index69 === NEGATIVE_ZERO)
+    if (index70 === NEGATIVE_ZERO)
       return -0;
-    if (standalone || typeof index69 !== "number") {
+    if (standalone || typeof index70 !== "number") {
       throw new Error(`Invalid input`);
     }
-    if (index69 in hydrated)
-      return hydrated[index69];
-    const value = values[index69];
+    if (index70 in hydrated)
+      return hydrated[index70];
+    const value = values[index70];
     if (!value || typeof value !== "object") {
-      hydrated[index69] = value;
+      hydrated[index70] = value;
     } else if (Array.isArray(value)) {
       if (typeof value[0] === "string") {
         const type = value[0];
         const reviver = revivers?.[type];
         if (reviver) {
-          return hydrated[index69] = reviver(hydrate(value[1]));
+          return hydrated[index70] = reviver(hydrate(value[1]));
         }
         switch (type) {
           case "Date":
-            hydrated[index69] = new Date(value[1]);
+            hydrated[index70] = new Date(value[1]);
             break;
           case "Set":
             const set = /* @__PURE__ */ new Set();
-            hydrated[index69] = set;
+            hydrated[index70] = set;
             for (let i2 = 1; i2 < value.length; i2 += 1) {
               set.add(hydrate(value[i2]));
             }
             break;
           case "Map":
             const map = /* @__PURE__ */ new Map();
-            hydrated[index69] = map;
+            hydrated[index70] = map;
             for (let i2 = 1; i2 < value.length; i2 += 2) {
               map.set(hydrate(value[i2]), hydrate(value[i2 + 1]));
             }
             break;
           case "RegExp":
-            hydrated[index69] = new RegExp(value[1], value[2]);
+            hydrated[index70] = new RegExp(value[1], value[2]);
             break;
           case "Object":
-            hydrated[index69] = Object(value[1]);
+            hydrated[index70] = Object(value[1]);
             break;
           case "BigInt":
-            hydrated[index69] = BigInt(value[1]);
+            hydrated[index70] = BigInt(value[1]);
             break;
           case "null":
             const obj = /* @__PURE__ */ Object.create(null);
-            hydrated[index69] = obj;
+            hydrated[index70] = obj;
             for (let i2 = 1; i2 < value.length; i2 += 2) {
               obj[value[i2]] = hydrate(value[i2 + 1]);
             }
@@ -25387,13 +25792,13 @@ function unflatten(parsed, revivers) {
           case "BigUint64Array": {
             const TypedArrayConstructor = globalThis[type];
             const typedArray = new TypedArrayConstructor(hydrate(value[1]));
-            hydrated[index69] = value[2] !== void 0 ? typedArray.subarray(value[2], value[3]) : typedArray;
+            hydrated[index70] = value[2] !== void 0 ? typedArray.subarray(value[2], value[3]) : typedArray;
             break;
           }
           case "ArrayBuffer": {
             const base64 = value[1];
             const arraybuffer = decode64(base64);
-            hydrated[index69] = arraybuffer;
+            hydrated[index70] = arraybuffer;
             break;
           }
           case "Temporal.Duration":
@@ -25405,17 +25810,17 @@ function unflatten(parsed, revivers) {
           case "Temporal.PlainYearMonth":
           case "Temporal.ZonedDateTime": {
             const temporalName = type.slice(9);
-            hydrated[index69] = Temporal[temporalName].from(value[1]);
+            hydrated[index70] = Temporal[temporalName].from(value[1]);
             break;
           }
           case "URL": {
             const url = new URL(value[1]);
-            hydrated[index69] = url;
+            hydrated[index70] = url;
             break;
           }
           case "URLSearchParams": {
             const url = new URLSearchParams(value[1]);
-            hydrated[index69] = url;
+            hydrated[index70] = url;
             break;
           }
           default:
@@ -25423,7 +25828,7 @@ function unflatten(parsed, revivers) {
         }
       } else {
         const array2 = new Array(value.length);
-        hydrated[index69] = array2;
+        hydrated[index70] = array2;
         for (let i2 = 0; i2 < value.length; i2 += 1) {
           const n2 = value[i2];
           if (n2 === HOLE)
@@ -25433,7 +25838,7 @@ function unflatten(parsed, revivers) {
       }
     } else {
       const object = {};
-      hydrated[index69] = object;
+      hydrated[index70] = object;
       for (const key2 in value) {
         if (key2 === "__proto__") {
           throw new Error("Cannot parse an object with a `__proto__` property");
@@ -25442,7 +25847,7 @@ function unflatten(parsed, revivers) {
         object[key2] = hydrate(n2);
       }
     }
-    return hydrated[index69];
+    return hydrated[index70];
   }
   return hydrate(0);
 }
@@ -25475,13 +25880,13 @@ function stringify(value, reducers) {
       return NEGATIVE_ZERO;
     if (indexes.has(thing))
       return indexes.get(thing);
-    const index70 = p2++;
-    indexes.set(thing, index70);
+    const index71 = p2++;
+    indexes.set(thing, index71);
     for (const { key: key2, fn } of custom) {
       const value2 = fn(thing);
       if (value2) {
-        stringified[index70] = `["${key2}",${flatten(value2)}]`;
-        return index70;
+        stringified[index71] = `["${key2}",${flatten(value2)}]`;
+        return index71;
       }
     }
     let str = "";
@@ -25619,12 +26024,12 @@ function stringify(value, reducers) {
           }
       }
     }
-    stringified[index70] = str;
-    return index70;
+    stringified[index71] = str;
+    return index71;
   }
-  const index69 = flatten(value);
-  if (index69 < 0)
-    return `${index69}`;
+  const index70 = flatten(value);
+  if (index70 < 0)
+    return `${index70}`;
   return `[${stringified.join(",")}]`;
 }
 function stringify_primitive2(thing) {
@@ -25696,9 +26101,9 @@ var base = "";
 var assets = base;
 var app_dir = "_app";
 var initial = { base, assets };
-function override(paths) {
-  base = paths.base;
-  assets = paths.assets;
+function override(paths2) {
+  base = paths2.base;
+  assets = paths2.assets;
 }
 function reset() {
   base = initial.base;
@@ -25864,8 +26269,7 @@ var options = {
   templates: {
     app: ({ head, body: body2, assets: assets2, nonce, env }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + `/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=AW-998511498"><\/script>
+		<!-- Google tag (gtag.js) \u2014 only loads on the production domain -->
 		<script>
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
@@ -25873,7 +26277,18 @@ var options = {
 			}
 			gtag('js', new Date());
 
-			gtag('config', 'AW-998511498');
+			if (
+				location.hostname === 'klasekpainting.com' ||
+				location.hostname.endsWith('.klasekpainting.com')
+			) {
+				var gtagScript = document.createElement('script');
+				gtagScript.async = true;
+				gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XYDTS6RQD2';
+				document.head.appendChild(gtagScript);
+
+				gtag('config', 'G-XYDTS6RQD2');
+				gtag('config', 'AW-998511498');
+			}
 		<\/script>
 		` + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover">\n		<div style="display: contents">' + body2 + "</div>\n	</body>\n</html>\n",
     error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + '</title>\n	</head>\n	<body class="bg-secondary-dark">\n		<div id="error-container">\n			<h1>Oops! Something went wrong...</h1>\n			<p>' + status + " | " + message + `</p>
@@ -25900,7 +26315,7 @@ var options = {
 </style>
 `
   },
-  version_hash: "amp8ja"
+  version_hash: "19l8kqn"
 };
 async function get_hooks() {
   let handle2;
@@ -26757,9 +27172,9 @@ async function load_server_data({ event, event_state, state, node, parent }) {
     url: false,
     search_params: /* @__PURE__ */ new Set()
   };
-  const load65 = node.server.load;
+  const load66 = node.server.load;
   const slash = node.server.trailingSlash;
-  if (!load65) {
+  if (!load66) {
     return { type: "data", data: null, uses, slash };
   }
   const url = make_trackable(
@@ -26789,7 +27204,7 @@ async function load_server_data({ event, event_state, state, node, parent }) {
       const traced_event = merge_tracing(event, current);
       const result2 = await with_request_store(
         { event: traced_event, state: event_state },
-        () => load65.call(null, {
+        () => load66.call(null, {
           ...traced_event,
           fetch: (info, init2) => {
             new URL(info instanceof Request ? info.url : info, event.url);
@@ -26863,8 +27278,8 @@ async function load_data({
   csr
 }) {
   const server_data_node = await server_data_promise;
-  const load65 = node?.universal?.load;
-  if (!load65) {
+  const load66 = node?.universal?.load;
+  if (!load66) {
     return server_data_node?.data ?? null;
   }
   const result = await record_span({
@@ -26878,7 +27293,7 @@ async function load_data({
       const traced_event = merge_tracing(event, current);
       return await with_request_store(
         { event: traced_event, state: event_state },
-        () => load65.call(null, {
+        () => load66.call(null, {
           url: event.url,
           params: event.params,
           data: server_data_node?.data ?? null,
@@ -27605,8 +28020,8 @@ async function render_response({
   }
   const { client } = manifest2._;
   const modulepreloads = new Set(client.imports);
-  const stylesheets69 = new Set(client.stylesheets);
-  const fonts69 = new Set(client.fonts);
+  const stylesheets70 = new Set(client.stylesheets);
+  const fonts70 = new Set(client.fonts);
   const link_headers = /* @__PURE__ */ new Set();
   const link_tags = /* @__PURE__ */ new Set();
   const inline_styles = /* @__PURE__ */ new Map();
@@ -27687,9 +28102,9 @@ async function render_response({
       for (const url of node.imports)
         modulepreloads.add(url);
       for (const url of node.stylesheets)
-        stylesheets69.add(url);
+        stylesheets70.add(url);
       for (const url of node.fonts)
-        fonts69.add(url);
+        fonts70.add(url);
       if (node.inline_styles && !client.inline) {
         Object.entries(await node.inline_styles()).forEach(([k, v2]) => inline_styles.set(k, v2));
       }
@@ -27717,7 +28132,7 @@ async function render_response({
     head += `
 	<style${attributes.join("")}>${style}</style>`;
   }
-  for (const dep of stylesheets69) {
+  for (const dep of stylesheets70) {
     const path = prefixed(dep);
     const attributes = ['rel="stylesheet"'];
     if (inline_styles.has(dep)) {
@@ -27730,7 +28145,7 @@ async function render_response({
     head += `
 		<link href="${path}" ${attributes.join(" ")}>`;
   }
-  for (const dep of fonts69) {
+  for (const dep of fonts70) {
     const path = prefixed(dep);
     if (resolve_opts.preload({ type: "font", path })) {
       const ext = dep.slice(dep.lastIndexOf(".") + 1);
@@ -28592,11 +29007,11 @@ async function render_page(event, event_state, page2, options2, manifest2, state
           const error2 = await handle_error_and_jsonify(event, event_state, options2, err);
           while (i2--) {
             if (page2.errors[i2]) {
-              const index69 = (
+              const index70 = (
                 /** @type {number} */
                 page2.errors[i2]
               );
-              const node2 = await manifest2._.nodes[index69]();
+              const node2 = await manifest2._.nodes[index70]();
               let j2 = i2;
               while (!branch[j2])
                 j2 -= 1;
@@ -29762,7 +30177,7 @@ var manifest = (() => {
     assets: /* @__PURE__ */ new Set(["favicon.png", "klasek-painting.png", "klasek_blog.webp", "klasek_blog_what-exterior-paint-colors-look-the-best-2.webp", "klasek_blog_what-exterior-paint-colors-look-the-best-3.webp", "klasek_blog_what-exterior-paint-colors-look-the-best.webp", "robots.txt"]),
     mimeTypes: { ".png": "image/png", ".webp": "image/webp", ".txt": "text/plain" },
     _: {
-      client: { start: "_app/immutable/entry/start.CjN_6J3s.js", app: "_app/immutable/entry/app.BVxu0fr2.js", imports: ["_app/immutable/entry/start.CjN_6J3s.js", "_app/immutable/chunks/BZgZIqmN.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/DsXuwSGI.js", "_app/immutable/entry/app.BVxu0fr2.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/KUc_ZfUX.js", "_app/immutable/chunks/IHki7fMi.js"], stylesheets: [], fonts: [], uses_env_dynamic_public: false },
+      client: { start: "_app/immutable/entry/start.Bde4EDHx.js", app: "_app/immutable/entry/app.Ctl4uaW7.js", imports: ["_app/immutable/entry/start.Bde4EDHx.js", "_app/immutable/chunks/DtFYjPI3.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/zlTXQEG6.js", "_app/immutable/entry/app.Ctl4uaW7.js", "_app/immutable/chunks/C1FmrZbK.js", "_app/immutable/chunks/DrOtaHMw.js", "_app/immutable/chunks/IHki7fMi.js"], stylesheets: [], fonts: [], uses_env_dynamic_public: false },
       nodes: [
         __memo(() => Promise.resolve().then(() => (init__(), __exports))),
         __memo(() => Promise.resolve().then(() => (init__2(), __exports2))),
@@ -29831,7 +30246,8 @@ var manifest = (() => {
         __memo(() => Promise.resolve().then(() => (init__65(), __exports65))),
         __memo(() => Promise.resolve().then(() => (init__66(), __exports66))),
         __memo(() => Promise.resolve().then(() => (init__67(), __exports67))),
-        __memo(() => Promise.resolve().then(() => (init__68(), __exports68)))
+        __memo(() => Promise.resolve().then(() => (init__68(), __exports68))),
+        __memo(() => Promise.resolve().then(() => (init__69(), __exports69)))
       ],
       remotes: {},
       routes: [
@@ -29997,17 +30413,31 @@ var manifest = (() => {
           endpoint: null
         },
         {
+          id: "/(light-nav)/careers",
+          pattern: /^\/careers\/?$/,
+          params: [],
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 42 },
+          endpoint: null
+        },
+        {
+          id: "/(light-nav)/careers/apply",
+          pattern: /^\/careers\/apply\/?$/,
+          params: [],
+          page: null,
+          endpoint: __memo(() => Promise.resolve().then(() => (init_server_ts(), server_ts_exports)))
+        },
+        {
           id: "/(light-nav)/contact-us",
           pattern: /^\/contact-us\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 42 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 43 },
           endpoint: null
         },
         {
           id: "/(light-nav)/legal/privacy-policy",
           pattern: /^\/legal\/privacy-policy\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 43 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 44 },
           endpoint: null
         },
         {
@@ -30126,117 +30556,110 @@ var manifest = (() => {
           id: "/(light-nav)/services",
           pattern: /^\/services\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 44 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 45 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/brick-painting-repair",
           pattern: /^\/services\/brick-painting-repair\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 45 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 46 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/brick-painting-repair/exterior-brick-painting",
           pattern: /^\/services\/brick-painting-repair\/exterior-brick-painting\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 46 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 47 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/brick-painting-repair/exterior-brick-repair",
           pattern: /^\/services\/brick-painting-repair\/exterior-brick-repair\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 47 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 48 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/brick-painting-repair/exterior-brick-staining",
           pattern: /^\/services\/brick-painting-repair\/exterior-brick-staining\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 48 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 49 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/commercial-exterior-painting",
           pattern: /^\/services\/commercial-exterior-painting\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 49 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 50 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/design-color-consultation",
           pattern: /^\/services\/design-color-consultation\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 50 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 51 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/exterior-home-painting",
           pattern: /^\/services\/exterior-home-painting\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 51 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 52 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/exterior-home-painting/exterior-paint-contractor",
           pattern: /^\/services\/exterior-home-painting\/exterior-paint-contractor\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 52 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 53 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/exterior-home-painting/historic-house-painting",
           pattern: /^\/services\/exterior-home-painting\/historic-house-painting\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 53 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 54 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/gutter-installation-repair",
           pattern: /^\/services\/gutter-installation-repair\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 54 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 55 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/siding-painting-repair",
           pattern: /^\/services\/siding-painting-repair\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 55 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 56 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/siding-painting-repair/aluminum-siding-painting",
           pattern: /^\/services\/siding-painting-repair\/aluminum-siding-painting\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 56 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 57 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/siding-painting-repair/aluminum-siding-repair",
           pattern: /^\/services\/siding-painting-repair\/aluminum-siding-repair\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 57 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 58 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/siding-painting-repair/cedar-siding-painting",
           pattern: /^\/services\/siding-painting-repair\/cedar-siding-painting\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 58 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 59 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/siding-painting-repair/cedar-siding-repair",
           pattern: /^\/services\/siding-painting-repair\/cedar-siding-repair\/?$/,
-          params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 59 },
-          endpoint: null
-        },
-        {
-          id: "/(light-nav)/services/siding-painting-repair/hardie-board-installation",
-          pattern: /^\/services\/siding-painting-repair\/hardie-board-installation\/?$/,
           params: [],
           page: { layouts: [0, 3], errors: [1, ,], leaf: 60 },
           endpoint: null
@@ -30256,38 +30679,45 @@ var manifest = (() => {
           endpoint: null
         },
         {
+          id: "/(light-nav)/services/siding-painting-repair/hardie-board-services",
+          pattern: /^\/services\/siding-painting-repair\/hardie-board-services\/?$/,
+          params: [],
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 63 },
+          endpoint: null
+        },
+        {
           id: "/(light-nav)/services/siding-painting-repair/vinyl-siding-painting",
           pattern: /^\/services\/siding-painting-repair\/vinyl-siding-painting\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 63 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 64 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/siding-painting-repair/vinyl-siding-repair",
           pattern: /^\/services\/siding-painting-repair\/vinyl-siding-repair\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 64 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 65 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/stucco-painting-repair",
           pattern: /^\/services\/stucco-painting-repair\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 65 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 66 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/stucco-painting-repair/stucco-painting",
           pattern: /^\/services\/stucco-painting-repair\/stucco-painting\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 66 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 67 },
           endpoint: null
         },
         {
           id: "/(light-nav)/services/stucco-painting-repair/stucco-repair",
           pattern: /^\/services\/stucco-painting-repair\/stucco-repair\/?$/,
           params: [],
-          page: { layouts: [0, 3], errors: [1, ,], leaf: 67 },
+          page: { layouts: [0, 3], errors: [1, ,], leaf: 68 },
           endpoint: null
         },
         {
@@ -30295,7 +30725,7 @@ var manifest = (() => {
           pattern: /^\/sitemap\.xml\/?$/,
           params: [],
           page: null,
-          endpoint: __memo(() => Promise.resolve().then(() => (init_server_ts(), server_ts_exports)))
+          endpoint: __memo(() => Promise.resolve().then(() => (init_server_ts2(), server_ts_exports2)))
         }
       ],
       prerendered_routes: /* @__PURE__ */ new Set([]),

@@ -23,7 +23,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 		condition. Cracks, chips, or other damage can affect the outcome of the painting. That&#39;s why
 		it&#39;s crucial to work with the best <a${add_attribute("href", routes["brick-repair"].href, 0)}>brick repair service</a> in Willow Springs, Illinois, before you begin your project.</p> <p data-svelte-h="svelte-wa62f2"><a${add_attribute("href", routes["contact"].href, 0)}>Contact Klasek Painting</a> for a free consultation. Our experienced
 		brick masons will thoroughly inspect your home, recommend necessary repairs, and provide a clear,
-		written estimate.</p> <p data-svelte-h="svelte-196jn03">With over 20 years of experience and the use of top-quality materials, you can rely on us to
+		written estimate.</p> <p data-svelte-h="svelte-1mx2euy">With over 30 years of experience and the use of top-quality materials, you can rely on us to
 		prepare your home for a beautiful and long-lasting paint or stain job.</p> <h2 data-svelte-h="svelte-twuctf">Transformative Siding Painting in Willow Springs, Illinois</h2> <p data-svelte-h="svelte-703fyy">Your home&#39;s siding is not only important for protecting it from the elements but also plays a
 		big role in its curb appeal. Our <a${add_attribute("href", routes["siding-painting-repair"].href, 0)}>siding painting services</a>
 		in Willow Springs, Illinois, are designed to revitalize your home&#39;s exterior. Whether you

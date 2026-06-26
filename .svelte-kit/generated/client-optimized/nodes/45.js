@@ -1,3 +1,3 @@
-import * as universal from "../../../../src/routes/(light-nav)/services/brick-painting-repair/+page.ts";
+import * as universal from "../../../../src/routes/(light-nav)/services/+page.ts";
 export { universal };
-export { default as component } from "../../../../src/routes/(light-nav)/services/brick-painting-repair/+page.svelte";
+export { default as component } from "../../../../src/routes/(light-nav)/services/+page.svelte";

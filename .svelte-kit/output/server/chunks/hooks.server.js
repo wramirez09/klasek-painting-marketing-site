@@ -44,6 +44,7 @@ const redirectMap = {
   "/exterior-painting/brick-house-painting-service-contractor": routes["brick-painting"].href,
   "/exterior-painting-contractors": routes["exterior-paint-contractor"].href,
   "/hardie-board-siding-painting": routes["hardie-painting"].href,
+  "/services/siding-painting-repair/hardie-board-installation": routes["hardie-installation"].href,
   "/aluminum-siding-painting": routes["aluminum-painting"].href,
   "/exterior-brick-painting-staining": routes["brick-painting-repair"].href,
   "/historic-house-painting": routes["historic-house-painting"].href,

@@ -1,6 +1,7 @@
 import { c as create_ssr_component, v as validate_component, a as add_attribute, e as each } from "../../../../../../chunks/ssr.js";
 import { S as SubServiceHero, F as FaqSection } from "../../../../../../chunks/FaqSection.js";
 import { C as ColumnTemplateSection } from "../../../../../../chunks/ColumnTemplateSection.js";
+import { i as installGutters } from "../../../../../../chunks/expert-historic-house-painting.js";
 import { G as GalleryLinkBlock } from "../../../../../../chunks/GalleryLinkBlock.js";
 import { g as galleryRoutes } from "../../../../../../chunks/routes.js";
 const src = {
@@ -13,18 +14,6 @@ const src = {
     src: "/_app/immutable/assets/historic-house-remodeling.Bvl7JXil.png",
     w: 598,
     h: 598
-  }
-};
-const expert = {
-  sources: {
-    avif: "/_app/immutable/assets/expert-historic-house-painting.Cizdwxvi.avif 437w, /_app/immutable/assets/expert-historic-house-painting.DuMMm2gi.avif 874w",
-    webp: "/_app/immutable/assets/expert-historic-house-painting.BO9XXW_L.webp 437w, /_app/immutable/assets/expert-historic-house-painting.D6wwSFmt.webp 874w",
-    png: "/_app/immutable/assets/expert-historic-house-painting.tG6jh17i.png 437w, /_app/immutable/assets/expert-historic-house-painting.D1OAV4fi.png 874w"
-  },
-  img: {
-    src: "/_app/immutable/assets/expert-historic-house-painting.D1OAV4fi.png",
-    w: 874,
-    h: 452
   }
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -47,7 +36,7 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     },
     {
       question: "How can our expert color consultation enhance your historic home?",
-      answer: "Not only do we provide a free written estimate, but we also offer expert color consultation. With our 20-plus years of experience painting older homes in Chicago, we know how to use color. One tip we give our customers is on combining colors. Specifically, choose either warm or cool tones. Take your time and be selective in your choice of colors; it's worth it. The right combination will make your historic home look incredible. We're here to help you in your selection."
+      answer: "Not only do we provide a free written estimate, but we also offer expert color consultation. With our 30-plus years of experience painting older homes in Chicago, we know how to use color. One tip we give our customers is on combining colors. Specifically, choose either warm or cool tones. Take your time and be selective in your choice of colors; it's worth it. The right combination will make your historic home look incredible. We're here to help you in your selection."
     },
     {
       question: "Why are bold colors expected for Chicago's heritage homes?",
@@ -80,8 +69,8 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       })} <img class="w-full h-auto max-w-[500px] mx-auto"${add_attribute("src", src.img.src, 0)} alt="House remodeling project"${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}></picture>`}</div>`;
     },
     "left-column": () => {
-      return `<div slot="left-column" data-svelte-h="svelte-15fuh5d"><h2>Professional Historic Painting In Cook County</h2> <p>First of all, <a href="/">Klasek Painting</a> specializes in historic house painting. In fact,
-			we have over 20 years experience. Specifically, we restore older homes. And, we bring them back
+      return `<div slot="left-column" data-svelte-h="svelte-1bnrey6"><h2>Professional Historic Painting In Cook County</h2> <p>First of all, <a href="/">Klasek Painting</a> specializes in historic house painting. In fact,
+			we have over 30 years experience. Specifically, we restore older homes. And, we bring them back
 			to their former beauty. We&#39;re experts in both paint and stain finishes.</p> <p>For those reasons, we are the leading company for restoring Chicagoland exteriors.</p> <h3>Custom Painting Services For Older Homes</h3> <p>The owner, Pete Klasek, loves making older homes look new again. As a result, our painters
 			take extra care in every step of the process.</p> <p>Chicago&#39;s Klasek Painting brings out character and architectural design in homes. Our goal is
 			to increase value and curb appeal.</p></div>`;
@@ -97,9 +86,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 			high-quality primer to any raw surface.</p> ${validate_component(GalleryLinkBlock, "GalleryLinkBlock").$$render($$result, { data: [galleryRoutes["victorian"]] }, {}, {})}</div>`;
     },
     "left-column": () => {
-      return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof expert === "string" ? `<img class="w-full h-auto rounded-lg bord max-w-[525px] mx-auto"${add_attribute("src", expert.img.src, 0)} alt="Freshly painted house exterior snowy winter weather"${add_attribute("width", expert.img.w, 0)}${add_attribute("height", expert.img.h, 0)}>` : `<picture>${each(Object.entries(expert.sources), ([format, srcset]) => {
+      return `<div slot="left-column" class="lg:row-start-1 row-start-2">${typeof installGutters === "string" ? `<img class="w-full h-auto rounded-lg bord max-w-[525px] mx-auto"${add_attribute("src", installGutters.img.src, 0)} alt="Freshly painted house exterior snowy winter weather"${add_attribute("width", installGutters.img.w, 0)}${add_attribute("height", installGutters.img.h, 0)}>` : `<picture>${each(Object.entries(installGutters.sources), ([format, srcset]) => {
         return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="w-full h-auto rounded-lg bord max-w-[525px] mx-auto"${add_attribute("src", expert.img.src, 0)} alt="Freshly painted house exterior snowy winter weather"${add_attribute("width", expert.img.w, 0)}${add_attribute("height", expert.img.h, 0)}></picture>`}</div>`;
+      })} <img class="w-full h-auto rounded-lg bord max-w-[525px] mx-auto"${add_attribute("src", installGutters.img.src, 0)} alt="Freshly painted house exterior snowy winter weather"${add_attribute("width", installGutters.img.w, 0)}${add_attribute("height", installGutters.img.h, 0)}></picture>`}</div>`;
     }
   })} ${validate_component(FaqSection, "FaqSection").$$render($$result, { faqData }, {}, {})}`;
 });

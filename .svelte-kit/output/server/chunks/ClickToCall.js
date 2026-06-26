@@ -1,6 +1,6 @@
 import { c as create_ssr_component, v as validate_component, b as escape, j as compute_slots } from "./ssr.js";
 import { B as Button } from "./button.js";
-import { d as destinationPhone } from "./siteData.js";
+import { e as destinationPhone } from "./siteData.js";
 const ClickToCall = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $$slots = compute_slots(slots);
   let { variant = "default" } = $$props;

@@ -2,7 +2,7 @@ import { c as create_ssr_component, v as validate_component, a as add_attribute,
 import { C as CityHero, a as CityPageBody } from "../../../../../../../chunks/CityPageBody.js";
 import { r as routes } from "../../../../../../../chunks/routes.js";
 import { C as ClickToCall } from "../../../../../../../chunks/ClickToCall.js";
-import { d as destinationPhone } from "../../../../../../../chunks/siteData.js";
+import { e as destinationPhone } from "../../../../../../../chunks/siteData.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `${validate_component(CityHero, "CityHero").$$render($$result, { city: "Clarendon Hills" }, {}, {})} ${validate_component(CityPageBody, "CityPageBody").$$render($$result, {}, {}, {
     default: () => {

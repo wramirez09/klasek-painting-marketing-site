@@ -4,19 +4,8 @@ import { C as ColumnTemplateSection } from "../../../../../../chunks/ColumnTempl
 import { B as BasicTemplateSection } from "../../../../../../chunks/BasicTemplateSection.js";
 import { r as routes, g as galleryRoutes } from "../../../../../../chunks/routes.js";
 import { H as HeadingAccent } from "../../../../../../chunks/HeadingAccent.js";
+import { i as installDetail } from "../../../../../../chunks/exterior-brick-repair-service.js";
 import { G as GalleryLinkBlock } from "../../../../../../chunks/GalleryLinkBlock.js";
-const src = {
-  sources: {
-    avif: "/_app/immutable/assets/exterior-brick-repair-service.DfZItOVp.avif 480w, /_app/immutable/assets/exterior-brick-repair-service.BGOhrMLd.avif 960w",
-    webp: "/_app/immutable/assets/exterior-brick-repair-service.CnnvmMn2.webp 480w, /_app/immutable/assets/exterior-brick-repair-service.DzUiu0HV.webp 960w",
-    png: "/_app/immutable/assets/exterior-brick-repair-service.BpgzJm8m.png 480w, /_app/immutable/assets/exterior-brick-repair-service.CzZzCMPE.png 960w"
-  },
-  img: {
-    src: "/_app/immutable/assets/exterior-brick-repair-service.CzZzCMPE.png",
-    w: 960,
-    h: 546
-  }
-};
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   const faqData = [
     {
@@ -84,9 +73,9 @@ const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 			your home looks its best and is well-protected from the elements.</p></div>`;
     },
     "left-column": () => {
-      return `<div slot="left-column" class="lg:order-first order-last">${typeof src === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src.img.src, 0)} alt="Front exterior of red brick house"${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}>` : `<picture>${each(Object.entries(src.sources), ([format, srcset]) => {
+      return `<div slot="left-column" class="lg:order-first order-last">${typeof installDetail === "string" ? `<img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", installDetail.img.src, 0)} alt="Front exterior of red brick house"${add_attribute("width", installDetail.img.w, 0)}${add_attribute("height", installDetail.img.h, 0)}>` : `<picture>${each(Object.entries(installDetail.sources), ([format, srcset]) => {
         return `<source${add_attribute("srcset", srcset, 0)}${add_attribute("type", "image/" + format, 0)}>`;
-      })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", src.img.src, 0)} alt="Front exterior of red brick house"${add_attribute("width", src.img.w, 0)}${add_attribute("height", src.img.h, 0)}></picture>`}</div>`;
+      })} <img class="w-full h-auto max-w-[500px] mx-auto bord rounded-lg"${add_attribute("src", installDetail.img.src, 0)} alt="Front exterior of red brick house"${add_attribute("width", installDetail.img.w, 0)}${add_attribute("height", installDetail.img.h, 0)}></picture>`}</div>`;
     }
   })} ${validate_component(BasicTemplateSection, "BasicTemplateSection").$$render($$result, { class: "bg-off-white" }, {}, {
     default: () => {
