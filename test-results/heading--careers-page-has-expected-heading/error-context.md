@@ -1,0 +1,261 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - paragraph [ref=e5]: Stucco Repair Crews Available Now!
+    - generic [ref=e6]:
+      - link "Klasek Painting" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img "Klasek Painting" [ref=e10] [cursor=pointer]
+      - list [ref=e11]:
+        - listitem [ref=e12]:
+          - link "About" [ref=e14] [cursor=pointer]:
+            - /url: /about-us
+            - text: About
+            - img [ref=e15] [cursor=pointer]
+        - listitem [ref=e17]:
+          - link "Services" [ref=e19] [cursor=pointer]:
+            - /url: /services
+            - text: Services
+            - img [ref=e21] [cursor=pointer]
+        - listitem [ref=e23]:
+          - link "Service Area" [ref=e25] [cursor=pointer]:
+            - /url: /about-us/service-area
+            - text: Service Area
+            - img [ref=e26] [cursor=pointer]
+        - listitem [ref=e28]:
+          - link "Photo Gallery" [ref=e30] [cursor=pointer]:
+            - /url: /photo-gallery
+        - listitem [ref=e31]:
+          - link "Blog" [ref=e33] [cursor=pointer]:
+            - /url: /blog
+        - listitem [ref=e34]:
+          - link "Careers" [ref=e36] [cursor=pointer]:
+            - /url: /careers
+      - link "Get Free Estimate" [ref=e38] [cursor=pointer]:
+        - /url: /contact-us
+  - generic [ref=e41]:
+    - generic [ref=e42]:
+      - generic [ref=e43]: Now Hiring · Lyons, IL & suburbs
+      - heading "Build a career with the best crew in the suburbs." [level=1] [ref=e45]:
+        - text: Build a career with
+        - generic [ref=e46]: the best crew
+        - text: in the suburbs.
+      - paragraph [ref=e47]: Klasek Painting has served Lyons and the western Chicago suburbs for 30+ years. We're growing — and looking for skilled, dependable people who take real pride in their work.
+      - link "View Open Positions" [ref=e49] [cursor=pointer]:
+        - /url: "#positions"
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: 30+
+          - generic [ref=e53]: Years in business
+        - generic [ref=e54]:
+          - generic [ref=e55]: $18–35
+          - generic [ref=e56]: Per hour, by skill
+        - generic [ref=e57]:
+          - generic [ref=e58]: Seasonal
+          - generic [ref=e59]: Steady work
+    - img "The Klasek Painting crew at work on an exterior job" [ref=e61]
+  - generic [ref=e63]:
+    - generic [ref=e64]:
+      - generic [ref=e65]: Why Klasek
+      - heading "More than a paycheck — a crew that has your back." [level=2] [ref=e66]
+      - paragraph [ref=e67]: "We treat our people the way we treat our customers: with respect, fairness, and high standards. Here's what you can expect."
+    - generic [ref=e68]:
+      - generic [ref=e69]:
+        - img [ref=e71]
+        - heading "Competitive pay" [level=3] [ref=e73]
+        - paragraph [ref=e74]: $18–$35/hour based on experience and skill — paid fairly for quality work.
+      - generic [ref=e75]:
+        - img [ref=e77]
+        - heading "Steady, seasonal work" [level=3] [ref=e80]
+        - paragraph [ref=e81]: Full-time and part-time hours available throughout the busy painting season.
+      - generic [ref=e82]:
+        - img [ref=e84]
+        - heading "Work with pros" [level=3] [ref=e88]
+        - paragraph [ref=e89]: Join a tight-knit crew of experienced painters who care about doing the job right.
+      - generic [ref=e90]:
+        - img [ref=e92]
+        - heading "Local routes" [level=3] [ref=e94]
+        - paragraph [ref=e95]: Job sites across Lyons and the western/southwestern suburbs — no long-haul travel.
+  - generic [ref=e97]:
+    - generic [ref=e98]:
+      - heading "Open Positions" [level=2] [ref=e99]
+      - paragraph [ref=e100]: One role open right now — and we'd love to hear from the right person.
+    - generic [ref=e101]:
+      - generic [ref=e102]:
+        - generic [ref=e103]:
+          - generic [ref=e105]: Full-time / Part-time
+          - heading "Experienced Painter & Repair Technician" [level=3] [ref=e106]
+          - paragraph [ref=e107]: A skilled, reliable painter who can also handle repairs — delivering clean, detail-oriented work that meets our 100% satisfaction standard while representing Klasek professionally with homeowners.
+        - generic [ref=e108]:
+          - heading "What you'll do" [level=4] [ref=e109]: What you'll do
+          - generic [ref=e111]:
+            - generic [ref=e112]:
+              - img [ref=e114]
+              - paragraph [ref=e116]: Exterior painting — prep, prime, brush, roll, and spray
+            - generic [ref=e117]:
+              - img [ref=e119]
+              - paragraph [ref=e121]: Surface repair on siding, stucco, brick, drywall, and wood
+            - generic [ref=e122]:
+              - img [ref=e124]
+              - paragraph [ref=e126]: Carpentry repairs, caulking, patching, and trim work
+            - generic [ref=e127]:
+              - img [ref=e129]
+              - paragraph [ref=e131]: Surface cleaning, sanding, masking, and protecting work areas
+            - generic [ref=e132]:
+              - img [ref=e134]
+              - paragraph [ref=e136]: Communicate professionally and respectfully with homeowners on every job
+          - heading "What we're looking for" [level=4] [ref=e137]: What we're looking for
+          - generic [ref=e139]:
+            - generic [ref=e140]:
+              - img [ref=e142]
+              - paragraph [ref=e144]: Proven painting experience (residential exterior a plus)
+            - generic [ref=e145]:
+              - img [ref=e147]
+              - paragraph [ref=e149]: Quality repairs — siding, stucco, drywall, and basic carpentry
+            - generic [ref=e150]:
+              - img [ref=e152]
+              - paragraph [ref=e154]: Comfortable on ladders & scaffolding; able to lift 50+ lbs
+            - generic [ref=e155]:
+              - img [ref=e157]
+              - paragraph [ref=e159]: Reliable transportation — sites vary day to day
+            - generic [ref=e160]:
+              - img [ref=e162]
+              - paragraph [ref=e164]: Your own basic hand tools & a valid driver's license
+            - generic [ref=e165]:
+              - img [ref=e167]
+              - paragraph [ref=e169]: Strong work ethic, attention to detail, and pride in your craft
+            - generic [ref=e170]:
+              - img [ref=e172]
+              - paragraph [ref=e174]: Bilingual (English/Spanish) a plus
+          - generic [ref=e175]:
+            - link "Apply for This Role" [ref=e176] [cursor=pointer]:
+              - /url: "#apply"
+            - paragraph [ref=e177]: Serious, dependable applicants only.
+      - complementary [ref=e178]:
+        - paragraph [ref=e179]: The details
+        - generic [ref=e180]:
+          - generic [ref=e181]:
+            - img [ref=e183]
+            - generic [ref=e185]:
+              - term [ref=e186]: Pay
+              - definition [ref=e187]:
+                - text: $18–$35 / hour
+                - generic [ref=e188]: based on experience
+          - generic [ref=e189]:
+            - img [ref=e191]
+            - generic [ref=e194]:
+              - term [ref=e195]: Status
+              - definition [ref=e196]:
+                - text: 1099 Independent Contractor
+                - generic [ref=e197]: you handle your own taxes & insurance
+          - generic [ref=e198]:
+            - img [ref=e200]
+            - generic [ref=e203]:
+              - term [ref=e204]: Schedule
+              - definition [ref=e205]:
+                - text: Full-time & part-time
+                - generic [ref=e206]: steady seasonal work
+          - generic [ref=e207]:
+            - img [ref=e209]
+            - generic [ref=e212]:
+              - term [ref=e213]: Locations
+              - definition [ref=e214]:
+                - text: Lyons & nearby suburbs
+                - generic [ref=e215]: western/southwestern Chicago
+        - link "Apply Now" [ref=e216] [cursor=pointer]:
+          - /url: "#apply"
+  - generic [ref=e218]:
+    - generic [ref=e219]:
+      - generic [ref=e220]: Apply Now
+      - heading "Tell us about yourself." [level=2] [ref=e221]
+      - paragraph [ref=e222]: Send your name, experience, and availability — we'll be in touch. It takes about two minutes.
+    - generic [ref=e224]:
+      - generic [ref=e225]:
+        - generic [ref=e226]: Company
+        - textbox [ref=e227]
+      - generic [ref=e228]:
+        - generic [ref=e229]:
+          - generic [ref=e230]: Full Name *
+          - textbox "Full Name *" [ref=e231]
+        - generic [ref=e232]:
+          - generic [ref=e233]: Phone *
+          - textbox "Phone *" [ref=e234]
+      - generic [ref=e235]:
+        - generic [ref=e236]:
+          - generic [ref=e237]: Email
+          - textbox "Email" [ref=e238]
+        - generic [ref=e239]:
+          - generic [ref=e240]: Position
+          - combobox "Position" [ref=e241]:
+            - option "Painter & Repair Technician" [selected]
+            - option "Painter"
+            - option "Repair / Carpentry"
+            - option "Other"
+      - generic [ref=e242]:
+        - generic [ref=e243]:
+          - generic [ref=e244]: Years of Experience
+          - textbox "Years of Experience" [ref=e245]
+        - generic [ref=e246]:
+          - generic [ref=e247]: Availability
+          - textbox "Availability" [ref=e248]
+      - generic [ref=e249]:
+        - generic [ref=e250]:
+          - checkbox "I have reliable transportation to job sites" [ref=e251]
+          - text: I have reliable transportation to job sites
+        - generic [ref=e252]:
+          - checkbox "I am legally authorized to work in the U.S." [ref=e253]
+          - text: I am legally authorized to work in the U.S.
+      - generic [ref=e254]:
+        - generic [ref=e255]: Tell us about your experience
+        - textbox "Tell us about your experience" [ref=e256]
+      - button "Submit Application" [ref=e257] [cursor=pointer]
+  - generic [ref=e259]:
+    - paragraph [ref=e260]: Ready to join the crew?
+    - heading "Apply in two minutes." [level=2] [ref=e261]
+    - link "Apply Now" [ref=e262] [cursor=pointer]:
+      - /url: "#apply"
+  - contentinfo [ref=e263]:
+    - generic [ref=e264]:
+      - generic [ref=e265]:
+        - link "Klasek Painting" [ref=e266] [cursor=pointer]:
+          - /url: /
+          - img "Klasek Painting" [ref=e268] [cursor=pointer]
+        - paragraph [ref=e269]: Exterior painting & repair specialists serving Lyons and the western Chicago suburbs for 30+ years. Now hiring.
+        - generic [ref=e270]:
+          - img "5 stars" [ref=e271]
+          - generic [ref=e272]: 5.0 on Google
+      - generic [ref=e273]:
+        - paragraph [ref=e274]: Services
+        - list [ref=e275]:
+          - listitem [ref=e276]:
+            - link "Why Klasek" [ref=e277] [cursor=pointer]:
+              - /url: "#positions"
+          - listitem [ref=e278]:
+            - link "Open positions" [ref=e279] [cursor=pointer]:
+              - /url: "#positions"
+          - listitem [ref=e280]:
+            - link "Apply now" [ref=e281] [cursor=pointer]:
+              - /url: "#apply"
+      - generic [ref=e282]:
+        - paragraph [ref=e283]: Contact
+        - list [ref=e284]:
+          - listitem [ref=e285]:
+            - link "(708) 267-0682" [ref=e286] [cursor=pointer]:
+              - /url: tel:(708) 267-0682
+          - listitem [ref=e287]:
+            - link "4415 S. Custer, Lyons, IL 60534" [ref=e288] [cursor=pointer]:
+              - /url: https://www.google.com/maps/place/Klasek+Painting/@38.346351,-100.9156525,5z/data=!4m5!3m4!1s0x0:0xc7bf3515e03f4afe!8m2!3d38.346351!4d-100.9156525?shorturl=1
+              - text: 4415 S. Custer,
+              - text: Lyons, IL 60534
+      - generic [ref=e289]:
+        - paragraph [ref=e290]: Ready when you are
+        - link "Get a Free Estimate" [ref=e291] [cursor=pointer]:
+          - /url: /contact-us
+        - link "Get Directions" [ref=e292] [cursor=pointer]:
+          - /url: https://www.google.com/maps/dir/?api=1&destination=41.81041,-87.839737
+    - generic [ref=e293]:
+      - paragraph [ref=e294]: © 2026 Klasek Painting. All rights reserved.
+      - paragraph [ref=e295]: Lead-Safe Certified · 100% Satisfaction Guarantee
+```

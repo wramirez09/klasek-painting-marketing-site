@@ -101,46 +101,6 @@
 
 <BasicTemplateSection class="bg-off-white">
 	<HeadingAccent extend={true} class="sm:w-fit">
-		<h2>Materials Needed for Repairing Aluminum Siding</h2>
-	</HeadingAccent>
-
-	<p>
-		Repairing aluminum siding requires specific materials to ensure a seamless and durable finish.
-		Here are the essential materials we use:
-	</p>
-
-	<ul>
-		<li>
-			<strong>Replacement Panels:</strong> Matching aluminum panels to replace any severely damaged sections
-		</li>
-		<li>
-			<strong>Metal Primer:</strong> A high-quality primer to prepare the aluminum surface for painting
-		</li>
-		<li>
-			<strong>Aluminum Siding Cleaner:</strong> To remove dirt, mildew, and oxidation from the siding
-		</li>
-		<li>
-			<strong>Sealant:</strong> Weather-resistant sealant to fill gaps and prevent moisture infiltration
-		</li>
-		<li>
-			<strong>Touch-Up Paint:</strong> High-quality paint to match the existing siding color for a cohesive
-			look
-		</li>
-		<li>
-			<strong>Sandpaper and Scrapers:</strong> For smoothing out dents and removing loose paint
-		</li>
-	</ul>
-
-	<p>
-		Using the right materials is crucial for effective and long-lasting aluminum siding repairs. At
-		Klasek Painting, we ensure that every product we use meets the highest standards of quality.
-		This commitment to excellence guarantees that your home will look great and stay protected for
-		years to come.
-	</p>
-</BasicTemplateSection>
-
-<BasicTemplateSection class="pb-0">
-	<HeadingAccent extend={true} class="sm:w-fit">
 		<h2>Our Expert Aluminum Siding Repair Process</h2>
 	</HeadingAccent>
 

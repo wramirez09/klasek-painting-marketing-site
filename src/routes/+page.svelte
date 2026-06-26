@@ -9,18 +9,18 @@
   import CtaBannerSection from "$lib/common/sections/CtaBannerSection.svelte";
   import ServiceGridSection from "$lib/services/ServiceGridSection.svelte";
   import OtherServicesSection from "$lib/common/sections/OtherServicesSection.svelte";
+  import EmailSignup from "$lib/common/EmailSignup.svelte";
   import Footer from "$lib/common/footer/Footer.svelte";
   import StuccoSection from "$lib/common/sections/StuccoSection.svelte";
-  import EmailSignup from "$lib/common/EmailSignup.svelte";
+  import ReliableServiceSection from "$lib/common/sections/ReliableServiceSection.svelte";
 </script>
 
 <NavBar />
 <HomepageHero />
 <EmailSignup class="-mt-8 relative z-10" />
 <WhyChooseUsSection />
-<ServiceGridSection />
+<ReliableServiceSection class="bg-off-white" />
 <StuccoSection />
-<OtherServicesSection />
 <ServiceAreaSection />
 <CtaBannerSection />
 <ViewOurWorkSection class="pb-0" />

@@ -96,6 +96,13 @@
 		"src/routes/(light-nav)/blog/[title]/+page.server.ts",
 		"src/routes/+layout.server.ts"
 	],
+	"/(light-nav)/careers": [
+		"src/routes/(light-nav)/careers/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(light-nav)/careers/apply": [
+		"src/routes/(light-nav)/careers/apply/+server.ts"
+	],
 	"/(light-nav)/contact-us": [
 		"src/routes/(light-nav)/contact-us/+page.server.ts",
 		"src/routes/+layout.server.ts"
@@ -208,6 +215,10 @@
 		"src/routes/(light-nav)/services/exterior-home-painting/historic-house-painting/+page.ts",
 		"src/routes/+layout.server.ts"
 	],
+	"/(light-nav)/services/gutter-installation-repair": [
+		"src/routes/(light-nav)/services/gutter-installation-repair/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
 	"/(light-nav)/services/siding-painting-repair": [
 		"src/routes/(light-nav)/services/siding-painting-repair/+page.ts",
 		"src/routes/+layout.server.ts"
@@ -234,6 +245,10 @@
 	],
 	"/(light-nav)/services/siding-painting-repair/hardie-board-repair": [
 		"src/routes/(light-nav)/services/siding-painting-repair/hardie-board-repair/+page.ts",
+		"src/routes/+layout.server.ts"
+	],
+	"/(light-nav)/services/siding-painting-repair/hardie-board-services": [
+		"src/routes/(light-nav)/services/siding-painting-repair/hardie-board-services/+page.ts",
 		"src/routes/+layout.server.ts"
 	],
 	"/(light-nav)/services/siding-painting-repair/vinyl-siding-painting": [

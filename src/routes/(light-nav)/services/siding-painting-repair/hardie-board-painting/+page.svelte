@@ -88,51 +88,8 @@
 
 <BasicTemplateSection class="bg-off-white">
 	<HeadingAccent extend={true}>
-		<h2>New Hardie Board Painting Recommendations</h2>
+		<h2>Klasek Painting Serving Chicagoland</h2>
 	</HeadingAccent>
-
-	<p>
-		New Hardie Board may come with factory primer applied, but the coating is thin and doesn't cover
-		the edges, so applying an additional primer layer is still necessary. You can use a product like <a
-			href="https://www.sherwin-williams.com/painting-contractors/products/families/loxon-professional-products"
-			target="_blank">Loxon</a
-		>
-		Masonry Primer by Sherwin-Williams. When it comes to the top-coat,
-		<a href="/">Klasek Painting</a> always uses a high-quality acrylic latex exterior paint. It's essential
-		to use a good brand of paint like Sherwin Williams, Benjamin Moore, or Behr. That way, your siding
-		is protected, and your paint job will last much longer.
-	</p>
-
-	<p>
-		For application, although you can roll on the paint, it's best to spray the boards to get the
-		paint into all the cracks and make sure the entire surface is covered.
-	</p>
-
-	<h3>Faded Hardie Board Painting Recommendations</h3>
-
-	<p>
-		One of the reasons Hardie Board is so popular is because it is “hardy.” But the color can fade
-		in the intense heat of our Chicago area. That's why it's important to use good quality paint
-		that resists fading. When it comes time to paint, make sure preparation is thorough. That
-		includes setting any popped nails, scraping any loose or peeling paint, and caulking any
-		significant gaps. On an <a href={routes['exterior-home-painting'].href}>exterior wall</a>,
-		Hardie Board wicks moisture like a champ, but if it has direct contact with the ground, there
-		can be deterioration. In that case, the damaged section would need
-		<a href={routes['siding-painting-repair'].href}>repairing or replacing before painting.</a>
-	</p>
-
-	<h3>Tips For Painting Trim</h3>
-
-	<p>
-		Once all of the siding is painted, the icing on the cake is the trim work. Make sure the
-		preparation is complete before you apply any paint. Prepping trim can include sanding and
-		scraping off loose paint, caulking any large cracks, and replacing any dry rot. If the trim,
-		doors, spindles, columns, or porch are weathered, it helps to add a primer coat. And for any
-		bare wood or metal, priming is a must. For paint sheen on trim, semi-gloss looks best and stays
-		cleaner too.
-	</p>
-
-	<h3>Klasek Painting Serving Chicagoland</h3>
 
 	<p>
 		Klasek Painting has been servicing the beautiful Chicago suburbs for over 30 years. Owner, Pete

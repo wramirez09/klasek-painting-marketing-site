@@ -1,212 +1,56 @@
-import { siteName } from '$lib/common/seo/siteData';
+import { siteName } from "$lib/common/seo/siteData";
+import { blogData } from "$lib/blogs/data";
+
+// Build the URL list from the route tree so the sitemap can never drift from
+// what actually ships. Vite resolves this glob at build time.
+const pageModules = import.meta.glob("/src/routes/**/+page.svelte");
+
+// One build timestamp shared across all entries for <lastmod>.
+const lastmod = new Date().toISOString().split("T")[0];
+
+const staticPaths = Object.keys(pageModules)
+  .map((file) => file.replace("/src/routes", "").replace("/+page.svelte", ""))
+  // strip route group segments e.g. /(light-nav)
+  .map((path) => path.replace(/\/\([^/]+\)/g, ""))
+  // the root route collapses to '' — normalize to '/'
+  .map((path) => (path === "" ? "/" : path))
+  // drop dynamic params and .well-known routes
+  .filter((path) => !path.includes("[") && !path.includes(".well-known"));
+
+// The /blog/[title] route is dynamic, so the glob can't enumerate posts.
+// Pull real post URLs from the blog data (skipping the ":version" duplicate keys).
+const blogPaths = Object.keys(blogData).filter((key) => !key.includes(":"));
+
+const paths = Array.from(new Set([...staticPaths, ...blogPaths])).sort((a, b) =>
+  a === "/" ? -1 : b === "/" ? 1 : a.localeCompare(b),
+);
 
 // GET /sitemap.xml
 export const GET = () => {
-	return new Response(
-		`
-      <?xml version="1.0" encoding="UTF-8" ?>
-      <urlset
-        xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="https://www.w3.org/1999/xhtml"
-        xmlns:mobile="https://www.google.com/schemas/sitemap-mobile/1.0"
-        xmlns:news="https://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:image="https://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
-      >
-  <url>
-    <loc>${siteName}/</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/faqs</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery</loc>
-  </url>
-  <url>
-    <loc>${siteName}/contact-us</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/exterior-home-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/stucco-painting-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/cedar-siding-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/burr-ridge-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/hinsdale-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/oak-brook-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/western-springs-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/la-grange-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/clarendon-hills-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/downers-grove-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/orland-park-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/riverside-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/oak-park-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/berwyn-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/westmont-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/willowbrook-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/willow-springs-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area/forest-park-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/testimonials</loc>
-  </url>
-  <url>
-    <loc>${siteName}/about-us/service-area</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/past-projects</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/brick-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/stucco-siding-repair-paint</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/stucco-and-trim</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/cedar-replacement</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/exterior-hardie-board</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/trim</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/stucco-and-cedar-siding</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/victorian-homes</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/cedar-siding-repair-paint</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/white-cedar-siding</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/siding-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/siding-and-stucco</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/cedar-shingle-and-stucco-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/photo-gallery/stucco-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/exterior-home-painting/historic-house-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/exterior-home-painting/exterior-paint-contractor</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/stucco-painting-repair/stucco-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/stucco-painting-repair/stucco-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/brick-painting-repair/exterior-brick-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/brick-painting-repair/exterior-brick-staining</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/brick-painting-repair/exterior-brick-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/cedar-siding-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/vinyl-siding-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/hardie-board-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/design-color-consultation</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/brick-painting-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/aluminum-siding-painting</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/hardie-board-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/aluminum-siding-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}/services/siding-painting-repair/vinyl-siding-repair</loc>
-  </url>
-  <url>
-    <loc>${siteName}services/commercial-exterior-painting/</loc>
-  </url>
-  <url>
-    <loc>${siteName}/blog</loc>
-  </url>
-  <url>
-    <loc>${siteName}/blog/painting-maintenance-how-to-keep-your-home-looking-fresh</loc>
-  </url>
-  <url>
-    <loc>${siteName}/blog/diy-vs-professional-painting-when-to-hire-a-painter</loc>
-  </url>
-  <url>
-    <loc>${siteName}/blog/what-exterior-paint-colors-look-the-best</loc>
-  </url>
-      </urlset>`.trim(),
-		{
-			headers: {
-				'Content-Type': 'application/xml'
-			}
-		}
-	);
+  const urls = paths
+    .map(
+      (path) => `  <url>
+    <loc>${siteName}${path === "/" ? "/" : path}</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>`,
+    )
+    .join("\n");
+
+  const body = `<?xml version="1.0" encoding="UTF-8" ?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+  xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+  xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+>
+${urls}
+</urlset>`;
+
+  return new Response(body, {
+    headers: {
+      "Content-Type": "application/xml",
+    },
+  });
 };

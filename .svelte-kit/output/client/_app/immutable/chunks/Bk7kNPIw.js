@@ -1,0 +1,1 @@
+function a(e,t){return Object.freeze({title:e,description:t,titleTemplate:"%s | Cook County Painters",openGraph:{title:e,description:t}})}function r(e,t){return Object.freeze({titleTemplate:"%s",title:e,description:t,openGraph:{title:e,description:t}})}export{r as a,a as c};

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Google tag (gtag.js) — only loads on the production domain -->
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+
+			if (
+				location.hostname === 'klasekpainting.com' ||
+				location.hostname.endsWith('.klasekpainting.com')
+			) {
+				var gtagScript = document.createElement('script');
+				gtagScript.async = true;
+				gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XYDTS6RQD2';
+				document.head.appendChild(gtagScript);
+
+				gtag('config', 'G-XYDTS6RQD2');
+				gtag('config', 'AW-998511498');
+			}
+		</script>
+		
+		<link rel="modulepreload" href="/_app/immutable/entry/start.Bde4EDHx.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/DtFYjPI3.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/DrOtaHMw.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/zlTXQEG6.js">
+		<link rel="modulepreload" href="/_app/immutable/entry/app.Ctl4uaW7.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/C1FmrZbK.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/IHki7fMi.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">
+			<script>
+				{
+					__sveltekit_19l8kqn = {
+						base: ""
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/_app/immutable/entry/start.Bde4EDHx.js"),
+						import("/_app/immutable/entry/app.Ctl4uaW7.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

@@ -61,8 +61,6 @@
   }}
 />
 
-<EmailSignup />
-
 <ColumnTemplateSection class="lg:pt-12 pt-4">
   <div slot="right-column">
     <enhanced:img
@@ -153,3 +151,5 @@
 </BasicTemplateSection>
 
 <FaqSection {faqData} />
+
+<EmailSignup />

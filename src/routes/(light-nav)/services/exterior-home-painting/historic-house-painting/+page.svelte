@@ -32,7 +32,7 @@
 		{
 			question: 'How can our expert color consultation enhance your historic home?',
 			answer:
-				"Not only do we provide a free written estimate, but we also offer expert color consultation. With our 20-plus years of experience painting older homes in Chicago, we know how to use color. One tip we give our customers is on combining colors. Specifically, choose either warm or cool tones. Take your time and be selective in your choice of colors; it's worth it. The right combination will make your historic home look incredible. We're here to help you in your selection."
+				"Not only do we provide a free written estimate, but we also offer expert color consultation. With our 30-plus years of experience painting older homes in Chicago, we know how to use color. One tip we give our customers is on combining colors. Specifically, choose either warm or cool tones. Take your time and be selective in your choice of colors; it's worth it. The right combination will make your historic home look incredible. We're here to help you in your selection."
 		},
 		{
 			question: "Why are bold colors expected for Chicago's heritage homes?",
@@ -65,7 +65,7 @@
 
 		<p>
 			First of all, <a href="/">Klasek Painting</a> specializes in historic house painting. In fact,
-			we have over 20 years experience. Specifically, we restore older homes. And, we bring them back
+			we have over 30 years experience. Specifically, we restore older homes. And, we bring them back
 			to their former beauty. We're experts in both paint and stain finishes.
 		</p>
 

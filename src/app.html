@@ -5,32 +5,7 @@
 	<meta charset="utf-8" />
 	<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=AW-998511498"></script>
-	<!-- atlas code -->
-	<script nowprocket nitro-exclude type="text/javascript" id="sa-dynamic-optimization"
-		data-uuid="1cffbccf-fb4a-489d-9fb5-94ec6df5992b"
-		src="data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjFjZmZiY2NmLWZiNGEtNDg5ZC05ZmI1LTk0ZWM2ZGY1OTkyYiI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw=="></script>
-	<!-- end atlas-->
-
-	<!-- schema markup -->
-	<script type="application/ld+json">
-		{
-			"url": "https://klasekpainting.com",
-			"logo": "https://www.google.com/s2/favicons?sz=256&domain_url=https://klasekpainting.com",
-			"name": "Klasek Painting",
-			"type": "HomeAndConstructionBusiness",
-			"email": "peter@klasekpainting.com",
-			"address": {
-				"type": "PostalAddress",
-				"streetAddress": "4415 S. Custer, , IL 60534",
-				"addressLocality": "Lyons"
-			},
-			"context": "https://schema.org",
-			"description": "At Klasek Painting we offer reliable, professional painting services for exterior surfaces. Our company was established in 1992 and with over 30 years of experience, our company continues to provide top-quality work for residential projects. We use the most state-of-the-art materials from Sherwin Williams to assure a long-lasting paint job. We work from 7am to 5pm to complete your project in a timely fashion."
-		}
-	</script>
-	<!-- end schema -->
+	<!-- Google tag (gtag.js) — only loads on the production domain -->
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag() {
@@ -38,7 +13,18 @@
 		}
 		gtag('js', new Date());
 
-		gtag('config', 'AW-998511498');
+		if (
+			location.hostname === 'klasekpainting.com' ||
+			location.hostname.endsWith('.klasekpainting.com')
+		) {
+			var gtagScript = document.createElement('script');
+			gtagScript.async = true;
+			gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XYDTS6RQD2';
+			document.head.appendChild(gtagScript);
+
+			gtag('config', 'G-XYDTS6RQD2');
+			gtag('config', 'AW-998511498');
+		}
 	</script>
 	%sveltekit.head%
 </head>

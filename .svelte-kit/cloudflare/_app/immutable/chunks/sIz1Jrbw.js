@@ -1,0 +1,1 @@
+const s=""+new URL("../assets/klasek-painting-stucco-and-trim-3.BmdUIGZO.webp",import.meta.url).href,e=""+new URL("../assets/klasek-painting-victorian-homes-1.CVJ0qezX.webp",import.meta.url).href;export{e as d,s};

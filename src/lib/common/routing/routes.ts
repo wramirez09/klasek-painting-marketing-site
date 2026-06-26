@@ -118,6 +118,15 @@ export const serviceRoutes: RouteMap = {
 		text: 'Stucco Painting',
 		href: '/services/stucco-painting-repair/stucco-painting'
 	},
+	'hardie-installation': {
+		text: 'Hardie Board Services',
+		href: '/services/siding-painting-repair/hardie-board-services'
+	},
+	// Gutter services
+	gutters: {
+		text: 'Gutter Installation & Repair',
+		href: '/services/gutter-installation-repair'
+	},
 	// Design consultation
 	'design-consultation': {
 		text: 'Design Consultation',
@@ -169,6 +178,7 @@ export const routes: RouteMap = {
 	contact: { text: 'Contact Us', href: '/contact-us' },
 	about: { text: 'About', href: '/about-us' },
 	services: { text: 'Services', href: '/services' },
+	careers: { text: 'Careers', href: '/careers' },
 	...aboutUsRoutes,
 	...serviceRoutes,
 	...legalRoutes

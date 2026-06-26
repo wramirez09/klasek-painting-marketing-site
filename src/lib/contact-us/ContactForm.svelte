@@ -33,6 +33,10 @@
   const ZOHO_FORM_ID = "webform5683047000006693036";
   const ZOHO_FORM_ACTION = "https://crm.zoho.com/crm/WebToLeadForm";
 
+  // Source attribution. The WebToLead form does not map a "Lead Source" field,
+  // so we fold the origin into the (mapped) Description field for CRM tracking.
+  const LEAD_SOURCE_TAG = "Submitted via Website Contact Form";
+
   // Zoho form fields
   const ZOHO_FIELDS = {
     xnQsjsdp:
@@ -51,9 +55,10 @@
   }
 
   function checkMandatory(): boolean {
+    // Last Name intentionally omitted — optional to reduce quote-request friction
+    // (T1.3). Zoho's WebToLead still accepts a lead without it.
     const requiredFields: (keyof FormData)[] = [
       "First Name",
-      "Last Name",
       "Phone",
       "Zip Code",
     ];
@@ -91,10 +96,21 @@
         params.append(key, value);
       });
 
-      // Add form data
+      // Add form data (Description is handled below so we can tag the source)
       Object.entries(formData).forEach(([key, value]) => {
+        if (key === "Description") return;
         if (value) params.append(key, value);
       });
+
+      // Always send a Description carrying the lead source, with the user's
+      // job details appended underneath when provided.
+      const descriptionWithSource = [
+        LEAD_SOURCE_TAG,
+        formData.Description.trim(),
+      ]
+        .filter(Boolean)
+        .join("\n\n");
+      params.append("Description", descriptionWithSource);
 
       const response = await fetch(ZOHO_FORM_ACTION, {
         method: "POST",
@@ -260,9 +276,7 @@
         class="zcwf_col_lab"
         style="width: 30%; margin-right: 10px; float: left;"
       >
-        <label for="Last_Name" style="font-size: 14px;"
-          >Last Name <span style="color: red;">*</span></label
-        >
+        <label for="Last_Name" style="font-size: 14px;">Last Name</label>
       </div>
       <div class="zcwf_col_fld" style="float: left; width: 60%;">
         <input
@@ -271,7 +285,6 @@
           name="Last Name"
           bind:value={formData["Last Name"]}
           maxlength="80"
-          aria-required="true"
           style="width: 100%; padding: 8px; border: 1px solid #D1D5DB; border-radius: 4px;"
         />
       </div>
@@ -396,9 +409,15 @@
         style="background: #3B82F6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Submitting..." : "Submit"}
+        {isSubmitting ? "Submitting..." : "Get My Free Estimate"}
       </button>
     </div>
+
+    <p
+      style="margin: 0; text-align: right; font-size: 13px; color: #4B5563; clear: both;"
+    >
+      We reply within 1 business day — no obligation, free estimate.
+    </p>
   </form>
 </div>
 

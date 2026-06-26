@@ -16,12 +16,17 @@
   const usefulLinks: Link[] = [
     routes["contact"],
     routes["service-area"],
+    routes["careers"],
     routes["privacy"],
   ];
+
+  export let showEmailSignup = true;
 </script>
 
 <footer class="flex flex-col items-center bg-secondary px-6">
-  <EmailSignup />
+  {#if showEmailSignup}
+    <EmailSignup />
+  {/if}
   <FooterCta />
 
   <div

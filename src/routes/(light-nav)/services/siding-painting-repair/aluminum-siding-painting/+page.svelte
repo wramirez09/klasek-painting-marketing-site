@@ -79,29 +79,8 @@
 
 <BasicTemplateSection class="bg-off-white">
 	<HeadingAccent extend={true} class="sm:w-fit">
-		<h2>Painting Aluminum Siding</h2>
+		<h2>Klasek Painting For Professional Exterior Painting</h2>
 	</HeadingAccent>
-
-	<p>
-		Before you start painting, make sure you have all the windows covered and any roof sections that
-		might be exposed to paint.
-	</p>
-
-	<strong>You'll need two different types of paint for results that will last for years.</strong>
-
-	<ol>
-		<li>Exterior Oil-Based Paint</li>
-		<li>Exterior Acrylic-Based Paint</li>
-	</ol>
-
-	<p>
-		Use a premium brand of paint like Sherwin Williams, Behr, or Benjamin Moore. The oil-based paint
-		is applied directly to the siding to act as a barrier between the siding and acrylic paint. Once
-		the oil paint is completely dry, apply the acrylic-based paint. Don't use the acrylic paint
-		directly on the siding because it will bubble, fade, and peel.
-	</p>
-
-	<h3>Klasek Painting For Professional Exterior Painting</h3>
 
 	<p>
 		<a href="/">Klasek Painting</a> has been servicing the beautiful Chicago suburbs for over 25
