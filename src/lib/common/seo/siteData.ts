@@ -53,6 +53,9 @@ export const googleMapsHref =
 // `/public/` prefix 404'd, breaking og:image and the schema logo/image.
 export const publicLogoUrl = `${siteName}/klasek-painting.png`;
 
+// 1200x630 social-share card (static/og-image.jpg) for og:image + Twitter.
+export const ogImageUrl = `${siteName}/og-image.jpg`;
+
 // Radius in meters for service area
 export const serviceAreaRadius = 17000;
 

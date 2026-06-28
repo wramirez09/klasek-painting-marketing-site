@@ -1,6 +1,6 @@
 import type { LayoutServerLoad } from "./$types";
 import type { MetaTagsProps } from "svelte-meta-tags";
-import { publicLogoUrl, siteName } from "$lib/common/seo/siteData";
+import { ogImageUrl, siteName } from "$lib/common/seo/siteData";
 
 export const load = ((ctx) => {
   // Canonical/og:url are built from the fixed production origin (siteName),
@@ -26,12 +26,12 @@ export const load = ((ctx) => {
       siteName: "Klasek Painting",
       images: [
         {
-          url: publicLogoUrl,
-          alt: "Klasek Painting",
-          width: 682,
-          height: 262,
-          secureUrl: publicLogoUrl,
-          type: "image/png",
+          url: ogImageUrl,
+          alt: "Klasek Painting — premium exterior house painting & design services",
+          width: 1200,
+          height: 630,
+          secureUrl: ogImageUrl,
+          type: "image/jpeg",
         },
       ],
     },
@@ -40,8 +40,9 @@ export const load = ((ctx) => {
       title: "Klasek Painting",
       description:
         "Expert exterior house painting and repair across Chicago’s western Cook County suburbs for 30+ years. Free estimates.",
-      image: publicLogoUrl,
-      imageAlt: "Klasek Painting",
+      image: ogImageUrl,
+      imageAlt:
+        "Klasek Painting — premium exterior house painting & design services",
     },
   });
 
