@@ -1,1 +1,29 @@
+# Default: allow all conventional search crawlers.
+User-agent: *
+Allow: /
+
+# AI search & answer-engine crawlers — explicitly allowed so the site is
+# eligible to be cited/recommended by ChatGPT, Perplexity, Gemini, Claude,
+# and Google AI Overviews.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.klasekpainting.com/sitemap.xml
