@@ -4,8 +4,11 @@ export const businessName = "Klasek Painting";
 
 export const destinationPhone = "(708) 267-0682";
 
+// Real Lyons, IL location. The previous value used coordinates in western
+// Kansas (@38.34,-100.91), which mislabeled the footer address link and the
+// schema `sameAs` profile. Keep these coords in lockstep with `businessGeo`.
 export const googleMapsHref =
-  "https://www.google.com/maps/place/Klasek+Painting/@38.346351,-100.9156525,5z/data=!4m5!3m4!1s0x0:0xc7bf3515e03f4afe!8m2!3d38.346351!4d-100.9156525?shorturl=1";
+  "https://www.google.com/maps/place/Klasek+Painting/@41.81041,-87.839737,17z/";
 
 export const publicLogoUrl = `${siteName}/public/klasek-painting.png`;
 
