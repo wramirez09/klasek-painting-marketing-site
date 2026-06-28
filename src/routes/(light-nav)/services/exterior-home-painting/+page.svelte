@@ -12,6 +12,39 @@
   import ViewOurWorkSection from "$lib/home/ViewOurWorkSection.svelte";
   import CtaBannerSection from "$lib/common/sections/CtaBannerSection.svelte";
   import EmailSignup from "$lib/common/EmailSignup.svelte";
+  import FaqSection from "$lib/common/sections/FaqSection.svelte";
+  import type { FaqData } from "$lib/common/sections/subcomponents/Faq.svelte";
+
+  const faqData: FaqData[] = [
+    {
+      question:
+        "Who does exterior house painting in the western Cook County suburbs?",
+      answer:
+        "Klasek Painting has painted exterior homes across the western Chicago suburbs for more than 30 years from our base in Lyons, IL. We serve 15 communities including Hinsdale, La Grange, Burr Ridge, Oak Park, and Downers Grove.",
+    },
+    {
+      question:
+        "How much does exterior house painting cost in the Chicago suburbs?",
+      answer:
+        "The price depends on the size of the home, the siding material, how much surface prep and repair is required, and the products chosen. We provide a free, written estimate after assessing your property, so the price is accurate before any work starts.",
+    },
+    {
+      question: "How long does an exterior repaint take?",
+      answer:
+        "Most single-family exterior repaints take a few days to about a week, depending on the size of the home, the amount of repair needed, and the weather. Your written estimate includes a projected timeline.",
+    },
+    {
+      question:
+        "When is the best time of year to paint a house exterior in the Chicago area?",
+      answer:
+        "Exterior painting in the Chicago area is typically done from late spring through fall, when temperatures and humidity let the paint cure properly. We schedule projects around the weather to protect the finish.",
+    },
+    {
+      question: "Do you paint historic and older homes?",
+      answer:
+        "Yes. Klasek Painting regularly paints historic and Victorian-era homes, with careful surface preparation and products matched to older exteriors. Ask about our historic house painting service.",
+    },
+  ];
 </script>
 
 <RootServiceHero
@@ -63,5 +96,7 @@
 <PaintingPromisesSection />
 
 <ViewOurWorkSection class="bg-off-white" />
+
+<FaqSection {faqData} />
 
 <ServiceAreaSection />
