@@ -69,5 +69,13 @@
 				{/each}
 			</Marquee>
 		</div>
+
+		<!-- Readable, machine-extractable version of the trust badges above -->
+		<p class="max-w-screen-md text-center text-sm text-gray-600 lg:text-base">
+			Klasek Painting is <strong>EPA Lead-Safe Certified</strong> and a
+			<strong>member of the PDCA</strong> (Painting &amp; Decorating Contractors of
+			America). We paint with premium Sherwin-Williams, Benjamin Moore, Valspar, and
+			Behr products.
+		</p>
 	</div>
 </section>

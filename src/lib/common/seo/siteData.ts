@@ -9,6 +9,18 @@ export const businessId = `${siteName}/#business`;
 // Typical exterior-painting project price band (Google's priceRange convention).
 export const priceRange = "$$";
 
+// Google rating as publicly displayed on the Google Business Profile.
+// SOURCE: Google's public listing (4.0 / 13 reviews). The live profile is
+// bot-blocked from automated fetch, so confirm against the GBP dashboard and
+// update if it has changed. Google's structured-data policy requires this to
+// match the rating Google actually displays, so it reflects the full public
+// aggregate — NOT a recompute that drops sub-3-star reviews (that number would
+// appear nowhere public and risks a manual action).
+export const googleRating = {
+  ratingValue: "4.0",
+  reviewCount: "13",
+};
+
 // The 15 named suburbs served, for schema `areaServed`. Kept here so the
 // business schema and per-page Service schema stay in sync.
 export const serviceAreaCities = [

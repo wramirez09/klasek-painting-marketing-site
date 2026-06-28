@@ -27,18 +27,28 @@
     </div>
 
     <div class="flex items-center gap-4">
-      <enhanced:img
-        class="h-9 w-auto sm:h-10"
-        src={leadSafe}
-        alt="EPA Lead-Safe Certified Firm"
-        loading="lazy"
-      />
-      <enhanced:img
-        class="h-9 w-auto sm:h-10"
-        src={pdca}
-        alt="PDCA Member"
-        loading="lazy"
-      />
+      <figure class="flex flex-col items-center gap-1">
+        <enhanced:img
+          class="h-9 w-auto sm:h-10"
+          src={leadSafe}
+          alt="EPA Lead-Safe Certified Firm"
+          loading="lazy"
+        />
+        <figcaption class="text-[10px] font-medium leading-none text-gray-600">
+          Lead-Safe Certified
+        </figcaption>
+      </figure>
+      <figure class="flex flex-col items-center gap-1">
+        <enhanced:img
+          class="h-9 w-auto sm:h-10"
+          src={pdca}
+          alt="PDCA Member"
+          loading="lazy"
+        />
+        <figcaption class="text-[10px] font-medium leading-none text-gray-600">
+          PDCA Member
+        </figcaption>
+      </figure>
     </div>
   </div>
 </div>

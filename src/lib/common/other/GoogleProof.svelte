@@ -1,6 +1,7 @@
 <script lang="ts">
 	import stars from '$images/5-stars.svg';
 	import google from '$images/logos/Google-name-logo.svg';
+	import { googleRating } from '$lib/common/seo/siteData';
 
 	// Default styles
 	let classes = 'bg-white rounded-lg border lg:px-6 sm:p-4 p-3';
@@ -11,12 +12,20 @@
 </script>
 
 <div class="flex sm:flex-row flex-col items-stretch sm:gap-6 gap-2 {classes}">
-	<div class="flex sm:flex-col sm:gap-1 gap-4 items-center justify-center flex-shrink-0">
+	<div class="flex sm:flex-col sm:gap-1 gap-2 items-center justify-center flex-shrink-0">
 		<!-- Google -->
 		<img class="w-[100px] h-[39px]" src={google} alt="Google" />
 
-		<!-- Stars -->
-		<img class="w-[80px] h-[14px]" src={stars} alt="5 stars" />
+		<!-- Stars (decorative; the rating is stated as text below for machines) -->
+		<img class="w-[80px] h-[14px]" src={stars} alt="" aria-hidden="true" />
+
+		<!-- Machine-readable aggregate rating text -->
+		<p class="text-xs font-semibold text-secondary-dark text-center leading-tight">
+			{googleRating.ratingValue} out of 5
+			<span class="block font-normal text-gray-600">
+				{googleRating.reviewCount} Google reviews
+			</span>
+		</p>
 	</div>
 
 	<!-- Border -->

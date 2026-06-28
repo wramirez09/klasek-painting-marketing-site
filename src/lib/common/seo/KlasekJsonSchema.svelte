@@ -13,6 +13,7 @@
     businessId,
     priceRange,
     serviceAreaCities,
+    googleRating,
   } from "$lib/common/seo/siteData";
   import type { HousePainter, WithContext } from "schema-dts";
   import { JsonLd } from "svelte-meta-tags";
@@ -30,6 +31,11 @@
     url: $page.url.origin,
     telephone: destinationPhone,
     sameAs: businessProfiles,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: googleRating.ratingValue,
+      reviewCount: Number(googleRating.reviewCount),
+    },
     openingHoursSpecification: openingHours.map((h) => ({
       "@type": "OpeningHoursSpecification" as const,
       dayOfWeek: h.dayOfWeek,
