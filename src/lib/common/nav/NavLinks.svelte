@@ -1,8 +1,8 @@
 <script lang="ts">
   import NavItem from "./subcomponents/NavItem.svelte";
-  import Dropdown from "./subcomponents/Dropdown.svelte";
-  import DropdownItem from "./subcomponents/DropdownItem.svelte";
   import ServicesMegaDropdown from "./subcomponents/ServicesMegaDropdown.svelte";
+  import TextMegaDropdown from "./subcomponents/TextMegaDropdown.svelte";
+  import { MessageSquareQuote, CircleHelp } from "lucide-svelte";
   import {
     routes,
     aboutUsRoutes,
@@ -10,21 +10,26 @@
   } from "$lib/common/routing/routes";
 </script>
 
-<!-- About us -->
-<Dropdown data={routes["about"]} class="xl:block lg:hidden block">
-  <DropdownItem data={aboutUsRoutes["testimonials"]} />
-  <DropdownItem data={aboutUsRoutes["faq"]} />
-</Dropdown>
+<!-- About us (jumbo dropdown, no icons) -->
+<TextMegaDropdown
+  trigger={routes["about"]}
+  heading="About us"
+  items={[
+    { ...aboutUsRoutes["testimonials"], icon: MessageSquareQuote },
+    { ...aboutUsRoutes["faq"], icon: CircleHelp },
+  ]}
+  class="xl:block lg:hidden block"
+/>
 
 <!-- Services (jumbo dropdown with thumbnails) -->
 <ServicesMegaDropdown />
 
-<!-- Service Area -->
-<Dropdown data={aboutUsRoutes["service-area"]}>
-  {#each Object.values(serviceAreaRoutes) as data}
-    <DropdownItem {data} />
-  {/each}
-</Dropdown>
+<!-- Service Area (jumbo dropdown, no icons) -->
+<TextMegaDropdown
+  trigger={aboutUsRoutes["service-area"]}
+  heading="Areas we serve"
+  items={Object.values(serviceAreaRoutes)}
+/>
 
 <!-- Gallery -->
 <NavItem data={routes["gallery"]} class="xl:block lg:hidden block" />
