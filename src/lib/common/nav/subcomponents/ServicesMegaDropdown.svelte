@@ -12,12 +12,12 @@
     Landmark,
     Building2,
     Box,
-    Wrench,
     Rows3,
-    Hammer,
     TreePine,
-    Fence,
     Paintbrush,
+    Wrench,
+    Hammer,
+    Fence,
     Layers,
     BrickWall,
     Grip,
@@ -28,105 +28,118 @@
   let classes = "";
   export { classes as class };
 
-  // All services (parity with the old Exterior Painting + Exterior Repair
-  // dropdowns, consolidated where the site uses a combined page).
-  // Laid out in pairs: painting left, matching repair right.
-  const items = [
+  // All services grouped into Painting, Repairs and Other Services sections.
+  const sections = [
     {
-      icon: PaintRoller,
-      text: routes["exterior-home-painting"].text,
-      description: "Durable finishes for the whole exterior",
-      href: routes["exterior-home-painting"].href,
+      title: "Painting",
+      items: [
+        {
+          icon: PaintRoller,
+          text: routes["exterior-home-painting"].text,
+          description: "Durable finishes for the whole exterior",
+          href: routes["exterior-home-painting"].href,
+        },
+        {
+          icon: HardHat,
+          text: "Paint Contractor",
+          description: "Your trusted exterior paint contractor",
+          href: routes["exterior-paint-contractor"].href,
+        },
+        {
+          icon: Landmark,
+          text: routes["historic-house-painting"].text,
+          description: "Restoration-grade care for older homes",
+          href: routes["historic-house-painting"].href,
+        },
+        {
+          icon: Building2,
+          text: routes["commercial"].text,
+          description: "Exterior painting for business properties",
+          href: routes["commercial"].href,
+        },
+        {
+          icon: Box,
+          text: routes["hardie-painting"].text,
+          description: "Primed, prepped & sprayed to last",
+          href: routes["hardie-painting"].href,
+        },
+        {
+          icon: Rows3,
+          text: routes["aluminum-painting"].text,
+          description: "Factory-fresh color for metal siding",
+          href: routes["aluminum-painting"].href,
+        },
+        {
+          icon: TreePine,
+          text: routes["cedar-painting"].text,
+          description: "Finishes that let cedar shine",
+          href: routes["cedar-painting"].href,
+        },
+        {
+          icon: Paintbrush,
+          text: routes["vinyl-painting"].text,
+          description: "Safe, lasting color updates for vinyl",
+          href: routes["vinyl-painting"].href,
+        },
+      ],
     },
     {
-      icon: HardHat,
-      text: "Paint Contractor",
-      description: "Your trusted exterior paint contractor",
-      href: routes["exterior-paint-contractor"].href,
+      title: "Repairs",
+      items: [
+        {
+          icon: Wrench,
+          text: routes["hardie-installation"].text,
+          description: "Repair, trim & installation",
+          href: routes["hardie-installation"].href,
+        },
+        {
+          icon: Hammer,
+          text: routes["aluminum-repair"].text,
+          description: "Dents & weathered panels repaired",
+          href: routes["aluminum-repair"].href,
+        },
+        {
+          icon: Fence,
+          text: routes["cedar-repair"].text,
+          description: "Rot & weather damage repaired",
+          href: routes["cedar-repair"].href,
+        },
+        {
+          icon: Layers,
+          text: routes["vinyl-repair"].text,
+          description: "Cracked & warped panels replaced",
+          href: routes["vinyl-repair"].href,
+        },
+      ],
     },
     {
-      icon: Landmark,
-      text: routes["historic-house-painting"].text,
-      description: "Restoration-grade care for older homes",
-      href: routes["historic-house-painting"].href,
-    },
-    {
-      icon: Building2,
-      text: routes["commercial"].text,
-      description: "Exterior painting for business properties",
-      href: routes["commercial"].href,
-    },
-    {
-      icon: Box,
-      text: routes["hardie-painting"].text,
-      description: "Primed, prepped & sprayed to last",
-      href: routes["hardie-painting"].href,
-    },
-    {
-      icon: Wrench,
-      text: routes["hardie-installation"].text,
-      description: "Painting, repair, trim & installation",
-      href: routes["hardie-installation"].href,
-    },
-    {
-      icon: Rows3,
-      text: routes["aluminum-painting"].text,
-      description: "Factory-fresh color for metal siding",
-      href: routes["aluminum-painting"].href,
-    },
-    {
-      icon: Hammer,
-      text: routes["aluminum-repair"].text,
-      description: "Dents & weathered panels repaired",
-      href: routes["aluminum-repair"].href,
-    },
-    {
-      icon: TreePine,
-      text: routes["cedar-painting"].text,
-      description: "Finishes that let cedar shine",
-      href: routes["cedar-painting"].href,
-    },
-    {
-      icon: Fence,
-      text: routes["cedar-repair"].text,
-      description: "Rot & weather damage repaired",
-      href: routes["cedar-repair"].href,
-    },
-    {
-      icon: Paintbrush,
-      text: routes["vinyl-painting"].text,
-      description: "Safe, lasting color updates for vinyl",
-      href: routes["vinyl-painting"].href,
-    },
-    {
-      icon: Layers,
-      text: routes["vinyl-repair"].text,
-      description: "Cracked & warped panels replaced",
-      href: routes["vinyl-repair"].href,
-    },
-    {
-      icon: BrickWall,
-      text: routes["brick-painting-repair"].text,
-      description: "Refresh & seal brick and masonry",
-      href: routes["brick-painting-repair"].href,
-    },
-    {
-      icon: Grip,
-      text: routes["stucco-painting-repair"].text,
-      description: "Patch, finish & paint stucco walls",
-      href: routes["stucco-painting-repair"].href,
-    },
-    {
-      icon: Droplets,
-      text: routes["gutters"].text,
-      description: "Seamless gutters cut on-site",
-      href: routes["gutters"].href,
-    },
-    {
-      icon: Palette,
-      text: "Free Color Consultation",
-      description: "On-site color & design guidance",
-      href: routes["design-consultation"].href,
+      title: "Other Services",
+      items: [
+        {
+          icon: BrickWall,
+          text: routes["brick-painting-repair"].text,
+          description: "Refresh & seal brick and masonry",
+          href: routes["brick-painting-repair"].href,
+        },
+        {
+          icon: Grip,
+          text: routes["stucco-painting-repair"].text,
+          description: "Patch, finish & paint stucco walls",
+          href: routes["stucco-painting-repair"].href,
+        },
+        {
+          icon: Droplets,
+          text: routes["gutters"].text,
+          description: "Seamless gutters cut on-site",
+          href: routes["gutters"].href,
+        },
+        {
+          icon: Palette,
+          text: "Free Color Consultation",
+          description: "On-site color & design guidance",
+          href: routes["design-consultation"].href,
+        },
+      ],
     },
   ];
 
@@ -241,41 +254,43 @@
         <!-- left: icon grid; negative mobile margin pulls content back toward
              the screen edge (the mobile menu ul applies px-8/xs:px-12) -->
         <div class="lg:flex-1 lg:p-3.5 -mx-6 xs:-mx-10 lg:mx-0 relative">
-          <div
-            class="lg:px-3 lg:pt-1 pt-3 pb-2 font-extrabold text-[10.5px] tracking-[0.14em] uppercase lg:text-gray-500 text-primary"
-          >
-            Painting &amp; repair services
-          </div>
-          <div class="lg:grid lg:grid-cols-4 lg:gap-x-2.5 flex flex-col">
-            {#each items as item}
-              <a
-                href={item.href}
-                class="flex items-start gap-3.5 lg:p-3 py-2 rounded-xl lg:hover:bg-off-white transition-colors duration-100 group/item"
-              >
-                <span
-                  class="w-11 h-11 rounded-[10px] lg:bg-primary-light/40 lg:text-primary-dark text-primary flex items-center justify-center shrink-0 transition-colors duration-100 group-hover/item:bg-primary-dark group-hover/item:text-white"
+          {#each sections as section}
+            <div
+              class="lg:px-3 lg:pt-1 pt-3 pb-2 font-extrabold text-[10.5px] tracking-[0.14em] uppercase lg:text-gray-500 text-primary"
+            >
+              {section.title}
+            </div>
+            <div class="lg:grid lg:grid-cols-4 lg:gap-x-2.5 flex flex-col">
+              {#each section.items as item}
+                <a
+                  href={item.href}
+                  class="flex items-start gap-3.5 lg:p-3 py-2 rounded-xl lg:hover:bg-off-white transition-colors duration-100 group/item"
                 >
-                  <svelte:component
-                    this={item.icon}
-                    size={21}
-                    strokeWidth={1.7}
-                  />
-                </span>
-                <span>
                   <span
-                    class="block font-bold text-[15px] lg:text-secondary-dark text-white transition-colors duration-100 lg:group-hover/item:text-primary-dark"
+                    class="w-11 h-11 rounded-[10px] lg:bg-primary-light/40 lg:text-primary-dark text-primary flex items-center justify-center shrink-0 transition-colors duration-100 group-hover/item:bg-primary-dark group-hover/item:text-white"
                   >
-                    {item.text}
+                    <svelte:component
+                      this={item.icon}
+                      size={21}
+                      strokeWidth={1.7}
+                    />
                   </span>
-                  <span
-                    class="block text-[12.5px] leading-snug lg:text-gray-500 text-white/60 mt-0.5"
-                  >
-                    {item.description}
+                  <span>
+                    <span
+                      class="block font-bold text-[15px] lg:text-secondary-dark text-white transition-colors duration-100 lg:group-hover/item:text-primary-dark"
+                    >
+                      {item.text}
+                    </span>
+                    <span
+                      class="block text-[12.5px] leading-snug lg:text-gray-500 text-white/60 mt-0.5"
+                    >
+                      {item.description}
+                    </span>
                   </span>
-                </span>
-              </a>
-            {/each}
-          </div>
+                </a>
+              {/each}
+            </div>
+          {/each}
         </div>
       </div>
     </div>
