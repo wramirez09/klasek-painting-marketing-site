@@ -1,6 +1,7 @@
 <script lang="ts">
   import "../app.css";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
+  import { afterNavigate } from "$app/navigation";
   import type { PageData } from "./$types";
   import { MetaTags, type MetaTagsProps } from "svelte-meta-tags";
   import merge from "lodash/merge";
@@ -28,6 +29,20 @@
       } else {
         showClickToCall = true;
       }
+    });
+  });
+
+  // GA4 sends a page_view on the initial load (via gtag config in app.html),
+  // but this is an SPA — client-side navigations don't reload the page, so
+  // they go uncounted. Fire a page_view on each in-app navigation (skipping
+  // the first load to avoid double-counting). gtag is a no-op off production.
+  afterNavigate(async ({ from }) => {
+    if (!from) return; // initial load already reported by gtag config
+    await tick(); // let svelte-meta-tags update document.title first
+    window.gtag?.("event", "page_view", {
+      page_location: window.location.href,
+      page_path: window.location.pathname + window.location.search,
+      page_title: document.title,
     });
   });
 
