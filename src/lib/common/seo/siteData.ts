@@ -49,7 +49,9 @@ export const destinationPhone = "(708) 267-0682";
 export const googleMapsHref =
   "https://www.google.com/maps/place/Klasek+Painting/@41.81041,-87.839737,17z/";
 
-export const publicLogoUrl = `${siteName}/public/klasek-painting.png`;
+// Served from static/klasek-painting.png at the site root. The previous
+// `/public/` prefix 404'd, breaking og:image and the schema logo/image.
+export const publicLogoUrl = `${siteName}/klasek-painting.png`;
 
 // Radius in meters for service area
 export const serviceAreaRadius = 17000;
