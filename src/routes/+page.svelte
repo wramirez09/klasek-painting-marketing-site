@@ -12,6 +12,7 @@
   import EmailSignup from "$lib/common/EmailSignup.svelte";
   import Footer from "$lib/common/footer/Footer.svelte";
   import StuccoSection from "$lib/common/sections/StuccoSection.svelte";
+  import HardieSection from "$lib/common/sections/HardieSection.svelte";
   import ReliableServiceSection from "$lib/common/sections/ReliableServiceSection.svelte";
   import FaqSection from "$lib/common/sections/FaqSection.svelte";
   import type { FaqData } from "$lib/common/sections/subcomponents/Faq.svelte";
@@ -53,6 +54,7 @@
 <WhyChooseUsSection />
 <ReliableServiceSection class="bg-off-white" />
 <StuccoSection />
+<HardieSection />
 <ServiceAreaSection />
 <CtaBannerSection />
 <ViewOurWorkSection class="pb-0" />
