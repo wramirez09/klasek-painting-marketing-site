@@ -2,6 +2,33 @@ export const siteName = "https://www.klasekpainting.com";
 
 export const businessName = "Klasek Painting";
 
+// Stable node identifier so per-page Service schema can reference the single
+// canonical business node (defined site-wide in KlasekJsonSchema) via @id.
+export const businessId = `${siteName}/#business`;
+
+// Typical exterior-painting project price band (Google's priceRange convention).
+export const priceRange = "$$";
+
+// The 15 named suburbs served, for schema `areaServed`. Kept here so the
+// business schema and per-page Service schema stay in sync.
+export const serviceAreaCities = [
+  "Burr Ridge, IL",
+  "Hinsdale, IL",
+  "Oak Brook, IL",
+  "Western Springs, IL",
+  "La Grange, IL",
+  "Clarendon Hills, IL",
+  "Downers Grove, IL",
+  "Orland Park, IL",
+  "Riverside, IL",
+  "Oak Park, IL",
+  "Berwyn, IL",
+  "Westmont, IL",
+  "Willowbrook, IL",
+  "Willow Springs, IL",
+  "Forest Park, IL",
+] as const;
+
 export const destinationPhone = "(708) 267-0682";
 
 // Real Lyons, IL location. The previous value used coordinates in western

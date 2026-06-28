@@ -10,6 +10,9 @@
     openingHours,
     businessProfiles,
     businessAddress,
+    businessId,
+    priceRange,
+    serviceAreaCities,
   } from "$lib/common/seo/siteData";
   import type { HousePainter, WithContext } from "schema-dts";
   import { JsonLd } from "svelte-meta-tags";
@@ -18,7 +21,9 @@
   const schema = {
     "@context": "https://schema.org",
     "@type": "HousePainter",
+    "@id": businessId,
     name: businessName,
+    priceRange,
     description: `${businessName} is a family-owned exterior painting and siding repair specialist serving Chicago and Cook County since ${establishedYear} — ${experienceYears} years of historic-home painting, siding, brick, and stucco work. Call for a free estimate.`,
     image: publicLogoUrl,
     logo: publicLogoUrl,
@@ -199,6 +204,11 @@
         },
         geoRadius: serviceAreaRadius,
       },
+      // The 15 named suburbs, so AI answer engines can match city-level queries.
+      ...serviceAreaCities.map((city) => ({
+        "@type": "City" as const,
+        name: city,
+      })),
     ],
   } satisfies WithContext<HousePainter>;
 </script>

@@ -2,6 +2,7 @@
   import NavBar from "$lib/common/nav/NavBar.svelte";
   import Footer from "$lib/common/footer/Footer.svelte";
   import FooterFunnel from "$lib/common/footer/FooterFunnel.svelte";
+  import ServiceJsonLd from "$lib/common/seo/ServiceJsonLd.svelte";
   import { page } from "$app/stores";
 
   // Landing funnel pages get a compact dark footer instead of the standard one
@@ -46,6 +47,8 @@
 </script>
 
 <NavBar lightNav={true} />
+<!-- Per-page Service schema for /services/* routes (no-op elsewhere) -->
+<ServiceJsonLd />
 <slot />
 {#if funnelFooter}
   <FooterFunnel {...funnelFooter} />
